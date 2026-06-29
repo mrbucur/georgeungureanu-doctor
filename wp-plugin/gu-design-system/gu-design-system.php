@@ -160,3 +160,102 @@ function gu_design_system_on_deactivate() {
 	delete_transient( 'gu_design_system_activated' );
 }
 register_deactivation_hook( __FILE__, 'gu_design_system_on_deactivate' );
+
+
+// ─────────────────────────────────────────────────────────────
+// 4. CUSTOM POST TYPES AND TAXONOMIES
+// ─────────────────────────────────────────────────────────────
+
+function gu_register_cpt_afectiuni() {
+	register_post_type( 'afectiuni', [
+		'labels' => [
+			'name'          => __( 'Afecțiuni', 'gu-design-system' ),
+			'singular_name' => __( 'Afecțiune', 'gu-design-system' ),
+			'add_new'       => __( 'Adaugă afecțiune', 'gu-design-system' ),
+			'add_new_item'  => __( 'Adaugă afecțiune nouă', 'gu-design-system' ),
+			'edit_item'     => __( 'Editează afecțiune', 'gu-design-system' ),
+			'view_item'     => __( 'Vezi afecțiune', 'gu-design-system' ),
+			'all_items'     => __( 'Toate afecțiunile', 'gu-design-system' ),
+			'search_items'  => __( 'Caută afecțiuni', 'gu-design-system' ),
+		],
+		'public'            => true,
+		'has_archive'       => true,
+		'show_in_rest'      => true,
+		'menu_icon'         => 'dashicons-heart',
+		'supports'          => [ 'title', 'thumbnail', 'excerpt' ],
+		'rewrite'           => [ 'slug' => 'afectiuni' ],
+		'show_in_nav_menus' => true,
+	] );
+}
+add_action( 'init', 'gu_register_cpt_afectiuni' );
+
+function gu_register_taxonomy_categorie_afectiuni() {
+	register_taxonomy( 'categorie-afectiuni', [ 'afectiuni' ], [
+		'labels' => [
+			'name'          => __( 'Categorii afecțiuni', 'gu-design-system' ),
+			'singular_name' => __( 'Categorie afecțiuni', 'gu-design-system' ),
+			'all_items'     => __( 'Toate categoriile', 'gu-design-system' ),
+			'edit_item'     => __( 'Editează categoria', 'gu-design-system' ),
+			'add_new_item'  => __( 'Adaugă categorie nouă', 'gu-design-system' ),
+			'menu_name'     => __( 'Categorii', 'gu-design-system' ),
+		],
+		'hierarchical'  => true,
+		'public'        => true,
+		'show_in_rest'  => true,
+		'rewrite'       => [ 'slug' => 'categorie-afectiuni' ],
+	] );
+}
+add_action( 'init', 'gu_register_taxonomy_categorie_afectiuni' );
+
+
+// ─────────────────────────────────────────────────────────────
+// 5. SHORTCODES FOR ELEMENTOR TEMPLATES
+// ─────────────────────────────────────────────────────────────
+
+// [gu_field name="field_name"] — ACF field value for the current post.
+// Bypasses ACF's enable_shortcode setting (disabled by default in ACF >= 6.3).
+add_shortcode( 'gu_field', function ( $atts ) {
+	if ( ! function_exists( 'get_field' ) ) {
+		return '';
+	}
+	$atts = shortcode_atts( [ 'name' => '' ], $atts );
+	if ( empty( $atts['name'] ) ) {
+		return '';
+	}
+	$value = get_field( $atts['name'] );
+	if ( is_array( $value ) || false === $value ) {
+		return '';
+	}
+	return wp_kses_post( (string) $value );
+} );
+
+// [gu_afectiuni_archive] — card grid of all published afectiuni.
+// Used in the Elementor archive template.
+add_shortcode( 'gu_afectiuni_archive', function () {
+	if ( ! post_type_exists( 'afectiuni' ) ) {
+		return '';
+	}
+	$query = new WP_Query( [
+		'post_type'      => 'afectiuni',
+		'posts_per_page' => -1,
+		'post_status'    => 'publish',
+		'orderby'        => 'title',
+		'order'          => 'ASC',
+	] );
+	if ( ! $query->have_posts() ) {
+		return '<p>Nu există afecțiuni publicate.</p>';
+	}
+	$out = '<div class="gu-afectiuni-grid" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:24px;">';
+	while ( $query->have_posts() ) {
+		$query->the_post();
+		$summary = function_exists( 'get_field' ) ? wp_strip_all_tags( (string) get_field( 'short_summary' ) ) : get_the_excerpt();
+		$out    .= '<article style="background:#FDFBF7;border:1px solid #D6CFC4;border-radius:8px;padding:28px;">';
+		$out    .= '<h3 style="font-family:Lora,serif;font-size:20px;font-weight:700;margin:0 0 10px;"><a href="' . esc_url( get_permalink() ) . '" style="color:#231E1A;text-decoration:none;">' . esc_html( get_the_title() ) . '</a></h3>';
+		$out    .= '<p style="font-family:Inter,system-ui,sans-serif;font-size:15px;color:#5A5550;margin:0 0 14px;">' . esc_html( wp_trim_words( $summary, 20 ) ) . '</p>';
+		$out    .= '<a href="' . esc_url( get_permalink() ) . '" style="font-size:14px;font-weight:600;color:#4D7A70;text-decoration:none;">Citește mai mult →</a>';
+		$out    .= '</article>';
+	}
+	wp_reset_postdata();
+	$out .= '</div>';
+	return $out;
+} );
