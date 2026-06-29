@@ -1,0 +1,724 @@
+/* ============================================================
+   georgeungureanu.doctor
+   Direction B+ — Warm Academic Medicine
+
+   ELEMENTOR → SITE SETTINGS → CUSTOM CSS
+   Paste this entire file into that field.
+
+   Do not add styles here that belong to individual widgets
+   or components. Component styles are in Prompt 02.
+   Do not add page-specific styles here.
+
+   Token naming convention:
+     Colors:     --color-[token]
+     Typography: --font-*, --size-*, --leading-*, --weight-*
+     Spacing:    --space-[n]
+     Layout:     --max-width, --content-width, etc.
+     Motion:     --transition-*
+
+   Governing source: docs/design-system/APPROVED_VISUAL_DIRECTION.md
+   ============================================================ */
+
+
+/* ------------------------------------------------------------
+   01. GOOGLE FONTS IMPORT
+   Lora:  editorial serif — all H1, H2, H3, pull-quotes
+   Inter: humanist sans   — all body, UI, navigation, labels
+
+   display=swap: text renders immediately in fallback font,
+   swaps to Lora/Inter when loaded. Required for Core Web Vitals.
+   ------------------------------------------------------------ */
+
+@import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,700;1,400&family=Inter:ital,opsz,wght@0,14..32,400;0,14..32,500;0,14..32,600&display=swap');
+
+
+/* ------------------------------------------------------------
+   02. DESIGN TOKENS — CSS CUSTOM PROPERTIES
+   Single source of truth for all design values.
+   All custom classes below use these variables.
+   Elementor Global Colors are configured separately in
+   Site Settings but must match these hex values exactly.
+   ------------------------------------------------------------ */
+
+:root {
+
+  /* ----------------------------------------------------------
+     COLOR TOKENS
+     Full documentation: docs/design-system/COLOR_SYSTEM.md
+     ---------------------------------------------------------- */
+
+  /* Primary palette */
+  --color-ink:            #231E1A;   /* Warm near-black — all primary text */
+  --color-ink-secondary:  #5A4E47;   /* Warm grey-brown — secondary text */
+  --color-surface:        #FDFBF7;   /* Warm cream — primary background */
+  --color-surface-warm:   #F4EFE6;   /* Deeper cream — alternate sections */
+  --color-surface-muted:  #EDE8DF;   /* Warm parchment — cards, callouts */
+
+  /* Accent: deep muted sage-teal — the signature of Direction B+ */
+  --color-accent:         #4D7A70;
+  --color-accent-hover:   #3A5F57;
+  --color-accent-subtle:  #E4EDEB;
+
+  /* Supporting */
+  --color-border:         #D6CFC4;   /* Warm taupe — all borders */
+  --color-border-strong:  #BDB3A5;   /* Stronger warm border */
+  --color-overlay:        rgba(35, 30, 26, 0.80); /* Ink at 80% for photo overlays */
+
+  /* Functional */
+  --color-success:        #2D7046;
+  --color-warning:        #A05A2C;
+  --color-error:          #B83030;
+
+  /* ----------------------------------------------------------
+     TYPOGRAPHY TOKENS
+     Full documentation: docs/design-system/TYPOGRAPHY_SYSTEM.md
+     ---------------------------------------------------------- */
+
+  /* Families */
+  --font-serif:           'Lora', Georgia, 'Times New Roman', serif;
+  --font-sans:            'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+
+  /* Weights */
+  --weight-regular:       400;
+  --weight-medium:        500;
+  --weight-semibold:      600;
+  --weight-bold:          700;
+
+  /* Desktop type scale */
+  --size-h1:              52px;
+  --size-h2:              38px;
+  --size-h3:              28px;
+  --size-h4:              20px;
+  --size-h5:              17px;
+  --size-h6:              15px;
+  --size-body-lg:         19px;
+  --size-body:            17px;
+  --size-body-sm:         15px;
+  --size-quote:           24px;
+  --size-overline:        12px;
+  --size-label:           13px;
+  --size-caption:         13px;
+  --size-cta:             16px;
+  --size-nav:             15px;
+
+  /* Line heights — generous for stressed readers */
+  --leading-h1:           1.15;
+  --leading-h2:           1.20;
+  --leading-h3:           1.25;
+  --leading-h4:           1.30;
+  --leading-h5:           1.35;
+  --leading-h6:           1.40;
+  --leading-body-lg:      1.75;   /* Non-negotiable for patient reading comfort */
+  --leading-body:         1.70;   /* Non-negotiable for patient reading comfort */
+  --leading-body-sm:      1.65;
+  --leading-quote:        1.45;
+  --leading-caption:      1.50;
+  --leading-label:        1.40;
+
+  /* ----------------------------------------------------------
+     SPACING TOKENS
+     Base unit: 8px. All values are multiples of 8.
+     Full documentation: docs/design-system/SPACING_SYSTEM.md
+     ---------------------------------------------------------- */
+
+  --space-1:              4px;    /* Micro — icon-to-label, badge inner */
+  --space-2:              8px;    /* Tight — list items, form internals */
+  --space-3:              12px;   /* Small — label-to-input, icon-to-text */
+  --space-4:              16px;   /* Standard — paragraph spacing */
+  --space-5:              20px;   /* Medium — small margins, card mobile */
+  --space-6:              24px;   /* Component — card padding, nav gap */
+  --space-8:              32px;   /* Section element — heading to body */
+  --space-10:             40px;   /* Section internal — subcomponent gap */
+  --space-12:             48px;   /* Section padding mobile */
+  --space-16:             64px;   /* Section padding desktop standard */
+  --space-20:             80px;   /* Section padding desktop large */
+  --space-24:             96px;   /* Section padding desktop generous */
+  --space-32:             128px;  /* Hero section desktop only */
+
+  /* ----------------------------------------------------------
+     LAYOUT TOKENS
+     ---------------------------------------------------------- */
+
+  --max-width:            1200px; /* Global content container */
+  --wide-width:           1100px; /* Wide grid layouts */
+  --reading-column:       700px;  /* 68 chars — body text max-width */
+  --content-width:        760px;  /* Content-focused page column */
+
+  /* ----------------------------------------------------------
+     COMPONENT TOKENS
+     ---------------------------------------------------------- */
+
+  --radius-sm:            4px;
+  --radius-md:            6px;
+  --radius-lg:            8px;
+  --border-width:         1px;
+  --border-width-strong:  1.5px;
+
+  /* ----------------------------------------------------------
+     MOTION TOKENS
+     All animations respect prefers-reduced-motion (see §09).
+     ---------------------------------------------------------- */
+
+  --transition-fast:      200ms ease;
+  --transition-base:      250ms ease-in-out;
+  --transition-reveal:    400ms ease-out;
+}
+
+
+/* ------------------------------------------------------------
+   03. BOX-SIZING RESET
+   Ensures padding is included in width calculations.
+   Applied globally — safe to have alongside Elementor.
+   ------------------------------------------------------------ */
+
+html {
+  box-sizing: border-box;
+  -webkit-text-size-adjust: 100%;
+  scroll-behavior: smooth; /* Overridden by prefers-reduced-motion in §09 */
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+}
+
+
+/* ------------------------------------------------------------
+   04. BASE BODY STYLES
+   Establishes the warm typographic foundation.
+   Hello Elementor is intentionally minimal so these apply cleanly.
+   ------------------------------------------------------------ */
+
+body {
+  background-color: var(--color-surface);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  font-size: var(--size-body);
+  line-height: var(--leading-body);
+
+  /* Font rendering — antialiased for Retina; grayscale for Windows */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  -webkit-font-feature-settings: "kern" 1;
+  font-feature-settings: "kern" 1;
+}
+
+
+/* ------------------------------------------------------------
+   05. GLOBAL LINK STYLES
+   Base styles for all anchor elements.
+   Navigation and button links are handled by component styles (Prompt 02).
+   ------------------------------------------------------------ */
+
+a {
+  color: var(--color-accent);
+  text-decoration: none;
+  transition: color var(--transition-fast);
+}
+
+a:hover {
+  color: var(--color-accent-hover);
+}
+
+/* Body-context links (inside paragraphs, list items, table cells)
+   always show underline for accessibility and clarity */
+p a,
+li a,
+td a,
+figcaption a {
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+}
+
+p a:hover,
+li a:hover,
+td a:hover,
+figcaption a:hover {
+  color: var(--color-accent-hover);
+  text-decoration-thickness: 2px;
+}
+
+
+/* ------------------------------------------------------------
+   06. FOCUS RING — ACCESSIBILITY (CRITICAL)
+   Uses :focus-visible to show only during keyboard navigation.
+   Never suppress this. Never remove this.
+   The 3px offset ensures the ring is never clipped by overflow:hidden.
+   ------------------------------------------------------------ */
+
+:focus-visible {
+  outline: 3px solid var(--color-accent);
+  outline-offset: 3px;
+  border-radius: var(--radius-sm);
+}
+
+/* Hide the default :focus ring for pointer users where :focus-visible is supported */
+:focus:not(:focus-visible) {
+  outline: none;
+}
+
+/* Interactive elements need explicit focus handling */
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible,
+[tabindex]:focus-visible {
+  outline: 3px solid var(--color-accent);
+  outline-offset: 3px;
+}
+
+
+/* ------------------------------------------------------------
+   07. TEXT SELECTION
+   Warm accent tint — consistent with the palette.
+   Avoids the jarring default blue selection on warm backgrounds.
+   ------------------------------------------------------------ */
+
+::selection {
+  background-color: var(--color-accent-subtle);
+  color: var(--color-ink);
+}
+
+::-moz-selection {
+  background-color: var(--color-accent-subtle);
+  color: var(--color-ink);
+}
+
+
+/* ------------------------------------------------------------
+   08. TYPOGRAPHIC DEFAULTS
+   Base styling for semantic HTML elements within content areas.
+   Ensures correct rendering when content is entered in the
+   WordPress editor or via Elementor's text widgets.
+   ------------------------------------------------------------ */
+
+h1, h2, h3 {
+  font-family: var(--font-serif);
+  color: var(--color-ink);
+  font-weight: var(--weight-bold);
+}
+
+h4, h5, h6 {
+  font-family: var(--font-sans);
+  color: var(--color-ink);
+  font-weight: var(--weight-semibold);
+}
+
+h1 { font-size: var(--size-h1); line-height: var(--leading-h1); }
+h2 { font-size: var(--size-h2); line-height: var(--leading-h2); }
+h3 { font-size: var(--size-h3); line-height: var(--leading-h3); font-weight: var(--weight-regular); }
+h4 { font-size: var(--size-h4); line-height: var(--leading-h4); }
+h5 { font-size: var(--size-h5); line-height: var(--leading-h5); }
+h6 { font-size: var(--size-h6); line-height: var(--leading-h6); }
+
+p {
+  font-size: var(--size-body);
+  line-height: var(--leading-body);
+  color: var(--color-ink);
+  margin-bottom: var(--space-4);
+}
+
+p:last-child {
+  margin-bottom: 0;
+}
+
+blockquote {
+  font-family: var(--font-serif);
+  font-size: var(--size-quote);
+  font-style: italic;
+  line-height: var(--leading-quote);
+  color: var(--color-ink);
+  border-left: 3px solid var(--color-accent);
+  padding-left: var(--space-6);
+  margin: var(--space-8) 0;
+}
+
+/* Horizontal rule — warm border, generous margin */
+hr {
+  border: none;
+  border-top: 1px solid var(--color-border);
+  margin: var(--space-12) 0;
+}
+
+/* Images — prevent layout shift, maintain aspect ratio */
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Lists — legible spacing for patient-facing content */
+ul, ol {
+  padding-left: var(--space-6);
+  margin-bottom: var(--space-4);
+}
+
+li {
+  font-size: var(--size-body);
+  line-height: var(--leading-body);
+  color: var(--color-ink);
+  margin-bottom: var(--space-2);
+}
+
+li:last-child {
+  margin-bottom: 0;
+}
+
+/* Strong/bold — Inter SemiBold at reading size */
+strong, b {
+  font-weight: var(--weight-semibold);
+}
+
+/* Code — medical abbreviation definitions inline */
+code {
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 0.9em;
+  background-color: var(--color-surface-muted);
+  padding: 2px 6px;
+  border-radius: var(--radius-sm);
+  color: var(--color-ink);
+}
+
+
+/* ------------------------------------------------------------
+   09. REDUCED MOTION — ACCESSIBILITY (CRITICAL)
+   Respects user's OS-level motion preferences.
+   This is an accessibility requirement, not a preference.
+
+   !important is used here intentionally and documented:
+   These rules must override any animation added by Elementor's
+   motion effects, third-party plugins, or other stylesheets.
+   ------------------------------------------------------------ */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  /* Disable Elementor scroll-reveal animations */
+  .elementor-invisible {
+    visibility: visible !important;
+  }
+}
+
+
+/* ------------------------------------------------------------
+   10. SKIP-TO-CONTENT LINK — ACCESSIBILITY
+   Must be the FIRST focusable element in the DOM.
+   Add this link to the WordPress theme's header.php before
+   the main nav, or via Elementor's custom HTML at page top:
+   <a class="skip-to-content" href="#main-content">Treci la conținut</a>
+   ------------------------------------------------------------ */
+
+.skip-to-content {
+  position: absolute;
+  top: -200%;
+  left: var(--space-4);
+  background-color: var(--color-accent);
+  color: var(--color-surface);
+  font-family: var(--font-sans);
+  font-size: var(--size-body-sm);
+  font-weight: var(--weight-semibold);
+  padding: var(--space-3) var(--space-6);
+  border-radius: var(--radius-md);
+  z-index: 10000;
+  transition: top var(--transition-fast);
+  text-decoration: none;
+}
+
+.skip-to-content:focus-visible {
+  top: var(--space-4);
+  outline: 3px solid var(--color-surface);
+  outline-offset: 3px;
+}
+
+
+/* ------------------------------------------------------------
+   11. ELEMENTOR CONTAINER — WIDTH CONSTRAINTS
+   Ensures inner containers respect the design system's max-width.
+   The outer container is full-width; the inner is constrained.
+   ------------------------------------------------------------ */
+
+.e-con-inner {
+  max-width: var(--max-width);
+}
+
+/* When Elementor's "Content Width" is set to Boxed */
+.elementor-section-boxed > .elementor-container {
+  max-width: var(--max-width);
+}
+
+
+/* ------------------------------------------------------------
+   12. READING COLUMN CLASS
+   Apply the CSS class "reading-column" to the inner container
+   of any section containing long-form body text.
+
+   Maximum: 68 characters ≈ 700px at 17px body size.
+   Required for: condition pages, FAQ, about page biography,
+   patient information, article pages.
+   ------------------------------------------------------------ */
+
+.reading-column {
+  max-width: var(--reading-column);
+  margin-left: auto;
+  margin-right: auto;
+}
+
+
+/* ------------------------------------------------------------
+   13. SECTION-DARK UTILITY CLASS
+   Apply to Elementor containers using color-ink as background.
+   Inverts text and border colors for legibility on dark.
+
+   Usage: add "section-dark" to the container's CSS Classes field
+   in Elementor → Advanced → CSS Classes.
+   ------------------------------------------------------------ */
+
+.section-dark {
+  background-color: var(--color-ink);
+  color: var(--color-surface);
+}
+
+.section-dark h1,
+.section-dark h2,
+.section-dark h3,
+.section-dark h4,
+.section-dark h5,
+.section-dark h6,
+.section-dark p,
+.section-dark li {
+  color: var(--color-surface);
+}
+
+.section-dark a {
+  color: var(--color-surface);
+  opacity: 0.85;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.section-dark a:hover {
+  opacity: 1;
+}
+
+.section-dark hr {
+  border-top-color: rgba(253, 251, 247, 0.2); /* Surface at 20% */
+}
+
+
+/* ------------------------------------------------------------
+   14. OVERLINE TEXT CLASS
+   Consistent across all section-header overlines.
+   Apply CSS class "text-overline" to a text widget where
+   Elementor's Global Typography "Overline" style is selected.
+
+   This class ensures the uppercase + letter-spacing rendering
+   is consistent regardless of browser or font-display timing.
+   ------------------------------------------------------------ */
+
+.text-overline,
+.elementor-widget-text-editor .text-overline {
+  font-family: var(--font-sans);
+  font-size: var(--size-overline);
+  font-weight: var(--weight-semibold);
+  line-height: var(--leading-label);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-accent);
+  display: block;
+  margin-bottom: var(--space-3);
+}
+
+/* Overline on dark sections */
+.section-dark .text-overline {
+  color: var(--color-accent-subtle);
+}
+
+
+/* ------------------------------------------------------------
+   15. CALLOUT BOX UTILITY
+   Used for critical patient information on condition and
+   patient-information pages. Maximum 2 per page.
+
+   Apply CSS class "callout-box" to a container.
+   ------------------------------------------------------------ */
+
+.callout-box {
+  background-color: var(--color-accent-subtle);
+  border-left: 3px solid var(--color-accent);
+  border-radius: var(--radius-lg);
+  padding: var(--space-6);
+  margin: var(--space-8) 0;
+}
+
+.callout-box p {
+  font-size: var(--size-body);
+  line-height: var(--leading-body);
+  color: var(--color-ink);
+  margin-bottom: var(--space-3);
+}
+
+.callout-box p:last-child {
+  margin-bottom: 0;
+}
+
+/* Muted variant — for secondary notices */
+.callout-box-muted {
+  background-color: var(--color-surface-muted);
+  border-left: 3px solid var(--color-border-strong);
+}
+
+
+/* ------------------------------------------------------------
+   16. LEAD PARAGRAPH CLASS
+   Applied to the first paragraph of each major content section.
+   Larger size, more generous leading — signals "start here."
+   Use on the first text widget in any content section.
+   ------------------------------------------------------------ */
+
+.lead-paragraph,
+.lead-paragraph p {
+  font-size: var(--size-body-lg);
+  line-height: var(--leading-body-lg);
+  color: var(--color-ink);
+}
+
+
+/* ------------------------------------------------------------
+   17. FORM BASE STYLES
+   Applies the warm palette to standard HTML form elements.
+   Elementor Pro Form widget will be styled via widget controls,
+   but these base styles ensure consistency for any fallback
+   or non-Elementor form output.
+   ------------------------------------------------------------ */
+
+input[type="text"],
+input[type="email"],
+input[type="tel"],
+input[type="search"],
+input[type="url"],
+textarea,
+select {
+  font-family: var(--font-sans);
+  font-size: var(--size-body);
+  color: var(--color-ink);
+  background-color: var(--color-surface);
+  border: var(--border-width) solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: var(--space-4) var(--space-5);
+  line-height: var(--leading-body);
+  width: 100%;
+  transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+  outline: none;
+  border-color: var(--color-accent);
+  box-shadow: 0 0 0 3px var(--color-accent-subtle);
+}
+
+input::placeholder,
+textarea::placeholder {
+  color: var(--color-ink-secondary);
+  opacity: 0.7;
+}
+
+label {
+  font-family: var(--font-sans);
+  font-size: var(--size-label);
+  font-weight: var(--weight-semibold);
+  color: var(--color-ink);
+  letter-spacing: 0.02em;
+  display: block;
+  margin-bottom: var(--space-2);
+}
+
+
+/* ------------------------------------------------------------
+   18. PRINT STYLES
+   Patients may print condition pages or appointment instructions.
+   This ensures the printed version is clean and readable.
+   ------------------------------------------------------------ */
+
+@media print {
+  body {
+    background-color: #ffffff;
+    color: #000000;
+    font-family: Georgia, serif;
+    font-size: 12pt;
+    line-height: 1.5;
+  }
+
+  h1, h2, h3 {
+    font-family: Georgia, serif;
+    color: #000000;
+    page-break-after: avoid;
+  }
+
+  h4, h5, h6 {
+    font-family: Arial, sans-serif;
+    color: #000000;
+  }
+
+  p, li {
+    font-size: 11pt;
+    line-height: 1.6;
+    orphans: 3;
+    widows: 3;
+  }
+
+  a {
+    color: #000000;
+    text-decoration: underline;
+  }
+
+  /* Show URLs for links — helpful for patients reviewing printed content */
+  a[href^="http"]::after,
+  a[href^="https"]::after {
+    content: " (" attr(href) ")";
+    font-size: 9pt;
+    color: #555555;
+  }
+
+  /* Internal anchors don't need URLs printed */
+  a[href^="#"]::after {
+    content: "";
+  }
+
+  /* Hide navigation, buttons, and interactive elements */
+  .elementor-widget-button,
+  .elementor-nav-menu,
+  .skip-to-content,
+  .callout-box {
+    display: none;
+  }
+
+  /* Keep callout information visible in print */
+  .callout-box {
+    display: block;
+    border: 1px solid #cccccc;
+    padding: 12pt;
+    margin: 12pt 0;
+  }
+
+  /* Prevent page breaks inside important content blocks */
+  blockquote,
+  figure,
+  .callout-box {
+    page-break-inside: avoid;
+  }
+}
