@@ -1,0 +1,139 @@
+{
+    "version": "0.4",
+    "title": "Intervenții — Archive",
+    "type": "archive",
+    "content": [
+        {
+            "id": "s5ar001",
+            "elType": "container",
+            "isInner": false,
+            "settings": {
+                "flex_direction": "column",
+                "flex_align_items": "center",
+                "background_background": "classic",
+                "background_color": "#231E1A",
+                "padding": {
+                    "top": "80",
+                    "right": "24",
+                    "bottom": "80",
+                    "left": "24",
+                    "unit": "px",
+                    "isLinked": false
+                },
+                "content_width": "full"
+            },
+            "elements": [
+                {
+                    "id": "s5ar002",
+                    "elType": "container",
+                    "isInner": true,
+                    "settings": {
+                        "content_width": "full",
+                        "width": {
+                            "unit": "px",
+                            "size": 820
+                        }
+                    },
+                    "elements": [
+                        {
+                            "id": "s5ar003",
+                            "elType": "widget",
+                            "widgetType": "heading",
+                            "settings": {
+                                "title": "Intervenții Chirurgicale",
+                                "header_size": "h1",
+                                "title_color": "#FDFBF7",
+                                "typography_typography": "custom",
+                                "typography_font_family": "Lora",
+                                "typography_font_weight": "700",
+                                "typography_font_size": {
+                                    "unit": "px",
+                                    "size": 52
+                                },
+                                "typography_font_size_tablet": {
+                                    "unit": "px",
+                                    "size": 40
+                                },
+                                "typography_font_size_mobile": {
+                                    "unit": "px",
+                                    "size": 34
+                                }
+                            },
+                            "elements": []
+                        },
+                        {
+                            "id": "s5ar004",
+                            "elType": "widget",
+                            "widgetType": "text-editor",
+                            "settings": {
+                                "editor": "Proceduri neurochirurgicale minim invazive realizate de dr. George Ungureanu, cu experiență internațională în chirurgia coloanei vertebrale și a sistemului nervos.",
+                                "text_color": "rgba(253,251,247,0.8)",
+                                "typography_typography": "custom",
+                                "typography_font_family": "Inter",
+                                "typography_font_weight": "400",
+                                "typography_font_size": {
+                                    "unit": "px",
+                                    "size": 18
+                                },
+                                "typography_font_size_tablet": {
+                                    "unit": "px",
+                                    "size": 16
+                                }
+                            },
+                            "elements": []
+                        }
+                    ]
+                }
+            ],
+            "widgetType": null
+        },
+        {
+            "id": "s5ar010",
+            "elType": "container",
+            "isInner": false,
+            "settings": {
+                "flex_direction": "column",
+                "flex_align_items": "center",
+                "background_background": "classic",
+                "background_color": "#F4EFE6",
+                "padding": {
+                    "top": "60",
+                    "right": "24",
+                    "bottom": "60",
+                    "left": "24",
+                    "unit": "px",
+                    "isLinked": false
+                },
+                "content_width": "full"
+            },
+            "elements": [
+                {
+                    "id": "s5ar011",
+                    "elType": "container",
+                    "isInner": true,
+                    "settings": {
+                        "content_width": "full",
+                        "width": {
+                            "unit": "px",
+                            "size": 1100
+                        }
+                    },
+                    "elements": [
+                        {
+                            "id": "s5ar012",
+                            "elType": "widget",
+                            "widgetType": "shortcode",
+                            "settings": {
+                                "shortcode": "[gu_interventii_archive]"
+                            },
+                            "elements": []
+                        }
+                    ]
+                }
+            ],
+            "widgetType": null
+        }
+    ],
+    "export_date": "2026-06-29",
+    "source": "Sprint 5 — Surgical Procedures Architecture"
+}

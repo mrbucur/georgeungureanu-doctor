@@ -1,0 +1,735 @@
+{
+    "version": "0.4",
+    "title": "Intervenție — Single",
+    "type": "single",
+    "content": [
+        {
+            "id": "s5sg001",
+            "elType": "container",
+            "isInner": false,
+            "settings": {
+                "flex_direction": "column",
+                "flex_align_items": "center",
+                "background_background": "classic",
+                "background_color": "#231E1A",
+                "padding": {
+                    "top": "80",
+                    "right": "24",
+                    "bottom": "80",
+                    "left": "24",
+                    "unit": "px",
+                    "isLinked": false
+                },
+                "content_width": "full"
+            },
+            "elements": [
+                {
+                    "id": "s5sg002",
+                    "elType": "container",
+                    "isInner": true,
+                    "settings": {
+                        "content_width": "full",
+                        "width": {
+                            "unit": "px",
+                            "size": 760
+                        }
+                    },
+                    "elements": [
+                        {
+                            "id": "s5sg003",
+                            "elType": "widget",
+                            "widgetType": "theme-post-title",
+                            "settings": {
+                                "title": "[elementor-tag id=\"\" name=\"post-title\" settings=\"%7B%7D\"]",
+                                "header_size": "h1",
+                                "title_color": "#FDFBF7",
+                                "__dynamic__": {
+                                    "title": "[elementor-tag id=\"\" name=\"post-title\" settings=\"%7B%7D\"]"
+                                },
+                                "typography_typography": "custom",
+                                "typography_font_family": "Lora",
+                                "typography_font_weight": "700",
+                                "typography_font_size": {
+                                    "unit": "px",
+                                    "size": 48
+                                },
+                                "typography_font_size_tablet": {
+                                    "unit": "px",
+                                    "size": 38
+                                },
+                                "typography_font_size_mobile": {
+                                    "unit": "px",
+                                    "size": 32
+                                }
+                            },
+                            "elements": []
+                        },
+                        {
+                            "id": "s5sg004",
+                            "elType": "widget",
+                            "widgetType": "text-editor",
+                            "settings": {
+                                "editor": "[gu_field name=\"subtitle\"]",
+                                "text_color": "rgba(253,251,247,0.85)",
+                                "typography_typography": "custom",
+                                "typography_font_family": "Inter",
+                                "typography_font_weight": "400",
+                                "typography_font_size": {
+                                    "unit": "px",
+                                    "size": 20
+                                },
+                                "typography_font_size_tablet": {
+                                    "unit": "px",
+                                    "size": 18
+                                },
+                                "typography_font_size_mobile": {
+                                    "unit": "px",
+                                    "size": 16
+                                }
+                            },
+                            "elements": []
+                        }
+                    ]
+                }
+            ],
+            "widgetType": null
+        },
+        {
+            "id": "s5sg010",
+            "elType": "container",
+            "isInner": false,
+            "settings": {
+                "flex_direction": "column",
+                "flex_align_items": "center",
+                "background_background": "classic",
+                "background_color": "#F4EFE6",
+                "padding": {
+                    "top": "60",
+                    "right": "24",
+                    "bottom": "60",
+                    "left": "24",
+                    "unit": "px",
+                    "isLinked": false
+                },
+                "content_width": "full"
+            },
+            "elements": [
+                {
+                    "id": "s5sg011",
+                    "elType": "container",
+                    "isInner": true,
+                    "settings": {
+                        "content_width": "full",
+                        "width": {
+                            "unit": "px",
+                            "size": 760
+                        }
+                    },
+                    "elements": [
+                        {
+                            "id": "s5sg012",
+                            "elType": "widget",
+                            "widgetType": "text-editor",
+                            "settings": {
+                                "editor": "[gu_field name=\"short_summary\"]",
+                                "text_color": "#3D3530",
+                                "typography_line_height": {
+                                    "unit": "em",
+                                    "size": 1.75
+                                },
+                                "typography_typography": "custom",
+                                "typography_font_family": "Inter",
+                                "typography_font_weight": "400",
+                                "typography_font_size": {
+                                    "unit": "px",
+                                    "size": 18
+                                }
+                            },
+                            "elements": []
+                        }
+                    ]
+                }
+            ],
+            "widgetType": null
+        },
+        {
+            "id": "s5sg020",
+            "elType": "container",
+            "isInner": false,
+            "settings": {
+                "flex_direction": "column",
+                "flex_align_items": "center",
+                "padding": {
+                    "top": "60",
+                    "right": "24",
+                    "bottom": "60",
+                    "left": "24",
+                    "unit": "px",
+                    "isLinked": false
+                },
+                "content_width": "full"
+            },
+            "elements": [
+                {
+                    "id": "s5sg02001",
+                    "elType": "container",
+                    "isInner": true,
+                    "settings": {
+                        "content_width": "full",
+                        "padding": {
+                            "top": "0",
+                            "right": "0",
+                            "bottom": "48",
+                            "left": "0",
+                            "unit": "px",
+                            "isLinked": false
+                        },
+                        "width": {
+                            "unit": "px",
+                            "size": 760
+                        }
+                    },
+                    "elements": [
+                        {
+                            "id": "s5sg0211",
+                            "elType": "widget",
+                            "widgetType": "heading",
+                            "settings": {
+                                "title": "Indicații",
+                                "header_size": "h3",
+                                "title_color": "#231E1A",
+                                "typography_typography": "custom",
+                                "typography_font_family": "Lora",
+                                "typography_font_weight": "700",
+                                "typography_font_size": {
+                                    "unit": "px",
+                                    "size": 26
+                                }
+                            },
+                            "elements": []
+                        },
+                        {
+                            "id": "s5sg0212",
+                            "elType": "widget",
+                            "widgetType": "text-editor",
+                            "settings": {
+                                "editor": "[gu_field name=\"indications\"]",
+                                "text_color": "#3D3530",
+                                "typography_line_height": {
+                                    "unit": "em",
+                                    "size": 1.7
+                                },
+                                "typography_typography": "custom",
+                                "typography_font_family": "Inter",
+                                "typography_font_weight": "400",
+                                "typography_font_size": {
+                                    "unit": "px",
+                                    "size": 16
+                                }
+                            },
+                            "elements": []
+                        }
+                    ]
+                },
+                {
+                    "id": "s5sg02002",
+                    "elType": "container",
+                    "isInner": true,
+                    "settings": {
+                        "content_width": "full",
+                        "padding": {
+                            "top": "0",
+                            "right": "0",
+                            "bottom": "48",
+                            "left": "0",
+                            "unit": "px",
+                            "isLinked": false
+                        },
+                        "width": {
+                            "unit": "px",
+                            "size": 760
+                        }
+                    },
+                    "elements": [
+                        {
+                            "id": "s5sg0221",
+                            "elType": "widget",
+                            "widgetType": "heading",
+                            "settings": {
+                                "title": "Când este indicată operația",
+                                "header_size": "h3",
+                                "title_color": "#231E1A",
+                                "typography_typography": "custom",
+                                "typography_font_family": "Lora",
+                                "typography_font_weight": "700",
+                                "typography_font_size": {
+                                    "unit": "px",
+                                    "size": 26
+                                }
+                            },
+                            "elements": []
+                        },
+                        {
+                            "id": "s5sg0222",
+                            "elType": "widget",
+                            "widgetType": "text-editor",
+                            "settings": {
+                                "editor": "[gu_field name=\"when_surgery\"]",
+                                "text_color": "#3D3530",
+                                "typography_line_height": {
+                                    "unit": "em",
+                                    "size": 1.7
+                                },
+                                "typography_typography": "custom",
+                                "typography_font_family": "Inter",
+                                "typography_font_weight": "400",
+                                "typography_font_size": {
+                                    "unit": "px",
+                                    "size": 16
+                                }
+                            },
+                            "elements": []
+                        }
+                    ]
+                },
+                {
+                    "id": "s5sg02003",
+                    "elType": "container",
+                    "isInner": true,
+                    "settings": {
+                        "content_width": "full",
+                        "padding": {
+                            "top": "0",
+                            "right": "0",
+                            "bottom": "48",
+                            "left": "0",
+                            "unit": "px",
+                            "isLinked": false
+                        },
+                        "width": {
+                            "unit": "px",
+                            "size": 760
+                        }
+                    },
+                    "elements": [
+                        {
+                            "id": "s5sg0231",
+                            "elType": "widget",
+                            "widgetType": "heading",
+                            "settings": {
+                                "title": "Tehnica chirurgicală",
+                                "header_size": "h3",
+                                "title_color": "#231E1A",
+                                "typography_typography": "custom",
+                                "typography_font_family": "Lora",
+                                "typography_font_weight": "700",
+                                "typography_font_size": {
+                                    "unit": "px",
+                                    "size": 26
+                                }
+                            },
+                            "elements": []
+                        },
+                        {
+                            "id": "s5sg0232",
+                            "elType": "widget",
+                            "widgetType": "text-editor",
+                            "settings": {
+                                "editor": "[gu_field name=\"surgical_technique\"]",
+                                "text_color": "#3D3530",
+                                "typography_line_height": {
+                                    "unit": "em",
+                                    "size": 1.7
+                                },
+                                "typography_typography": "custom",
+                                "typography_font_family": "Inter",
+                                "typography_font_weight": "400",
+                                "typography_font_size": {
+                                    "unit": "px",
+                                    "size": 16
+                                }
+                            },
+                            "elements": []
+                        }
+                    ]
+                },
+                {
+                    "id": "s5sg02004",
+                    "elType": "container",
+                    "isInner": true,
+                    "settings": {
+                        "content_width": "full",
+                        "padding": {
+                            "top": "0",
+                            "right": "0",
+                            "bottom": "48",
+                            "left": "0",
+                            "unit": "px",
+                            "isLinked": false
+                        },
+                        "width": {
+                            "unit": "px",
+                            "size": 760
+                        }
+                    },
+                    "elements": [
+                        {
+                            "id": "s5sg0241",
+                            "elType": "widget",
+                            "widgetType": "heading",
+                            "settings": {
+                                "title": "Beneficii",
+                                "header_size": "h3",
+                                "title_color": "#231E1A",
+                                "typography_typography": "custom",
+                                "typography_font_family": "Lora",
+                                "typography_font_weight": "700",
+                                "typography_font_size": {
+                                    "unit": "px",
+                                    "size": 26
+                                }
+                            },
+                            "elements": []
+                        },
+                        {
+                            "id": "s5sg0242",
+                            "elType": "widget",
+                            "widgetType": "text-editor",
+                            "settings": {
+                                "editor": "[gu_field name=\"benefits\"]",
+                                "text_color": "#3D3530",
+                                "typography_line_height": {
+                                    "unit": "em",
+                                    "size": 1.7
+                                },
+                                "typography_typography": "custom",
+                                "typography_font_family": "Inter",
+                                "typography_font_weight": "400",
+                                "typography_font_size": {
+                                    "unit": "px",
+                                    "size": 16
+                                }
+                            },
+                            "elements": []
+                        }
+                    ]
+                },
+                {
+                    "id": "s5sg02005",
+                    "elType": "container",
+                    "isInner": true,
+                    "settings": {
+                        "content_width": "full",
+                        "padding": {
+                            "top": "0",
+                            "right": "0",
+                            "bottom": "48",
+                            "left": "0",
+                            "unit": "px",
+                            "isLinked": false
+                        },
+                        "width": {
+                            "unit": "px",
+                            "size": 760
+                        }
+                    },
+                    "elements": [
+                        {
+                            "id": "s5sg0251",
+                            "elType": "widget",
+                            "widgetType": "heading",
+                            "settings": {
+                                "title": "Riscuri și complicații",
+                                "header_size": "h3",
+                                "title_color": "#231E1A",
+                                "typography_typography": "custom",
+                                "typography_font_family": "Lora",
+                                "typography_font_weight": "700",
+                                "typography_font_size": {
+                                    "unit": "px",
+                                    "size": 26
+                                }
+                            },
+                            "elements": []
+                        },
+                        {
+                            "id": "s5sg0252",
+                            "elType": "widget",
+                            "widgetType": "text-editor",
+                            "settings": {
+                                "editor": "[gu_field name=\"risks\"]",
+                                "text_color": "#3D3530",
+                                "typography_line_height": {
+                                    "unit": "em",
+                                    "size": 1.7
+                                },
+                                "typography_typography": "custom",
+                                "typography_font_family": "Inter",
+                                "typography_font_weight": "400",
+                                "typography_font_size": {
+                                    "unit": "px",
+                                    "size": 16
+                                }
+                            },
+                            "elements": []
+                        }
+                    ]
+                },
+                {
+                    "id": "s5sg02006",
+                    "elType": "container",
+                    "isInner": true,
+                    "settings": {
+                        "content_width": "full",
+                        "padding": {
+                            "top": "0",
+                            "right": "0",
+                            "bottom": "48",
+                            "left": "0",
+                            "unit": "px",
+                            "isLinked": false
+                        },
+                        "width": {
+                            "unit": "px",
+                            "size": 760
+                        }
+                    },
+                    "elements": [
+                        {
+                            "id": "s5sg0261",
+                            "elType": "widget",
+                            "widgetType": "heading",
+                            "settings": {
+                                "title": "Recuperare",
+                                "header_size": "h3",
+                                "title_color": "#231E1A",
+                                "typography_typography": "custom",
+                                "typography_font_family": "Lora",
+                                "typography_font_weight": "700",
+                                "typography_font_size": {
+                                    "unit": "px",
+                                    "size": 26
+                                }
+                            },
+                            "elements": []
+                        },
+                        {
+                            "id": "s5sg0262",
+                            "elType": "widget",
+                            "widgetType": "text-editor",
+                            "settings": {
+                                "editor": "[gu_field name=\"recovery_timeline\"]",
+                                "text_color": "#3D3530",
+                                "typography_line_height": {
+                                    "unit": "em",
+                                    "size": 1.7
+                                },
+                                "typography_typography": "custom",
+                                "typography_font_family": "Inter",
+                                "typography_font_weight": "400",
+                                "typography_font_size": {
+                                    "unit": "px",
+                                    "size": 16
+                                }
+                            },
+                            "elements": []
+                        }
+                    ]
+                }
+            ],
+            "widgetType": null
+        },
+        {
+            "id": "s5sg050",
+            "elType": "container",
+            "isInner": false,
+            "settings": {
+                "flex_direction": "column",
+                "flex_align_items": "center",
+                "background_background": "classic",
+                "background_color": "#F4EFE6",
+                "padding": {
+                    "top": "60",
+                    "right": "24",
+                    "bottom": "60",
+                    "left": "24",
+                    "unit": "px",
+                    "isLinked": false
+                },
+                "content_width": "full"
+            },
+            "elements": [
+                {
+                    "id": "s5sg051",
+                    "elType": "container",
+                    "isInner": true,
+                    "settings": {
+                        "content_width": "full",
+                        "width": {
+                            "unit": "px",
+                            "size": 760
+                        }
+                    },
+                    "elements": [
+                        {
+                            "id": "s5sg052",
+                            "elType": "widget",
+                            "widgetType": "heading",
+                            "settings": {
+                                "title": "Întrebări frecvente",
+                                "header_size": "h2",
+                                "title_color": "#231E1A",
+                                "typography_typography": "custom",
+                                "typography_font_family": "Lora",
+                                "typography_font_weight": "700",
+                                "typography_font_size": {
+                                    "unit": "px",
+                                    "size": 32
+                                }
+                            },
+                            "elements": []
+                        },
+                        {
+                            "id": "s5sg053",
+                            "elType": "widget",
+                            "widgetType": "text-editor",
+                            "settings": {
+                                "editor": "[gu_field name=\"faq\"]",
+                                "text_color": "#3D3530",
+                                "typography_line_height": {
+                                    "unit": "em",
+                                    "size": 1.7
+                                },
+                                "typography_typography": "custom",
+                                "typography_font_family": "Inter",
+                                "typography_font_weight": "400",
+                                "typography_font_size": {
+                                    "unit": "px",
+                                    "size": 16
+                                }
+                            },
+                            "elements": []
+                        }
+                    ]
+                }
+            ],
+            "widgetType": null
+        },
+        {
+            "id": "s5sg060",
+            "elType": "container",
+            "isInner": false,
+            "settings": {
+                "flex_direction": "column",
+                "flex_align_items": "center",
+                "background_background": "classic",
+                "background_color": "#231E1A",
+                "padding": {
+                    "top": "80",
+                    "right": "24",
+                    "bottom": "80",
+                    "left": "24",
+                    "unit": "px",
+                    "isLinked": false
+                },
+                "content_width": "full"
+            },
+            "elements": [
+                {
+                    "id": "s5sg061",
+                    "elType": "container",
+                    "isInner": true,
+                    "settings": {
+                        "content_width": "full",
+                        "flex_direction": "column",
+                        "flex_align_items": "center",
+                        "width": {
+                            "unit": "px",
+                            "size": 600
+                        }
+                    },
+                    "elements": [
+                        {
+                            "id": "s5sg062",
+                            "elType": "widget",
+                            "widgetType": "text-editor",
+                            "settings": {
+                                "editor": "[gu_field name=\"cta_title\"]",
+                                "text_color": "#FDFBF7",
+                                "text_align": "center",
+                                "typography_typography": "custom",
+                                "typography_font_family": "Lora",
+                                "typography_font_weight": "700",
+                                "typography_font_size": {
+                                    "unit": "px",
+                                    "size": 32
+                                }
+                            },
+                            "elements": []
+                        },
+                        {
+                            "id": "s5sg063",
+                            "elType": "widget",
+                            "widgetType": "text-editor",
+                            "settings": {
+                                "editor": "[gu_field name=\"cta_text\"]",
+                                "text_color": "rgba(253,251,247,0.8)",
+                                "text_align": "center",
+                                "typography_typography": "custom",
+                                "typography_font_family": "Inter",
+                                "typography_font_weight": "400",
+                                "typography_font_size": {
+                                    "unit": "px",
+                                    "size": 16
+                                }
+                            },
+                            "elements": []
+                        },
+                        {
+                            "id": "s5sg064",
+                            "elType": "widget",
+                            "widgetType": "button",
+                            "settings": {
+                                "text": "Programează o consultație",
+                                "link": {
+                                    "url": "/programari/",
+                                    "is_external": "",
+                                    "nofollow": ""
+                                },
+                                "background_color": "#4D7A70",
+                                "button_text_color": "#FDFBF7",
+                                "border_radius": {
+                                    "top": "4",
+                                    "right": "4",
+                                    "bottom": "4",
+                                    "left": "4",
+                                    "unit": "px",
+                                    "isLinked": true
+                                },
+                                "padding": {
+                                    "top": "14",
+                                    "right": "32",
+                                    "bottom": "14",
+                                    "left": "32",
+                                    "unit": "px",
+                                    "isLinked": false
+                                },
+                                "typography_typography": "custom",
+                                "typography_font_family": "Inter",
+                                "typography_font_weight": "600",
+                                "typography_font_size": {
+                                    "unit": "px",
+                                    "size": 15
+                                }
+                            },
+                            "elements": []
+                        }
+                    ]
+                }
+            ],
+            "widgetType": null
+        }
+    ],
+    "export_date": "2026-06-29",
+    "source": "Sprint 5 — Surgical Procedures Architecture"
+}

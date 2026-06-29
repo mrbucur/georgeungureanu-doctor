@@ -209,7 +209,53 @@ add_action( 'init', 'gu_register_taxonomy_categorie_afectiuni' );
 
 
 // ─────────────────────────────────────────────────────────────
-// 5. SHORTCODES FOR ELEMENTOR TEMPLATES
+// 5. CPT: INTERVENȚII CHIRURGICALE
+// ─────────────────────────────────────────────────────────────
+
+function gu_register_cpt_interventii() {
+	register_post_type( 'interventii', [
+		'labels' => [
+			'name'          => __( 'Intervenții', 'gu-design-system' ),
+			'singular_name' => __( 'Intervenție', 'gu-design-system' ),
+			'add_new'       => __( 'Adaugă intervenție', 'gu-design-system' ),
+			'add_new_item'  => __( 'Adaugă intervenție nouă', 'gu-design-system' ),
+			'edit_item'     => __( 'Editează intervenție', 'gu-design-system' ),
+			'view_item'     => __( 'Vezi intervenție', 'gu-design-system' ),
+			'all_items'     => __( 'Toate intervențiile', 'gu-design-system' ),
+			'search_items'  => __( 'Caută intervenții', 'gu-design-system' ),
+		],
+		'public'            => true,
+		'has_archive'       => true,
+		'show_in_rest'      => true,
+		'menu_icon'         => 'dashicons-clipboard',
+		'supports'          => [ 'title', 'thumbnail', 'excerpt' ],
+		'rewrite'           => [ 'slug' => 'interventii' ],
+		'show_in_nav_menus' => true,
+	] );
+}
+add_action( 'init', 'gu_register_cpt_interventii' );
+
+function gu_register_taxonomy_categorie_interventii() {
+	register_taxonomy( 'categorie-interventii', [ 'interventii' ], [
+		'labels' => [
+			'name'          => __( 'Categorii intervenții', 'gu-design-system' ),
+			'singular_name' => __( 'Categorie intervenție', 'gu-design-system' ),
+			'all_items'     => __( 'Toate categoriile', 'gu-design-system' ),
+			'edit_item'     => __( 'Editează categoria', 'gu-design-system' ),
+			'add_new_item'  => __( 'Adaugă categorie nouă', 'gu-design-system' ),
+			'menu_name'     => __( 'Categorii', 'gu-design-system' ),
+		],
+		'hierarchical'  => true,
+		'public'        => true,
+		'show_in_rest'  => true,
+		'rewrite'       => [ 'slug' => 'categorie-interventii' ],
+	] );
+}
+add_action( 'init', 'gu_register_taxonomy_categorie_interventii' );
+
+
+// ─────────────────────────────────────────────────────────────
+// 6. SHORTCODES FOR ELEMENTOR TEMPLATES
 // ─────────────────────────────────────────────────────────────
 
 // [gu_field name="field_name"] — ACF field value for the current post.
@@ -253,6 +299,37 @@ add_shortcode( 'gu_afectiuni_archive', function () {
 		$out    .= '<h3 style="font-family:Lora,serif;font-size:20px;font-weight:700;margin:0 0 10px;"><a href="' . esc_url( get_permalink() ) . '" style="color:#231E1A;text-decoration:none;">' . esc_html( get_the_title() ) . '</a></h3>';
 		$out    .= '<p style="font-family:Inter,system-ui,sans-serif;font-size:15px;color:#5A5550;margin:0 0 14px;">' . esc_html( wp_trim_words( $summary, 20 ) ) . '</p>';
 		$out    .= '<a href="' . esc_url( get_permalink() ) . '" style="font-size:14px;font-weight:600;color:#4D7A70;text-decoration:none;">Citește mai mult →</a>';
+		$out    .= '</article>';
+	}
+	wp_reset_postdata();
+	$out .= '</div>';
+	return $out;
+} );
+
+// [gu_interventii_archive] — card grid of all published interventii.
+// Used in the Elementor archive template.
+add_shortcode( 'gu_interventii_archive', function () {
+	if ( ! post_type_exists( 'interventii' ) ) {
+		return '';
+	}
+	$query = new WP_Query( [
+		'post_type'      => 'interventii',
+		'posts_per_page' => -1,
+		'post_status'    => 'publish',
+		'orderby'        => 'title',
+		'order'          => 'ASC',
+	] );
+	if ( ! $query->have_posts() ) {
+		return '<p>Nu există intervenții publicate.</p>';
+	}
+	$out = '<div class="gu-interventii-grid" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:24px;">';
+	while ( $query->have_posts() ) {
+		$query->the_post();
+		$summary = function_exists( 'get_field' ) ? wp_strip_all_tags( (string) get_field( 'short_summary' ) ) : get_the_excerpt();
+		$out    .= '<article style="background:#FDFBF7;border:1px solid #D6CFC4;border-radius:8px;padding:28px;">';
+		$out    .= '<h3 style="font-family:Lora,serif;font-size:20px;font-weight:700;margin:0 0 10px;"><a href="' . esc_url( get_permalink() ) . '" style="color:#231E1A;text-decoration:none;">' . esc_html( get_the_title() ) . '</a></h3>';
+		$out    .= '<p style="font-family:Inter,system-ui,sans-serif;font-size:15px;color:#5A5550;margin:0 0 14px;">' . esc_html( wp_trim_words( $summary, 20 ) ) . '</p>';
+		$out    .= '<a href="' . esc_url( get_permalink() ) . '" style="font-size:14px;font-weight:600;color:#4D7A70;text-decoration:none;">Detalii intervenție →</a>';
 		$out    .= '</article>';
 	}
 	wp_reset_postdata();
