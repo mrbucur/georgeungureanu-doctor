@@ -1,0 +1,142 @@
+{
+    "version": "0.4",
+    "title": "FAQ — Programări",
+    "type": "section",
+    "content": [
+        {
+            "id": "lib_faq_001",
+            "elType": "container",
+            "isInner": false,
+            "settings": {
+                "flex_direction": "column",
+                "flex_align_items": "center",
+                "background_background": "classic",
+                "background_color": "#F4EFE6",
+                "padding": {
+                    "unit": "px",
+                    "isLinked": false,
+                    "top": "80",
+                    "right": "24",
+                    "bottom": "80",
+                    "left": "24"
+                },
+                "content_width": "full"
+            },
+            "elements": [
+                {
+                    "id": "lib_faq_002",
+                    "elType": "container",
+                    "isInner": true,
+                    "settings": {
+                        "content_width": "full",
+                        "width": {
+                            "unit": "px",
+                            "size": 760
+                        },
+                        "flex_direction": "column",
+                        "flex_gap": {
+                            "column": "32",
+                            "row": "0",
+                            "unit": "px",
+                            "isLinked": false
+                        }
+                    },
+                    "elements": [
+                        {
+                            "id": "lib_faq_003",
+                            "elType": "widget",
+                            "widgetType": "heading",
+                            "settings": {
+                                "title": "Întrebări frecvente",
+                                "header_size": "h2",
+                                "align": "left",
+                                "title_color": "#231E1A",
+                                "typography_typography": "custom",
+                                "typography_font_family": "Lora",
+                                "typography_font_weight": "700",
+                                "typography_font_size": {
+                                    "unit": "px",
+                                    "size": 32
+                                },
+                                "typography_line_height": {
+                                    "unit": "em",
+                                    "size": 1.2
+                                }
+                            }
+                        },
+                        {
+                            "id": "lib_faq_004",
+                            "elType": "widget",
+                            "widgetType": "accordion",
+                            "settings": {
+                                "tabs": [
+                                    {
+                                        "_id": "faq01",
+                                        "tab_title": "Am nevoie de o trimitere de la medicul de familie?",
+                                        "tab_content": "Nu este obligatorie. Poți programa o consultație direct, fără trimitere. Dacă ai bilet de trimitere, aduce-l — ajută la documentare. Dacă nu, evaluarea se poate face pe baza simptomelor și a investigațiilor existente."
+                                    },
+                                    {
+                                        "_id": "faq02",
+                                        "tab_title": "Cât costă o consultație? Este decontată de CNAS?",
+                                        "tab_content": "[CLIENT: Informații tarif consultație și decontare CNAS — ex: Consultația inițială costă X lei. Decontarea CNAS este disponibilă / nu este disponibilă deoarece...]"
+                                    },
+                                    {
+                                        "_id": "faq03",
+                                        "tab_title": "Cât durează o consultație?",
+                                        "tab_content": "O consultație inițială durează în medie 45–60 de minute. O a doua opinie: 30–45 minute. Un control postoperator: 20–30 minute. Aceste durate pot varia în funcție de complexitatea cazului."
+                                    },
+                                    {
+                                        "_id": "faq04",
+                                        "tab_title": "Pot veni cu un aparținător?",
+                                        "tab_content": "Da, ești binevenit să vii cu un aparținător. De multe ori este util ca un membru al familiei să fie prezent pentru a înțelege împreună diagnosticul și opțiunile de tratament."
+                                    },
+                                    {
+                                        "_id": "faq05",
+                                        "tab_title": "Ce se întâmplă dacă trebuie să anulez sau reprogramez?",
+                                        "tab_content": "Dacă nu poți ajunge la programare, te rugăm să ne anunți cu cel puțin 24 de ore înainte, telefonic sau prin email. Reprogramarea se face fără costuri suplimentare."
+                                    },
+                                    {
+                                        "_id": "faq06",
+                                        "tab_title": "Consultez și pacienți din alte țări?",
+                                        "tab_content": "[CLIENT: Confirmare dacă se acceptă pacienți internaționali și detalii specifice — ex: Consultez și pacienți din Republica Moldova, diaspora românească și pacienți internaționali. Consultația se poate desfășura în română / engleză. Contactați-mă înainte pentru detalii logistice.]"
+                                    },
+                                    {
+                                        "_id": "faq07",
+                                        "tab_title": "Voi fi presat să aleg operația?",
+                                        "tab_content": "Nu. Scopul consultației este să înțelegeți complet situația și să aveți toate informațiile necesare pentru a lua o decizie. Chirurgia este recomandată doar când beneficiile depășesc clar riscurile și alternativele conservatoare au fost discutate."
+                                    }
+                                ],
+                                "title_html_tag": "h3",
+                                "icon_align": "right",
+                                "border_color": {
+                                    "color": "#D6CFC7"
+                                },
+                                "title_color": "#231E1A",
+                                "title_color_active": "#4D7A70",
+                                "icon_color": "#4D7A70",
+                                "content_color": "#5A4E47",
+                                "typography_typography": "custom",
+                                "typography_font_family": "Inter",
+                                "typography_font_weight": "600",
+                                "typography_font_size": {
+                                    "unit": "px",
+                                    "size": 16
+                                },
+                                "content_typography_typography": "custom",
+                                "content_typography_font_family": "Inter",
+                                "content_typography_font_size": {
+                                    "unit": "px",
+                                    "size": 16
+                                },
+                                "content_typography_line_height": {
+                                    "unit": "em",
+                                    "size": 1.7
+                                }
+                            }
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

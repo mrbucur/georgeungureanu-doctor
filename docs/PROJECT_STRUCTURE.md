@@ -51,7 +51,11 @@ georgeungureanu-doctor/
             ├── sprint4-single-afectiuni.json
             ├── sprint4-archive-afectiuni.json
             ├── sprint5-single-interventii.json
-            └── sprint5-archive-interventii.json
+            ├── sprint5-archive-interventii.json
+            ├── sprint6-programari.json         # Programări page (full page)
+            ├── sprint6-faq-programari.json     # Reusable FAQ accordion section
+            ├── sprint6-locatie-card.json       # Reusable Location card section
+            └── sprint6-cta-final.json          # Reusable Final CTA dark strip
 ```
 
 ---
@@ -87,6 +91,10 @@ All Elementor content lives in the WordPress database. The exported JSONs in `el
 | 53 | Library | Afecțiuni — Archive | archive | `afectiuni` archive |
 | 69 | Library | Intervenție — Single | single | `interventii` singular |
 | 70 | Library | Intervenții — Archive | archive | `interventii` archive |
+| 72 | Page | Programări | page (direct Elementor) | `/programari/` |
+| 73 | Library | FAQ — Programări | section (reusable) | — |
+| 74 | Library | Locație — Card | section (reusable) | — |
+| 75 | Library | CTA Final — Dark Strip | section (reusable) | — |
 
 ---
 

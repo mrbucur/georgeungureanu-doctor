@@ -40,14 +40,14 @@
 
 ---
 
-### 4. `/programari/` page is an empty placeholder
-**What:** The `/programari/` page (ID=72) was created as an empty published page to prevent 404 errors from CTA buttons. It has no Elementor template assigned and shows default theme output.
+### 4. `/programari/` booking data is placeholder content ~~empty placeholder~~
+**What:** ~~The `/programari/` page (ID=72) was created as an empty published page.~~ The page was fully implemented in Sprint 6 (9 sections, form, FAQ, locations). However, all clinic-specific data (address, phone, hours, stats) and the form `email_to` field are marked `[CLIENT:]` placeholders.
 
-**Implication:** When a user clicks "Programează o consultație," they reach a blank page.
+**Implication:** The page renders correctly with the correct structure but displays placeholder text. The booking form does not deliver submissions until `email_to` is configured.
 
-**Risk level:** High (UX). Blocks staging launch.
+**Risk level:** Medium. Page is functional and renders; content is incomplete.
 
-**Mitigation:** Implement the Programări page (Sprint 6 scope). Options: Calendly embed, WP booking plugin, or static contact form.
+**Mitigation:** Client must provide the data listed in `docs/implementation/SPRINT_6_PROGRAMARI_REPORT.md` → CLIENT_DATA_TO_CONFIRM table.
 
 ---
 

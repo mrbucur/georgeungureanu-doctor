@@ -84,6 +84,13 @@ Create these pages (slug must match exactly):
 
 **Acasă** will be used as the static front page (set in Settings → Reading).
 
+After importing Sprint 6 templates, apply the Programări page content:
+1. Open the **Programări** page in Elementor editor
+2. Click **+** → **My Templates** → **Pages** → **Programări**
+3. Insert — the full 9-section page replaces the blank content
+4. Update all `[CLIENT:]` placeholders (see SPRINT_6_PROGRAMARI_REPORT.md)
+5. Update the form widget `email_to` field with the real email address
+
 After creating pages: go to **Settings → Reading** and set "Your homepage displays" to **A static page**, selecting **Acasă** as Homepage.
 
 ### Step 7 — Import Elementor Templates
@@ -97,6 +104,10 @@ Templates are in `wp-plugin/gu-design-system/elementor-templates/`. Import via *
 5. `sprint4-archive-afectiuni.json` — Afecțiuni archive
 6. `sprint5-single-interventii.json` — Intervenție single page
 7. `sprint5-archive-interventii.json` — Intervenții archive
+8. `sprint6-programari.json` — Programări page content
+9. `sprint6-faq-programari.json` — Reusable FAQ section
+10. `sprint6-locatie-card.json` — Reusable Location card section
+11. `sprint6-cta-final.json` — Reusable Final CTA section
 
 ### Step 8 — Assign Theme Builder Conditions
 

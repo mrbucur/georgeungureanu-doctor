@@ -1,0 +1,2491 @@
+{
+    "version": "0.4",
+    "title": "Programări",
+    "type": "page",
+    "content": [
+        {
+            "id": "s6pg001",
+            "elType": "container",
+            "isInner": false,
+            "settings": {
+                "flex_direction": "column",
+                "flex_align_items": "center",
+                "background_background": "classic",
+                "background_color": "#231E1A",
+                "padding": {
+                    "unit": "px",
+                    "isLinked": false,
+                    "top": "100",
+                    "right": "24",
+                    "bottom": "100",
+                    "left": "24"
+                },
+                "content_width": "full"
+            },
+            "elements": [
+                {
+                    "id": "s6pg002",
+                    "elType": "container",
+                    "isInner": true,
+                    "settings": {
+                        "content_width": "full",
+                        "width": {
+                            "unit": "px",
+                            "size": 760
+                        },
+                        "flex_direction": "column",
+                        "flex_gap": {
+                            "column": "20",
+                            "row": "0",
+                            "unit": "px",
+                            "isLinked": false
+                        }
+                    },
+                    "elements": [
+                        {
+                            "id": "s6pg003",
+                            "elType": "widget",
+                            "widgetType": "heading",
+                            "settings": {
+                                "title": "Programează o consultație neurochirurgicală",
+                                "header_size": "h1",
+                                "align": "left",
+                                "title_color": "#FDFBF7",
+                                "typography_typography": "custom",
+                                "typography_font_family": "Lora",
+                                "typography_font_weight": "700",
+                                "typography_font_size": {
+                                    "unit": "px",
+                                    "size": 44
+                                },
+                                "typography_line_height": {
+                                    "unit": "em",
+                                    "size": 1.2
+                                }
+                            }
+                        },
+                        {
+                            "id": "s6pg004",
+                            "elType": "widget",
+                            "widgetType": "text-editor",
+                            "settings": {
+                                "editor": "<p>O evaluare corectă este primul pas. Nu trebuie să ai un diagnostic — doar să îți descrii problema.</p>",
+                                "text_color": "#C8C0B8",
+                                "typography_typography": "custom",
+                                "typography_font_family": "Inter",
+                                "typography_font_size": {
+                                    "unit": "px",
+                                    "size": 20
+                                },
+                                "typography_line_height": {
+                                    "unit": "em",
+                                    "size": 1.7
+                                }
+                            }
+                        },
+                        {
+                            "id": "s6pg005",
+                            "elType": "widget",
+                            "widgetType": "button",
+                            "settings": {
+                                "text": "Alege tipul de consultație ↓",
+                                "link": {
+                                    "url": "#tipuri-consultatie",
+                                    "is_external": "",
+                                    "nofollow": ""
+                                },
+                                "size": "lg",
+                                "background_color": "#4D7A70",
+                                "button_text_color": "#FDFBF7",
+                                "border_radius": {
+                                    "top": "4",
+                                    "right": "4",
+                                    "bottom": "4",
+                                    "left": "4",
+                                    "unit": "px",
+                                    "isLinked": true
+                                },
+                                "typography_typography": "custom",
+                                "typography_font_family": "Inter",
+                                "typography_font_weight": "600",
+                                "typography_font_size": {
+                                    "unit": "px",
+                                    "size": 17
+                                },
+                                "padding": {
+                                    "top": "18",
+                                    "right": "40",
+                                    "bottom": "18",
+                                    "left": "40",
+                                    "unit": "px",
+                                    "isLinked": false
+                                },
+                                "button_background_hover_color": "#3A5F57",
+                                "hover_color": "#FDFBF7",
+                                "margin": {
+                                    "top": "16",
+                                    "right": "0",
+                                    "bottom": "0",
+                                    "left": "0",
+                                    "unit": "px",
+                                    "isLinked": false
+                                }
+                            }
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": "s6pg010",
+            "elType": "container",
+            "isInner": false,
+            "settings": {
+                "flex_direction": "column",
+                "flex_align_items": "center",
+                "background_background": "classic",
+                "background_color": "#F4EFE6",
+                "padding": {
+                    "unit": "px",
+                    "isLinked": false,
+                    "top": "48",
+                    "right": "24",
+                    "bottom": "48",
+                    "left": "24"
+                },
+                "content_width": "full"
+            },
+            "elements": [
+                {
+                    "id": "s6pg011",
+                    "elType": "container",
+                    "isInner": true,
+                    "settings": {
+                        "content_width": "full",
+                        "width": {
+                            "unit": "px",
+                            "size": 760
+                        },
+                        "flex_direction": "row",
+                        "flex_wrap": "wrap",
+                        "flex_gap": {
+                            "column": "32",
+                            "row": "32",
+                            "unit": "px",
+                            "isLinked": false
+                        }
+                    },
+                    "elements": [
+                        {
+                            "id": "s6pg012",
+                            "elType": "container",
+                            "isInner": true,
+                            "settings": {
+                                "content_width": "full",
+                                "flex_direction": "column",
+                                "flex_align_items": "flex-start",
+                                "flex_grow": "1",
+                                "flex_gap": {
+                                    "column": "4",
+                                    "row": "0",
+                                    "unit": "px",
+                                    "isLinked": false
+                                }
+                            },
+                            "elements": [
+                                {
+                                    "id": "s6pg012n",
+                                    "elType": "widget",
+                                    "widgetType": "heading",
+                                    "settings": {
+                                        "title": "[CLIENT: Ani de experiență]+ ani",
+                                        "header_size": "h3",
+                                        "title_color": "#4D7A70",
+                                        "typography_typography": "custom",
+                                        "typography_font_family": "Lora",
+                                        "typography_font_weight": "700",
+                                        "typography_font_size": {
+                                            "unit": "px",
+                                            "size": 32
+                                        }
+                                    }
+                                },
+                                {
+                                    "id": "s6pg012l",
+                                    "elType": "widget",
+                                    "widgetType": "text-editor",
+                                    "settings": {
+                                        "editor": "<p>experiență în neurochirurgie</p>",
+                                        "text_color": "#5A4E47",
+                                        "typography_typography": "custom",
+                                        "typography_font_family": "Inter",
+                                        "typography_font_size": {
+                                            "unit": "px",
+                                            "size": 15
+                                        }
+                                    }
+                                }
+                            ]
+                        },
+                        {
+                            "id": "s6pg013d",
+                            "elType": "container",
+                            "isInner": true,
+                            "settings": {
+                                "content_width": "full",
+                                "width": {
+                                    "unit": "px",
+                                    "size": 1
+                                },
+                                "background_background": "classic",
+                                "background_color": "#D6CFC7",
+                                "height": {
+                                    "unit": "px",
+                                    "size": 48
+                                }
+                            },
+                            "elements": []
+                        },
+                        {
+                            "id": "s6pg014",
+                            "elType": "container",
+                            "isInner": true,
+                            "settings": {
+                                "content_width": "full",
+                                "flex_direction": "column",
+                                "flex_align_items": "flex-start",
+                                "flex_grow": "1",
+                                "flex_gap": {
+                                    "column": "4",
+                                    "row": "0",
+                                    "unit": "px",
+                                    "isLinked": false
+                                }
+                            },
+                            "elements": [
+                                {
+                                    "id": "s6pg014n",
+                                    "elType": "widget",
+                                    "widgetType": "heading",
+                                    "settings": {
+                                        "title": "[CLIENT: Nr. intervenții]+",
+                                        "header_size": "h3",
+                                        "title_color": "#4D7A70",
+                                        "typography_typography": "custom",
+                                        "typography_font_family": "Lora",
+                                        "typography_font_weight": "700",
+                                        "typography_font_size": {
+                                            "unit": "px",
+                                            "size": 32
+                                        }
+                                    }
+                                },
+                                {
+                                    "id": "s6pg014l",
+                                    "elType": "widget",
+                                    "widgetType": "text-editor",
+                                    "settings": {
+                                        "editor": "<p>intervenții neurochirurgicale</p>",
+                                        "text_color": "#5A4E47",
+                                        "typography_typography": "custom",
+                                        "typography_font_family": "Inter",
+                                        "typography_font_size": {
+                                            "unit": "px",
+                                            "size": 15
+                                        }
+                                    }
+                                }
+                            ]
+                        },
+                        {
+                            "id": "s6pg015d",
+                            "elType": "container",
+                            "isInner": true,
+                            "settings": {
+                                "content_width": "full",
+                                "width": {
+                                    "unit": "px",
+                                    "size": 1
+                                },
+                                "background_background": "classic",
+                                "background_color": "#D6CFC7",
+                                "height": {
+                                    "unit": "px",
+                                    "size": 48
+                                }
+                            },
+                            "elements": []
+                        },
+                        {
+                            "id": "s6pg016",
+                            "elType": "container",
+                            "isInner": true,
+                            "settings": {
+                                "content_width": "full",
+                                "flex_direction": "column",
+                                "flex_align_items": "flex-start",
+                                "flex_grow": "1",
+                                "flex_gap": {
+                                    "column": "4",
+                                    "row": "0",
+                                    "unit": "px",
+                                    "isLinked": false
+                                }
+                            },
+                            "elements": [
+                                {
+                                    "id": "s6pg016n",
+                                    "elType": "widget",
+                                    "widgetType": "heading",
+                                    "settings": {
+                                        "title": "[CLIENT: Loc formare]",
+                                        "header_size": "h3",
+                                        "title_color": "#4D7A70",
+                                        "typography_typography": "custom",
+                                        "typography_font_family": "Lora",
+                                        "typography_font_weight": "700",
+                                        "typography_font_size": {
+                                            "unit": "px",
+                                            "size": 32
+                                        }
+                                    }
+                                },
+                                {
+                                    "id": "s6pg016l",
+                                    "elType": "widget",
+                                    "widgetType": "text-editor",
+                                    "settings": {
+                                        "editor": "<p>formare internațională</p>",
+                                        "text_color": "#5A4E47",
+                                        "typography_typography": "custom",
+                                        "typography_font_family": "Inter",
+                                        "typography_font_size": {
+                                            "unit": "px",
+                                            "size": 15
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": "s6pg020",
+            "elType": "container",
+            "isInner": false,
+            "settings": {
+                "flex_direction": "column",
+                "flex_align_items": "center",
+                "background_background": "classic",
+                "background_color": "#FDFBF7",
+                "padding": {
+                    "top": "80",
+                    "right": "24",
+                    "bottom": "80",
+                    "left": "24",
+                    "unit": "px",
+                    "isLinked": false
+                },
+                "content_width": "full",
+                "css_classes": "tipuri-consultatie",
+                "custom_id": "tipuri-consultatie"
+            },
+            "elements": [
+                {
+                    "id": "s6pg021",
+                    "elType": "container",
+                    "isInner": true,
+                    "settings": {
+                        "content_width": "full",
+                        "width": {
+                            "unit": "px",
+                            "size": 760
+                        },
+                        "flex_direction": "column",
+                        "flex_gap": {
+                            "column": "40",
+                            "row": "0",
+                            "unit": "px",
+                            "isLinked": false
+                        }
+                    },
+                    "elements": [
+                        {
+                            "id": "s6pg022",
+                            "elType": "widget",
+                            "widgetType": "heading",
+                            "settings": {
+                                "title": "Alege tipul de consultație potrivit situației tale",
+                                "header_size": "h2",
+                                "align": "left",
+                                "title_color": "#231E1A",
+                                "typography_typography": "custom",
+                                "typography_font_family": "Lora",
+                                "typography_font_weight": "700",
+                                "typography_font_size": {
+                                    "unit": "px",
+                                    "size": 32
+                                },
+                                "typography_line_height": {
+                                    "unit": "em",
+                                    "size": 1.2
+                                }
+                            }
+                        },
+                        {
+                            "id": "s6pg023",
+                            "elType": "container",
+                            "isInner": true,
+                            "settings": {
+                                "content_width": "full",
+                                "width": {
+                                    "unit": "px",
+                                    "size": 760
+                                },
+                                "flex_direction": "row",
+                                "flex_wrap": "wrap",
+                                "flex_gap": {
+                                    "column": "24",
+                                    "row": "24",
+                                    "unit": "px",
+                                    "isLinked": false
+                                }
+                            },
+                            "elements": [
+                                {
+                                    "id": "s6pg024",
+                                    "elType": "container",
+                                    "isInner": true,
+                                    "settings": {
+                                        "content_width": "full",
+                                        "flex_direction": "column",
+                                        "flex_grow": "1",
+                                        "background_background": "classic",
+                                        "background_color": "#FDFBF7",
+                                        "border_border": "solid",
+                                        "border_color": "#EDE8DF",
+                                        "border_width": {
+                                            "top": "1",
+                                            "right": "1",
+                                            "bottom": "1",
+                                            "left": "1",
+                                            "unit": "px",
+                                            "isLinked": true
+                                        },
+                                        "border_radius": {
+                                            "top": "8",
+                                            "right": "8",
+                                            "bottom": "8",
+                                            "left": "8",
+                                            "unit": "px",
+                                            "isLinked": true
+                                        },
+                                        "padding": {
+                                            "top": "32",
+                                            "right": "24",
+                                            "bottom": "32",
+                                            "left": "24",
+                                            "unit": "px",
+                                            "isLinked": false
+                                        },
+                                        "flex_gap": {
+                                            "column": "16",
+                                            "row": "0",
+                                            "unit": "px",
+                                            "isLinked": false
+                                        }
+                                    },
+                                    "elements": [
+                                        {
+                                            "id": "s6pg024h",
+                                            "elType": "widget",
+                                            "widgetType": "heading",
+                                            "settings": {
+                                                "title": "Consultație inițială",
+                                                "header_size": "h3",
+                                                "align": "left",
+                                                "title_color": "#231E1A",
+                                                "typography_typography": "custom",
+                                                "typography_font_family": "Inter",
+                                                "typography_font_weight": "600",
+                                                "typography_font_size": {
+                                                    "unit": "px",
+                                                    "size": 20
+                                                },
+                                                "typography_line_height": {
+                                                    "unit": "em",
+                                                    "size": 1.2
+                                                }
+                                            }
+                                        },
+                                        {
+                                            "id": "s6pg024t",
+                                            "elType": "widget",
+                                            "widgetType": "text-editor",
+                                            "settings": {
+                                                "editor": "<p>Prima vizită. Vii fără diagnostic — evaluez simptomele, istoricul medical și investigațiile existente.</p>",
+                                                "text_color": "#5A4E47",
+                                                "typography_typography": "custom",
+                                                "typography_font_family": "Inter",
+                                                "typography_font_size": {
+                                                    "unit": "px",
+                                                    "size": 15
+                                                },
+                                                "typography_line_height": {
+                                                    "unit": "em",
+                                                    "size": 1.7
+                                                }
+                                            }
+                                        },
+                                        {
+                                            "id": "s6pg024d",
+                                            "elType": "widget",
+                                            "widgetType": "text-editor",
+                                            "settings": {
+                                                "editor": "<p><strong>Durată:</strong> 45–60 min</p>",
+                                                "text_color": "#5A4E47",
+                                                "typography_typography": "custom",
+                                                "typography_font_family": "Inter",
+                                                "typography_font_size": {
+                                                    "unit": "px",
+                                                    "size": 14
+                                                },
+                                                "typography_line_height": {
+                                                    "unit": "em",
+                                                    "size": 1.7
+                                                }
+                                            }
+                                        },
+                                        {
+                                            "id": "s6pg024w",
+                                            "elType": "widget",
+                                            "widgetType": "text-editor",
+                                            "settings": {
+                                                "editor": "<p><strong>Când:</strong> Simptome noi, hernie de disc, dureri persistente, simptome neurologice</p>",
+                                                "text_color": "#5A4E47",
+                                                "typography_typography": "custom",
+                                                "typography_font_family": "Inter",
+                                                "typography_font_size": {
+                                                    "unit": "px",
+                                                    "size": 14
+                                                },
+                                                "typography_line_height": {
+                                                    "unit": "em",
+                                                    "size": 1.7
+                                                }
+                                            }
+                                        },
+                                        {
+                                            "id": "s6pg024b",
+                                            "elType": "widget",
+                                            "widgetType": "button",
+                                            "settings": {
+                                                "text": "Programează consultație inițială",
+                                                "link": {
+                                                    "url": "#formular-programare",
+                                                    "is_external": "",
+                                                    "nofollow": ""
+                                                },
+                                                "size": "sm",
+                                                "background_color": "#4D7A70",
+                                                "button_text_color": "#FDFBF7",
+                                                "border_radius": {
+                                                    "top": "4",
+                                                    "right": "4",
+                                                    "bottom": "4",
+                                                    "left": "4",
+                                                    "unit": "px",
+                                                    "isLinked": true
+                                                },
+                                                "typography_typography": "custom",
+                                                "typography_font_family": "Inter",
+                                                "typography_font_weight": "600",
+                                                "typography_font_size": {
+                                                    "unit": "px",
+                                                    "size": 14
+                                                },
+                                                "button_background_hover_color": "#3A5F57",
+                                                "hover_color": "#FDFBF7",
+                                                "margin": {
+                                                    "top": "8",
+                                                    "right": "0",
+                                                    "bottom": "0",
+                                                    "left": "0",
+                                                    "unit": "px",
+                                                    "isLinked": false
+                                                }
+                                            }
+                                        }
+                                    ]
+                                },
+                                {
+                                    "id": "s6pg025",
+                                    "elType": "container",
+                                    "isInner": true,
+                                    "settings": {
+                                        "content_width": "full",
+                                        "flex_direction": "column",
+                                        "flex_grow": "1",
+                                        "background_background": "classic",
+                                        "background_color": "#FDFBF7",
+                                        "border_border": "solid",
+                                        "border_color": "#EDE8DF",
+                                        "border_width": {
+                                            "top": "1",
+                                            "right": "1",
+                                            "bottom": "1",
+                                            "left": "1",
+                                            "unit": "px",
+                                            "isLinked": true
+                                        },
+                                        "border_radius": {
+                                            "top": "8",
+                                            "right": "8",
+                                            "bottom": "8",
+                                            "left": "8",
+                                            "unit": "px",
+                                            "isLinked": true
+                                        },
+                                        "padding": {
+                                            "top": "32",
+                                            "right": "24",
+                                            "bottom": "32",
+                                            "left": "24",
+                                            "unit": "px",
+                                            "isLinked": false
+                                        },
+                                        "flex_gap": {
+                                            "column": "16",
+                                            "row": "0",
+                                            "unit": "px",
+                                            "isLinked": false
+                                        }
+                                    },
+                                    "elements": [
+                                        {
+                                            "id": "s6pg025h",
+                                            "elType": "widget",
+                                            "widgetType": "heading",
+                                            "settings": {
+                                                "title": "A doua opinie",
+                                                "header_size": "h3",
+                                                "align": "left",
+                                                "title_color": "#231E1A",
+                                                "typography_typography": "custom",
+                                                "typography_font_family": "Inter",
+                                                "typography_font_weight": "600",
+                                                "typography_font_size": {
+                                                    "unit": "px",
+                                                    "size": 20
+                                                },
+                                                "typography_line_height": {
+                                                    "unit": "em",
+                                                    "size": 1.2
+                                                }
+                                            }
+                                        },
+                                        {
+                                            "id": "s6pg025t",
+                                            "elType": "widget",
+                                            "widgetType": "text-editor",
+                                            "settings": {
+                                                "editor": "<p>Ai deja un diagnostic sau o recomandare chirurgicală și vrei o evaluare independentă înainte de a decide.</p>",
+                                                "text_color": "#5A4E47",
+                                                "typography_typography": "custom",
+                                                "typography_font_family": "Inter",
+                                                "typography_font_size": {
+                                                    "unit": "px",
+                                                    "size": 15
+                                                },
+                                                "typography_line_height": {
+                                                    "unit": "em",
+                                                    "size": 1.7
+                                                }
+                                            }
+                                        },
+                                        {
+                                            "id": "s6pg025d",
+                                            "elType": "widget",
+                                            "widgetType": "text-editor",
+                                            "settings": {
+                                                "editor": "<p><strong>Durată:</strong> 30–45 min</p>",
+                                                "text_color": "#5A4E47",
+                                                "typography_typography": "custom",
+                                                "typography_font_family": "Inter",
+                                                "typography_font_size": {
+                                                    "unit": "px",
+                                                    "size": 14
+                                                },
+                                                "typography_line_height": {
+                                                    "unit": "em",
+                                                    "size": 1.7
+                                                }
+                                            }
+                                        },
+                                        {
+                                            "id": "s6pg025w",
+                                            "elType": "widget",
+                                            "widgetType": "text-editor",
+                                            "settings": {
+                                                "editor": "<p><strong>Când:</strong> Înainte de o intervenție chirurgicală propusă de alt medic</p>",
+                                                "text_color": "#5A4E47",
+                                                "typography_typography": "custom",
+                                                "typography_font_family": "Inter",
+                                                "typography_font_size": {
+                                                    "unit": "px",
+                                                    "size": 14
+                                                },
+                                                "typography_line_height": {
+                                                    "unit": "em",
+                                                    "size": 1.7
+                                                }
+                                            }
+                                        },
+                                        {
+                                            "id": "s6pg025b",
+                                            "elType": "widget",
+                                            "widgetType": "button",
+                                            "settings": {
+                                                "text": "Programează a doua opinie",
+                                                "link": {
+                                                    "url": "#formular-programare",
+                                                    "is_external": "",
+                                                    "nofollow": ""
+                                                },
+                                                "size": "sm",
+                                                "background_color": "#4D7A70",
+                                                "button_text_color": "#FDFBF7",
+                                                "border_radius": {
+                                                    "top": "4",
+                                                    "right": "4",
+                                                    "bottom": "4",
+                                                    "left": "4",
+                                                    "unit": "px",
+                                                    "isLinked": true
+                                                },
+                                                "typography_typography": "custom",
+                                                "typography_font_family": "Inter",
+                                                "typography_font_weight": "600",
+                                                "typography_font_size": {
+                                                    "unit": "px",
+                                                    "size": 14
+                                                },
+                                                "button_background_hover_color": "#3A5F57",
+                                                "hover_color": "#FDFBF7",
+                                                "margin": {
+                                                    "top": "8",
+                                                    "right": "0",
+                                                    "bottom": "0",
+                                                    "left": "0",
+                                                    "unit": "px",
+                                                    "isLinked": false
+                                                }
+                                            }
+                                        }
+                                    ]
+                                },
+                                {
+                                    "id": "s6pg026",
+                                    "elType": "container",
+                                    "isInner": true,
+                                    "settings": {
+                                        "content_width": "full",
+                                        "flex_direction": "column",
+                                        "flex_grow": "1",
+                                        "background_background": "classic",
+                                        "background_color": "#FDFBF7",
+                                        "border_border": "solid",
+                                        "border_color": "#EDE8DF",
+                                        "border_width": {
+                                            "top": "1",
+                                            "right": "1",
+                                            "bottom": "1",
+                                            "left": "1",
+                                            "unit": "px",
+                                            "isLinked": true
+                                        },
+                                        "border_radius": {
+                                            "top": "8",
+                                            "right": "8",
+                                            "bottom": "8",
+                                            "left": "8",
+                                            "unit": "px",
+                                            "isLinked": true
+                                        },
+                                        "padding": {
+                                            "top": "32",
+                                            "right": "24",
+                                            "bottom": "32",
+                                            "left": "24",
+                                            "unit": "px",
+                                            "isLinked": false
+                                        },
+                                        "flex_gap": {
+                                            "column": "16",
+                                            "row": "0",
+                                            "unit": "px",
+                                            "isLinked": false
+                                        }
+                                    },
+                                    "elements": [
+                                        {
+                                            "id": "s6pg026h",
+                                            "elType": "widget",
+                                            "widgetType": "heading",
+                                            "settings": {
+                                                "title": "Consultație postoperatorie",
+                                                "header_size": "h3",
+                                                "align": "left",
+                                                "title_color": "#231E1A",
+                                                "typography_typography": "custom",
+                                                "typography_font_family": "Inter",
+                                                "typography_font_weight": "600",
+                                                "typography_font_size": {
+                                                    "unit": "px",
+                                                    "size": 20
+                                                },
+                                                "typography_line_height": {
+                                                    "unit": "em",
+                                                    "size": 1.2
+                                                }
+                                            }
+                                        },
+                                        {
+                                            "id": "s6pg026t",
+                                            "elType": "widget",
+                                            "widgetType": "text-editor",
+                                            "settings": {
+                                                "editor": "<p>Follow-up după o intervenție neurochirurgicală efectuată în altă clinică sau de alt chirurg.</p>",
+                                                "text_color": "#5A4E47",
+                                                "typography_typography": "custom",
+                                                "typography_font_family": "Inter",
+                                                "typography_font_size": {
+                                                    "unit": "px",
+                                                    "size": 15
+                                                },
+                                                "typography_line_height": {
+                                                    "unit": "em",
+                                                    "size": 1.7
+                                                }
+                                            }
+                                        },
+                                        {
+                                            "id": "s6pg026d",
+                                            "elType": "widget",
+                                            "widgetType": "text-editor",
+                                            "settings": {
+                                                "editor": "<p><strong>Durată:</strong> 20–30 min</p>",
+                                                "text_color": "#5A4E47",
+                                                "typography_typography": "custom",
+                                                "typography_font_family": "Inter",
+                                                "typography_font_size": {
+                                                    "unit": "px",
+                                                    "size": 14
+                                                },
+                                                "typography_line_height": {
+                                                    "unit": "em",
+                                                    "size": 1.7
+                                                }
+                                            }
+                                        },
+                                        {
+                                            "id": "s6pg026w",
+                                            "elType": "widget",
+                                            "widgetType": "text-editor",
+                                            "settings": {
+                                                "editor": "<p><strong>Când:</strong> Control după operație, evaluarea recuperării, ajustare tratament</p>",
+                                                "text_color": "#5A4E47",
+                                                "typography_typography": "custom",
+                                                "typography_font_family": "Inter",
+                                                "typography_font_size": {
+                                                    "unit": "px",
+                                                    "size": 14
+                                                },
+                                                "typography_line_height": {
+                                                    "unit": "em",
+                                                    "size": 1.7
+                                                }
+                                            }
+                                        },
+                                        {
+                                            "id": "s6pg026b",
+                                            "elType": "widget",
+                                            "widgetType": "button",
+                                            "settings": {
+                                                "text": "Programează control postop",
+                                                "link": {
+                                                    "url": "#formular-programare",
+                                                    "is_external": "",
+                                                    "nofollow": ""
+                                                },
+                                                "size": "sm",
+                                                "background_color": "#4D7A70",
+                                                "button_text_color": "#FDFBF7",
+                                                "border_radius": {
+                                                    "top": "4",
+                                                    "right": "4",
+                                                    "bottom": "4",
+                                                    "left": "4",
+                                                    "unit": "px",
+                                                    "isLinked": true
+                                                },
+                                                "typography_typography": "custom",
+                                                "typography_font_family": "Inter",
+                                                "typography_font_weight": "600",
+                                                "typography_font_size": {
+                                                    "unit": "px",
+                                                    "size": 14
+                                                },
+                                                "button_background_hover_color": "#3A5F57",
+                                                "hover_color": "#FDFBF7",
+                                                "margin": {
+                                                    "top": "8",
+                                                    "right": "0",
+                                                    "bottom": "0",
+                                                    "left": "0",
+                                                    "unit": "px",
+                                                    "isLinked": false
+                                                }
+                                            }
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": "s6pg030",
+            "elType": "container",
+            "isInner": false,
+            "settings": {
+                "flex_direction": "column",
+                "flex_align_items": "center",
+                "background_background": "classic",
+                "background_color": "#F4EFE6",
+                "padding": {
+                    "unit": "px",
+                    "isLinked": false,
+                    "top": "80",
+                    "right": "24",
+                    "bottom": "80",
+                    "left": "24"
+                },
+                "content_width": "full"
+            },
+            "elements": [
+                {
+                    "id": "s6pg031",
+                    "elType": "container",
+                    "isInner": true,
+                    "settings": {
+                        "content_width": "full",
+                        "width": {
+                            "unit": "px",
+                            "size": 760
+                        },
+                        "flex_direction": "column",
+                        "flex_gap": {
+                            "column": "32",
+                            "row": "0",
+                            "unit": "px",
+                            "isLinked": false
+                        }
+                    },
+                    "elements": [
+                        {
+                            "id": "s6pg032",
+                            "elType": "widget",
+                            "widgetType": "heading",
+                            "settings": {
+                                "title": "Cum funcționează",
+                                "header_size": "h2",
+                                "align": "left",
+                                "title_color": "#231E1A",
+                                "typography_typography": "custom",
+                                "typography_font_family": "Lora",
+                                "typography_font_weight": "700",
+                                "typography_font_size": {
+                                    "unit": "px",
+                                    "size": 32
+                                },
+                                "typography_line_height": {
+                                    "unit": "em",
+                                    "size": 1.2
+                                }
+                            }
+                        },
+                        {
+                            "id": "s6pg033",
+                            "elType": "widget",
+                            "widgetType": "text-editor",
+                            "settings": {
+                                "editor": "<p>Patru pași simpli, de la cerere la plan de tratament.</p>",
+                                "text_color": "#5A4E47",
+                                "typography_typography": "custom",
+                                "typography_font_family": "Inter",
+                                "typography_font_size": {
+                                    "unit": "px",
+                                    "size": 18
+                                },
+                                "typography_line_height": {
+                                    "unit": "em",
+                                    "size": 1.7
+                                }
+                            }
+                        },
+                        {
+                            "id": "s6pg034",
+                            "elType": "container",
+                            "isInner": true,
+                            "settings": {
+                                "content_width": "full",
+                                "width": {
+                                    "unit": "px",
+                                    "size": 760
+                                },
+                                "flex_direction": "row",
+                                "flex_wrap": "wrap",
+                                "flex_gap": {
+                                    "column": "32",
+                                    "row": "32",
+                                    "unit": "px",
+                                    "isLinked": false
+                                }
+                            },
+                            "elements": [
+                                {
+                                    "id": "s6pg035",
+                                    "elType": "container",
+                                    "isInner": true,
+                                    "settings": {
+                                        "content_width": "full",
+                                        "flex_direction": "column",
+                                        "flex_grow": "1",
+                                        "flex_gap": {
+                                            "column": "8",
+                                            "row": "0",
+                                            "unit": "px",
+                                            "isLinked": false
+                                        }
+                                    },
+                                    "elements": [
+                                        {
+                                            "id": "s6pg035n",
+                                            "elType": "widget",
+                                            "widgetType": "heading",
+                                            "settings": {
+                                                "title": "①",
+                                                "header_size": "h3",
+                                                "title_color": "#4D7A70",
+                                                "typography_typography": "custom",
+                                                "typography_font_family": "Lora",
+                                                "typography_font_weight": "700",
+                                                "typography_font_size": {
+                                                    "unit": "px",
+                                                    "size": 36
+                                                }
+                                            }
+                                        },
+                                        {
+                                            "id": "s6pg035t",
+                                            "elType": "widget",
+                                            "widgetType": "heading",
+                                            "settings": {
+                                                "title": "Trimiți cererea",
+                                                "header_size": "h4",
+                                                "title_color": "#231E1A",
+                                                "typography_typography": "custom",
+                                                "typography_font_family": "Inter",
+                                                "typography_font_weight": "600",
+                                                "typography_font_size": {
+                                                    "unit": "px",
+                                                    "size": 16
+                                                }
+                                            }
+                                        },
+                                        {
+                                            "id": "s6pg035d",
+                                            "elType": "widget",
+                                            "widgetType": "text-editor",
+                                            "settings": {
+                                                "editor": "<p>Completezi formularul de mai jos în 2 minute. Nu ai nevoie de dosar medical în această etapă.</p>",
+                                                "text_color": "#5A4E47",
+                                                "typography_typography": "custom",
+                                                "typography_font_family": "Inter",
+                                                "typography_font_size": {
+                                                    "unit": "px",
+                                                    "size": 14
+                                                },
+                                                "typography_line_height": {
+                                                    "unit": "em",
+                                                    "size": 1.6
+                                                }
+                                            }
+                                        }
+                                    ]
+                                },
+                                {
+                                    "id": "s6pg036",
+                                    "elType": "container",
+                                    "isInner": true,
+                                    "settings": {
+                                        "content_width": "full",
+                                        "flex_direction": "column",
+                                        "flex_grow": "1",
+                                        "flex_gap": {
+                                            "column": "8",
+                                            "row": "0",
+                                            "unit": "px",
+                                            "isLinked": false
+                                        }
+                                    },
+                                    "elements": [
+                                        {
+                                            "id": "s6pg036n",
+                                            "elType": "widget",
+                                            "widgetType": "heading",
+                                            "settings": {
+                                                "title": "②",
+                                                "header_size": "h3",
+                                                "title_color": "#4D7A70",
+                                                "typography_typography": "custom",
+                                                "typography_font_family": "Lora",
+                                                "typography_font_weight": "700",
+                                                "typography_font_size": {
+                                                    "unit": "px",
+                                                    "size": 36
+                                                }
+                                            }
+                                        },
+                                        {
+                                            "id": "s6pg036t",
+                                            "elType": "widget",
+                                            "widgetType": "heading",
+                                            "settings": {
+                                                "title": "Ești contactat în 24h",
+                                                "header_size": "h4",
+                                                "title_color": "#231E1A",
+                                                "typography_typography": "custom",
+                                                "typography_font_family": "Inter",
+                                                "typography_font_weight": "600",
+                                                "typography_font_size": {
+                                                    "unit": "px",
+                                                    "size": 16
+                                                }
+                                            }
+                                        },
+                                        {
+                                            "id": "s6pg036d",
+                                            "elType": "widget",
+                                            "widgetType": "text-editor",
+                                            "settings": {
+                                                "editor": "<p>Echipa clinicii te sună în ziua lucrătoare următoare pentru a stabili data și ora consultației.</p>",
+                                                "text_color": "#5A4E47",
+                                                "typography_typography": "custom",
+                                                "typography_font_family": "Inter",
+                                                "typography_font_size": {
+                                                    "unit": "px",
+                                                    "size": 14
+                                                },
+                                                "typography_line_height": {
+                                                    "unit": "em",
+                                                    "size": 1.6
+                                                }
+                                            }
+                                        }
+                                    ]
+                                },
+                                {
+                                    "id": "s6pg037",
+                                    "elType": "container",
+                                    "isInner": true,
+                                    "settings": {
+                                        "content_width": "full",
+                                        "flex_direction": "column",
+                                        "flex_grow": "1",
+                                        "flex_gap": {
+                                            "column": "8",
+                                            "row": "0",
+                                            "unit": "px",
+                                            "isLinked": false
+                                        }
+                                    },
+                                    "elements": [
+                                        {
+                                            "id": "s6pg037n",
+                                            "elType": "widget",
+                                            "widgetType": "heading",
+                                            "settings": {
+                                                "title": "③",
+                                                "header_size": "h3",
+                                                "title_color": "#4D7A70",
+                                                "typography_typography": "custom",
+                                                "typography_font_family": "Lora",
+                                                "typography_font_weight": "700",
+                                                "typography_font_size": {
+                                                    "unit": "px",
+                                                    "size": 36
+                                                }
+                                            }
+                                        },
+                                        {
+                                            "id": "s6pg037t",
+                                            "elType": "widget",
+                                            "widgetType": "heading",
+                                            "settings": {
+                                                "title": "Vii la consultație",
+                                                "header_size": "h4",
+                                                "title_color": "#231E1A",
+                                                "typography_typography": "custom",
+                                                "typography_font_family": "Inter",
+                                                "typography_font_weight": "600",
+                                                "typography_font_size": {
+                                                    "unit": "px",
+                                                    "size": 16
+                                                }
+                                            }
+                                        },
+                                        {
+                                            "id": "s6pg037d",
+                                            "elType": "widget",
+                                            "widgetType": "text-editor",
+                                            "settings": {
+                                                "editor": "<p>Vii cu investigațiile existente (RMN, CT, analize). Dacă nu ai, nu este o problemă — evaluarea poate continua.</p>",
+                                                "text_color": "#5A4E47",
+                                                "typography_typography": "custom",
+                                                "typography_font_family": "Inter",
+                                                "typography_font_size": {
+                                                    "unit": "px",
+                                                    "size": 14
+                                                },
+                                                "typography_line_height": {
+                                                    "unit": "em",
+                                                    "size": 1.6
+                                                }
+                                            }
+                                        }
+                                    ]
+                                },
+                                {
+                                    "id": "s6pg038",
+                                    "elType": "container",
+                                    "isInner": true,
+                                    "settings": {
+                                        "content_width": "full",
+                                        "flex_direction": "column",
+                                        "flex_grow": "1",
+                                        "flex_gap": {
+                                            "column": "8",
+                                            "row": "0",
+                                            "unit": "px",
+                                            "isLinked": false
+                                        }
+                                    },
+                                    "elements": [
+                                        {
+                                            "id": "s6pg038n",
+                                            "elType": "widget",
+                                            "widgetType": "heading",
+                                            "settings": {
+                                                "title": "④",
+                                                "header_size": "h3",
+                                                "title_color": "#4D7A70",
+                                                "typography_typography": "custom",
+                                                "typography_font_family": "Lora",
+                                                "typography_font_weight": "700",
+                                                "typography_font_size": {
+                                                    "unit": "px",
+                                                    "size": 36
+                                                }
+                                            }
+                                        },
+                                        {
+                                            "id": "s6pg038t",
+                                            "elType": "widget",
+                                            "widgetType": "heading",
+                                            "settings": {
+                                                "title": "Primești un plan clar",
+                                                "header_size": "h4",
+                                                "title_color": "#231E1A",
+                                                "typography_typography": "custom",
+                                                "typography_font_family": "Inter",
+                                                "typography_font_weight": "600",
+                                                "typography_font_size": {
+                                                    "unit": "px",
+                                                    "size": 16
+                                                }
+                                            }
+                                        },
+                                        {
+                                            "id": "s6pg038d",
+                                            "elType": "widget",
+                                            "widgetType": "text-editor",
+                                            "settings": {
+                                                "editor": "<p>La finalul consultației primești diagnostic, opțiuni de tratament și recomandare explicată pas cu pas.</p>",
+                                                "text_color": "#5A4E47",
+                                                "typography_typography": "custom",
+                                                "typography_font_family": "Inter",
+                                                "typography_font_size": {
+                                                    "unit": "px",
+                                                    "size": 14
+                                                },
+                                                "typography_line_height": {
+                                                    "unit": "em",
+                                                    "size": 1.6
+                                                }
+                                            }
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": "s6pg040",
+            "elType": "container",
+            "isInner": false,
+            "settings": {
+                "flex_direction": "column",
+                "flex_align_items": "center",
+                "background_background": "classic",
+                "background_color": "#231E1A",
+                "padding": {
+                    "unit": "px",
+                    "isLinked": false,
+                    "top": "80",
+                    "right": "24",
+                    "bottom": "80",
+                    "left": "24"
+                },
+                "content_width": "full"
+            },
+            "elements": [
+                {
+                    "id": "s6pg041",
+                    "elType": "container",
+                    "isInner": true,
+                    "settings": {
+                        "content_width": "full",
+                        "width": {
+                            "unit": "px",
+                            "size": 760
+                        },
+                        "flex_direction": "column",
+                        "flex_gap": {
+                            "column": "32",
+                            "row": "0",
+                            "unit": "px",
+                            "isLinked": false
+                        }
+                    },
+                    "elements": [
+                        {
+                            "id": "s6pg042",
+                            "elType": "widget",
+                            "widgetType": "heading",
+                            "settings": {
+                                "title": "Unde consulți",
+                                "header_size": "h2",
+                                "align": "left",
+                                "title_color": "#FDFBF7",
+                                "typography_typography": "custom",
+                                "typography_font_family": "Lora",
+                                "typography_font_weight": "700",
+                                "typography_font_size": {
+                                    "unit": "px",
+                                    "size": 32
+                                },
+                                "typography_line_height": {
+                                    "unit": "em",
+                                    "size": 1.2
+                                }
+                            }
+                        },
+                        {
+                            "id": "s6pg043",
+                            "elType": "widget",
+                            "widgetType": "text-editor",
+                            "settings": {
+                                "editor": "<p>Consultațiile au loc în cadrul clinicilor partenere din București.</p>",
+                                "text_color": "#C8C0B8",
+                                "typography_typography": "custom",
+                                "typography_font_family": "Inter",
+                                "typography_font_size": {
+                                    "unit": "px",
+                                    "size": 18
+                                },
+                                "typography_line_height": {
+                                    "unit": "em",
+                                    "size": 1.7
+                                }
+                            }
+                        },
+                        {
+                            "id": "s6pg044",
+                            "elType": "container",
+                            "isInner": true,
+                            "settings": {
+                                "content_width": "full",
+                                "width": {
+                                    "unit": "px",
+                                    "size": 760
+                                },
+                                "flex_direction": "row",
+                                "flex_wrap": "wrap",
+                                "flex_gap": {
+                                    "column": "24",
+                                    "row": "24",
+                                    "unit": "px",
+                                    "isLinked": false
+                                }
+                            },
+                            "elements": [
+                                {
+                                    "id": "s6pg045",
+                                    "elType": "container",
+                                    "isInner": true,
+                                    "settings": {
+                                        "content_width": "full",
+                                        "flex_direction": "column",
+                                        "flex_grow": "1",
+                                        "background_background": "classic",
+                                        "background_color": "#2E2925",
+                                        "border_border": "solid",
+                                        "border_color": "#4A4440",
+                                        "border_width": {
+                                            "top": "1",
+                                            "right": "1",
+                                            "bottom": "1",
+                                            "left": "1",
+                                            "unit": "px",
+                                            "isLinked": true
+                                        },
+                                        "border_radius": {
+                                            "top": "8",
+                                            "right": "8",
+                                            "bottom": "8",
+                                            "left": "8",
+                                            "unit": "px",
+                                            "isLinked": true
+                                        },
+                                        "padding": {
+                                            "top": "32",
+                                            "right": "24",
+                                            "bottom": "32",
+                                            "left": "24",
+                                            "unit": "px",
+                                            "isLinked": false
+                                        },
+                                        "flex_gap": {
+                                            "column": "12",
+                                            "row": "0",
+                                            "unit": "px",
+                                            "isLinked": false
+                                        }
+                                    },
+                                    "elements": [
+                                        {
+                                            "id": "s6pg045n",
+                                            "elType": "widget",
+                                            "widgetType": "heading",
+                                            "settings": {
+                                                "title": "[CLIENT: Denumire clinică 1]",
+                                                "header_size": "h3",
+                                                "title_color": "#FDFBF7",
+                                                "typography_typography": "custom",
+                                                "typography_font_family": "Lora",
+                                                "typography_font_weight": "700",
+                                                "typography_font_size": {
+                                                    "unit": "px",
+                                                    "size": 20
+                                                }
+                                            }
+                                        },
+                                        {
+                                            "id": "s6pg045i",
+                                            "elType": "widget",
+                                            "widgetType": "text-editor",
+                                            "settings": {
+                                                "editor": "<p>[CLIENT: Stradă, număr]<br>[CLIENT: Sector/Oraș]</p><p><strong style=\"color:#C8C0B8\">Program:</strong> [CLIENT: ex. Luni–Vineri, 09:00–17:00]</p><p><strong style=\"color:#C8C0B8\">Timp de așteptare:</strong> [CLIENT: ex. ~3–5 zile lucrătoare]</p>",
+                                                "text_color": "#C8C0B8",
+                                                "typography_typography": "custom",
+                                                "typography_font_family": "Inter",
+                                                "typography_font_size": {
+                                                    "unit": "px",
+                                                    "size": 15
+                                                },
+                                                "typography_line_height": {
+                                                    "unit": "em",
+                                                    "size": 1.7
+                                                }
+                                            }
+                                        },
+                                        {
+                                            "id": "s6pg045b",
+                                            "elType": "widget",
+                                            "widgetType": "button",
+                                            "settings": {
+                                                "text": "📞 [CLIENT: +40 7XX XXX XXX]",
+                                                "link": {
+                                                    "url": "tel:+407",
+                                                    "is_external": "",
+                                                    "nofollow": ""
+                                                },
+                                                "size": "sm",
+                                                "background_color": "#4D7A70",
+                                                "button_text_color": "#FDFBF7",
+                                                "border_radius": {
+                                                    "top": "4",
+                                                    "right": "4",
+                                                    "bottom": "4",
+                                                    "left": "4",
+                                                    "unit": "px",
+                                                    "isLinked": true
+                                                },
+                                                "typography_typography": "custom",
+                                                "typography_font_family": "Inter",
+                                                "typography_font_weight": "600",
+                                                "typography_font_size": {
+                                                    "unit": "px",
+                                                    "size": 14
+                                                },
+                                                "margin": {
+                                                    "top": "12",
+                                                    "right": "0",
+                                                    "bottom": "0",
+                                                    "left": "0",
+                                                    "unit": "px",
+                                                    "isLinked": false
+                                                }
+                                            }
+                                        }
+                                    ]
+                                },
+                                {
+                                    "id": "s6pg046",
+                                    "elType": "container",
+                                    "isInner": true,
+                                    "settings": {
+                                        "content_width": "full",
+                                        "flex_direction": "column",
+                                        "flex_grow": "1",
+                                        "background_background": "classic",
+                                        "background_color": "#2E2925",
+                                        "border_border": "solid",
+                                        "border_color": "#4A4440",
+                                        "border_width": {
+                                            "top": "1",
+                                            "right": "1",
+                                            "bottom": "1",
+                                            "left": "1",
+                                            "unit": "px",
+                                            "isLinked": true
+                                        },
+                                        "border_radius": {
+                                            "top": "8",
+                                            "right": "8",
+                                            "bottom": "8",
+                                            "left": "8",
+                                            "unit": "px",
+                                            "isLinked": true
+                                        },
+                                        "padding": {
+                                            "top": "32",
+                                            "right": "24",
+                                            "bottom": "32",
+                                            "left": "24",
+                                            "unit": "px",
+                                            "isLinked": false
+                                        },
+                                        "flex_gap": {
+                                            "column": "12",
+                                            "row": "0",
+                                            "unit": "px",
+                                            "isLinked": false
+                                        }
+                                    },
+                                    "elements": [
+                                        {
+                                            "id": "s6pg046n",
+                                            "elType": "widget",
+                                            "widgetType": "heading",
+                                            "settings": {
+                                                "title": "[CLIENT: Denumire clinică 2 — sau șterge această carte]",
+                                                "header_size": "h3",
+                                                "title_color": "#FDFBF7",
+                                                "typography_typography": "custom",
+                                                "typography_font_family": "Lora",
+                                                "typography_font_weight": "700",
+                                                "typography_font_size": {
+                                                    "unit": "px",
+                                                    "size": 20
+                                                }
+                                            }
+                                        },
+                                        {
+                                            "id": "s6pg046i",
+                                            "elType": "widget",
+                                            "widgetType": "text-editor",
+                                            "settings": {
+                                                "editor": "<p>[CLIENT: Stradă, număr]<br>[CLIENT: Sector/Oraș]</p><p><strong style=\"color:#C8C0B8\">Program:</strong> [CLIENT: ex. Joi, 10:00–15:00]</p><p><strong style=\"color:#C8C0B8\">Timp de așteptare:</strong> [CLIENT: ex. ~7 zile lucrătoare]</p>",
+                                                "text_color": "#C8C0B8",
+                                                "typography_typography": "custom",
+                                                "typography_font_family": "Inter",
+                                                "typography_font_size": {
+                                                    "unit": "px",
+                                                    "size": 15
+                                                },
+                                                "typography_line_height": {
+                                                    "unit": "em",
+                                                    "size": 1.7
+                                                }
+                                            }
+                                        },
+                                        {
+                                            "id": "s6pg046b",
+                                            "elType": "widget",
+                                            "widgetType": "button",
+                                            "settings": {
+                                                "text": "📞 [CLIENT: +40 7XX XXX XXX]",
+                                                "link": {
+                                                    "url": "tel:+407",
+                                                    "is_external": "",
+                                                    "nofollow": ""
+                                                },
+                                                "size": "sm",
+                                                "background_color": "#4D7A70",
+                                                "button_text_color": "#FDFBF7",
+                                                "border_radius": {
+                                                    "top": "4",
+                                                    "right": "4",
+                                                    "bottom": "4",
+                                                    "left": "4",
+                                                    "unit": "px",
+                                                    "isLinked": true
+                                                },
+                                                "typography_typography": "custom",
+                                                "typography_font_family": "Inter",
+                                                "typography_font_weight": "600",
+                                                "typography_font_size": {
+                                                    "unit": "px",
+                                                    "size": 14
+                                                },
+                                                "margin": {
+                                                    "top": "12",
+                                                    "right": "0",
+                                                    "bottom": "0",
+                                                    "left": "0",
+                                                    "unit": "px",
+                                                    "isLinked": false
+                                                }
+                                            }
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": "s6pg050",
+            "elType": "container",
+            "isInner": false,
+            "settings": {
+                "flex_direction": "column",
+                "flex_align_items": "center",
+                "background_background": "classic",
+                "background_color": "#F4EFE6",
+                "padding": {
+                    "unit": "px",
+                    "isLinked": false,
+                    "top": "80",
+                    "right": "24",
+                    "bottom": "80",
+                    "left": "24"
+                },
+                "content_width": "full"
+            },
+            "elements": [
+                {
+                    "id": "s6pg051",
+                    "elType": "container",
+                    "isInner": true,
+                    "settings": {
+                        "content_width": "full",
+                        "width": {
+                            "unit": "px",
+                            "size": 760
+                        },
+                        "flex_direction": "column",
+                        "flex_gap": {
+                            "column": "32",
+                            "row": "0",
+                            "unit": "px",
+                            "isLinked": false
+                        }
+                    },
+                    "elements": [
+                        {
+                            "id": "s6pg052",
+                            "elType": "widget",
+                            "widgetType": "heading",
+                            "settings": {
+                                "title": "Ce să aduci la consultație",
+                                "header_size": "h2",
+                                "align": "left",
+                                "title_color": "#231E1A",
+                                "typography_typography": "custom",
+                                "typography_font_family": "Lora",
+                                "typography_font_weight": "700",
+                                "typography_font_size": {
+                                    "unit": "px",
+                                    "size": 32
+                                },
+                                "typography_line_height": {
+                                    "unit": "em",
+                                    "size": 1.2
+                                }
+                            }
+                        },
+                        {
+                            "id": "s6pg053",
+                            "elType": "widget",
+                            "widgetType": "icon-list",
+                            "settings": {
+                                "icon_list": [
+                                    {
+                                        "_id": "bring01",
+                                        "text": "RMN sau CT — pe CD, film sau în format digital (dacă ai efectuat)",
+                                        "selected_icon": {
+                                            "value": "fas fa-check-circle",
+                                            "library": "fa-solid"
+                                        },
+                                        "link": {
+                                            "url": ""
+                                        }
+                                    },
+                                    {
+                                        "_id": "bring02",
+                                        "text": "Bilet de trimitere de la medicul de familie sau specialist (opțional)",
+                                        "selected_icon": {
+                                            "value": "fas fa-check-circle",
+                                            "library": "fa-solid"
+                                        },
+                                        "link": {
+                                            "url": ""
+                                        }
+                                    },
+                                    {
+                                        "_id": "bring03",
+                                        "text": "Lista medicamentelor curente (denumire, doze)",
+                                        "selected_icon": {
+                                            "value": "fas fa-check-circle",
+                                            "library": "fa-solid"
+                                        },
+                                        "link": {
+                                            "url": ""
+                                        }
+                                    },
+                                    {
+                                        "_id": "bring04",
+                                        "text": "Rezultate analize recente (dacă sunt disponibile)",
+                                        "selected_icon": {
+                                            "value": "fas fa-check-circle",
+                                            "library": "fa-solid"
+                                        },
+                                        "link": {
+                                            "url": ""
+                                        }
+                                    },
+                                    {
+                                        "_id": "bring05",
+                                        "text": "Buletin sau carte de identitate",
+                                        "selected_icon": {
+                                            "value": "fas fa-check-circle",
+                                            "library": "fa-solid"
+                                        },
+                                        "link": {
+                                            "url": ""
+                                        }
+                                    }
+                                ],
+                                "icon_color": {
+                                    "color": "#4D7A70"
+                                },
+                                "text_color": "#231E1A",
+                                "space_between": {
+                                    "size": 16,
+                                    "unit": "px"
+                                },
+                                "typography_typography": "custom",
+                                "typography_font_family": "Inter",
+                                "typography_font_size": {
+                                    "unit": "px",
+                                    "size": 17
+                                },
+                                "typography_line_height": {
+                                    "unit": "em",
+                                    "size": 1.5
+                                }
+                            }
+                        },
+                        {
+                            "id": "s6pg054",
+                            "elType": "container",
+                            "isInner": true,
+                            "settings": {
+                                "content_width": "full",
+                                "background_background": "classic",
+                                "background_color": "#E4EDEB",
+                                "border_radius": {
+                                    "top": "6",
+                                    "right": "6",
+                                    "bottom": "6",
+                                    "left": "6",
+                                    "unit": "px",
+                                    "isLinked": true
+                                },
+                                "padding": {
+                                    "top": "20",
+                                    "right": "24",
+                                    "bottom": "20",
+                                    "left": "24",
+                                    "unit": "px",
+                                    "isLinked": false
+                                }
+                            },
+                            "elements": [
+                                {
+                                    "id": "s6pg055",
+                                    "elType": "widget",
+                                    "widgetType": "text-editor",
+                                    "settings": {
+                                        "editor": "<p><strong>Nu ai toate documentele?</strong> Vino oricum — consultația inițială se bazează pe evaluarea simptomelor, nu neapărat pe investigații. Le poți efectua ulterior dacă este necesar.</p>",
+                                        "text_color": "#2E4A45",
+                                        "typography_typography": "custom",
+                                        "typography_font_family": "Inter",
+                                        "typography_font_size": {
+                                            "unit": "px",
+                                            "size": 15
+                                        },
+                                        "typography_line_height": {
+                                            "unit": "em",
+                                            "size": 1.7
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": "s6pg060",
+            "elType": "container",
+            "isInner": false,
+            "settings": {
+                "flex_direction": "column",
+                "flex_align_items": "center",
+                "background_background": "classic",
+                "background_color": "#FDFBF7",
+                "padding": {
+                    "top": "80",
+                    "right": "24",
+                    "bottom": "80",
+                    "left": "24",
+                    "unit": "px",
+                    "isLinked": false
+                },
+                "content_width": "full",
+                "custom_id": "formular-programare"
+            },
+            "elements": [
+                {
+                    "id": "s6pg061",
+                    "elType": "container",
+                    "isInner": true,
+                    "settings": {
+                        "content_width": "full",
+                        "width": {
+                            "unit": "px",
+                            "size": 760
+                        },
+                        "flex_direction": "column",
+                        "flex_gap": {
+                            "column": "24",
+                            "row": "0",
+                            "unit": "px",
+                            "isLinked": false
+                        }
+                    },
+                    "elements": [
+                        {
+                            "id": "s6pg062",
+                            "elType": "widget",
+                            "widgetType": "heading",
+                            "settings": {
+                                "title": "Trimite cererea de programare",
+                                "header_size": "h2",
+                                "align": "left",
+                                "title_color": "#231E1A",
+                                "typography_typography": "custom",
+                                "typography_font_family": "Lora",
+                                "typography_font_weight": "700",
+                                "typography_font_size": {
+                                    "unit": "px",
+                                    "size": 32
+                                },
+                                "typography_line_height": {
+                                    "unit": "em",
+                                    "size": 1.2
+                                }
+                            }
+                        },
+                        {
+                            "id": "s6pg062t",
+                            "elType": "widget",
+                            "widgetType": "text-editor",
+                            "settings": {
+                                "editor": "<p>Completezi în 2 minute. Vei fi contactat în ziua lucrătoare următoare pentru confirmare.</p>",
+                                "text_color": "#5A4E47",
+                                "typography_typography": "custom",
+                                "typography_font_family": "Inter",
+                                "typography_font_size": {
+                                    "unit": "px",
+                                    "size": 17
+                                },
+                                "typography_line_height": {
+                                    "unit": "em",
+                                    "size": 1.7
+                                }
+                            }
+                        },
+                        {
+                            "id": "s6pg063",
+                            "elType": "widget",
+                            "widgetType": "form",
+                            "settings": {
+                                "form_name": "Cerere programare",
+                                "form_fields": [
+                                    {
+                                        "_id": "fn001",
+                                        "field_type": "text",
+                                        "field_label": "Nume și prenume",
+                                        "placeholder": "Ex: Ion Popescu",
+                                        "required": "true",
+                                        "width": "50",
+                                        "field_html_id": "field_name"
+                                    },
+                                    {
+                                        "_id": "fn002",
+                                        "field_type": "tel",
+                                        "field_label": "Telefon",
+                                        "placeholder": "Ex: 0740 123 456",
+                                        "required": "true",
+                                        "width": "50",
+                                        "field_html_id": "field_phone"
+                                    },
+                                    {
+                                        "_id": "fn003",
+                                        "field_type": "email",
+                                        "field_label": "Email",
+                                        "placeholder": "Ex: email@exemplu.ro",
+                                        "required": "true",
+                                        "width": "100",
+                                        "field_html_id": "field_email"
+                                    },
+                                    {
+                                        "_id": "fn004",
+                                        "field_type": "select",
+                                        "field_label": "Tipul consultației",
+                                        "required": "true",
+                                        "width": "50",
+                                        "field_options": "Consultație inițială\nA doua opinie\nConsultație postoperatorie",
+                                        "field_html_id": "field_type"
+                                    },
+                                    {
+                                        "_id": "fn005",
+                                        "field_type": "select",
+                                        "field_label": "Clinica preferată",
+                                        "required": "true",
+                                        "width": "50",
+                                        "field_options": "[CLIENT: Denumire clinică 1]\n[CLIENT: Denumire clinică 2]",
+                                        "field_html_id": "field_clinic"
+                                    },
+                                    {
+                                        "_id": "fn006",
+                                        "field_type": "textarea",
+                                        "field_label": "Descrie pe scurt problema (opțional)",
+                                        "placeholder": "Simptome principale, de cât timp, investigații efectuate...",
+                                        "required": "",
+                                        "width": "100",
+                                        "rows": "4",
+                                        "field_html_id": "field_problem"
+                                    },
+                                    {
+                                        "_id": "fn007",
+                                        "field_type": "radio",
+                                        "field_label": "Prefer să fiu contactat",
+                                        "required": "",
+                                        "width": "100",
+                                        "field_options": "Dimineața (08:00–12:00)\nDupăamiaza (12:00–17:00)\nOrice oră",
+                                        "field_value": "Orice oră",
+                                        "field_html_id": "field_time"
+                                    },
+                                    {
+                                        "_id": "fn008",
+                                        "field_type": "acceptance",
+                                        "field_label": "Acord prelucrare date",
+                                        "required": "true",
+                                        "width": "100",
+                                        "acceptance_text": "Sunt de acord cu <a href=\"/politica-de-confidentialitate/\" target=\"_blank\">prelucrarea datelor cu caracter personal</a> în scopul programării consultației, în conformitate cu GDPR.",
+                                        "field_html_id": "field_gdpr"
+                                    }
+                                ],
+                                "submit_actions": [
+                                    "email"
+                                ],
+                                "email_to": "[CLIENT: Email destinație formulare — ex: programari@georgeungureanu.doctor]",
+                                "email_subject": "Cerere programare nouă — georgeungureanu.doctor",
+                                "email_content": "[all-fields]",
+                                "button_text": "Trimite cererea de programare",
+                                "button_size": "md",
+                                "button_align": "stretch",
+                                "button_background_color": "#4D7A70",
+                                "button_text_color": "#FDFBF7",
+                                "button_background_hover_color": "#3A5F57",
+                                "button_border_radius": {
+                                    "top": "4",
+                                    "right": "4",
+                                    "bottom": "4",
+                                    "left": "4",
+                                    "unit": "px",
+                                    "isLinked": true
+                                },
+                                "button_typography_typography": "custom",
+                                "button_typography_font_family": "Inter",
+                                "button_typography_font_weight": "600",
+                                "button_typography_font_size": {
+                                    "unit": "px",
+                                    "size": 16
+                                },
+                                "success_message": "Cererea a fost trimisă. Vei fi contactat în 24 de ore lucrătoare la numărul furnizat.",
+                                "error_message": "A apărut o eroare. Vă rugăm să încercați din nou sau să ne contactați telefonic.",
+                                "label_typography_typography": "custom",
+                                "label_typography_font_family": "Inter",
+                                "label_typography_font_weight": "600",
+                                "label_typography_font_size": {
+                                    "unit": "px",
+                                    "size": 14
+                                },
+                                "label_color": "#231E1A",
+                                "field_typography_typography": "custom",
+                                "field_typography_font_family": "Inter",
+                                "field_typography_font_size": {
+                                    "unit": "px",
+                                    "size": 16
+                                },
+                                "field_text_color": "#231E1A",
+                                "field_background_color": "#FDFBF7",
+                                "field_border_color": "#D6CFC7",
+                                "field_border_focus_color": "#4D7A70",
+                                "rows_gap": {
+                                    "size": 20,
+                                    "unit": "px"
+                                }
+                            }
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": "s6pg070",
+            "elType": "container",
+            "isInner": false,
+            "settings": {
+                "flex_direction": "column",
+                "flex_align_items": "center",
+                "background_background": "classic",
+                "background_color": "#F4EFE6",
+                "padding": {
+                    "unit": "px",
+                    "isLinked": false,
+                    "top": "80",
+                    "right": "24",
+                    "bottom": "80",
+                    "left": "24"
+                },
+                "content_width": "full"
+            },
+            "elements": [
+                {
+                    "id": "s6pg071",
+                    "elType": "container",
+                    "isInner": true,
+                    "settings": {
+                        "content_width": "full",
+                        "width": {
+                            "unit": "px",
+                            "size": 760
+                        },
+                        "flex_direction": "column",
+                        "flex_gap": {
+                            "column": "32",
+                            "row": "0",
+                            "unit": "px",
+                            "isLinked": false
+                        }
+                    },
+                    "elements": [
+                        {
+                            "id": "s6pg072",
+                            "elType": "widget",
+                            "widgetType": "heading",
+                            "settings": {
+                                "title": "Întrebări frecvente",
+                                "header_size": "h2",
+                                "align": "left",
+                                "title_color": "#231E1A",
+                                "typography_typography": "custom",
+                                "typography_font_family": "Lora",
+                                "typography_font_weight": "700",
+                                "typography_font_size": {
+                                    "unit": "px",
+                                    "size": 32
+                                },
+                                "typography_line_height": {
+                                    "unit": "em",
+                                    "size": 1.2
+                                }
+                            }
+                        },
+                        {
+                            "id": "s6pg073",
+                            "elType": "widget",
+                            "widgetType": "accordion",
+                            "settings": {
+                                "tabs": [
+                                    {
+                                        "_id": "faq01",
+                                        "tab_title": "Am nevoie de o trimitere de la medicul de familie?",
+                                        "tab_content": "Nu este obligatorie. Poți programa o consultație direct, fără trimitere. Dacă ai bilet de trimitere, aduce-l — ajută la documentare. Dacă nu, evaluarea se poate face pe baza simptomelor și a investigațiilor existente."
+                                    },
+                                    {
+                                        "_id": "faq02",
+                                        "tab_title": "Cât costă o consultație? Este decontată de CNAS?",
+                                        "tab_content": "[CLIENT: Informații tarif consultație și decontare CNAS — ex: Consultația inițială costă X lei. Decontarea CNAS este disponibilă / nu este disponibilă deoarece...]"
+                                    },
+                                    {
+                                        "_id": "faq03",
+                                        "tab_title": "Cât durează o consultație?",
+                                        "tab_content": "O consultație inițială durează în medie 45–60 de minute. O a doua opinie: 30–45 minute. Un control postoperator: 20–30 minute. Aceste durate pot varia în funcție de complexitatea cazului."
+                                    },
+                                    {
+                                        "_id": "faq04",
+                                        "tab_title": "Pot veni cu un aparținător?",
+                                        "tab_content": "Da, ești binevenit să vii cu un aparținător. De multe ori este util ca un membru al familiei să fie prezent pentru a înțelege împreună diagnosticul și opțiunile de tratament."
+                                    },
+                                    {
+                                        "_id": "faq05",
+                                        "tab_title": "Ce se întâmplă dacă trebuie să anulez sau reprogramez?",
+                                        "tab_content": "Dacă nu poți ajunge la programare, te rugăm să ne anunți cu cel puțin 24 de ore înainte, telefonic sau prin email. Reprogramarea se face fără costuri suplimentare."
+                                    },
+                                    {
+                                        "_id": "faq06",
+                                        "tab_title": "Consultez și pacienți din alte țări?",
+                                        "tab_content": "[CLIENT: Confirmare dacă se acceptă pacienți internaționali și detalii specifice — ex: Consultez și pacienți din Republica Moldova, diaspora românească și pacienți internaționali. Consultația se poate desfășura în română / engleză. Contactați-mă înainte pentru detalii logistice.]"
+                                    },
+                                    {
+                                        "_id": "faq07",
+                                        "tab_title": "Voi fi presat să aleg operația?",
+                                        "tab_content": "Nu. Scopul consultației este să înțelegeți complet situația și să aveți toate informațiile necesare pentru a lua o decizie. Chirurgia este recomandată doar când beneficiile depășesc clar riscurile și alternativele conservatoare au fost discutate."
+                                    }
+                                ],
+                                "title_html_tag": "h3",
+                                "icon_align": "right",
+                                "border_color": {
+                                    "color": "#D6CFC7"
+                                },
+                                "title_color": "#231E1A",
+                                "title_color_active": "#4D7A70",
+                                "icon_color": "#4D7A70",
+                                "content_color": "#5A4E47",
+                                "typography_typography": "custom",
+                                "typography_font_family": "Inter",
+                                "typography_font_weight": "600",
+                                "typography_font_size": {
+                                    "unit": "px",
+                                    "size": 16
+                                },
+                                "content_typography_typography": "custom",
+                                "content_typography_font_family": "Inter",
+                                "content_typography_font_size": {
+                                    "unit": "px",
+                                    "size": 16
+                                },
+                                "content_typography_line_height": {
+                                    "unit": "em",
+                                    "size": 1.7
+                                },
+                                "item_spacing": {
+                                    "size": 0,
+                                    "unit": "px"
+                                }
+                            }
+                        },
+                        {
+                            "id": "s6pg074",
+                            "elType": "widget",
+                            "widgetType": "text-editor",
+                            "settings": {
+                                "editor": "<p>Ai o altă întrebare? Scrie-ne la <a href=\"mailto:[CLIENT: Email contact]\" style=\"color:#4D7A70\">[CLIENT: Email contact]</a></p>",
+                                "text_color": "#5A4E47",
+                                "typography_typography": "custom",
+                                "typography_font_family": "Inter",
+                                "typography_font_size": {
+                                    "unit": "px",
+                                    "size": 15
+                                },
+                                "typography_line_height": {
+                                    "unit": "em",
+                                    "size": 1.7
+                                }
+                            }
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": "s6pg080",
+            "elType": "container",
+            "isInner": false,
+            "settings": {
+                "flex_direction": "column",
+                "flex_align_items": "center",
+                "background_background": "classic",
+                "background_color": "#231E1A",
+                "padding": {
+                    "unit": "px",
+                    "isLinked": false,
+                    "top": "80",
+                    "right": "24",
+                    "bottom": "80",
+                    "left": "24"
+                },
+                "content_width": "full"
+            },
+            "elements": [
+                {
+                    "id": "s6pg081",
+                    "elType": "container",
+                    "isInner": true,
+                    "settings": {
+                        "content_width": "full",
+                        "width": {
+                            "unit": "px",
+                            "size": 760
+                        },
+                        "flex_direction": "column",
+                        "flex_gap": {
+                            "column": "24",
+                            "row": "0",
+                            "unit": "px",
+                            "isLinked": false
+                        }
+                    },
+                    "elements": [
+                        {
+                            "id": "s6pg082",
+                            "elType": "widget",
+                            "widgetType": "heading",
+                            "settings": {
+                                "title": "Primul pas este cel mai ușor.",
+                                "header_size": "h2",
+                                "align": "center",
+                                "title_color": "#FDFBF7",
+                                "typography_typography": "custom",
+                                "typography_font_family": "Lora",
+                                "typography_font_weight": "700",
+                                "typography_font_size": {
+                                    "unit": "px",
+                                    "size": 36
+                                },
+                                "typography_line_height": {
+                                    "unit": "em",
+                                    "size": 1.2
+                                }
+                            }
+                        },
+                        {
+                            "id": "s6pg083",
+                            "elType": "widget",
+                            "widgetType": "text-editor",
+                            "settings": {
+                                "editor": "<p>Completează cererea în 2 minute sau sună direct. Fără angajamente, fără presiune.</p>",
+                                "text_color": "#C8C0B8",
+                                "typography_typography": "custom",
+                                "typography_font_family": "Inter",
+                                "typography_font_size": {
+                                    "unit": "px",
+                                    "size": 18
+                                },
+                                "typography_line_height": {
+                                    "unit": "em",
+                                    "size": 1.7
+                                },
+                                "border_border": "solid",
+                                "border_color": "#4D7A70",
+                                "border_width": {
+                                    "top": "2",
+                                    "right": "2",
+                                    "bottom": "2",
+                                    "left": "2",
+                                    "unit": "px",
+                                    "isLinked": true
+                                }
+                            }
+                        },
+                        {
+                            "id": "s6pg084",
+                            "elType": "container",
+                            "isInner": true,
+                            "settings": {
+                                "content_width": "full",
+                                "width": {
+                                    "unit": "px",
+                                    "size": 760
+                                },
+                                "flex_direction": "row",
+                                "flex_wrap": "wrap",
+                                "flex_gap": {
+                                    "column": "16",
+                                    "row": "16",
+                                    "unit": "px",
+                                    "isLinked": false
+                                }
+                            },
+                            "elements": [
+                                {
+                                    "id": "s6pg085",
+                                    "elType": "widget",
+                                    "widgetType": "button",
+                                    "settings": {
+                                        "button_type": "button",
+                                        "text": "Completează cererea ↑",
+                                        "link": {
+                                            "url": "#formular-programare",
+                                            "is_external": "",
+                                            "nofollow": ""
+                                        },
+                                        "size": "lg",
+                                        "background_color": "#4D7A70",
+                                        "button_text_color": "#FDFBF7",
+                                        "border_radius": {
+                                            "top": "4",
+                                            "right": "4",
+                                            "bottom": "4",
+                                            "left": "4",
+                                            "unit": "px",
+                                            "isLinked": true
+                                        },
+                                        "typography_typography": "custom",
+                                        "typography_font_family": "Inter",
+                                        "typography_font_weight": "600",
+                                        "typography_font_size": {
+                                            "unit": "px",
+                                            "size": 16
+                                        },
+                                        "padding": {
+                                            "top": "16",
+                                            "right": "32",
+                                            "bottom": "16",
+                                            "left": "32",
+                                            "unit": "px",
+                                            "isLinked": false
+                                        },
+                                        "hover_color": "#FDFBF7",
+                                        "button_background_hover_color": "#3A5F57"
+                                    }
+                                },
+                                {
+                                    "id": "s6pg086",
+                                    "elType": "widget",
+                                    "widgetType": "button",
+                                    "settings": {
+                                        "button_type": "button",
+                                        "text": "[CLIENT: +40 7XX XXX XXX]",
+                                        "link": {
+                                            "url": "tel:[CLIENT: phonenumber]",
+                                            "is_external": "",
+                                            "nofollow": ""
+                                        },
+                                        "size": "lg",
+                                        "background_color": "transparent",
+                                        "button_text_color": "#FDFBF7",
+                                        "border_radius": {
+                                            "top": "4",
+                                            "right": "4",
+                                            "bottom": "4",
+                                            "left": "4",
+                                            "unit": "px",
+                                            "isLinked": true
+                                        },
+                                        "typography_typography": "custom",
+                                        "typography_font_family": "Inter",
+                                        "typography_font_weight": "600",
+                                        "typography_font_size": {
+                                            "unit": "px",
+                                            "size": 16
+                                        },
+                                        "padding": {
+                                            "top": "16",
+                                            "right": "32",
+                                            "bottom": "16",
+                                            "left": "32",
+                                            "unit": "px",
+                                            "isLinked": false
+                                        },
+                                        "hover_color": "#FDFBF7",
+                                        "button_background_hover_color": "#3A5F57"
+                                    }
+                                }
+                            ]
+                        },
+                        {
+                            "id": "s6pg087",
+                            "elType": "widget",
+                            "widgetType": "text-editor",
+                            "settings": {
+                                "editor": "<p style=\"text-align:center;font-size:14px\">Sau scrie la <a href=\"mailto:[CLIENT: Email contact]\" style=\"color:#4D7A70\">[CLIENT: Email contact]</a> — răspundem în 24 de ore lucrătoare.</p>",
+                                "text_color": "#C8C0B8",
+                                "typography_typography": "custom",
+                                "typography_font_family": "Inter",
+                                "typography_font_size": {
+                                    "unit": "px",
+                                    "size": 14
+                                },
+                                "typography_line_height": {
+                                    "unit": "em",
+                                    "size": 1.7
+                                }
+                            }
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}
