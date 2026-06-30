@@ -1,0 +1,728 @@
+{
+    "key": "group_ar",
+    "title": "Article (Knowledge Center)",
+    "fields": [
+        {
+            "aria-label": "",
+            "type": "text",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": false,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "placeholder": "Un rând suplimentar sub titlu (opțional)",
+            "default_value": "",
+            "maxlength": "",
+            "prepend": "",
+            "append": "",
+            "key": "field_ar_subtitle",
+            "name": "subtitle",
+            "menu_order": 0
+        },
+        {
+            "aria-label": "",
+            "type": "textarea",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": false,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "placeholder": "2–3 propoziții. Afișat în carduri și ca meta description fallback.",
+            "rows": 3,
+            "default_value": "",
+            "new_lines": "",
+            "maxlength": "",
+            "key": "field_ar_short_summary",
+            "name": "short_summary",
+            "menu_order": 1
+        },
+        {
+            "aria-label": "",
+            "type": "wysiwyg",
+            "instructions": "Listă cu bullet-uri a ideilor principale. Afișat în caseta verde deschis.",
+            "required": 0,
+            "conditional_logic": false,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "tabs": "visual",
+            "toolbar": "basic",
+            "media_upload": 0,
+            "default_value": "",
+            "delay": 0,
+            "key": "field_ar_key_takeaways",
+            "name": "key_takeaways",
+            "menu_order": 2
+        },
+        {
+            "aria-label": "",
+            "type": "number",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": false,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "placeholder": 5,
+            "min": 1,
+            "max": 60,
+            "default_value": "",
+            "step": "",
+            "prepend": "",
+            "append": "",
+            "key": "field_ar_reading_time",
+            "name": "reading_time",
+            "menu_order": 3
+        },
+        {
+            "aria-label": "",
+            "type": "date_picker",
+            "instructions": "Ultima dată când Dr. George a revizuit conținutul.",
+            "required": 0,
+            "conditional_logic": false,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "display_format": "d/m/Y",
+            "return_format": "Y-m-d",
+            "first_day": 1,
+            "default_to_current_date": 0,
+            "key": "field_ar_medical_review_date",
+            "name": "medical_review_date",
+            "menu_order": 4
+        },
+        {
+            "aria-label": "",
+            "type": "text",
+            "instructions": "Lasă gol pentru a folosi \"Dr. George Ungureanu\".",
+            "required": 0,
+            "conditional_logic": false,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "placeholder": "Dr. George Ungureanu",
+            "default_value": "",
+            "maxlength": "",
+            "prepend": "",
+            "append": "",
+            "key": "field_ar_author_display_name",
+            "name": "author_display_name",
+            "menu_order": 5
+        },
+        {
+            "aria-label": "",
+            "type": "text",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": false,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "placeholder": "MD, Neurochirurg",
+            "default_value": "",
+            "maxlength": "",
+            "prepend": "",
+            "append": "",
+            "key": "field_ar_author_credentials",
+            "name": "author_credentials",
+            "menu_order": 6
+        },
+        {
+            "aria-label": "",
+            "type": "textarea",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": false,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "placeholder": "1–2 propoziții despre autor (opțional).",
+            "rows": 2,
+            "default_value": "",
+            "new_lines": "",
+            "maxlength": "",
+            "key": "field_ar_author_bio_short",
+            "name": "author_bio_short",
+            "menu_order": 7
+        },
+        {
+            "aria-label": "",
+            "type": "post_object",
+            "instructions": "Se upgradeaza la câmp Relationship când ACF Pro este activ.",
+            "required": 0,
+            "conditional_logic": false,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "post_type": [
+                "afectiuni"
+            ],
+            "return_format": "object",
+            "multiple": 0,
+            "allow_null": 1,
+            "ui": 1,
+            "taxonomy": [],
+            "bidirectional_target": [],
+            "key": "field_ar_related_condition_1",
+            "name": "related_condition_1",
+            "menu_order": 8
+        },
+        {
+            "aria-label": "",
+            "type": "post_object",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": false,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "post_type": [
+                "afectiuni"
+            ],
+            "return_format": "object",
+            "multiple": 0,
+            "allow_null": 1,
+            "ui": 1,
+            "taxonomy": [],
+            "bidirectional_target": [],
+            "key": "field_ar_related_condition_2",
+            "name": "related_condition_2",
+            "menu_order": 9
+        },
+        {
+            "aria-label": "",
+            "type": "post_object",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": false,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "post_type": [
+                "afectiuni"
+            ],
+            "return_format": "object",
+            "multiple": 0,
+            "allow_null": 1,
+            "ui": 1,
+            "taxonomy": [],
+            "bidirectional_target": [],
+            "key": "field_ar_related_condition_3",
+            "name": "related_condition_3",
+            "menu_order": 10
+        },
+        {
+            "aria-label": "",
+            "type": "post_object",
+            "instructions": "Se upgradeaza la câmp Relationship când ACF Pro este activ.",
+            "required": 0,
+            "conditional_logic": false,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "post_type": [
+                "interventii"
+            ],
+            "return_format": "object",
+            "multiple": 0,
+            "allow_null": 1,
+            "ui": 1,
+            "taxonomy": [],
+            "bidirectional_target": [],
+            "key": "field_ar_related_procedure_1",
+            "name": "related_procedure_1",
+            "menu_order": 11
+        },
+        {
+            "aria-label": "",
+            "type": "post_object",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": false,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "post_type": [
+                "interventii"
+            ],
+            "return_format": "object",
+            "multiple": 0,
+            "allow_null": 1,
+            "ui": 1,
+            "taxonomy": [],
+            "bidirectional_target": [],
+            "key": "field_ar_related_procedure_2",
+            "name": "related_procedure_2",
+            "menu_order": 12
+        },
+        {
+            "aria-label": "",
+            "type": "post_object",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": false,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "post_type": [
+                "interventii"
+            ],
+            "return_format": "object",
+            "multiple": 0,
+            "allow_null": 1,
+            "ui": 1,
+            "taxonomy": [],
+            "bidirectional_target": [],
+            "key": "field_ar_related_procedure_3",
+            "name": "related_procedure_3",
+            "menu_order": 13
+        },
+        {
+            "aria-label": "",
+            "type": "post_object",
+            "instructions": "Se upgradeaza la câmp Relationship când ACF Pro este activ.",
+            "required": 0,
+            "conditional_logic": false,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "post_type": [
+                "articole"
+            ],
+            "return_format": "object",
+            "multiple": 0,
+            "allow_null": 1,
+            "ui": 1,
+            "taxonomy": [],
+            "bidirectional_target": [],
+            "key": "field_ar_related_article_1",
+            "name": "related_article_1",
+            "menu_order": 14
+        },
+        {
+            "aria-label": "",
+            "type": "post_object",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": false,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "post_type": [
+                "articole"
+            ],
+            "return_format": "object",
+            "multiple": 0,
+            "allow_null": 1,
+            "ui": 1,
+            "taxonomy": [],
+            "bidirectional_target": [],
+            "key": "field_ar_related_article_2",
+            "name": "related_article_2",
+            "menu_order": 15
+        },
+        {
+            "aria-label": "",
+            "type": "post_object",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": false,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "post_type": [
+                "articole"
+            ],
+            "return_format": "object",
+            "multiple": 0,
+            "allow_null": 1,
+            "ui": 1,
+            "taxonomy": [],
+            "bidirectional_target": [],
+            "key": "field_ar_related_article_3",
+            "name": "related_article_3",
+            "menu_order": 16
+        },
+        {
+            "aria-label": "",
+            "type": "text",
+            "instructions": "ACF Pro: se va migra la repeater faq_items.",
+            "required": 0,
+            "conditional_logic": false,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "placeholder": "Ex: Când este necesară operația?",
+            "default_value": "",
+            "maxlength": "",
+            "prepend": "",
+            "append": "",
+            "key": "field_ar_faq_1_question",
+            "name": "faq_1_question",
+            "menu_order": 17
+        },
+        {
+            "aria-label": "",
+            "type": "textarea",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": false,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "rows": 3,
+            "default_value": "",
+            "new_lines": "",
+            "maxlength": "",
+            "placeholder": "",
+            "key": "field_ar_faq_1_answer",
+            "name": "faq_1_answer",
+            "menu_order": 18
+        },
+        {
+            "aria-label": "",
+            "type": "text",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": false,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "maxlength": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
+            "key": "field_ar_faq_2_question",
+            "name": "faq_2_question",
+            "menu_order": 19
+        },
+        {
+            "aria-label": "",
+            "type": "textarea",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": false,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "rows": 3,
+            "default_value": "",
+            "new_lines": "",
+            "maxlength": "",
+            "placeholder": "",
+            "key": "field_ar_faq_2_answer",
+            "name": "faq_2_answer",
+            "menu_order": 20
+        },
+        {
+            "aria-label": "",
+            "type": "text",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": false,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "maxlength": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
+            "key": "field_ar_faq_3_question",
+            "name": "faq_3_question",
+            "menu_order": 21
+        },
+        {
+            "aria-label": "",
+            "type": "textarea",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": false,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "rows": 3,
+            "default_value": "",
+            "new_lines": "",
+            "maxlength": "",
+            "placeholder": "",
+            "key": "field_ar_faq_3_answer",
+            "name": "faq_3_answer",
+            "menu_order": 22
+        },
+        {
+            "aria-label": "",
+            "type": "text",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": false,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "maxlength": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
+            "key": "field_ar_faq_4_question",
+            "name": "faq_4_question",
+            "menu_order": 23
+        },
+        {
+            "aria-label": "",
+            "type": "textarea",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": false,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "rows": 3,
+            "default_value": "",
+            "new_lines": "",
+            "maxlength": "",
+            "placeholder": "",
+            "key": "field_ar_faq_4_answer",
+            "name": "faq_4_answer",
+            "menu_order": 24
+        },
+        {
+            "aria-label": "",
+            "type": "text",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": false,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "maxlength": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
+            "key": "field_ar_faq_5_question",
+            "name": "faq_5_question",
+            "menu_order": 25
+        },
+        {
+            "aria-label": "",
+            "type": "textarea",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": false,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "rows": 3,
+            "default_value": "",
+            "new_lines": "",
+            "maxlength": "",
+            "placeholder": "",
+            "key": "field_ar_faq_5_answer",
+            "name": "faq_5_answer",
+            "menu_order": 26
+        },
+        {
+            "aria-label": "",
+            "type": "text",
+            "instructions": "Lasă gol pentru titlul CTA global.",
+            "required": 0,
+            "conditional_logic": false,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "placeholder": "Programează o consultație neurochirurgicală",
+            "default_value": "",
+            "maxlength": "",
+            "prepend": "",
+            "append": "",
+            "key": "field_ar_cta_title",
+            "name": "cta_title",
+            "menu_order": 27
+        },
+        {
+            "aria-label": "",
+            "type": "textarea",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": false,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "placeholder": "O evaluare corectă este primul pas.",
+            "rows": 2,
+            "default_value": "",
+            "new_lines": "",
+            "maxlength": "",
+            "key": "field_ar_cta_text",
+            "name": "cta_text",
+            "menu_order": 28
+        },
+        {
+            "aria-label": "",
+            "type": "text",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": false,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "placeholder": "Programează acum",
+            "default_value": "",
+            "maxlength": "",
+            "prepend": "",
+            "append": "",
+            "key": "field_ar_cta_button_label",
+            "name": "cta_button_label",
+            "menu_order": 29
+        },
+        {
+            "aria-label": "",
+            "type": "select",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": false,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "choices": {
+                "Article": "Article",
+                "MedicalWebPage": "MedicalWebPage",
+                "FAQPage": "FAQPage"
+            },
+            "default_value": "MedicalWebPage",
+            "allow_null": 0,
+            "multiple": 0,
+            "ui": 0,
+            "ajax": 0,
+            "placeholder": "",
+            "return_format": "value",
+            "create_options": 0,
+            "save_options": 0,
+            "key": "field_ar_schema_type",
+            "name": "schema_type",
+            "menu_order": 30
+        },
+        {
+            "aria-label": "",
+            "type": "text",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": false,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "placeholder": "Max 60 caractere. Afișat ca <title> în Google.",
+            "maxlength": 60,
+            "default_value": "",
+            "prepend": "",
+            "append": "",
+            "key": "field_ar_seo_title",
+            "name": "seo_title",
+            "menu_order": 31
+        },
+        {
+            "aria-label": "",
+            "type": "textarea",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": false,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "placeholder": "Max 155 caractere.",
+            "rows": 2,
+            "maxlength": 155,
+            "default_value": "",
+            "new_lines": "",
+            "key": "field_ar_seo_description",
+            "name": "seo_description",
+            "menu_order": 32
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "post_type",
+                "operator": "==",
+                "value": "articole"
+            }
+        ]
+    ],
+    "menu_order": 30,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "active": true,
+    "modified": 1782825860
+}

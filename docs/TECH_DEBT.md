@@ -19,11 +19,11 @@
 ---
 
 ### 2. ACF group keys created without ACF admin UI
-**What:** ACF field groups (IDs 39, 55) were inserted directly into `wp_posts`. The Sprint 5 group (ID=55) was initially created with a missing `post_excerpt` key — discovered and fixed in Sprint 5.5.
+**What:** ACF field groups (IDs 39, 55, 78) were inserted directly into `wp_posts`. The Sprint 5 group (ID=55) initially had a missing `post_excerpt` key; Sprint 7A group (ID=78) had the wrong key (`article-knowledge-center` instead of `group_ar`). Both were fixed in-sprint.
 
 **Implication:** ACF's internal key (`post_excerpt`) must match the Local JSON filename. A key mismatch prevents auto-sync from `acf-json/`.
 
-**Risk level:** Low (fixed). Sprint 5.5 corrected the key to `group_sp`.
+**Risk level:** Low (fixed). Keys verified: `group_mc` (39), `group_sp` (55), `group_ar` (78).
 
 **Mitigation:** After any DB recreation, run: `SELECT post_excerpt FROM wp_posts WHERE post_type='acf-field-group'` and verify keys match filenames in `acf-json/`.
 
@@ -120,11 +120,11 @@
 ## Future Improvements
 
 ### ACF Pro Opportunities
-- **Repeater fields**: FAQ entries (currently a single wysiwyg) would benefit from a repeater with `question`/`answer` sub-fields for structured output
+- **Repeater fields**: FAQ entries in `articole` (currently 5×text+textarea pairs — fields `faq_1_question`…`faq_5_answer`) would benefit from a repeater `faq_items` with `question`/`answer` sub-fields. Shortcode `[gu_article_faq]` already handles both patterns via `have_rows('faq_items')` fallback.
+- **Relationship fields**: `articole` uses 3× `post_object` fields per relation type (9 fields total). `gu_get_related_posts()` helper already handles both `post_object` (Free) and `relationship` (Pro) — upgrade path is transparent.
 - **Flexible Content**: Single page templates use fixed section order; Flexible Content would allow per-post section customization
 - **Options Page**: Site-wide settings (clinic address, phone, working hours) currently hardcoded in footer template
 - **Gallery field**: For surgical procedure images / case gallery
-- **Relationship fields**: Link `interventii` to related `afectiuni` entries
 
 ### Performance Opportunities
 - **Image optimization**: No WebP conversion configured; `wp-content/uploads/` will accumulate unoptimized images
