@@ -3,7 +3,7 @@
  * Plugin Name:  GU Design System
  * Plugin URI:   https://georgeungureanu.doctor
  * Description:  Loads the approved Direction B+ (Warm Academic Medicine) design system for georgeungureanu.doctor. Enqueues Google Fonts (Lora + Inter), CSS custom properties (color, typography, spacing, layout, motion tokens), and utility classes. Safe to activate/deactivate — removes everything on deactivation. Does not modify Elementor database settings, does not create pages or templates, and does not depend on Elementor Pro APIs.
- * Version:      1.1.0
+ * Version:      1.2.0
  * Author:       georgeungureanu.doctor
  * License:      Private — All rights reserved
  * Text Domain:  gu-design-system
@@ -16,7 +16,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Prevent direct file access.
 }
 
-define( 'GU_DESIGN_SYSTEM_VERSION', '1.1.0' );
+define( 'GU_DESIGN_SYSTEM_VERSION', '1.2.0' );
 define( 'GU_DESIGN_SYSTEM_URL', plugin_dir_url( __FILE__ ) );
 
 
@@ -626,6 +626,227 @@ add_shortcode( 'gu_related_articles', function () {
 		$out .= '<a class="gu-related-card__link" href="' . esc_url( get_permalink( $p->ID ) ) . '">Citește →</a>';
 		$out .= '</div></article>';
 	}
+	$out .= '</div>';
+	return $out;
+} );
+
+
+// ─────────────────────────────────────────────────────────────
+// 9. SPRINT 7B — SEO, SCHEMA & CROSS-LINKING
+// ─────────────────────────────────────────────────────────────
+
+// ── 9a. SEO: title override + meta description ───────────────
+// Injects custom <title> and <meta name="description"> for articole
+// single posts. Skips automatically when Yoast SEO or Rank Math
+// is active (those plugins own <head> SEO). Safe to leave active
+// even after installing an SEO plugin — the check prevents conflicts.
+//
+// Limitation: does NOT write to Yoast/Rank Math databases.
+// If the site later uses Yoast, populate Yoast _yoast_wpseo_title
+// and _yoast_wpseo_metadesc from the ACF fields via a one-time migration.
+
+function gu_seo_plugin_active(): bool {
+	return class_exists( 'WPSEO_Frontend' )  // Yoast SEO
+		|| class_exists( 'RankMath' )          // Rank Math
+		|| class_exists( 'SEOPRESS_SETTINGS' ) // SEOPress
+		|| defined( 'THE_SEO_FRAMEWORK_VERSION' ); // The SEO Framework
+}
+
+// Title override via pre_get_document_title filter (safe — no duplicate <title>).
+add_filter( 'pre_get_document_title', function ( string $title ): string {
+	if ( gu_seo_plugin_active() || ! is_singular( 'articole' ) ) {
+		return $title;
+	}
+	$seo_title = function_exists( 'get_field' ) ? (string) get_field( 'seo_title' ) : '';
+	if ( empty( $seo_title ) ) {
+		return $title; // keep default WP title
+	}
+	return wp_strip_all_tags( $seo_title );
+}, 20 );
+
+// Meta description injection.
+add_action( 'wp_head', function () {
+	if ( gu_seo_plugin_active() || ! is_singular( 'articole' ) || ! function_exists( 'get_field' ) ) {
+		return;
+	}
+	$description = (string) get_field( 'seo_description' );
+	if ( empty( $description ) ) {
+		// Fallback to short_summary (strips HTML, trims to 155 chars).
+		$description = wp_strip_all_tags( (string) get_field( 'short_summary' ) );
+	}
+	if ( empty( $description ) ) {
+		return;
+	}
+	$description = mb_substr( wp_strip_all_tags( $description ), 0, 155 );
+	echo '<meta name="description" content="' . esc_attr( $description ) . '">' . "\n";
+}, 1 );
+
+// ── 9b. Schema.org JSON-LD ────────────────────────────────────
+// Outputs a @graph containing:
+//   – MedicalWebPage (or Article) for the article
+//   – BreadcrumbList (Home → Articole → Article title)
+//   – Physician node for Dr. George Ungureanu
+// FAQPage schema is already output inline by [gu_article_faq] shortcode.
+// Conservative schema: no ratings, no reviews, no medical claims.
+
+add_action( 'wp_head', function () {
+	if ( ! is_singular( 'articole' ) || ! function_exists( 'get_field' ) ) {
+		return;
+	}
+
+	$post        = get_queried_object();
+	$post_url    = get_permalink( $post );
+	$home_url    = trailingslashit( home_url() );
+	$archive_url = get_post_type_archive_link( 'articole' );
+
+	$schema_type  = (string) get_field( 'seo_schema_type' ) ?: (string) get_field( 'schema_type' ) ?: 'MedicalWebPage';
+	$allowed_types = [ 'Article', 'MedicalWebPage', 'FAQPage' ];
+	if ( ! in_array( $schema_type, $allowed_types, true ) ) {
+		$schema_type = 'MedicalWebPage';
+	}
+
+	$title       = wp_strip_all_tags( get_the_title( $post ) );
+	$description = wp_strip_all_tags( (string) get_field( 'seo_description' ) ?: (string) get_field( 'short_summary' ) );
+	$review_date = (string) get_field( 'medical_review_date' ); // Y-m-d
+	$modified    = $review_date ?: get_post_modified_time( 'Y-m-d', true, $post );
+	$published   = get_post_time( 'Y-m-d', true, $post );
+
+	$physician_id = $home_url . 'despre/#physician';
+
+	$graph = [
+		[
+			'@type'         => $schema_type,
+			'@id'           => $post_url . '#webpage',
+			'name'          => $title,
+			'description'   => mb_substr( $description, 0, 300 ),
+			'url'           => $post_url,
+			'inLanguage'    => 'ro-RO',
+			'datePublished' => $published,
+			'dateModified'  => $modified,
+			'author'        => [ '@id' => $physician_id ],
+			'breadcrumb'    => [ '@id' => $post_url . '#breadcrumb' ],
+		],
+		[
+			'@type'       => 'BreadcrumbList',
+			'@id'         => $post_url . '#breadcrumb',
+			'itemListElement' => [
+				[ '@type' => 'ListItem', 'position' => 1, 'name' => 'Acasă',   'item' => $home_url ],
+				[ '@type' => 'ListItem', 'position' => 2, 'name' => 'Articole', 'item' => $archive_url ],
+				[ '@type' => 'ListItem', 'position' => 3, 'name' => $title ],
+			],
+		],
+		[
+			'@type'    => 'Physician',
+			'@id'      => $physician_id,
+			'name'     => 'Dr. George Ungureanu',
+			'jobTitle' => 'Neurochirurg',
+			'url'      => $home_url . 'despre/',
+			'worksFor' => [
+				'@type' => 'MedicalOrganization',
+				'name'  => 'Cabinet Neurochirurgie Dr. George Ungureanu',
+				'url'   => $home_url,
+			],
+		],
+	];
+
+	$json = wp_json_encode(
+		[ '@context' => 'https://schema.org', '@graph' => $graph ],
+		JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT
+	);
+	echo '<script type="application/ld+json">' . $json . '</script>' . "\n";
+}, 10 );
+
+// ── 9c. Author / Medical Review block ────────────────────────
+// [gu_article_author] — Renders a credibility block with Dr. George's
+// photo placeholder, credentials, review date, bio and /despre/ link.
+// Section background: warm (#F4EFE6). Placed after article body.
+add_shortcode( 'gu_article_author', function () {
+	if ( ! function_exists( 'get_field' ) ) {
+		return '';
+	}
+	$name        = (string) get_field( 'author_display_name' ) ?: 'Dr. George Ungureanu';
+	$title       = (string) get_field( 'author_credentials' )  ?: 'MD, Neurochirurg';
+	$bio         = (string) get_field( 'author_bio_short' );
+	$review_raw  = (string) get_field( 'medical_review_date' );
+	$review_str  = $review_raw ? date_i18n( 'd F Y', strtotime( $review_raw ) ) : '';
+	$about_url   = home_url( '/despre/' );
+
+	$out  = '<div class="gu-author-block">';
+	$out .= '<div class="gu-author-block__avatar" aria-hidden="true">';
+	// SVG silhouette placeholder — replaced when photography is available
+	$out .= '<svg viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg" width="80" height="80"><circle cx="40" cy="40" r="40" fill="#C8C0B8"/><circle cx="40" cy="30" r="14" fill="#FDFBF7"/><ellipse cx="40" cy="72" rx="24" ry="18" fill="#FDFBF7"/></svg>';
+	$out .= '</div>';
+	$out .= '<div class="gu-author-block__content">';
+	$out .= '<span class="gu-author-block__label">Autor &amp; Revizie medicală</span>';
+	$out .= '<h3 class="gu-author-block__name">' . esc_html( $name ) . '</h3>';
+	$out .= '<p class="gu-author-block__title">' . esc_html( $title ) . '</p>';
+	if ( $bio ) {
+		$out .= '<p class="gu-author-block__bio">' . esc_html( $bio ) . '</p>';
+	}
+	if ( $review_str ) {
+		$out .= '<p class="gu-author-block__review">Conținut revizuit la <strong>' . esc_html( $review_str ) . '</strong></p>';
+	}
+	$out .= '<a class="gu-author-block__link" href="' . esc_url( $about_url ) . '">Despre Dr. George Ungureanu →</a>';
+	$out .= '</div>';
+	$out .= '</div>';
+	return $out;
+} );
+
+// ── 9d. Reverse-lookup: articles referencing the current post ─
+// [gu_articles_for_post] — Used on afectiuni/interventii single pages.
+// Finds published articole where related_condition_1/2/3 or
+// related_procedure_1/2/3 contain the current post's ID.
+// No new ACF fields required on the condition/procedure groups.
+add_shortcode( 'gu_articles_for_post', function () {
+	$post_id = get_the_ID();
+	if ( ! $post_id ) {
+		return '';
+	}
+
+	// Build meta_query across all six possible relation fields.
+	$meta_relations = [
+		'related_condition_1', 'related_condition_2', 'related_condition_3',
+		'related_procedure_1', 'related_procedure_2', 'related_procedure_3',
+	];
+	$meta_query = [ 'relation' => 'OR' ];
+	foreach ( $meta_relations as $key ) {
+		$meta_query[] = [ 'key' => $key, 'value' => (string) $post_id, 'compare' => '=' ];
+	}
+
+	$query = new WP_Query( [
+		'post_type'      => 'articole',
+		'post_status'    => 'publish',
+		'posts_per_page' => 6,
+		'meta_query'     => $meta_query,
+	] );
+
+	if ( ! $query->have_posts() ) {
+		return '';
+	}
+
+	$out = '<div class="gu-related-grid">';
+	while ( $query->have_posts() ) {
+		$query->the_post();
+		$summary = function_exists( 'get_field' ) ? wp_strip_all_tags( (string) get_field( 'short_summary' ) ) : get_the_excerpt();
+		$time    = function_exists( 'get_field' ) ? (int) get_field( 'reading_time' ) : 0;
+		$cats    = get_the_terms( get_the_ID(), 'categorie-articole' );
+		$cat     = ( is_array( $cats ) && ! empty( $cats ) ) ? esc_html( $cats[0]->name ) : '';
+		$out .= '<article class="gu-related-card">';
+		if ( $cat ) {
+			$out .= '<span class="gu-article-card__cat">' . $cat . '</span>';
+		}
+		$out .= '<h3 class="gu-related-card__title"><a href="' . esc_url( get_permalink() ) . '">' . esc_html( get_the_title() ) . '</a></h3>';
+		if ( $summary ) {
+			$out .= '<p class="gu-related-card__summary">' . esc_html( wp_trim_words( $summary, 20 ) ) . '</p>';
+		}
+		$out .= '<div class="gu-related-card__footer">';
+		if ( $time ) {
+			$out .= '<span class="gu-article-card__time">' . $time . ' min</span>';
+		}
+		$out .= '<a class="gu-related-card__link" href="' . esc_url( get_permalink() ) . '">Citește articolul →</a>';
+		$out .= '</div></article>';
+	}
+	wp_reset_postdata();
 	$out .= '</div>';
 	return $out;
 } );

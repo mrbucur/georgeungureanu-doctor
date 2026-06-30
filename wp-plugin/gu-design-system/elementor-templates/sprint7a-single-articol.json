@@ -192,6 +192,57 @@
             ]
         },
         {
+            "id": "s7bg010",
+            "elType": "container",
+            "isInner": false,
+            "settings": {
+                "flex_direction": "column",
+                "flex_align_items": "center",
+                "background_background": "classic",
+                "background_color": "#F4EFE6",
+                "padding": {
+                    "unit": "px",
+                    "isLinked": false,
+                    "top": "56",
+                    "right": "24",
+                    "bottom": "56",
+                    "left": "24"
+                },
+                "content_width": "full"
+            },
+            "elements": [
+                {
+                    "id": "s7bg011",
+                    "elType": "container",
+                    "isInner": true,
+                    "settings": {
+                        "content_width": "full",
+                        "width": {
+                            "unit": "px",
+                            "size": 760
+                        },
+                        "flex_direction": "column",
+                        "flex_gap": {
+                            "column": "24",
+                            "row": "0",
+                            "unit": "px",
+                            "isLinked": false
+                        }
+                    },
+                    "elements": [
+                        {
+                            "id": "s7bg012",
+                            "elType": "widget",
+                            "widgetType": "shortcode",
+                            "settings": {
+                                "shortcode": "[gu_article_author]"
+                            }
+                        }
+                    ]
+                }
+            ]
+        },
+        {
             "id": "s7sg030",
             "elType": "container",
             "isInner": false,
