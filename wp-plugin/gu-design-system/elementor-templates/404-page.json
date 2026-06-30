@@ -1,0 +1,194 @@
+{
+    "version": "0.4",
+    "title": "organism-404-page",
+    "type": "error-404",
+    "content": [
+        {
+            "id": "f404b001",
+            "elType": "container",
+            "settings": {
+                "_title": "404 Page Content",
+                "html_tag": "main",
+                "_element_id": "main-content",
+                "flex_direction": "column",
+                "align_items": "center",
+                "justify_content": "flex-start",
+                "content_width": "full",
+                "padding": {
+                    "unit": "px",
+                    "top": "120",
+                    "right": "24",
+                    "bottom": "120",
+                    "left": "24",
+                    "isLinked": false
+                },
+                "gap": "gap",
+                "gap_rows_custom": {
+                    "unit": "px",
+                    "size": 32
+                },
+                "gap_columns_custom": {
+                    "unit": "px",
+                    "size": 32
+                }
+            },
+            "elements": [
+                {
+                    "id": "f404b002",
+                    "elType": "widget",
+                    "widgetType": "heading",
+                    "settings": {
+                        "_title": "404 Status Label",
+                        "title": "404",
+                        "header_size": "p",
+                        "align": "center",
+                        "__globals__": {
+                            "title_color": "globals/colors?id=gu-accent",
+                            "typography_typography": "globals/typography?id=gu-overline"
+                        }
+                    },
+                    "elements": []
+                },
+                {
+                    "id": "f404b003",
+                    "elType": "widget",
+                    "widgetType": "heading",
+                    "settings": {
+                        "_title": "404 Heading",
+                        "title": "Pagina nu a fost găsită",
+                        "header_size": "h1",
+                        "align": "center",
+                        "title_color": "#231E1A",
+                        "__globals__": {
+                            "title_color": "globals/colors?id=gu-ink",
+                            "typography_typography": "globals/typography?id=gu-h2"
+                        }
+                    },
+                    "elements": []
+                },
+                {
+                    "id": "f404b004",
+                    "elType": "widget",
+                    "widgetType": "text-editor",
+                    "settings": {
+                        "_title": "404 Body Text",
+                        "editor": "<p style=\"text-align: center;\">Pagina pe care o căutați nu mai există sau a fost mutată la o altă adresă.<br>Vă rugăm să folosiți una dintre opțiunile de mai jos.</p>"
+                    },
+                    "elements": []
+                },
+                {
+                    "id": "f404b005",
+                    "elType": "container",
+                    "settings": {
+                        "_title": "404 Buttons Row",
+                        "flex_direction": "row",
+                        "flex_wrap": "wrap",
+                        "justify_content": "center",
+                        "align_items": "center",
+                        "gap": "gap",
+                        "gap_columns_custom": {
+                            "unit": "px",
+                            "size": 16
+                        },
+                        "gap_rows_custom": {
+                            "unit": "px",
+                            "size": 16
+                        }
+                    },
+                    "elements": [
+                        {
+                            "id": "f404b006",
+                            "elType": "widget",
+                            "widgetType": "button",
+                            "settings": {
+                                "_title": "Button — Acasă",
+                                "text": "Mergi la pagina principală",
+                                "link": {
+                                    "url": "/",
+                                    "is_external": "",
+                                    "nofollow": "",
+                                    "custom_attributes": ""
+                                },
+                                "button_background_color": "#4D7A70",
+                                "button_text_color": "#FDFBF7",
+                                "button_padding": {
+                                    "unit": "px",
+                                    "top": "12",
+                                    "right": "28",
+                                    "bottom": "12",
+                                    "left": "28",
+                                    "isLinked": false
+                                },
+                                "button_border_radius": {
+                                    "unit": "px",
+                                    "top": "4",
+                                    "right": "4",
+                                    "bottom": "4",
+                                    "left": "4",
+                                    "isLinked": true
+                                },
+                                "__globals__": {
+                                    "button_background_color": "globals/colors?id=gu-accent",
+                                    "button_text_color": "globals/colors?id=gu-surface",
+                                    "typography_typography": "globals/typography?id=gu-cta"
+                                }
+                            },
+                            "elements": []
+                        },
+                        {
+                            "id": "f404b007",
+                            "elType": "widget",
+                            "widgetType": "button",
+                            "settings": {
+                                "_title": "Button — Programări",
+                                "text": "Solicită o programare",
+                                "link": {
+                                    "url": "/programari/",
+                                    "is_external": "",
+                                    "nofollow": "",
+                                    "custom_attributes": ""
+                                },
+                                "button_background_color": "transparent",
+                                "button_text_color": "#4D7A70",
+                                "button_border_border": "solid",
+                                "button_border_width": {
+                                    "unit": "px",
+                                    "top": "1",
+                                    "right": "1",
+                                    "bottom": "1",
+                                    "left": "1",
+                                    "isLinked": true
+                                },
+                                "button_border_color": "#4D7A70",
+                                "button_padding": {
+                                    "unit": "px",
+                                    "top": "12",
+                                    "right": "28",
+                                    "bottom": "12",
+                                    "left": "28",
+                                    "isLinked": false
+                                },
+                                "button_border_radius": {
+                                    "unit": "px",
+                                    "top": "4",
+                                    "right": "4",
+                                    "bottom": "4",
+                                    "left": "4",
+                                    "isLinked": true
+                                },
+                                "__globals__": {
+                                    "button_text_color": "globals/colors?id=gu-accent",
+                                    "button_border_color": "globals/colors?id=gu-accent",
+                                    "typography_typography": "globals/typography?id=gu-cta"
+                                }
+                            },
+                            "elements": []
+                        }
+                    ]
+                }
+            ]
+        }
+    ],
+    "export_date": "2026-06-30",
+    "source": "georgeungureanu.doctor — Sprint 5.5 full export"
+}
