@@ -3,7 +3,7 @@
  * Plugin Name:  GU Design System
  * Plugin URI:   https://georgeungureanu.doctor
  * Description:  Loads the approved Direction B+ (Warm Academic Medicine) design system for georgeungureanu.doctor. Enqueues Google Fonts (Lora + Inter), CSS custom properties (color, typography, spacing, layout, motion tokens), and utility classes. Safe to activate/deactivate — removes everything on deactivation. Does not modify Elementor database settings, does not create pages or templates, and does not depend on Elementor Pro APIs.
- * Version:      1.2.0
+ * Version:      1.3.0
  * Author:       georgeungureanu.doctor
  * License:      Private — All rights reserved
  * Text Domain:  gu-design-system
@@ -16,7 +16,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Prevent direct file access.
 }
 
-define( 'GU_DESIGN_SYSTEM_VERSION', '1.2.0' );
+define( 'GU_DESIGN_SYSTEM_VERSION', '1.3.0' );
 define( 'GU_DESIGN_SYSTEM_URL', plugin_dir_url( __FILE__ ) );
 
 
@@ -77,6 +77,24 @@ function gu_design_system_enqueue_styles() {
 	);
 }
 add_action( 'wp_enqueue_scripts', 'gu_design_system_enqueue_styles' );
+
+function gu_design_system_enqueue_scripts() {
+	wp_enqueue_script(
+		'gu-header',
+		GU_DESIGN_SYSTEM_URL . 'assets/js/gu-header.js',
+		[],
+		GU_DESIGN_SYSTEM_VERSION,
+		true
+	);
+	wp_enqueue_script(
+		'gu-animations',
+		GU_DESIGN_SYSTEM_URL . 'assets/js/gu-animations.js',
+		[],
+		GU_DESIGN_SYSTEM_VERSION,
+		true
+	);
+}
+add_action( 'wp_enqueue_scripts', 'gu_design_system_enqueue_scripts' );
 
 
 // ─────────────────────────────────────────────────────────────
@@ -275,6 +293,23 @@ add_shortcode( 'gu_field', function ( $atts ) {
 	return wp_kses_post( (string) $value );
 } );
 
+// Shared helper: empty-state block shown on archive pages with < 3 items.
+function gu_archive_empty_state(): string {
+	$icon = '<svg width="40" height="40" viewBox="0 0 24 24" fill="none"'
+		. ' stroke="#4D7A70" stroke-width="1.5" stroke-linecap="round"'
+		. ' stroke-linejoin="round" aria-hidden="true">'
+		. '<circle cx="12" cy="12" r="10"/>'
+		. '<polyline points="12 6 12 12 16 14"/>'
+		. '</svg>';
+	return '<div class="gu-archive-empty-state">'
+		. $icon
+		. '<h3 class="gu-archive-empty-state__heading">Conținut în curs de actualizare</h3>'
+		. '<p class="gu-archive-empty-state__text">Noi resurse pentru pacienți vor fi adăugate periodic. Urmăriți această secțiune.</p>'
+		. '<a class="gu-btn gu-btn--accent gu-btn--sm"'
+		. ' href="' . esc_url( home_url( '/programari/' ) ) . '">Programează o consultație</a>'
+		. '</div>';
+}
+
 // [gu_afectiuni_archive] — card grid of all published afectiuni.
 // Used in the Elementor archive template.
 add_shortcode( 'gu_afectiuni_archive', function () {
@@ -291,7 +326,7 @@ add_shortcode( 'gu_afectiuni_archive', function () {
 	if ( ! $query->have_posts() ) {
 		return '<p>Nu există afecțiuni publicate.</p>';
 	}
-	$out = '<div class="gu-afectiuni-grid" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:24px;">';
+	$out = '<div class="gu-afectiuni-grid" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:24px;">';
 	while ( $query->have_posts() ) {
 		$query->the_post();
 		$summary = function_exists( 'get_field' ) ? wp_strip_all_tags( (string) get_field( 'short_summary' ) ) : get_the_excerpt();
@@ -303,6 +338,9 @@ add_shortcode( 'gu_afectiuni_archive', function () {
 	}
 	wp_reset_postdata();
 	$out .= '</div>';
+	if ( $query->found_posts < 3 ) {
+		$out .= gu_archive_empty_state();
+	}
 	return $out;
 } );
 
@@ -322,7 +360,7 @@ add_shortcode( 'gu_interventii_archive', function () {
 	if ( ! $query->have_posts() ) {
 		return '<p>Nu există intervenții publicate.</p>';
 	}
-	$out = '<div class="gu-interventii-grid" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:24px;">';
+	$out = '<div class="gu-interventii-grid" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:24px;">';
 	while ( $query->have_posts() ) {
 		$query->the_post();
 		$summary = function_exists( 'get_field' ) ? wp_strip_all_tags( (string) get_field( 'short_summary' ) ) : get_the_excerpt();
@@ -334,6 +372,9 @@ add_shortcode( 'gu_interventii_archive', function () {
 	}
 	wp_reset_postdata();
 	$out .= '</div>';
+	if ( $query->found_posts < 3 ) {
+		$out .= gu_archive_empty_state();
+	}
 	return $out;
 } );
 
@@ -473,6 +514,9 @@ add_shortcode( 'gu_articole_archive', function ( $atts ) {
 	}
 	wp_reset_postdata();
 	$out .= '</div>';
+	if ( $query->found_posts < 3 ) {
+		$out .= gu_archive_empty_state();
+	}
 	return $out;
 } );
 
@@ -731,7 +775,7 @@ add_action( 'wp_head', function () {
 			'@id'         => $post_url . '#breadcrumb',
 			'itemListElement' => [
 				[ '@type' => 'ListItem', 'position' => 1, 'name' => 'Acasă',   'item' => $home_url ],
-				[ '@type' => 'ListItem', 'position' => 2, 'name' => 'Articole', 'item' => $archive_url ],
+				[ '@type' => 'ListItem', 'position' => 2, 'name' => 'Sfatul Neurochirurgului', 'item' => $archive_url ],
 				[ '@type' => 'ListItem', 'position' => 3, 'name' => $title ],
 			],
 		],
@@ -848,5 +892,585 @@ add_shortcode( 'gu_articles_for_post', function () {
 	}
 	wp_reset_postdata();
 	$out .= '</div>';
+	return $out;
+} );
+
+
+// ─────────────────────────────────────────────────────────────
+// 10. SPRINT 8 — ABOUT PAGE (/despre/)
+// ─────────────────────────────────────────────────────────────
+
+// ── 10a. Utilities ────────────────────────────────────────────
+
+// Add body class so CSS can target the page without hardcoding the ID.
+add_filter( 'body_class', function ( array $classes ): array {
+	if ( is_page( 'despre' ) ) { $classes[] = 'page-despre'; }
+	return $classes;
+} );
+
+// Hide the Hello Elementor theme's .page-header H1 above the Elementor content.
+// This is the page title rendered by content-page.php; our own H1 lives in [gu_about_hero].
+add_action( 'wp_head', function () {
+	if ( ! is_page( 'despre' ) ) { return; }
+	echo '<style>.page-despre .page-header { display: none !important; }</style>' . "\n";
+}, 0 );
+
+function gu_get_about_page_id(): int {
+	static $pid = null;
+	if ( null === $pid ) {
+		$page = get_page_by_path( 'despre' );
+		$pid  = $page ? (int) $page->ID : 0;
+	}
+	return $pid;
+}
+
+function gu_get_about_field( string $key ): string {
+	$pid = gu_get_about_page_id();
+	if ( ! $pid || ! function_exists( 'get_field' ) ) { return ''; }
+	$val = get_field( $key, $pid );
+	if ( is_array( $val ) ) { return ''; }
+	return (string) $val;
+}
+
+// ── 10b. SEO head for /despre/ ────────────────────────────────
+
+add_filter( 'pre_get_document_title', function ( string $title ): string {
+	if ( gu_seo_plugin_active() || ! is_page( 'despre' ) ) { return $title; }
+	$seo = gu_get_about_field( 'about_seo_title' );
+	return $seo ? wp_strip_all_tags( $seo ) : $title;
+}, 21 );
+
+add_action( 'wp_head', function () {
+	if ( gu_seo_plugin_active() || ! is_page( 'despre' ) ) { return; }
+	$desc = gu_get_about_field( 'about_seo_description' );
+	if ( empty( trim( $desc ) ) ) { return; }
+	echo '<meta name="description" content="' . esc_attr( mb_substr( wp_strip_all_tags( $desc ), 0, 155 ) ) . '">' . "\n";
+}, 2 );
+
+// ── 10c. Physician schema — full enriched node on /despre/ ────
+
+add_action( 'wp_head', function () {
+	if ( ! is_page( 'despre' ) ) { return; }
+	$home_url  = trailingslashit( home_url() );
+	$about_url = $home_url . 'despre/';
+	$phys_id   = $about_url . '#physician';
+	$years     = (int) gu_get_about_field( 'about_years_experience' );
+	$hospital  = gu_get_about_field( 'about_hospital' );
+	$lang_raw  = gu_get_about_field( 'about_languages' ) ?: 'Română';
+	$languages = array_values( array_filter( array_map( 'trim', explode( ',', $lang_raw ) ) ) );
+
+	$desc_parts = [ 'Dr. George Ungureanu este medic primar neurochirurg' ];
+	if ( $years > 0 ) { $desc_parts[] = "cu {$years}+ ani de experiență clinică"; }
+	$desc_parts[] = 'în neurochirurgie spinală și craniană.';
+
+	$physician = [
+		'@type'         => 'Physician',
+		'@id'           => $phys_id,
+		'name'          => 'Dr. George Ungureanu',
+		'jobTitle'      => 'Medic primar neurochirurg',
+		'url'           => $about_url,
+		'description'   => implode( ' ', $desc_parts ),
+		'knowsAbout'    => [ 'Neurosurgery', 'Spine Surgery', 'Brain Surgery', 'Minimally Invasive Neurosurgery' ],
+		'knowsLanguage' => $languages,
+		'worksFor'      => [
+			'@type' => 'MedicalOrganization',
+			'@id'   => $home_url . '#practice',
+			'name'  => $hospital ?: 'Cabinet Neurochirurgie Dr. George Ungureanu',
+			'url'   => $home_url,
+		],
+	];
+
+	$graph = [
+		$physician,
+		[
+			'@type'           => 'BreadcrumbList',
+			'@id'             => $about_url . '#breadcrumb',
+			'itemListElement' => [
+				[ '@type' => 'ListItem', 'position' => 1, 'name' => 'Acasă', 'item' => $home_url ],
+				[ '@type' => 'ListItem', 'position' => 2, 'name' => 'Despre Dr. George Ungureanu' ],
+			],
+		],
+	];
+
+	echo '<script type="application/ld+json">'
+		. wp_json_encode(
+			[ '@context' => 'https://schema.org', '@graph' => $graph ],
+			JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT
+		)
+		. '</script>' . "\n";
+}, 11 );
+
+// ── 10d. Shortcodes ───────────────────────────────────────────
+
+// Hero — photo placeholder + name + badges + CTA.
+// id="physician" on root div resolves schema anchor /despre/#physician.
+add_shortcode( 'gu_about_hero', function () {
+	$tagline  = gu_get_about_field( 'about_tagline' ) ?: '[CLIENT: Tagline de completat]';
+	$years    = (int) gu_get_about_field( 'about_years_experience' );
+	$hospital = gu_get_about_field( 'about_hospital' ) ?: '[CLIENT: Spital / Cabinet]';
+
+	$pid       = gu_get_about_page_id();
+	$photo_arr = ( $pid && function_exists( 'get_field' ) ) ? get_field( 'about_photo', $pid ) : null;
+	if ( is_array( $photo_arr ) && ! empty( $photo_arr['url'] ) ) {
+		$photo_html = '<img src="' . esc_url( $photo_arr['url'] ) . '"'
+			. ' alt="Dr. George Ungureanu - Medic primar neurochirurg"'
+			. ' class="gu-about-hero__photo" width="440" height="540" loading="eager">';
+	} else {
+		$photo_html  = '<div class="gu-about-hero__photo-placeholder" role="img"'
+			. ' aria-label="[CLIENT: PORTRET PROFESIONAL NECESAR]">';
+		$photo_html .= '<svg viewBox="0 0 440 540" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">'
+			. '<rect width="440" height="540" fill="#C8C0B8"/>'
+			. '<circle cx="220" cy="185" r="82" fill="#FDFBF7"/>'
+			. '<ellipse cx="220" cy="490" rx="148" ry="120" fill="#FDFBF7"/>'
+			. '<text x="220" y="345" font-family="Georgia,serif" font-size="11" fill="#6B5E57"'
+			. ' text-anchor="middle">[CLIENT: PORTRET</text>'
+			. '<text x="220" y="362" font-family="Georgia,serif" font-size="11" fill="#6B5E57"'
+			. ' text-anchor="middle">PROFESIONAL NECESAR]</text>'
+			. '</svg>'
+			. '</div>';
+	}
+
+	$years_label = $years > 0 ? ( $years . '+ ani experiență' ) : '[CLIENT: ani experiență]';
+
+	$out  = '<div id="physician" class="gu-about-hero">';
+	$out .= '<div class="gu-about-hero__photo-wrap">' . $photo_html . '</div>';
+	$out .= '<div class="gu-about-hero__content">';
+	$out .= '<h1 class="gu-about-hero__name">Dr. George Ungureanu</h1>';
+	$out .= '<p class="gu-about-hero__title">Medic primar neurochirurg</p>';
+	$out .= '<p class="gu-about-hero__tagline">' . esc_html( $tagline ) . '</p>';
+	$out .= '<ul class="gu-about-hero__badges" aria-label="Informații cheie">';
+	$out .= '<li class="gu-about-hero__badge">' . esc_html( $years_label ) . '</li>';
+	$out .= '<li class="gu-about-hero__badge">Coloana vertebrală &amp; creier</li>';
+	$out .= '<li class="gu-about-hero__badge">' . esc_html( $hospital ) . '</li>';
+	$out .= '</ul>';
+	$out .= '<a class="gu-btn gu-btn--accent" href="' . esc_url( home_url( '/programari/' ) ) . '">Programează o consultație</a>';
+	$out .= '</div></div>';
+	return $out;
+} );
+
+// Credentials strip — 3-4 scannable facts.
+add_shortcode( 'gu_about_credentials_strip', function () {
+	$years    = (int) gu_get_about_field( 'about_years_experience' );
+	$hospital = gu_get_about_field( 'about_hospital' ) ?: '[CLIENT: Spital]';
+	$langs    = gu_get_about_field( 'about_languages' ) ?: 'Română';
+	$y_val    = $years > 0 ? ( $years . '+' ) : '[X]+';
+	$out  = '<div class="gu-credentials-strip" role="list">';
+	$out .= '<div class="gu-credentials-strip__item" role="listitem">'
+		. '<span class="gu-credentials-strip__value">' . esc_html( $y_val ) . '</span>'
+		. '<span class="gu-credentials-strip__label">ani de experiență clinică</span></div>';
+	$out .= '<div class="gu-credentials-strip__item" role="listitem">'
+		. '<span class="gu-credentials-strip__value">Neurochirurg</span>'
+		. '<span class="gu-credentials-strip__label">medic primar specialist</span></div>';
+	$out .= '<div class="gu-credentials-strip__item" role="listitem">'
+		. '<span class="gu-credentials-strip__value">' . esc_html( $hospital ) . '</span>'
+		. '<span class="gu-credentials-strip__label">afiliere clinică</span></div>';
+	if ( mb_strtolower( trim( $langs ), 'UTF-8' ) !== 'română' ) {
+		$out .= '<div class="gu-credentials-strip__item" role="listitem">'
+			. '<span class="gu-credentials-strip__value">' . esc_html( $langs ) . '</span>'
+			. '<span class="gu-credentials-strip__label">limbi de consultație</span></div>';
+	}
+	$out .= '</div>';
+	return $out;
+} );
+
+// Biography.
+add_shortcode( 'gu_about_bio', function () {
+	$bio = gu_get_about_field( 'about_bio' );
+	if ( empty( trim( strip_tags( $bio ) ) ) ) { return ''; }
+	return '<h2 class="gu-about-section-heading">Cine este Dr. George Ungureanu</h2>'
+		. '<div class="gu-about-bio">' . wp_kses_post( $bio ) . '</div>';
+} );
+
+// Philosophy of care — rendered inside dark section.
+add_shortcode( 'gu_about_philosophy', function () {
+	$phil = gu_get_about_field( 'about_philosophy' );
+	if ( empty( trim( strip_tags( $phil ) ) ) ) { return ''; }
+	return '<div class="gu-about-philosophy">'
+		. '<h2 class="gu-about-section-heading gu-about-section-heading--light">Filosofia mea de practică</h2>'
+		. '<div class="gu-about-philosophy__content">' . wp_kses_post( $phil ) . '</div>'
+		. '</div>';
+} );
+
+// Education & Training.
+add_shortcode( 'gu_about_education', function () {
+	$edu = gu_get_about_field( 'about_education' );
+	if ( empty( trim( strip_tags( $edu ) ) ) ) { return ''; }
+	return '<h2 class="gu-about-section-heading">Educație &amp; Formare</h2>'
+		. '<div class="gu-about-education">' . wp_kses_post( $edu ) . '</div>';
+} );
+
+// Clinical Experience.
+add_shortcode( 'gu_about_experience', function () {
+	$exp = gu_get_about_field( 'about_experience' );
+	if ( empty( trim( strip_tags( $exp ) ) ) ) { return ''; }
+	return '<h2 class="gu-about-section-heading">Experiență Clinică</h2>'
+		. '<div class="gu-about-experience">' . wp_kses_post( $exp ) . '</div>';
+} );
+
+// Special Interests — links to conditions/procedures.
+add_shortcode( 'gu_about_interests', function () {
+	$content = gu_get_about_field( 'about_interests' );
+	$out     = '<h2 class="gu-about-section-heading">Domenii de Interes Special</h2>';
+	if ( ! empty( trim( strip_tags( $content ) ) ) ) {
+		return $out . '<div class="gu-about-interests">' . wp_kses_post( $content ) . '</div>';
+	}
+	$items = [
+		[ 'Chirurgie minim invaziva a coloanei', 'Microdiscectomie, laminectomie si proceduri endoscopice lombare si cervicale.', '/interventii/microdiscectomie-lombara/' ],
+		[ 'Patologie discala lombara', 'Hernie de disc, stenoza de canal spinal si instabilitate vertebrala lombara.', '/afectiuni/hernie-de-disc-lombara/' ],
+		[ 'Neurochirurgie craniana', '[CLIENT: Descriere domeniu de completat dupa revizuire.]', '/afectiuni/' ],
+	];
+	$out .= '<div class="gu-interests-grid">';
+	foreach ( $items as [ $title, $desc, $url ] ) {
+		$out .= '<div class="gu-interest-card">'
+			. '<h3 class="gu-interest-card__title">' . esc_html( $title ) . '</h3>'
+			. '<p class="gu-interest-card__desc">' . esc_html( $desc ) . '</p>'
+			. '<a class="gu-interest-card__link" href="' . esc_url( home_url( $url ) ) . '">Aflați mai multe</a>'
+			. '</div>';
+	}
+	$out .= '</div>';
+	return $out;
+} );
+
+// Research & Publications — CONDITIONAL: self-contained block or empty string.
+add_shortcode( 'gu_about_research', function () {
+	$content = gu_get_about_field( 'about_research' );
+	if ( empty( trim( strip_tags( $content ) ) ) ) { return ''; }
+	return '<div class="gu-about-conditional gu-about-conditional--warm">'
+		. '<div class="gu-about-conditional__inner">'
+		. '<h2 class="gu-about-section-heading">Cercetare &amp; Publicații</h2>'
+		. '<div class="gu-about-research">' . wp_kses_post( $content ) . '</div>'
+		. '</div></div>';
+} );
+
+// Teaching & Academic.
+add_shortcode( 'gu_about_teaching', function () {
+	$content = gu_get_about_field( 'about_teaching' );
+	if ( empty( trim( strip_tags( $content ) ) ) ) { return ''; }
+	return '<h2 class="gu-about-section-heading">Activitate Didactică</h2>'
+		. '<div class="gu-about-teaching">' . wp_kses_post( $content ) . '</div>';
+} );
+
+// Professional Memberships.
+add_shortcode( 'gu_about_memberships', function () {
+	$content = gu_get_about_field( 'about_memberships' );
+	if ( empty( trim( strip_tags( $content ) ) ) ) { return ''; }
+	return '<h2 class="gu-about-section-heading">Afilieri Profesionale</h2>'
+		. '<div class="gu-about-memberships">' . wp_kses_post( $content ) . '</div>';
+} );
+
+// Media Appearances — CONDITIONAL: self-contained block or empty string.
+add_shortcode( 'gu_about_media', function () {
+	$content = gu_get_about_field( 'about_media' );
+	if ( empty( trim( strip_tags( $content ) ) ) ) { return ''; }
+	return '<div class="gu-about-conditional gu-about-conditional--light">'
+		. '<div class="gu-about-conditional__inner">'
+		. '<h2 class="gu-about-section-heading">Apariții în Media</h2>'
+		. '<div class="gu-about-media">' . wp_kses_post( $content ) . '</div>'
+		. '</div></div>';
+} );
+
+// CTA at bottom of /despre/ page.
+add_shortcode( 'gu_about_cta', function () {
+	return '<div class="gu-about-cta">'
+		. '<h2 class="gu-about-cta__heading">Vorbiți cu Dr. George Ungureanu</h2>'
+		. '<p class="gu-about-cta__text">O consultație vă oferă o evaluare individualizată a simptomelor dumneavoastră și o discuție deschisă despre toate opțiunile de tratament disponibile.</p>'
+		. '<a class="gu-btn gu-btn--light" href="' . esc_url( home_url( '/programari/' ) ) . '">Programează o consultație</a>'
+		. '</div>';
+} );
+
+
+// ─────────────────────────────────────────────────────────────
+// 11. CUSTOM HEADER + NAVIGATION
+// ─────────────────────────────────────────────────────────────
+
+/**
+ * Determine whether a nav URL matches the current request.
+ *
+ * Matches front page exactly; matches all other URLs as a path prefix so that
+ * e.g. /afectiuni/ stays active on /afectiuni/hernie-de-disc-lombara/.
+ */
+function gu_nav_is_active( string $url ): bool {
+	if ( trailingslashit( $url ) === trailingslashit( home_url( '/' ) ) ) {
+		return is_front_page();
+	}
+	$nav_path  = rtrim( (string) parse_url( $url, PHP_URL_PATH ), '/' );
+	$curr_path = rtrim( (string) parse_url( $_SERVER['REQUEST_URI'] ?? '/', PHP_URL_PATH ), '/' );
+	return 0 === strpos( $curr_path . '/', $nav_path . '/' );
+}
+
+/**
+ * Render the custom site header and mobile drawer into the page.
+ *
+ * Hooked to wp_body_open (priority 1) so it appears before Elementor renders
+ * its header location. The Elementor header is hidden via CSS.
+ */
+function gu_render_header(): void {
+	$nav_items = [
+		'Acasă'                    => home_url( '/' ),
+		'Afecțiuni'                => home_url( '/afectiuni/' ),
+		'Intervenții'              => home_url( '/interventii/' ),
+		'Sfatul Neurochirurgului'  => home_url( '/articole/' ),
+		'Recomandări'              => home_url( '/recomandari/' ),
+		'Despre'                   => home_url( '/despre/' ),
+	];
+	$cta_url = home_url( '/programari/' );
+	?>
+	<header class="gu-header" id="gu-header" role="banner">
+		<div class="gu-header__inner">
+
+			<a class="gu-header__logo"
+			   href="<?php echo esc_url( home_url( '/' ) ); ?>"
+			   aria-label="Dr. George Ungureanu — Pagina principală">
+				<span class="gu-header__logo-name">Dr. George Ungureanu</span>
+				<span class="gu-header__logo-title">Neurochirurg</span>
+			</a>
+
+			<nav class="gu-header__nav" aria-label="Navigare principală">
+				<ul class="gu-header__nav-list" role="list">
+					<?php foreach ( $nav_items as $label => $url ) : ?>
+					<li class="gu-header__nav-item">
+						<a class="gu-header__nav-link<?php echo gu_nav_is_active( $url ) ? ' is-active' : ''; ?>"
+						   href="<?php echo esc_url( $url ); ?>">
+							<?php echo esc_html( $label ); ?>
+						</a>
+					</li>
+					<?php endforeach; ?>
+				</ul>
+			</nav>
+
+			<div class="gu-header__actions">
+				<a class="gu-btn gu-btn--accent gu-header__cta"
+				   href="<?php echo esc_url( $cta_url ); ?>">
+					Programează o consultație
+				</a>
+				<button class="gu-header__hamburger"
+				        type="button"
+				        aria-expanded="false"
+				        aria-controls="gu-mobile-drawer"
+				        aria-label="Deschide meniul de navigare">
+					<span class="gu-header__bar" aria-hidden="true"></span>
+					<span class="gu-header__bar" aria-hidden="true"></span>
+					<span class="gu-header__bar" aria-hidden="true"></span>
+				</button>
+			</div>
+
+		</div>
+	</header>
+
+	<div class="gu-mobile-drawer"
+	     id="gu-mobile-drawer"
+	     aria-hidden="true"
+	     role="dialog"
+	     aria-modal="true"
+	     aria-label="Meniu de navigare">
+
+		<div class="gu-mobile-drawer__backdrop" id="gu-drawer-backdrop"></div>
+
+		<div class="gu-mobile-drawer__panel">
+			<button class="gu-mobile-drawer__close"
+			        type="button"
+			        id="gu-drawer-close"
+			        aria-label="Închide meniul">
+				<svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+				     stroke="currentColor" stroke-width="1.5"
+				     stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+					<line x1="18" y1="6" x2="6" y2="18"/>
+					<line x1="6" y1="6" x2="18" y2="18"/>
+				</svg>
+			</button>
+
+			<nav aria-label="Navigare mobilă">
+				<ul class="gu-mobile-drawer__nav" role="list">
+					<?php foreach ( $nav_items as $label => $url ) : ?>
+					<li>
+						<a class="gu-mobile-drawer__link"
+						   href="<?php echo esc_url( $url ); ?>">
+							<?php echo esc_html( $label ); ?>
+						</a>
+					</li>
+					<?php endforeach; ?>
+				</ul>
+			</nav>
+
+			<a class="gu-btn gu-btn--accent gu-mobile-drawer__cta"
+			   href="<?php echo esc_url( $cta_url ); ?>">
+				Programează o consultație
+			</a>
+		</div>
+
+	</div>
+	<?php
+}
+add_action( 'wp_body_open', 'gu_render_header', 1 );
+
+
+// ─────────────────────────────────────────────────────────────
+// 12. RECOMANDĂRI PAGE (/recomandari/)
+// Trust & professional validation pillar.
+// Philosophy: colleague recommendations first, patient
+// testimonials second, no star ratings, no carousels.
+// ─────────────────────────────────────────────────────────────
+
+add_filter( 'body_class', function ( array $classes ): array {
+	if ( is_page( 'recomandari' ) ) {
+		$classes[] = 'page-recomandari';
+	}
+	return $classes;
+} );
+
+add_shortcode( 'gu_recomandari_page', function (): string {
+
+	$programari_url = esc_url( home_url( '/programari/' ) );
+
+	// ── Shared inline style strings ───────────────────────────
+	$s_section_white  = 'background:#FFFFFF;border-bottom:1px solid rgba(0,0,0,.06);';
+	$s_section_canvas = 'background:#F5F5F7;border-bottom:1px solid rgba(0,0,0,.06);';
+	$s_inner_wide     = 'max-width:900px;margin:0 auto;padding:96px 32px;';
+	$s_inner_narrow   = 'max-width:720px;margin:0 auto;padding:96px 32px;text-align:center;';
+	$s_overline       = 'font:600 11px/1 Inter,system-ui,sans-serif;letter-spacing:.1em;text-transform:uppercase;color:#3D6B5E;margin:0 0 14px;';
+	$s_h1             = 'font:700 clamp(42px,4.8vw,64px)/1.1 Lora,Georgia,serif;color:#1D1D1F;letter-spacing:-.025em;margin:0 0 20px;';
+	$s_h2             = 'font:700 clamp(28px,3vw,42px)/1.15 Lora,Georgia,serif;color:#1D1D1F;letter-spacing:-.02em;margin:0 0 16px;';
+	$s_lead           = 'font:400 20px/1.7 Inter,system-ui,sans-serif;color:#6E6E73;max-width:600px;margin:0 0 32px;';
+	$s_lead_center    = $s_lead . 'margin-left:auto;margin-right:auto;';
+	$s_body           = 'font:400 17px/1.75 Inter,system-ui,sans-serif;color:#424245;margin:0 0 20px;';
+	$s_note           = 'font:400 14px/1.6 Inter,system-ui,sans-serif;color:#6E6E73;border-left:3px solid #3D6B5E;padding-left:14px;margin:32px 0 0;';
+	$s_client_box     = 'background:#FBFBFD;border:1px dashed rgba(61,107,94,.35);border-radius:10px;padding:28px 32px;margin:32px 0 0;font:400 15px/1.65 Inter,system-ui,sans-serif;color:#6E6E73;';
+	$s_card_grid      = 'display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:20px;margin-top:36px;';
+	$s_card           = 'background:#FFFFFF;border-radius:12px;padding:28px 28px 24px;box-shadow:0 1px 4px rgba(0,0,0,.06),0 0 0 1px rgba(0,0,0,.04);';
+	$s_card_role      = 'font:500 13px/1.4 Inter,system-ui,sans-serif;color:#3D6B5E;letter-spacing:.04em;margin:0 0 6px;text-transform:uppercase;font-size:12px;';
+	$s_card_name      = 'font:700 18px/1.3 Lora,Georgia,serif;color:#1D1D1F;margin:0 0 4px;';
+	$s_card_inst      = 'font:400 14px/1.5 Inter,system-ui,sans-serif;color:#6E6E73;margin:0 0 14px;';
+	$s_card_body      = 'font:400 15px/1.7 Inter,system-ui,sans-serif;color:#424245;margin:0;';
+	$s_btn_ink        = 'display:inline-block;background:#1D1D1F;color:#FFFFFF;font:600 16px/1 Inter,system-ui,sans-serif;padding:16px 36px;border-radius:8px;text-decoration:none;transition:background 200ms;';
+	$s_btn_sage       = 'display:inline-block;background:#3D6B5E;color:#FFFFFF;font:600 16px/1 Inter,system-ui,sans-serif;padding:16px 36px;border-radius:8px;text-decoration:none;margin-top:8px;';
+
+	$out = '';
+
+	// ────────────────────────────────────────────────────────
+	// HERO
+	// ────────────────────────────────────────────────────────
+	$out .= '<section style="' . $s_section_white . 'padding-bottom:0;">';
+	$out .= '<div style="' . $s_inner_narrow . 'padding-top:80px;padding-bottom:80px;">';
+	$out .= '<p style="' . $s_overline . '">Trust &amp; Validare Profesională</p>';
+	$out .= '<h1 style="' . $s_h1 . '">Recomandări</h1>';
+	$out .= '<p style="' . $s_lead_center . '">Parteneri medicali și pacienți despre experiența cu Dr. George Ungureanu — fără stele artificiale, fără scoruri.</p>';
+	$out .= '<a href="' . $programari_url . '" style="' . $s_btn_ink . '">Programează o consultație</a>';
+	$out .= '</div>';
+	$out .= '</section>';
+
+	// ────────────────────────────────────────────────────────
+	// SECTION 1 — COLLEAGUE DOCTOR RECOMMENDATIONS
+	// ────────────────────────────────────────────────────────
+	$out .= '<section style="' . $s_section_canvas . '">';
+	$out .= '<div style="' . $s_inner_wide . '">';
+	$out .= '<p style="' . $s_overline . '">Colegi medici</p>';
+	$out .= '<h2 style="' . $s_h2 . '">Recomandări din partea colegilor medici</h2>';
+	$out .= '<p style="' . $s_body . '">O trimitere din partea unui coleg înseamnă că acel medic încredințează proprii pacienți îngrijirilor Dr. George Ungureanu. Este cel mai direct semnal de validare profesională pe care îl poate oferi un medic specialist.</p>';
+
+	// Three placeholder colleague cards
+	$colleague_cards = [
+		[ 'Specialist neurolog', '[CLIENT: Prenume Nume]', '[CLIENT: Spital / Clinică]' ],
+		[ 'Medic ortoped', '[CLIENT: Prenume Nume]', '[CLIENT: Spital / Clinică]' ],
+		[ 'Medic de familie / internist', '[CLIENT: Prenume Nume]', '[CLIENT: Spital / Clinică]' ],
+	];
+	$out .= '<div style="' . $s_card_grid . '">';
+	foreach ( $colleague_cards as [ $role, $name, $institution ] ) {
+		$out .= '<div style="' . $s_card . '">';
+		$out .= '<p style="' . $s_card_role . '">' . esc_html( $role ) . '</p>';
+		$out .= '<p style="' . $s_card_name . '">' . esc_html( $name ) . '</p>';
+		$out .= '<p style="' . $s_card_inst . '">' . esc_html( $institution ) . '</p>';
+		$out .= '<p style="' . $s_card_body . ' font-style:italic;">'
+			. '„[CLIENT: Citat agreat de colegul medic înainte de publicare.]"'
+			. '</p>';
+		$out .= '</div>';
+	}
+	$out .= '</div>';
+
+	// Editorial note on ethics
+	$out .= '<p style="' . $s_note . '">';
+	$out .= 'Fiecare recomandare este publicată cu acordul scris al colegului medic. '
+		. 'Nu sunt afișate recomandări nesolicitate sau generate automat.';
+	$out .= '</p>';
+
+	// Client action required
+	$out .= '<div style="' . $s_client_box . '">';
+	$out .= '<strong style="color:#3D6B5E;">[CLIENT: RECOMMENDATION CONTENT REQUIRED]</strong><br>';
+	$out .= '<br>Pentru fiecare recomandare publicată este necesară:<br>';
+	$out .= '<ul style="margin:10px 0 0 20px;line-height:2;">';
+	$out .= '<li>Acordul scris al colegului medic</li>';
+	$out .= '<li>Verificarea identității și specializării</li>';
+	$out .= '<li>Citatul agreeat și aprobat de medic</li>';
+	$out .= '<li>Afilierea instituțională actuală</li>';
+	$out .= '</ul>';
+	$out .= '</div>';
+
+	$out .= '</div>';
+	$out .= '</section>';
+
+	// ────────────────────────────────────────────────────────
+	// SECTION 2 — PATIENT EXPERIENCES
+	// ────────────────────────────────────────────────────────
+	$out .= '<section style="' . $s_section_white . '">';
+	$out .= '<div style="' . $s_inner_wide . '">';
+	$out .= '<p style="' . $s_overline . '">Pacienți</p>';
+	$out .= '<h2 style="' . $s_h2 . '">Experiențele pacienților</h2>';
+	$out .= '<p style="' . $s_body . '">Relatări personale ale pacienților care au ales Dr. George Ungureanu pentru evaluare și tratament neurochirurgical.</p>';
+
+	// Philosophy statement — no stars, no scores
+	$out .= '<p style="background:#F5F5F7;border-radius:8px;padding:20px 24px;'
+		. 'font:400 15px/1.65 Inter,system-ui,sans-serif;color:#424245;margin:0 0 32px;">';
+	$out .= 'Nu afișăm scoruri numerice sau stele. Fiecare experiență de îngrijire medicală este individuală '
+		. 'și nu poate fi redusă la o cifră. Relatările de mai jos sunt partajate cu acordul explicit al pacienților.';
+	$out .= '</p>';
+
+	// Client placeholder
+	$out .= '<div style="' . $s_client_box . '">';
+	$out .= '<strong style="color:#3D6B5E;">[CLIENT: PATIENT TESTIMONIAL WORKFLOW REQUIRED]</strong><br>';
+	$out .= '<br>Format recomandat pentru fiecare testimonial:<br>';
+	$out .= '<ul style="margin:10px 0 0 20px;line-height:2;">';
+	$out .= '<li>Prenume (sau inițiale) + procedura efectuată + anul</li>';
+	$out .= '<li>Relatare liberă în 2–4 propoziții, în cuvintele pacientului</li>';
+	$out .= '<li>Fără: stele, scoruri, afirmații medicale sau de vindecare garantată</li>';
+	$out .= '<li>Cu: acordul scris al pacientului sau anonimizare completă</li>';
+	$out .= '</ul>';
+	$out .= '<br>Sursă recomandată: formular intern de feedback trimis post-consultație / post-intervenție.';
+	$out .= '</div>';
+
+	$out .= '</div>';
+	$out .= '</section>';
+
+	// ────────────────────────────────────────────────────────
+	// SECTION 3 — SHARE YOUR EXPERIENCE
+	// ────────────────────────────────────────────────────────
+	$out .= '<section style="' . $s_section_canvas . '">';
+	$out .= '<div style="' . $s_inner_narrow . '">';
+	$out .= '<p style="' . $s_overline . '">Contribuiți</p>';
+	$out .= '<h2 style="' . $s_h2 . '">Împărtășiți experiența dumneavoastră</h2>';
+	$out .= '<p style="' . $s_lead_center . '">Dacă ați primit îngrijiri de la Dr. George Ungureanu și doriți să vă împărtășiți experiența, vă invităm să ne contactați direct.</p>';
+
+	$out .= '<div style="' . $s_client_box . 'text-align:left;">';
+	$out .= '<strong style="color:#3D6B5E;">[CLIENT: PATIENT TESTIMONIAL WORKFLOW REQUIRED]</strong><br>';
+	$out .= '<br>Opțiuni de implementare:<br>';
+	$out .= '<ul style="margin:10px 0 0 20px;line-height:2;">';
+	$out .= '<li>Formular de contact intern cu câmpuri specifice (recomandată)</li>';
+	$out .= '<li>E-mail dedicat (ex. recomandari@georgeungureanu.doctor)</li>';
+	$out .= '<li>Integrare Google My Business Reviews (cu moderare manuală)</li>';
+	$out .= '</ul>';
+	$out .= '</div>';
+
+	$out .= '</div>';
+	$out .= '</section>';
+
+	// ────────────────────────────────────────────────────────
+	// FINAL CTA
+	// ────────────────────────────────────────────────────────
+	$out .= '<section style="background:#F5F5F7;border-top:1px solid rgba(0,0,0,.06);">';
+	$out .= '<div style="' . $s_inner_narrow . '">';
+	$out .= '<h2 style="' . $s_h2 . '">Programați o consultație</h2>';
+	$out .= '<p style="' . $s_lead_center . 'margin-bottom:32px;">O evaluare individualizată, fără grabă, cu un neurochirurg dedicat pacientului.</p>';
+	$out .= '<a href="' . $programari_url . '" style="' . $s_btn_sage . '">Programează o consultație</a>';
+	$out .= '</div>';
+	$out .= '</section>';
+
 	return $out;
 } );
