@@ -4198,3 +4198,611 @@ body {
     padding-bottom: 60px !important;
   }
 }
+
+/* =====================================================================
+   SECTION 29 — PROGRAMĂRI: CLINIC CARDS, CHECKLIST, FAQ (Sprint 9.9A)
+   Shortcode-rendered components — no Elementor element IDs.
+   ===================================================================== */
+
+/* ── Clinic card grid ─────────────────────────────────────── */
+
+.gu-clinic-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24px;
+  margin-top: 36px;
+}
+
+@media (max-width: 768px) {
+  .gu-clinic-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.gu-clinic-card {
+  background: #FFFFFF;
+  border-radius: 16px;
+  box-shadow: 0 1px 4px rgba(0,0,0,.06), 0 0 0 1px rgba(0,0,0,.04);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.gu-clinic-card__photo {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  background: linear-gradient(135deg, #E8E8ED 0%, #D2D2D7 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.gu-clinic-card__photo span {
+  font: 400 13px/1 Inter, system-ui, sans-serif;
+  color: #86868B;
+  letter-spacing: .01em;
+}
+
+.gu-clinic-card__body {
+  padding: 28px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.gu-clinic-card__city {
+  display: inline-block;
+  background: rgba(61, 107, 94, .10);
+  color: #3D6B5E;
+  font: 600 11px/1 Inter, system-ui, sans-serif;
+  text-transform: uppercase;
+  letter-spacing: .08em;
+  padding: 5px 12px;
+  border-radius: 100px;
+  margin-bottom: 14px;
+  align-self: flex-start;
+}
+
+.gu-clinic-card__name {
+  font: 700 20px/1.25 Lora, Georgia, serif;
+  color: #1D1D1F;
+  margin: 0 0 10px;
+}
+
+.gu-clinic-card__desc {
+  font: 400 15px/1.65 Inter, system-ui, sans-serif;
+  color: #6E6E73;
+  margin: 0 0 24px;
+  flex: 1;
+}
+
+.gu-clinic-card__actions {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+/* ── Booking checklist ────────────────────────────────────── */
+
+.gu-checklist {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.gu-checklist li {
+  position: relative;
+  padding: 16px 0 16px 40px;
+  font: 400 16px/1.5 Inter, system-ui, sans-serif;
+  color: #1D1D1F;
+  border-bottom: 1px solid rgba(0,0,0,.06);
+}
+
+.gu-checklist li:last-child {
+  border-bottom: none;
+}
+
+.gu-checklist li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: rgba(61,107,94,.08);
+  border: 1.5px solid rgba(61,107,94,.30);
+}
+
+.gu-checklist li::after {
+  content: '';
+  position: absolute;
+  left: 8px;
+  top: 50%;
+  transform: translateY(calc(-50% - 1px)) rotate(45deg);
+  width: 7px;
+  height: 12px;
+  border-right: 2px solid #3D6B5E;
+  border-bottom: 2px solid #3D6B5E;
+}
+
+/* ── FAQ accordion ────────────────────────────────────────── */
+
+.gu-faq {
+  border-top: 1px solid rgba(0,0,0,.08);
+}
+
+.gu-faq__item {
+  border-bottom: 1px solid rgba(0,0,0,.08);
+}
+
+.gu-faq__item summary {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  cursor: pointer;
+  list-style: none;
+  padding: 22px 0;
+  font: 600 17px/1.4 Inter, system-ui, sans-serif;
+  color: #1D1D1F;
+  transition: color 150ms ease;
+}
+
+.gu-faq__item summary::-webkit-details-marker {
+  display: none;
+}
+
+.gu-faq__item summary::after {
+  content: '+';
+  font: 300 26px/1 Inter, system-ui, sans-serif;
+  color: #3D6B5E;
+  flex-shrink: 0;
+  transition: transform 250ms ease;
+}
+
+.gu-faq__item[open] > summary {
+  color: #3D6B5E;
+}
+
+.gu-faq__item[open] > summary::after {
+  transform: rotate(45deg);
+}
+
+.gu-faq__answer {
+  padding: 4px 0 28px;
+}
+
+.gu-faq__answer p {
+  font: 400 16px/1.75 Inter, system-ui, sans-serif;
+  color: #424245;
+  margin: 0;
+  max-width: 700px;
+}
+
+/* ── Mobile padding for programari shortcode sections ─────── */
+
+@media (max-width: 480px) {
+  .page-programari section > div {
+    padding-left: 20px !important;
+    padding-right: 20px !important;
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   Section 30 — SFATUL HUB: NAV, FEATURED, GUIDE, MYTH, VIDEO
+   Sprint 9.9C
+   ═══════════════════════════════════════════════════════════════ */
+
+/* ── Hub navigation strip ─────────────────────────────────────── */
+
+.gu-hub-nav {
+  position: sticky;
+  top: 72px;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+  z-index: 90;
+}
+
+.gu-hub-nav__inner {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 0 32px;
+  display: flex;
+  gap: 4px;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+
+.gu-hub-nav__inner::-webkit-scrollbar {
+  display: none;
+}
+
+.gu-hub-nav__pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 12px 16px;
+  font: 500 13px/1 Inter, system-ui, sans-serif;
+  color: #6E6E73;
+  text-decoration: none;
+  border-bottom: 2px solid transparent;
+  white-space: nowrap;
+  transition: color 150ms ease, border-color 150ms ease;
+  flex-shrink: 0;
+}
+
+.gu-hub-nav__pill svg {
+  flex-shrink: 0;
+  color: inherit;
+}
+
+.gu-hub-nav__pill:hover {
+  color: #3D6B5E;
+  border-bottom-color: rgba(61, 107, 94, 0.3);
+}
+
+/* ── Featured article card ─────────────────────────────────────── */
+
+.gu-hub-featured {
+  background: #FFFFFF;
+  border-radius: 16px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.07), 0 0 0 1px rgba(0, 0, 0, 0.04);
+  overflow: hidden;
+  padding: 40px 44px;
+}
+
+.gu-hub-featured__cat {
+  font: 600 11px/1 Inter, system-ui, sans-serif;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #3D6B5E;
+  margin: 0 0 14px;
+}
+
+.gu-hub-featured__title {
+  font: 700 clamp(22px, 2.5vw, 32px)/1.2 Lora, Georgia, serif;
+  color: #1D1D1F;
+  letter-spacing: -0.02em;
+  margin: 0 0 14px;
+  max-width: 680px;
+}
+
+.gu-hub-featured__excerpt {
+  font: 400 16px/1.7 Inter, system-ui, sans-serif;
+  color: #6E6E73;
+  margin: 0 0 24px;
+  max-width: 620px;
+}
+
+.gu-hub-featured__link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font: 600 15px/1 Inter, system-ui, sans-serif;
+  color: #3D6B5E;
+  text-decoration: none;
+  transition: gap 200ms ease;
+}
+
+.gu-hub-featured__link:hover {
+  gap: 12px;
+}
+
+/* ── Guide grid (Prima Consultatie) ───────────────────────────── */
+
+.gu-guide-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  margin-top: 8px;
+}
+
+@media (max-width: 900px) {
+  .gu-guide-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.gu-guide-block {
+  background: #F5F5F7;
+  border-radius: 14px;
+  padding: 28px 28px 24px;
+}
+
+.gu-guide-block__over {
+  font: 700 11px/1 Inter, system-ui, sans-serif;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #3D6B5E;
+  margin: 0 0 10px;
+}
+
+.gu-guide-block__title {
+  font: 700 18px/1.25 Lora, Georgia, serif;
+  color: #1D1D1F;
+  margin: 0 0 18px;
+}
+
+.gu-guide-block__list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.gu-guide-block__list li {
+  position: relative;
+  padding: 11px 0 11px 28px;
+  font: 400 15px/1.5 Inter, system-ui, sans-serif;
+  color: #424245;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+.gu-guide-block__list li:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.gu-guide-block__list li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 14px;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: rgba(61, 107, 94, 0.12);
+}
+
+.gu-guide-block__list li::after {
+  content: '';
+  position: absolute;
+  left: 5px;
+  top: 17px;
+  width: 7px;
+  height: 4px;
+  border-left: 1.5px solid #3D6B5E;
+  border-bottom: 1.5px solid #3D6B5E;
+  transform: rotate(-45deg);
+}
+
+.gu-guide-block__list--questions li::before,
+.gu-guide-block__list--questions li::after {
+  display: none;
+}
+
+.gu-guide-block__list--questions li {
+  padding-left: 0;
+  font-style: italic;
+  color: #1D1D1F;
+}
+
+.gu-guide-block__note {
+  font: 400 13px/1.6 Inter, system-ui, sans-serif;
+  color: #6E6E73;
+  border-left: 2px solid #3D6B5E;
+  padding-left: 12px;
+  margin: 16px 0 0;
+}
+
+/* ── Recovery grid ────────────────────────────────────────────── */
+
+.gu-recovery-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 20px;
+}
+
+.gu-recovery-card {
+  background: #FFFFFF;
+  border-radius: 14px;
+  padding: 28px 28px 24px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.06), 0 0 0 1px rgba(0, 0, 0, 0.04);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.gu-recovery-card__title {
+  font: 700 17px/1.3 Lora, Georgia, serif;
+  color: #1D1D1F;
+  margin: 0;
+}
+
+.gu-recovery-card__duration {
+  font: 600 12px/1 Inter, system-ui, sans-serif;
+  letter-spacing: 0.06em;
+  color: #3D6B5E;
+  margin: 0;
+}
+
+.gu-recovery-card__desc {
+  font: 400 14px/1.65 Inter, system-ui, sans-serif;
+  color: #6E6E73;
+  margin: 0;
+  flex-grow: 1;
+}
+
+/* ── Myth / truth cards ───────────────────────────────────────── */
+
+.gu-myth-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.gu-myth-pair {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+@media (max-width: 640px) {
+  .gu-myth-pair {
+    grid-template-columns: 1fr;
+  }
+}
+
+.gu-myth-card,
+.gu-truth-card {
+  border-radius: 12px;
+  padding: 24px 26px;
+}
+
+.gu-myth-card {
+  background: #FFF8F0;
+  border-left: 4px solid #D4861A;
+}
+
+.gu-truth-card {
+  background: #F0F6F4;
+  border-left: 4px solid #3D6B5E;
+}
+
+.gu-myth-card__label,
+.gu-truth-card__label {
+  font: 700 11px/1 Inter, system-ui, sans-serif;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin: 0 0 10px;
+}
+
+.gu-myth-card__label {
+  color: #A66010;
+}
+
+.gu-truth-card__label {
+  color: #2D5048;
+}
+
+.gu-myth-card__text,
+.gu-truth-card__text {
+  font: 400 15px/1.65 Inter, system-ui, sans-serif;
+  margin: 0;
+}
+
+.gu-myth-card__text {
+  color: #4A3520;
+  font-style: italic;
+}
+
+.gu-truth-card__text {
+  color: #1D1D1F;
+}
+
+/* ── Video grid ───────────────────────────────────────────────── */
+
+.gu-video-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 20px;
+}
+
+.gu-video-card {
+  background: #FFFFFF;
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.06), 0 0 0 1px rgba(0, 0, 0, 0.04);
+  text-decoration: none;
+  display: flex;
+  flex-direction: column;
+  transition: box-shadow 200ms ease, transform 200ms ease;
+}
+
+.gu-video-card:hover {
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1), 0 0 0 1px rgba(0, 0, 0, 0.06);
+  transform: translateY(-2px);
+}
+
+.gu-video-card__thumb {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  background: linear-gradient(135deg, #2D2D30 0%, #1A1A1C 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.gu-video-card__play {
+  width: 44px;
+  height: 44px;
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #FFFFFF;
+}
+
+.gu-video-card__duration {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  background: rgba(0, 0, 0, 0.75);
+  color: #FFFFFF;
+  font: 600 12px/1 Inter, system-ui, sans-serif;
+  padding: 4px 8px;
+  border-radius: 4px;
+}
+
+.gu-video-card__body {
+  padding: 20px 22px 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  flex-grow: 1;
+}
+
+.gu-video-card__cat {
+  font: 600 11px/1 Inter, system-ui, sans-serif;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #3D6B5E;
+  margin: 0;
+}
+
+.gu-video-card__title {
+  font: 700 16px/1.3 Lora, Georgia, serif;
+  color: #1D1D1F;
+  margin: 0;
+}
+
+.gu-video-card__desc {
+  font: 400 14px/1.6 Inter, system-ui, sans-serif;
+  color: #6E6E73;
+  margin: 0;
+  flex-grow: 1;
+}
+
+.gu-video-card__link {
+  font: 600 13px/1 Inter, system-ui, sans-serif;
+  color: #3D6B5E;
+  margin-top: 4px;
+}
+
+/* ── Mobile padding for hub sections ─────────────────────────── */
+
+@media (max-width: 480px) {
+  .page-sfatul-hub section > div {
+    padding-left: 20px !important;
+    padding-right: 20px !important;
+  }
+
+  .gu-hub-featured {
+    padding: 28px 24px;
+  }
+
+  .gu-guide-block {
+    padding: 22px 20px;
+  }
+
+  .gu-hub-nav__inner {
+    padding: 0 16px;
+  }
+}

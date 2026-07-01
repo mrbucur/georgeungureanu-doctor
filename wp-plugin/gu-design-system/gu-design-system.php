@@ -1305,6 +1305,232 @@ add_action( 'wp_body_open', 'gu_render_header', 1 );
 
 
 // ─────────────────────────────────────────────────────────────
+// 13. PROGRAMĂRI PAGE (/programari/) — Sprint 9.9A
+// Simplified booking experience. Removes credential metrics
+// (years/interventions/training) that belong on /despre/.
+// Adds city-grouped clinic cards, online consultation section.
+// Preserves: what to bring, FAQ, final CTA.
+// ─────────────────────────────────────────────────────────────
+
+add_filter( 'body_class', function ( array $classes ): array {
+	if ( is_page( 'programari' ) ) {
+		$classes[] = 'page-programari';
+	}
+	return $classes;
+} );
+
+add_shortcode( 'gu_programari_page', function (): string {
+
+	// ── Shared inline style strings ──────────────────────────
+	$s_section_white  = 'background:#FFFFFF;border-bottom:1px solid rgba(0,0,0,.06);';
+	$s_section_canvas = 'background:#F5F5F7;border-bottom:1px solid rgba(0,0,0,.06);';
+	$s_inner_wide     = 'max-width:900px;margin:0 auto;padding:96px 32px;';
+	$s_inner_narrow   = 'max-width:720px;margin:0 auto;padding:96px 32px;';
+	$s_inner_narrow_c = 'max-width:720px;margin:0 auto;padding:96px 32px;text-align:center;';
+	$s_overline       = 'font:600 11px/1 Inter,system-ui,sans-serif;letter-spacing:.1em;text-transform:uppercase;color:#3D6B5E;margin:0 0 14px;';
+	$s_h1             = 'font:700 clamp(42px,4.8vw,64px)/1.1 Lora,Georgia,serif;color:#1D1D1F;letter-spacing:-.025em;margin:0 0 20px;';
+	$s_h2             = 'font:700 clamp(28px,3vw,42px)/1.15 Lora,Georgia,serif;color:#1D1D1F;letter-spacing:-.02em;margin:0 0 16px;';
+	$s_lead           = 'font:400 20px/1.7 Inter,system-ui,sans-serif;color:#6E6E73;max-width:600px;margin:0 0 32px;';
+	$s_body           = 'font:400 17px/1.75 Inter,system-ui,sans-serif;color:#424245;margin:0 0 20px;';
+	$s_note           = 'font:400 14px/1.6 Inter,system-ui,sans-serif;color:#6E6E73;border-left:3px solid #3D6B5E;padding-left:14px;margin:32px 0 0;';
+	$s_client_box     = 'background:#FBFBFD;border:1px dashed rgba(61,107,94,.35);border-radius:10px;padding:28px 32px;margin:32px 0 0;font:400 15px/1.65 Inter,system-ui,sans-serif;color:#6E6E73;';
+	$s_city_badge     = 'display:inline-block;background:rgba(61,107,94,.1);color:#3D6B5E;font:600 12px/1 Inter,system-ui,sans-serif;padding:6px 14px;border-radius:100px;letter-spacing:.04em;';
+	$s_btn_sage       = 'display:inline-block;background:#3D6B5E;color:#FFFFFF;font:600 16px/1 Inter,system-ui,sans-serif;padding:16px 36px;border-radius:8px;text-decoration:none;';
+	$s_btn_sage_sm    = 'display:inline-block;background:#3D6B5E;color:#FFFFFF;font:600 14px/1 Inter,system-ui,sans-serif;padding:12px 22px;border-radius:8px;text-decoration:none;';
+	$s_btn_outline_sm = 'display:inline-block;background:transparent;color:#3D6B5E;border:1.5px solid #3D6B5E;font:600 14px/1 Inter,system-ui,sans-serif;padding:11px 22px;border-radius:8px;text-decoration:none;';
+
+	$out = '';
+
+	// ──────────────────────────────────────────────────────
+	// SECTION 1 — HERO
+	// ──────────────────────────────────────────────────────
+	$out .= '<section style="' . $s_section_white . '">';
+	$out .= '<div style="' . $s_inner_narrow . 'padding-top:80px;padding-bottom:80px;">';
+	$out .= '<p style="' . $s_overline . '">Consultații Neurochirurgicale</p>';
+	$out .= '<h1 style="' . $s_h1 . '">Programați o consultație</h1>';
+	$out .= '<p style="' . $s_lead . '">O evaluare corectă este primul pas. Nu trebuie să aveți un diagnostic — doar să vă descrieți problema. Prima consultație durează 45–60 de minute.</p>';
+	$out .= '<div style="display:flex;gap:10px;flex-wrap:wrap;">';
+	$out .= '<span style="' . $s_city_badge . '">Cluj-Napoca</span>';
+	$out .= '<span style="' . $s_city_badge . '">Baia Mare</span>';
+	$out .= '</div>';
+	$out .= '</div>';
+	$out .= '</section>';
+
+	// ──────────────────────────────────────────────────────
+	// SECTION 2 — CLINIC CARDS
+	// ──────────────────────────────────────────────────────
+	$out .= '<section id="clinici" style="' . $s_section_canvas . '">';
+	$out .= '<div style="' . $s_inner_wide . '">';
+	$out .= '<p style="' . $s_overline . '">Locații</p>';
+	$out .= '<h2 style="' . $s_h2 . '">Unde consultă Dr. George Ungureanu</h2>';
+	$out .= '<p style="' . $s_lead . '">Consultații disponibile în două locații, cu programare directă la fiecare clinică.</p>';
+
+	$clinics = [
+		[
+			'city'        => 'Cluj-Napoca',
+			'name'        => '[CLIENT: Denumire clinică / spital]',
+			'description' => '[CLIENT: Scurtă descriere a clinicii și tipul de consultații disponibile la această locație — ex: Consultații neurochirurgicale în regim privat, luni–vineri]',
+			'booking_url' => '#',
+			'map_url'     => '#',
+		],
+		[
+			'city'        => 'Baia Mare',
+			'name'        => '[CLIENT: Denumire clinică / spital]',
+			'description' => '[CLIENT: Scurtă descriere a clinicii și tipul de consultații disponibile la această locație — ex: Consultații neurochirurgicale, program la cerere]',
+			'booking_url' => '#',
+			'map_url'     => '#',
+		],
+	];
+
+	$out .= '<div class="gu-clinic-grid">';
+	foreach ( $clinics as $clinic ) {
+		$out .= '<div class="gu-clinic-card">';
+
+		// Photo placeholder
+		$out .= '<div class="gu-clinic-card__photo">';
+		$out .= '<span>Fotografie clinică — în curând</span>';
+		$out .= '</div>';
+
+		// Card body
+		$out .= '<div class="gu-clinic-card__body">';
+		$out .= '<span class="gu-clinic-card__city">' . esc_html( $clinic['city'] ) . '</span>';
+		$out .= '<h3 class="gu-clinic-card__name">' . esc_html( $clinic['name'] ) . '</h3>';
+		$out .= '<p class="gu-clinic-card__desc">' . esc_html( $clinic['description'] ) . '</p>';
+		$out .= '<div class="gu-clinic-card__actions">';
+		$out .= '<a href="' . esc_url( $clinic['map_url'] ) . '" style="' . $s_btn_outline_sm . '">[CLIENT: Hartă →]</a>';
+		$out .= '<a href="' . esc_url( $clinic['booking_url'] ) . '" style="' . $s_btn_sage_sm . '">[CLIENT: Programează]</a>';
+		$out .= '</div>';
+		$out .= '</div>'; // .gu-clinic-card__body
+
+		$out .= '</div>'; // .gu-clinic-card
+	}
+	$out .= '</div>'; // .gu-clinic-grid
+
+	$out .= '</div>';
+	$out .= '</section>';
+
+	// ──────────────────────────────────────────────────────
+	// SECTION 3 — ONLINE CONSULTATION
+	// ──────────────────────────────────────────────────────
+	$out .= '<section style="' . $s_section_white . '">';
+	$out .= '<div style="' . $s_inner_wide . '">';
+	$out .= '<p style="' . $s_overline . '">La Distanță</p>';
+	$out .= '<h2 style="' . $s_h2 . '">Consultație Online</h2>';
+	$out .= '<p style="' . $s_body . '">O consultație online permite evaluarea simptomelor, revizuirea investigațiilor imagistice existente și orientarea pacientului — fără deplasare. Este indicată mai ales pentru a doua opinie sau pentru evaluarea preliminară.</p>';
+	$out .= '<p style="' . $s_body . '">Consultația online nu înlocuiește examinarea clinică directă atunci când aceasta este necesară.</p>';
+
+	$out .= '<div style="' . $s_client_box . '">';
+	$out .= '<strong style="color:#3D6B5E;">[CLIENT: DETALII CONSULTAȚIE ONLINE NECESARE]</strong><br><br>';
+	$out .= 'Vă rugăm să confirmați:<br>';
+	$out .= '<ul style="margin:10px 0 0 20px;line-height:2;">';
+	$out .= '<li>Dacă oferiți consultații online și prin ce platformă (Zoom, Teams, alt sistem)</li>';
+	$out .= '<li>Tariful pentru consultația online</li>';
+	$out .= '<li>Modalitatea de programare online (link direct, email, telefon)</li>';
+	$out .= '<li>Ce materiale trebuie trimise înainte de consultație</li>';
+	$out .= '</ul>';
+	$out .= '</div>';
+
+	$out .= '</div>';
+	$out .= '</section>';
+
+	// ──────────────────────────────────────────────────────
+	// SECTION 4 — WHAT TO BRING
+	// ──────────────────────────────────────────────────────
+	$out .= '<section style="' . $s_section_canvas . '">';
+	$out .= '<div style="' . $s_inner_wide . '">';
+	$out .= '<h2 style="' . $s_h2 . '">Ce să aduceți la consultație</h2>';
+
+	$checklist = [
+		'RMN sau CT — pe CD, film sau în format digital (dacă ați efectuat)',
+		'Bilet de trimitere de la medicul de familie sau specialist (opțional)',
+		'Lista medicamentelor curente (denumire, doze)',
+		'Rezultate analize recente (dacă sunt disponibile)',
+		'Buletin sau carte de identitate',
+	];
+
+	$out .= '<ul class="gu-checklist">';
+	foreach ( $checklist as $item ) {
+		$out .= '<li>' . esc_html( $item ) . '</li>';
+	}
+	$out .= '</ul>';
+
+	$out .= '<p style="' . $s_note . '"><strong>Nu aveți toate documentele?</strong> Veniți oricum — consultația inițială se bazează pe evaluarea simptomelor, nu neapărat pe investigații. Le puteți efectua ulterior dacă este necesar.</p>';
+
+	$out .= '</div>';
+	$out .= '</section>';
+
+	// ──────────────────────────────────────────────────────
+	// SECTION 5 — FAQ
+	// ──────────────────────────────────────────────────────
+	$out .= '<section style="' . $s_section_white . '">';
+	$out .= '<div style="' . $s_inner_wide . '">';
+	$out .= '<h2 style="' . $s_h2 . 'margin-bottom:40px;">Întrebări Frecvente</h2>';
+
+	$faqs = [
+		[
+			'q' => 'Am nevoie de o trimitere de la medicul de familie?',
+			'a' => 'Nu este obligatorie. Puteți programa o consultație direct, fără trimitere. Dacă aveți bilet de trimitere, aduceți-l — ajută la documentare. Dacă nu, evaluarea se poate face pe baza simptomelor și a investigațiilor existente.',
+		],
+		[
+			'q' => 'Cât durează o consultație?',
+			'a' => 'O consultație inițială durează în medie 45–60 de minute. O a doua opinie: 30–45 minute. Un control postoperator: 20–30 minute. Aceste durate pot varia în funcție de complexitatea cazului.',
+		],
+		[
+			'q' => 'Pot veni cu un aparținător?',
+			'a' => 'Da, sunteți binevenți să veniți cu un aparținător. De multe ori este util ca un membru al familiei să fie prezent pentru a înțelege împreună diagnosticul și opțiunile de tratament.',
+		],
+		[
+			'q' => 'Ce se întâmplă dacă trebuie să anulez sau reprogramez?',
+			'a' => 'Dacă nu puteți ajunge la programare, vă rugăm să ne anunțați cu cel puțin 24 de ore înainte, telefonic sau prin email. Reprogramarea se face fără costuri suplimentare.',
+		],
+		[
+			'q' => 'Voi fi presat să aleg operația?',
+			'a' => 'Nu. Scopul consultației este să înțelegeți complet situația și să aveți toate informațiile necesare pentru a lua o decizie. Chirurgia este recomandată doar când beneficiile depășesc clar riscurile și când opțiunile conservative au fost epuizate sau nu sunt aplicabile.',
+		],
+		[
+			'q' => 'Cât costă o consultație? Este decontată de CNAS?',
+			'a' => '[CLIENT: Informații tarif consultație și decontare CNAS — ex: Consultația inițială costă X lei. Decontarea CNAS este disponibilă / nu este disponibilă deoarece...]',
+		],
+		[
+			'q' => 'Consultați și pacienți din alte țări?',
+			'a' => '[CLIENT: Confirmare dacă se acceptă pacienți internaționali și detalii specifice — ex: Consultez și pacienți din Republica Moldova, diaspora românească și pacienți internaționali. Consultația se poate organiza online sau la una dintre clinicile partenere.]',
+		],
+	];
+
+	$out .= '<div class="gu-faq">';
+	foreach ( $faqs as $i => $item ) {
+		$out .= '<details class="gu-faq__item"' . ( 0 === $i ? ' open' : '' ) . '>';
+		$out .= '<summary class="gu-faq__question">' . esc_html( $item['q'] ) . '</summary>';
+		$out .= '<div class="gu-faq__answer"><p>' . esc_html( $item['a'] ) . '</p></div>';
+		$out .= '</details>';
+	}
+	$out .= '</div>';
+
+	$out .= '<p style="' . $s_note . '">Aveți o altă întrebare? Scrieți-ne la <a href="mailto:[CLIENT: email]" style="color:#3D6B5E;">[CLIENT: email contact]</a></p>';
+
+	$out .= '</div>';
+	$out .= '</section>';
+
+	// ──────────────────────────────────────────────────────
+	// SECTION 6 — FINAL CTA
+	// ──────────────────────────────────────────────────────
+	$out .= '<section style="background:#F5F5F7;border-top:1px solid rgba(0,0,0,.06);">';
+	$out .= '<div style="' . $s_inner_narrow_c . '">';
+	$out .= '<h2 style="' . $s_h2 . '">Primul pas este cel mai ușor.</h2>';
+	$out .= '<p style="' . $s_lead . 'margin-left:auto;margin-right:auto;margin-bottom:32px;">Alegeți locația potrivită și contactați direct clinica. Fără angajamente, fără presiune.</p>';
+	$out .= '<div style="display:flex;gap:12px;flex-wrap:wrap;justify-content:center;">';
+	$out .= '<a href="#clinici" style="' . $s_btn_sage . '">Alegeți o locație ↑</a>';
+	$out .= '<a href="#" style="' . $s_btn_outline_sm . '">[CLIENT: +40 7XX XXX XXX]</a>';
+	$out .= '</div>';
+	$out .= '<p style="margin-top:20px;font:400 14px/1.6 Inter,system-ui,sans-serif;color:#86868B;">Sau scrieți la <a href="mailto:[CLIENT: email]" style="color:#3D6B5E;">[CLIENT: email contact]</a></p>';
+	$out .= '</div>';
+	$out .= '</section>';
+
+	return $out;
+} );
+
+
+// ─────────────────────────────────────────────────────────────
 // 12. RECOMANDĂRI PAGE (/recomandari/)
 // Trust & professional validation pillar.
 // Philosophy: colleague recommendations first, patient
@@ -1469,6 +1695,427 @@ add_shortcode( 'gu_recomandari_page', function (): string {
 	$out .= '<h2 style="' . $s_h2 . '">Programați o consultație</h2>';
 	$out .= '<p style="' . $s_lead_center . 'margin-bottom:32px;">O evaluare individualizată, fără grabă, cu un neurochirurg dedicat pacientului.</p>';
 	$out .= '<a href="' . $programari_url . '" style="' . $s_btn_sage . '">Programează o consultație</a>';
+	$out .= '</div>';
+	$out .= '</section>';
+
+	return $out;
+} );
+
+
+// ─────────────────────────────────────────────────────────────
+// 14. SFATUL NEUROCHIRURGULUI HUB (/articole/) — Sprint 9.9C
+// Option C Hybrid: hub landing with editorial front door,
+// section previews, article grid. Sections render only when
+// content arrays are populated — no empty placeholders shown.
+// ─────────────────────────────────────────────────────────────
+
+add_filter( 'body_class', function ( array $classes ): array {
+	if ( is_post_type_archive( 'articole' ) ) {
+		$classes[] = 'page-sfatul-hub';
+	}
+	return $classes;
+} );
+
+add_shortcode( 'gu_sfatul_hub', function (): string {
+
+	// ── Content arrays — populate with Dr. George's content ──
+	// Each populated array enables its section on the hub page.
+
+	// [CLIENT:] Add myth/truth pairs reviewed by Dr. George
+	$myths = [
+		// [ 'myth' => 'Text as patients say it.', 'truth' => 'Clinical truth in plain language.' ],
+	];
+
+	// [CLIENT:] Add YouTube video list from Dr. George
+	$videos = [
+		// [
+		//   'title'       => 'Hernia de disc lombara - Ce este si cum se trateaza',
+		//   'url'         => 'https://youtu.be/EXAMPLE',
+		//   'category'    => 'Coloana vertebrala',
+		//   'duration'    => '8:24',
+		//   'description' => 'Dr. George explica in termeni simpli...',
+		// ],
+	];
+
+	// [CLIENT:] Add procedure-specific recovery topics from Dr. George
+	$recovery_topics = [
+		// [
+		//   'title'       => 'Recuperare dupa microdiscectomie lombara',
+		//   'description' => 'Etapele recuperarii si ce sa asteptati...',
+		//   'url'         => '/interventii/microdiscectomie-lombara/',
+		//   'duration'    => '4-6 saptamani',
+		// ],
+	];
+
+	// ── Determine which sections will render ──────────────────
+	$has_recuperare = ! empty( $recovery_topics );
+	$has_mituri     = ! empty( $myths );
+	$has_video      = ! empty( $videos );
+
+	// ── Featured article (manually pinned via wp_options) ─────
+	// To pin an article: UPDATE wp_options SET option_value='{ID}'
+	// WHERE option_name='gu_hub_pinned_article'
+	$pinned_id = (int) get_option( 'gu_hub_pinned_article', 0 );
+	$featured  = null;
+	if ( $pinned_id ) {
+		$p = get_post( $pinned_id );
+		if ( $p && $p->post_status === 'publish' && $p->post_type === 'articole' ) {
+			$featured = $p;
+		}
+	}
+	if ( ! $featured ) {
+		$recent = get_posts( [
+			'post_type'   => 'articole',
+			'numberposts' => 1,
+			'post_status' => 'publish',
+		] );
+		$featured = $recent ? $recent[0] : null;
+	}
+
+	// ── SVG icons (SF Symbols aesthetic, 20x20, stroke 1.5) ──
+	$ico_attr    = 'width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"';
+	$ico_consult = '<svg ' . $ico_attr . '><path d="M5 3h10a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1z"/><line x1="7" y1="8" x2="13" y2="8"/><line x1="7" y1="11" x2="13" y2="11"/><line x1="7" y1="14" x2="10" y2="14"/></svg>';
+	$ico_recover = '<svg ' . $ico_attr . '><polyline points="1,10 5,10 7,5 10,15 13,7 15,10 19,10"/></svg>';
+	$ico_myth    = '<svg ' . $ico_attr . '><path d="M10 2 2 18h16L10 2z"/><line x1="10" y1="9" x2="10" y2="12.5"/><circle cx="10" cy="15" r="0.75" fill="currentColor" stroke="none"/></svg>';
+	$ico_video   = '<svg ' . $ico_attr . '><circle cx="10" cy="10" r="7.5"/><polygon points="8,7.5 14,10 8,12.5" fill="currentColor" stroke="none"/></svg>';
+	$ico_faq     = '<svg ' . $ico_attr . '><path d="M10 2C5.6 2 2 5.6 2 10c0 2.2.9 4.2 2.3 5.7L3.5 18l3.8-1.2C8.4 17.6 9.2 18 10 18c4.4 0 8-3.6 8-8s-3.6-8-8-8z"/><path d="M8.5 8a1.5 1.5 0 0 1 3 0c0 1-1 1.5-1.5 2"/><circle cx="10" cy="13.5" r=".6" fill="currentColor" stroke="none"/></svg>';
+
+	// ── Nav section list (ordered, conditional) ───────────────
+	$nav_sections = [
+		[ 'id' => 'prima-consultatie', 'label' => 'Prima consultatie', 'icon' => $ico_consult, 'active' => true ],
+		[ 'id' => 'recuperare',        'label' => 'Recuperare',        'icon' => $ico_recover, 'active' => $has_recuperare ],
+		[ 'id' => 'mituri',            'label' => 'Mituri',            'icon' => $ico_myth,    'active' => $has_mituri ],
+		[ 'id' => 'video',             'label' => 'Video',             'icon' => $ico_video,   'active' => $has_video ],
+		[ 'id' => 'intrebari',         'label' => 'Intrebari',         'icon' => $ico_faq,     'active' => true ],
+	];
+
+	// ── Shared style strings ──────────────────────────────────
+	$s_white    = 'background:#FFFFFF;border-bottom:1px solid rgba(0,0,0,.06);';
+	$s_canvas   = 'background:#F5F5F7;border-bottom:1px solid rgba(0,0,0,.06);';
+	$s_wide     = 'max-width:960px;margin:0 auto;padding:80px 32px;';
+	$s_narrow   = 'max-width:720px;margin:0 auto;padding:80px 32px;';
+	$s_narrow_c = 'max-width:720px;margin:0 auto;padding:80px 32px;text-align:center;';
+	$s_over     = 'font:600 11px/1 Inter,system-ui,sans-serif;letter-spacing:.1em;text-transform:uppercase;color:#3D6B5E;margin:0 0 14px;';
+	$s_h1       = 'font:700 clamp(40px,4.5vw,60px)/1.1 Lora,Georgia,serif;color:#1D1D1F;letter-spacing:-.025em;margin:0 0 20px;';
+	$s_h2       = 'font:700 clamp(26px,3vw,38px)/1.15 Lora,Georgia,serif;color:#1D1D1F;letter-spacing:-.02em;margin:0 0 12px;';
+	$s_body     = 'font:400 16px/1.75 Inter,system-ui,sans-serif;color:#424245;margin:0 0 16px;';
+	$s_btn_sage = 'display:inline-flex;align-items:center;gap:8px;background:#3D6B5E;color:#FFFFFF;font:600 15px/1 Inter,system-ui,sans-serif;padding:13px 26px;border-radius:8px;text-decoration:none;';
+	$s_btn_out  = 'display:inline-flex;align-items:center;background:transparent;color:#3D6B5E;font:600 15px/1 Inter,system-ui,sans-serif;padding:0;border:none;text-decoration:none;gap:6px;';
+	$programari_url = esc_url( home_url( '/programari/' ) );
+
+	$out = '';
+
+	// ════════════════════════════════════════════════════
+	// HERO
+	// ════════════════════════════════════════════════════
+	$out .= '<section style="' . $s_white . '">';
+	$out .= '<div style="' . $s_narrow . 'padding-bottom:64px;">';
+	$out .= '<p style="' . $s_over . '">Educatie medicala pentru pacienti</p>';
+	$out .= '<h1 style="' . $s_h1 . '">Sfatul Neurochirurgului</h1>';
+	$out .= '<p style="font:400 19px/1.75 Inter,system-ui,sans-serif;color:#6E6E73;margin:0 0 32px;max-width:600px;">Ghiduri, raspunsuri si resurse medicale redactate de Dr. George Ungureanu &mdash; pentru ca un pacient informat are o recuperare mai buna.</p>';
+	$out .= '<a href="' . $programari_url . '" style="' . $s_btn_sage . '">Programeaza o consultatie</a>';
+	$out .= '</div>';
+	$out .= '</section>';
+
+	// ════════════════════════════════════════════════════
+	// HUB NAVIGATION STRIP
+	// ════════════════════════════════════════════════════
+	$active_pills = array_values( array_filter( $nav_sections, fn( $s ) => $s['active'] ) );
+	if ( count( $active_pills ) > 1 ) {
+		$out .= '<nav class="gu-hub-nav" aria-label="Sectiuni hub">';
+		$out .= '<div class="gu-hub-nav__inner">';
+		foreach ( $active_pills as $pill ) {
+			$out .= '<a href="#' . esc_attr( $pill['id'] ) . '" class="gu-hub-nav__pill">';
+			$out .= $pill['icon'];
+			$out .= '<span>' . esc_html( $pill['label'] ) . '</span>';
+			$out .= '</a>';
+		}
+		$out .= '</div>';
+		$out .= '</nav>';
+	}
+
+	// ════════════════════════════════════════════════════
+	// FEATURED ARTICLE
+	// ════════════════════════════════════════════════════
+	if ( $featured ) {
+		$f_url     = get_permalink( $featured );
+		$f_title   = get_the_title( $featured );
+		$f_excerpt = get_the_excerpt( $featured );
+		if ( ! $f_excerpt ) {
+			$f_excerpt = wp_trim_words( strip_tags( $featured->post_content ), 28 );
+		}
+		$f_cats = get_the_terms( $featured->ID, 'categorie-articole' );
+		$f_cat  = ( $f_cats && ! is_wp_error( $f_cats ) ) ? esc_html( $f_cats[0]->name ) : '';
+
+		$out .= '<section style="' . $s_canvas . '">';
+		$out .= '<div style="' . $s_wide . 'padding-top:56px;padding-bottom:56px;">';
+		$out .= '<div class="gu-hub-featured">';
+		$out .= '<div class="gu-hub-featured__body">';
+		if ( $f_cat ) {
+			$out .= '<p class="gu-hub-featured__cat">' . $f_cat . '</p>';
+		}
+		$out .= '<h2 class="gu-hub-featured__title">' . esc_html( $f_title ) . '</h2>';
+		$out .= '<p class="gu-hub-featured__excerpt">' . esc_html( $f_excerpt ) . '</p>';
+		$out .= '<a href="' . esc_url( $f_url ) . '" class="gu-hub-featured__link">Citeste articolul <svg width="16" height="16" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 10h12M12 5l5 5-5 5"/></svg></a>';
+		$out .= '</div>';
+		$out .= '</div>';
+		$out .= '</div>';
+		$out .= '</section>';
+	}
+
+	// ════════════════════════════════════════════════════
+	// PRIMA CONSULTATIE
+	// ════════════════════════════════════════════════════
+	$out .= '<section id="prima-consultatie" style="' . $s_white . '">';
+	$out .= '<div style="' . $s_wide . '">';
+	$out .= '<p style="' . $s_over . '">Ghid pentru pacienti</p>';
+	$out .= '<h2 style="' . $s_h2 . '">Prima Consultatie</h2>';
+	$out .= '<p style="' . $s_body . 'margin-bottom:40px;">Tot ce trebuie sa stiti inainte de prima intalnire cu Dr. George Ungureanu &mdash; fara surprize, fara anxietate inutila.</p>';
+
+	$out .= '<div class="gu-guide-grid">';
+
+	// Block 1 — Ce sa aduceti
+	$out .= '<div class="gu-guide-block">';
+	$out .= '<p class="gu-guide-block__over">Pas 1</p>';
+	$out .= '<h3 class="gu-guide-block__title">Ce sa aduceti</h3>';
+	$bring = [
+		'RMN sau CT recente, cu CD/DVD sau link digital (daca exista)',
+		'Trimitere de la medicul de familie sau specialist (daca aveti)',
+		'Lista medicamentelor pe care le luati in prezent',
+		'Buletin de identitate si cardul de sanatate CNAS',
+		'Analize de sange recente (daca ati efectuat)',
+	];
+	$out .= '<ul class="gu-guide-block__list">';
+	foreach ( $bring as $item ) {
+		$out .= '<li>' . esc_html( $item ) . '</li>';
+	}
+	$out .= '</ul>';
+	$out .= '<p class="gu-guide-block__note">Nu aveti toate documentele? Veniti oricum. O consultatie partial documentata este mai valoroasa decat o intarziere.</p>';
+	$out .= '</div>';
+
+	// Block 2 — Cum sa va pregatiti
+	$out .= '<div class="gu-guide-block">';
+	$out .= '<p class="gu-guide-block__over">Pas 2</p>';
+	$out .= '<h3 class="gu-guide-block__title">Cum sa va pregatiti</h3>';
+	$prep = [
+		'Notati simptomele: de cand au aparut, cum s-au modificat in timp',
+		'Scrieti intrebarile la care doriti raspuns — nu va bazati pe memorie',
+		'Aduceti un apartinator daca doriti un al doilea set de ochi si urechi',
+		'Nu este necesara pregatire speciala: diete, post sau modificari de medicatie',
+	];
+	$out .= '<ul class="gu-guide-block__list">';
+	foreach ( $prep as $item ) {
+		$out .= '<li>' . esc_html( $item ) . '</li>';
+	}
+	$out .= '</ul>';
+	$out .= '</div>';
+
+	// Block 3 — Ce intrebari sa puneti
+	$out .= '<div class="gu-guide-block">';
+	$out .= '<p class="gu-guide-block__over">Pas 3</p>';
+	$out .= '<h3 class="gu-guide-block__title">Ce intrebari sa puneti</h3>';
+	$qs = [
+		'"Ce arata exact investigatiile mele?"',
+		'"Cat de urgent este cazul meu?"',
+		'"Care sunt optiunile de tratament si ce implica fiecare?"',
+		'"Ce se intampla daca nu tratez acum?"',
+		'"Cat de des voi avea nevoie de urmarire?"',
+		'"Ce sa evit si ce pot face in continuare?"',
+	];
+	$out .= '<ul class="gu-guide-block__list gu-guide-block__list--questions">';
+	foreach ( $qs as $q ) {
+		$out .= '<li>' . esc_html( $q ) . '</li>';
+	}
+	$out .= '</ul>';
+	$out .= '</div>';
+
+	$out .= '</div>'; // .gu-guide-grid
+
+	$out .= '<div style="margin-top:40px;padding-top:32px;border-top:1px solid rgba(0,0,0,.06);">';
+	$out .= '<a href="' . $programari_url . '" style="' . $s_btn_sage . '">Programeaza prima consultatie</a>';
+	$out .= '</div>';
+	$out .= '</div>';
+	$out .= '</section>';
+
+	// ════════════════════════════════════════════════════
+	// RECUPERARE (conditional — needs content from Dr. George)
+	// ════════════════════════════════════════════════════
+	if ( $has_recuperare ) {
+		$out .= '<section id="recuperare" style="' . $s_canvas . '">';
+		$out .= '<div style="' . $s_wide . '">';
+		$out .= '<p style="' . $s_over . '">Ghiduri de recuperare</p>';
+		$out .= '<h2 style="' . $s_h2 . '">Recuperare si ingrijire</h2>';
+		$out .= '<p style="' . $s_body . 'margin-bottom:36px;">Ghiduri specifice pe tip de interventie &mdash; ce sa asteptati, cand sa va ingrijorati, cum sa reveniti la viata de zi cu zi.</p>';
+		$out .= '<div class="gu-recovery-grid">';
+		foreach ( $recovery_topics as $topic ) {
+			$out .= '<div class="gu-recovery-card">';
+			$out .= '<h3 class="gu-recovery-card__title">' . esc_html( $topic['title'] ) . '</h3>';
+			if ( ! empty( $topic['duration'] ) ) {
+				$out .= '<p class="gu-recovery-card__duration">' . esc_html( $topic['duration'] ) . '</p>';
+			}
+			$out .= '<p class="gu-recovery-card__desc">' . esc_html( $topic['description'] ) . '</p>';
+			if ( ! empty( $topic['url'] ) ) {
+				$out .= '<a href="' . esc_url( home_url( $topic['url'] ) ) . '" style="' . $s_btn_out . '">Deschide ghidul <svg width="14" height="14" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 10h12M12 5l5 5-5 5"/></svg></a>';
+			}
+			$out .= '</div>';
+		}
+		$out .= '</div>';
+		$out .= '</div>';
+		$out .= '</section>';
+	}
+
+	// ════════════════════════════════════════════════════
+	// MITURI SI ADEVARURI (conditional — needs Dr. George)
+	// ════════════════════════════════════════════════════
+	if ( $has_mituri ) {
+		$sections_before_mituri = 2 + (int) (bool) $featured + (int) $has_recuperare;
+		$myth_bg = ( $sections_before_mituri % 2 === 0 ) ? $s_canvas : $s_white;
+		$out .= '<section id="mituri" style="' . $myth_bg . '">';
+		$out .= '<div style="' . $s_wide . '">';
+		$out .= '<p style="' . $s_over . '">Claritate medicala</p>';
+		$out .= '<h2 style="' . $s_h2 . '">Mituri si adevaruri</h2>';
+		$out .= '<p style="' . $s_body . 'margin-bottom:36px;">Credinte frecvente despre neurochirurgie &mdash; si ce spune medicina reala.</p>';
+		$out .= '<div class="gu-myth-grid">';
+		foreach ( $myths as $pair ) {
+			$out .= '<div class="gu-myth-pair">';
+			$out .= '<div class="gu-myth-card"><p class="gu-myth-card__label">Mit</p><p class="gu-myth-card__text">' . esc_html( $pair['myth'] ) . '</p></div>';
+			$out .= '<div class="gu-truth-card"><p class="gu-truth-card__label">Adevarul</p><p class="gu-truth-card__text">' . esc_html( $pair['truth'] ) . '</p></div>';
+			$out .= '</div>';
+		}
+		$out .= '</div>';
+		$out .= '</div>';
+		$out .= '</section>';
+	}
+
+	// ════════════════════════════════════════════════════
+	// VIDEO (conditional — needs Dr. George's YouTube list)
+	// ════════════════════════════════════════════════════
+	if ( $has_video ) {
+		$sections_before_video = 2 + (int) (bool) $featured + (int) $has_recuperare + (int) $has_mituri;
+		$video_bg = ( $sections_before_video % 2 === 0 ) ? $s_canvas : $s_white;
+		$out .= '<section id="video" style="' . $video_bg . '">';
+		$out .= '<div style="' . $s_wide . '">';
+		$out .= '<p style="' . $s_over . '">Dr. George explica</p>';
+		$out .= '<h2 style="' . $s_h2 . '">Video</h2>';
+		$out .= '<p style="' . $s_body . 'margin-bottom:36px;">Explicatii vizuale despre afectiuni, proceduri si recuperare.</p>';
+		$out .= '<div class="gu-video-grid">';
+		foreach ( $videos as $video ) {
+			$out .= '<a href="' . esc_url( $video['url'] ) . '" class="gu-video-card" target="_blank" rel="noopener noreferrer">';
+			$out .= '<div class="gu-video-card__thumb"><div class="gu-video-card__play">' . $ico_video . '</div>';
+			if ( ! empty( $video['duration'] ) ) {
+				$out .= '<span class="gu-video-card__duration">' . esc_html( $video['duration'] ) . '</span>';
+			}
+			$out .= '</div>';
+			$out .= '<div class="gu-video-card__body">';
+			if ( ! empty( $video['category'] ) ) {
+				$out .= '<p class="gu-video-card__cat">' . esc_html( $video['category'] ) . '</p>';
+			}
+			$out .= '<h3 class="gu-video-card__title">' . esc_html( $video['title'] ) . '</h3>';
+			if ( ! empty( $video['description'] ) ) {
+				$out .= '<p class="gu-video-card__desc">' . esc_html( $video['description'] ) . '</p>';
+			}
+			$out .= '<span class="gu-video-card__link">Vizualizeaza pe YouTube &nearr;</span>';
+			$out .= '</div></a>';
+		}
+		$out .= '</div>';
+		$out .= '</div>';
+		$out .= '</section>';
+	}
+
+	// ════════════════════════════════════════════════════
+	// FAQ — EDUCATIONAL (always rendered)
+	// ════════════════════════════════════════════════════
+	$faq_data = [
+		[
+			'category' => 'Despre neurochirurgie',
+			'items' => [
+				[ 'q' => 'Ce este neurochirurgia?',
+				  'a' => 'Neurochirurgia este specialitatea medicala care se ocupa cu diagnosticul si tratamentul chirurgical al afectiunilor sistemului nervos: creier, maduva spinarii, coloana vertebrala si nervi periferici. Neurochirurgul poate interveni atat pe afectiuni urgente (traumatisme, hemoragii) cat si pe afectiuni degenerative (hernii de disc, stenoze, tumori).' ],
+				[ 'q' => 'Care este diferenta dintre neurolog si neurochirurg?',
+				  'a' => 'Neurologul diagnosticheaza si trateaza afectiunile neurologice prin metode non-chirurgicale: medicatie, terapie, monitorizare. Neurochirurgul intervine chirurgical atunci cand tratamentul conservator nu este suficient sau cand exista o afectiune structurala ce necesita corectie. Cei doi specialisti colaboreaza frecvent in ingrijirea aceluiasi pacient.' ],
+				[ 'q' => 'Cand ar trebui sa consult un neurochirurg?',
+				  'a' => 'Consultati un neurochirurg daca aveti: dureri lombare sau cervicale care iradeaza in membre, amorteli sau slabiciune la nivelul brantelor sau picioarelor, dureri de cap persistente sau neobisnuite, probleme de echilibru sau coordonare, sau un diagnostic RMN cu afectiuni structurale ale coloanei sau creierului. O consultatie nu inseamna neaparat ca veti fi operat.' ],
+				[ 'q' => 'Trebuie sa am simptome grave pentru a veni la consultatie?',
+				  'a' => 'Nu. O evaluare timpurie este adesea mai valoroasa — permite un diagnostic precis inainte ca situatia sa devina mai complexa. Multi pacienti vin la prima consultatie cu simptome moderate si pleaca cu un plan de tratament conservator, fara sa fie nevoie de operatie.' ],
+			],
+		],
+		[
+			'category' => 'Prima consultatie',
+			'items' => [
+				[ 'q' => 'Pot veni fara trimitere?',
+				  'a' => 'Da, puteti veni fara trimitere la o consultatie privata. Trimiterea poate fi necesara pentru decontarea prin CNAS, dar nu este obligatorie pentru a programa sau efectua consultatia. Detalii despre costuri si decontare la sectiunea Programari.' ],
+				[ 'q' => 'Ce se intampla la prima consultatie?',
+				  'a' => 'Prima consultatie include: un interviu clinic detaliat (istoricul simptomelor, medicamentele actuale, antecedente), examinare neurologica, analiza investigatiilor aduse (RMN, CT, analize) si discutarea optiunilor. Veti pleca cu un plan clar: tratament conservator, investigatii suplimentare sau recomandare de interventie.' ],
+				[ 'q' => 'Cat dureaza o consultatie?',
+				  'a' => 'O prima consultatie dureaza in medie 30-45 de minute. Consultatiile de urmarire (control post-op sau monitorizare) sunt de obicei mai scurte, 15-20 de minute. Este suficient timp pentru a discuta ingrijorarile dumneavoastra fara graba.' ],
+			],
+		],
+		[
+			'category' => 'Despre interventie',
+			'items' => [
+				[ 'q' => 'Inseamna o consultatie ca voi fi neaparat operat?',
+				  'a' => 'Nu. Scopul consultatiei este evaluarea, nu vanzarea unei operatii. Multi pacienti care vin cu temeri despre o interventie posibila pleaca cu un plan de tratament conservator (kinetoterapie, medicatie, monitorizare). Decizia de operare se ia impreuna cu pacientul, pe baza beneficiilor si riscurilor clare.' ],
+				[ 'q' => 'Cine decide daca am nevoie de operatie?',
+				  'a' => 'Decizia finala apartine intotdeauna pacientului, dupa ce a primit toate informatiile necesare. Dr. George Ungureanu va explica indicatiile interventiei, riscurile si alternativele, astfel incat decizia sa fie informata si asumata. Nu exista presiune pentru o anumita varianta de tratament.' ],
+				[ 'q' => 'Ce optiuni exista in afara operatiei?',
+				  'a' => 'Tratamentul conservator poate include: kinetoterapie si exercitii specifice, fizioterapie (electrostimulare, ultrasunete, laser), medicatie (antiinflamatoare, relaxante musculare, neurotrope), infiltratii epidurale sau facetare (in anumite indicatii) si monitorizare activa cu RMN-uri periodice. Optiunile depind de diagnosticul specific.' ],
+			],
+		],
+		[
+			'category' => 'Recuperare',
+			'items' => [
+				[ 'q' => 'Cat dureaza recuperarea in general?',
+				  'a' => 'Durata recuperarii depinde de tipul interventiei. Interventiile minim invazive pe coloana lombara permit revenirea acasa in 1-2 zile si la activitate normala in 4-6 saptamani. Interventiile mai extinse pot necesita recuperare mai lunga. Dr. George va oferi un ghid de recuperare specific dupa stabilirea planului de tratament.' ],
+				[ 'q' => 'Ce simptome ar trebui sa ma ingrijoreze dupa o interventie?',
+				  'a' => 'Contactati imediat clinica sau prezentati-va la urgente daca observati: febra peste 38 grade la mai mult de 48 de ore post-op, roseata sau scurgeri la nivelul plagii, dureri nou aparute sau brusc agravate, slabiciune sau amorteala nou instalata la membre, sau orice simptom care vi se pare neobisnuit fata de ce ati fost pregatit sa asteptati.' ],
+				[ 'q' => 'Cand pot reveni la activitatile zilnice dupa operatie?',
+				  'a' => 'Activitatile usoare (mers, activitati casnice simple) pot fi reluate de obicei in prima saptamana. Munca de birou in 2-4 saptamani. Munca fizica sau sportul la 6-12 saptamani, in functie de interventie si de evolutie. Fiecare caz este diferit; ghidurile specifice sunt discutate la externare.' ],
+			],
+		],
+	];
+
+	$sections_above_faq = 2 + (int) (bool) $featured + (int) $has_recuperare + (int) $has_mituri + (int) $has_video;
+	$faq_bg = ( $sections_above_faq % 2 === 0 ) ? $s_white : $s_canvas;
+
+	$out .= '<section id="intrebari" style="' . $faq_bg . '">';
+	$out .= '<div style="' . $s_wide . '">';
+	$out .= '<p style="' . $s_over . '">Raspunsuri clare</p>';
+	$out .= '<h2 style="' . $s_h2 . '">Intrebari Frecvente</h2>';
+	$out .= '<p style="' . $s_body . 'margin-bottom:40px;">Raspunsuri la cele mai comune intrebari despre neurochirurgie, consultatii si recuperare.</p>';
+	foreach ( $faq_data as $faq_sec ) {
+		$out .= '<h3 style="font:600 13px/1 Inter,system-ui,sans-serif;letter-spacing:.08em;text-transform:uppercase;color:#6E6E73;margin:36px 0 16px;">' . esc_html( $faq_sec['category'] ) . '</h3>';
+		$out .= '<div class="gu-faq" style="margin-bottom:8px;">';
+		foreach ( $faq_sec['items'] as $item ) {
+			$out .= '<details class="gu-faq__item"><summary class="gu-faq__question">' . esc_html( $item['q'] ) . '</summary>';
+			$out .= '<div class="gu-faq__answer"><p>' . esc_html( $item['a'] ) . '</p></div></details>';
+		}
+		$out .= '</div>';
+	}
+	$out .= '</div>';
+	$out .= '</section>';
+
+	// ════════════════════════════════════════════════════
+	// ARTICLE GRID
+	// ════════════════════════════════════════════════════
+	$grid_bg = ( ( $sections_above_faq + 1 ) % 2 === 0 ) ? $s_white : $s_canvas;
+	$out .= '<section style="' . $grid_bg . '">';
+	$out .= '<div style="' . $s_wide . '">';
+	$out .= '<p style="' . $s_over . '">Lectura aprofundata</p>';
+	$out .= '<h2 style="' . $s_h2 . '">Articole</h2>';
+	$out .= '<p style="' . $s_body . 'margin-bottom:8px;">Articole detaliate despre afectiuni, proceduri si viata cu o conditie neurologica.</p>';
+	$out .= do_shortcode( '[gu_articole_archive]' );
+	$out .= '</div>';
+	$out .= '</section>';
+
+	// ════════════════════════════════════════════════════
+	// FINAL CTA
+	// ════════════════════════════════════════════════════
+	$out .= '<section style="background:#1D1D1F;">';
+	$out .= '<div style="' . $s_narrow_c . '">';
+	$out .= '<p style="font:600 11px/1 Inter,system-ui,sans-serif;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.5);margin:0 0 14px;">Pasul urmator</p>';
+	$out .= '<h2 style="font:700 clamp(26px,3vw,38px)/1.15 Lora,Georgia,serif;color:#FFFFFF;letter-spacing:-.02em;margin:0 0 16px;">Pregatit pentru o evaluare?</h2>';
+	$out .= '<p style="font:400 18px/1.75 Inter,system-ui,sans-serif;color:rgba(255,255,255,.65);margin:0 auto 36px;max-width:500px;">O prima consultatie va ofera claritate &mdash; indiferent de diagnostic.</p>';
+	$out .= '<a href="' . $programari_url . '" style="display:inline-block;background:#3D6B5E;color:#FFFFFF;font:600 16px/1 Inter,system-ui,sans-serif;padding:16px 36px;border-radius:8px;text-decoration:none;">Programeaza o consultatie</a>';
 	$out .= '</div>';
 	$out .= '</section>';
 
