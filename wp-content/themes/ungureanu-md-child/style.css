@@ -1,0 +1,22 @@
+/*
+Theme Name:  Ungureanu MD Child
+Theme URI:   https://georgeungureanu.doctor
+Description: Custom child theme for Dr. George Ungureanu's medical website. Apple Health-inspired layout templates, page-specific overrides, and theme-level structural CSS. Design tokens, CPTs, ACF field groups, shortcodes, and component CSS live in the gu-design-system plugin.
+Author:      Mr. Bucur
+Author URI:  https://puiu.bucur.info
+Template:    hello-elementor
+Version:     1.0.0
+License:     Private — All rights reserved
+Text Domain: ungureanu-md-child
+*/
+
+/*
+ * This file intentionally contains only the theme header above.
+ *
+ * Theme-level CSS belongs in assets/css/theme.css (enqueued via functions.php).
+ * Component CSS, design tokens, and utility classes belong in the
+ * gu-design-system plugin (assets/css/gu-design-system.css).
+ *
+ * See docs/planning/CHILD_THEME_ARCHITECTURE.md for the full separation of
+ * responsibilities between plugin and child theme.
+ */

@@ -1,0 +1,31 @@
+---
+# cPanel Git Version Control — Deployment Tasks
+# georgeungureanu.doctor
+#
+# This file runs automatically when cPanel pulls the latest commit.
+# Configure once per hosting account — then all future git pushes
+# deploy to staging automatically after "Update from Remote".
+#
+# SETUP REQUIRED:
+#   Replace [WP_ROOT] below with the absolute server path to your
+#   WordPress installation, e.g. /home/username/public_html
+#
+# HOW TO FIND YOUR WP_ROOT:
+#   cPanel → File Manager → navigate to public_html → copy the path
+#   from the address bar, or run: echo $HOME/public_html
+
+deployment:
+  tasks:
+    # ── GU Design System plugin ──────────────────────────────────
+    - export PLUGIN_DEST=[WP_ROOT]/wp-content/plugins/gu-design-system
+    - mkdir -p "$PLUGIN_DEST"
+    - cp -R wp-plugin/gu-design-system/. "$PLUGIN_DEST/"
+
+    # ── Ungureanu MD Child theme ─────────────────────────────────
+    - export THEME_DEST=[WP_ROOT]/wp-content/themes/ungureanu-md-child
+    - mkdir -p "$THEME_DEST"
+    - cp -R wp-content/themes/ungureanu-md-child/. "$THEME_DEST/"
+
+    # ── ACF JSON (already inside plugin — copied above) ──────────
+    # acf-json/ lives at wp-plugin/gu-design-system/acf-json/
+    # No separate step needed.
