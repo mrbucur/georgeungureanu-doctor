@@ -3,7 +3,7 @@
  * Plugin Name:  GU Design System
  * Plugin URI:   https://georgeungureanu.doctor
  * Description:  Apple Health-inspired design system for georgeungureanu.doctor. Enqueues Inter via Google Fonts, CSS custom properties (color, typography, spacing, layout, motion tokens), scroll-reveal animations, and PHP-rendered page sections. Safe to activate/deactivate — removes everything on deactivation. Does not modify Elementor database settings and does not depend on Elementor Pro APIs.
- * Version:      1.3.1
+ * Version:      1.3.2
  * Author:       Mr. Bucur
  * Author URI:   https://puiu.bucur.info
  * License:      Private — All rights reserved
@@ -14,7 +14,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Prevent direct file access.
 }
 
-define( 'GU_DESIGN_SYSTEM_VERSION', '1.3.1' );
+define( 'GU_DESIGN_SYSTEM_VERSION', '1.3.2' );
 define( 'GU_DESIGN_SYSTEM_URL', plugin_dir_url( __FILE__ ) );
 define( 'GU_ACF_JSON_DIR', plugin_dir_path( __FILE__ ) . 'acf-json' );
 
@@ -2225,3 +2225,372 @@ add_action( 'wp_footer', function () {
 	</script>
 	<?php
 }, 20 );
+
+
+// ─────────────────────────────────────────────────────────────
+// ADMIN — SETUP PAGE
+// GU Design System → Setup
+// ─────────────────────────────────────────────────────────────
+
+/**
+ * Core pages required by the site.
+ * 'homepage' => true marks the page that becomes the static front page.
+ */
+function gu_core_pages_config(): array {
+	return [
+		[
+			'title'    => 'Acasă',
+			'slug'     => 'acasa',
+			'homepage' => true,
+		],
+		[
+			'title' => 'Despre',
+			'slug'  => 'despre',
+		],
+		[
+			'title' => 'Recomandări',
+			'slug'  => 'recomandari',
+		],
+		[
+			'title' => 'Programări',
+			'slug'  => 'programari',
+		],
+		[
+			'title' => 'Sfatul Neurochirurgului',
+			'slug'  => 'articole',
+		],
+	];
+}
+
+// ── Admin menu ────────────────────────────────────────────────
+
+add_action( 'admin_menu', function () {
+	add_menu_page(
+		'GU Design System',
+		'GU Design System',
+		'manage_options',
+		'gu-design-system',
+		'gu_admin_setup_page',
+		'dashicons-layout',
+		80
+	);
+
+	// Rename the auto-created duplicate submenu entry.
+	add_submenu_page(
+		'gu-design-system',
+		'Setup — GU Design System',
+		'Setup',
+		'manage_options',
+		'gu-design-system',
+		'gu_admin_setup_page'
+	);
+} );
+
+// ── POST handler — Create / Repair Core Pages ─────────────────
+
+add_action( 'admin_post_gu_create_pages', function () {
+	if ( ! current_user_can( 'manage_options' ) ) {
+		wp_die( 'Unauthorized.', 403 );
+	}
+	check_admin_referer( 'gu_create_pages' );
+
+	$created     = [];
+	$existing    = [];
+	$homepage_id = 0;
+
+	foreach ( gu_core_pages_config() as $cfg ) {
+		$page = get_page_by_path( $cfg['slug'], OBJECT, 'page' );
+
+		if ( $page instanceof WP_Post ) {
+			$existing[] = $cfg['slug'];
+			if ( ! empty( $cfg['homepage'] ) ) {
+				$homepage_id = $page->ID;
+			}
+			continue;
+		}
+
+		$id = wp_insert_post( [
+			'post_title'   => $cfg['title'],
+			'post_name'    => $cfg['slug'],
+			'post_status'  => 'publish',
+			'post_type'    => 'page',
+			'post_content' => '',
+			'post_author'  => get_current_user_id(),
+		], true );
+
+		if ( is_wp_error( $id ) ) {
+			continue;
+		}
+
+		$created[] = $cfg['slug'];
+
+		if ( ! empty( $cfg['homepage'] ) ) {
+			$homepage_id = $id;
+		}
+	}
+
+	// Set static front page if we have the Acasă page.
+	if ( $homepage_id ) {
+		update_option( 'show_on_front', 'page' );
+		update_option( 'page_on_front', $homepage_id );
+	}
+
+	wp_safe_redirect( add_query_arg(
+		[
+			'page'    => 'gu-design-system',
+			'action'  => 'pages_done',
+			'created' => count( $created ),
+			'skipped' => count( $existing ),
+		],
+		admin_url( 'admin.php' )
+	) );
+	exit;
+} );
+
+// ── POST handler — Flush Permalinks ───────────────────────────
+
+add_action( 'admin_post_gu_flush_permalinks', function () {
+	if ( ! current_user_can( 'manage_options' ) ) {
+		wp_die( 'Unauthorized.', 403 );
+	}
+	check_admin_referer( 'gu_flush_permalinks' );
+
+	flush_rewrite_rules( true );
+
+	wp_safe_redirect( add_query_arg(
+		[
+			'page'   => 'gu-design-system',
+			'action' => 'flushed',
+		],
+		admin_url( 'admin.php' )
+	) );
+	exit;
+} );
+
+// ── Page render ───────────────────────────────────────────────
+
+function gu_admin_setup_page(): void {
+	if ( ! current_user_can( 'manage_options' ) ) {
+		return;
+	}
+
+	$action  = isset( $_GET['action'] )  ? sanitize_key( $_GET['action'] )  : '';
+	$created = isset( $_GET['created'] ) ? (int) $_GET['created']            : 0;
+	$skipped = isset( $_GET['skipped'] ) ? (int) $_GET['skipped']            : 0;
+
+	// ── Status data ───────────────────────────────────────────
+
+	$pages_status = [];
+	foreach ( gu_core_pages_config() as $cfg ) {
+		$page = get_page_by_path( $cfg['slug'], OBJECT, 'page' );
+		$pages_status[] = [
+			'title'    => $cfg['title'],
+			'slug'     => $cfg['slug'],
+			'homepage' => ! empty( $cfg['homepage'] ),
+			'exists'   => $page instanceof WP_Post,
+			'id'       => $page instanceof WP_Post ? $page->ID : null,
+			'url'      => $page instanceof WP_Post
+			              ? get_permalink( $page->ID )
+			              : home_url( '/' . $cfg['slug'] . '/' ),
+		];
+	}
+
+	$front_type  = get_option( 'show_on_front', 'posts' );
+	$front_id    = (int) get_option( 'page_on_front', 0 );
+	$acasa_page  = get_page_by_path( 'acasa', OBJECT, 'page' );
+	$homepage_ok = $front_type === 'page'
+	               && $acasa_page instanceof WP_Post
+	               && $front_id === $acasa_page->ID;
+
+	$cpt_archives = [
+		[ 'label' => 'Afecțiuni',   'url' => home_url( '/afectiuni/' ) ],
+		[ 'label' => 'Intervenții', 'url' => home_url( '/interventii/' ) ],
+	];
+
+	$all_pages_exist = ! in_array( false, array_column( $pages_status, 'exists' ), true );
+
+	?>
+	<div class="wrap">
+	<h1>GU Design System — Setup</h1>
+
+	<style>
+	.gu-setup-card{background:#fff;border:1px solid #c3c4c7;border-radius:4px;padding:20px 24px;margin:20px 0}
+	.gu-setup-card h2{margin-top:0;font-size:13px;font-weight:600;text-transform:uppercase;letter-spacing:.05em;color:#50575e}
+	.gu-setup-table{border-collapse:collapse;width:100%;margin:12px 0 0}
+	.gu-setup-table th{text-align:left;padding:8px 12px;background:#f6f7f7;border-bottom:1px solid #c3c4c7;font-size:12px;color:#50575e;font-weight:600}
+	.gu-setup-table td{padding:10px 12px;border-bottom:1px solid #f0f0f1;font-size:13px;vertical-align:middle}
+	.gu-setup-table tr:last-child td{border-bottom:none}
+	.gu-setup-actions{display:flex;gap:12px;align-items:center;flex-wrap:wrap;margin-top:16px}
+	.gu-badge-ok{display:inline-block;background:#edfaef;color:#00a32a;border-radius:3px;padding:2px 8px;font-size:11px;font-weight:600}
+	.gu-badge-miss{display:inline-block;background:#fcf0f1;color:#d63638;border-radius:3px;padding:2px 8px;font-size:11px;font-weight:600}
+	</style>
+
+	<?php if ( $action === 'pages_done' ) : ?>
+	<div class="notice notice-success is-dismissible"><p>
+		<?php if ( $created > 0 ) : ?>
+			<strong><?php echo $created; ?> pagini create.</strong>
+		<?php endif; ?>
+		<?php if ( $skipped > 0 ) : ?>
+			<?php echo $skipped; ?> pagini existente — păstrate nemodificate.
+		<?php endif; ?>
+		<?php if ( $created === 0 && $skipped > 0 ) : ?>
+			Toate paginile existau deja. Nicio modificare.
+		<?php endif; ?>
+	</p></div>
+	<?php endif; ?>
+
+	<?php if ( $action === 'flushed' ) : ?>
+	<div class="notice notice-success is-dismissible"><p>
+		<strong>Permalink-urile au fost reîncărcate.</strong> Arhivele CPT sunt acum accesibile.
+	</p></div>
+	<?php endif; ?>
+
+
+	<!-- ── Core Pages ─────────────────────────────────────── -->
+	<div class="gu-setup-card">
+		<h2>Core Pages</h2>
+		<p style="margin-top:0">Paginile de mai jos trebuie să existe în baza de date WordPress. Conținutul paginilor existente nu este modificat.</p>
+
+		<table class="gu-setup-table">
+			<thead>
+				<tr>
+					<th>Pagină</th>
+					<th>Slug</th>
+					<th>URL</th>
+					<th>Status</th>
+				</tr>
+			</thead>
+			<tbody>
+			<?php foreach ( $pages_status as $row ) : ?>
+				<tr>
+					<td>
+						<strong><?php echo esc_html( $row['title'] ); ?></strong>
+						<?php if ( $row['homepage'] ) : ?>
+							<span style="color:#646970;font-size:11px"> (homepage)</span>
+						<?php endif; ?>
+					</td>
+					<td><code>/<?php echo esc_html( $row['slug'] ); ?>/</code></td>
+					<td>
+						<?php if ( $row['exists'] ) : ?>
+							<a href="<?php echo esc_url( $row['url'] ); ?>" target="_blank" rel="noopener">
+								<?php echo esc_html( $row['url'] ); ?>
+							</a>
+						<?php else : ?>
+							<span style="color:#646970"><?php echo esc_html( home_url( '/' . $row['slug'] . '/' ) ); ?></span>
+						<?php endif; ?>
+					</td>
+					<td>
+						<?php echo $row['exists']
+							? '<span class="gu-badge-ok">✓ Există</span>'
+							: '<span class="gu-badge-miss">✗ Lipsă</span>'; ?>
+					</td>
+				</tr>
+			<?php endforeach; ?>
+			</tbody>
+		</table>
+
+		<div class="gu-setup-actions">
+			<form method="post" action="<?php echo esc_url( admin_url( 'admin-post.php' ) ); ?>">
+				<?php wp_nonce_field( 'gu_create_pages' ); ?>
+				<input type="hidden" name="action" value="gu_create_pages">
+				<button type="submit" class="button button-primary">
+					<?php echo $all_pages_exist ? 'Repair Core Pages' : 'Create / Repair Core Pages'; ?>
+				</button>
+			</form>
+			<?php if ( $all_pages_exist ) : ?>
+				<span style="color:#00a32a;font-size:13px">✓ Toate paginile există</span>
+			<?php endif; ?>
+		</div>
+	</div>
+
+
+	<!-- ── Homepage Setting ───────────────────────────────── -->
+	<div class="gu-setup-card">
+		<h2>Homepage Setting</h2>
+
+		<?php if ( $homepage_ok ) : ?>
+			<p style="color:#00a32a;font-weight:600;margin:0">
+				✓ Pagina statică este setată corect: <strong>Acasă</strong> (ID <?php echo $front_id; ?>)
+			</p>
+		<?php elseif ( $front_type !== 'page' ) : ?>
+			<p style="color:#d63638;font-weight:600;margin:0 0 8px">
+				✗ Homepage afișează <em>ultimele articole</em>, nu pagina statică Acasă.
+			</p>
+			<p style="margin:0;color:#646970;font-size:12px">
+				Apasă <em>Create / Repair Core Pages</em> — va seta automat Acasă ca pagină statică.
+			</p>
+		<?php elseif ( ! ( $acasa_page instanceof WP_Post ) ) : ?>
+			<p style="color:#d63638;font-weight:600;margin:0">
+				✗ Pagina <code>/acasa/</code> lipsește — creaz-o mai întâi.
+			</p>
+		<?php else : ?>
+			<p style="color:#dba617;font-weight:600;margin:0 0 8px">
+				⚠ Homepage static este setat la pagina ID <?php echo $front_id; ?>, dar nu este <strong>Acasă</strong> (ID <?php echo $acasa_page->ID; ?>).
+			</p>
+			<p style="margin:0;color:#646970;font-size:12px">Apasă <em>Repair Core Pages</em> pentru a corecta.</p>
+		<?php endif; ?>
+
+		<p style="margin:12px 0 0;font-size:12px;color:#646970">
+			Settings → Reading → Your homepage displays:
+			<strong><?php echo $front_type === 'page' ? 'Static page (ID ' . $front_id . ')' : 'Latest posts'; ?></strong>
+		</p>
+	</div>
+
+
+	<!-- ── CPT Archives ───────────────────────────────────── -->
+	<div class="gu-setup-card">
+		<h2>CPT Archives</h2>
+		<p style="margin-top:0">Aceste URL-uri sunt generate automat din CPT-uri — nu necesită pagini în baza de date. Dacă returnează 404 după activare, apasă <em>Flush Permalinks</em>.</p>
+
+		<table class="gu-setup-table">
+			<thead><tr><th>CPT</th><th>URL</th></tr></thead>
+			<tbody>
+			<?php foreach ( $cpt_archives as $cpt ) : ?>
+				<tr>
+					<td><strong><?php echo esc_html( $cpt['label'] ); ?></strong></td>
+					<td>
+						<a href="<?php echo esc_url( $cpt['url'] ); ?>" target="_blank" rel="noopener">
+							<?php echo esc_html( $cpt['url'] ); ?>
+						</a>
+					</td>
+				</tr>
+			<?php endforeach; ?>
+			</tbody>
+		</table>
+	</div>
+
+
+	<!-- ── Flush Permalinks ───────────────────────────────── -->
+	<div class="gu-setup-card">
+		<h2>Flush Permalinks</h2>
+		<p style="margin-top:0">Reîncarcă regulile de rewriting WordPress. Necesar după activarea plugin-ului, crearea paginilor sau dacă arhivele CPT returnează 404.</p>
+
+		<form method="post" action="<?php echo esc_url( admin_url( 'admin-post.php' ) ); ?>">
+			<?php wp_nonce_field( 'gu_flush_permalinks' ); ?>
+			<input type="hidden" name="action" value="gu_flush_permalinks">
+			<button type="submit" class="button button-secondary">Flush Permalinks</button>
+		</form>
+
+		<p style="margin:12px 0 0;font-size:12px;color:#646970">
+			Echivalent cu Settings → Permalinks → Save Changes.
+		</p>
+	</div>
+
+
+	<!-- ── Quick Reference ────────────────────────────────── -->
+	<div class="gu-setup-card">
+		<h2>Quick Reference</h2>
+		<table class="gu-setup-table">
+			<thead><tr><th>Situație</th><th>Acțiune necesară</th></tr></thead>
+			<tbody>
+				<tr><td>WordPress nou instalat</td><td>Create / Repair Core Pages → Flush Permalinks → importă template-urile Elementor</td></tr>
+				<tr><td>Plugin actualizat (CPT sau slug nou)</td><td>Flush Permalinks</td></tr>
+				<tr><td>Activare temă</td><td>Flush Permalinks</td></tr>
+				<tr><td>Deploy cPanel Git</td><td>Elementor → Tools → Regenerate CSS (dacă s-a modificat CSS-ul plugin-ului)</td></tr>
+			</tbody>
+		</table>
+	</div>
+
+	</div><!-- .wrap -->
+	<?php
+}
