@@ -2,22 +2,40 @@
 /**
  * Plugin Name:  GU Design System
  * Plugin URI:   https://georgeungureanu.doctor
- * Description:  Loads the approved Direction B+ (Warm Academic Medicine) design system for georgeungureanu.doctor. Enqueues Google Fonts (Lora + Inter), CSS custom properties (color, typography, spacing, layout, motion tokens), and utility classes. Safe to activate/deactivate — removes everything on deactivation. Does not modify Elementor database settings, does not create pages or templates, and does not depend on Elementor Pro APIs.
- * Version:      1.3.0
- * Author:       georgeungureanu.doctor
+ * Description:  Apple Health-inspired design system for georgeungureanu.doctor. Enqueues Inter via Google Fonts, CSS custom properties (color, typography, spacing, layout, motion tokens), scroll-reveal animations, and PHP-rendered page sections. Safe to activate/deactivate — removes everything on deactivation. Does not modify Elementor database settings and does not depend on Elementor Pro APIs.
+ * Version:      1.3.1
+ * Author:       Mr. Bucur
+ * Author URI:   https://puiu.bucur.info
  * License:      Private — All rights reserved
  * Text Domain:  gu-design-system
- *
- * Governing source: docs/design-system/APPROVED_VISUAL_DIRECTION.md (Direction B+)
- * CSS source:       elementor/custom.css (adapted — @import removed; fonts via wp_enqueue_style)
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Prevent direct file access.
 }
 
-define( 'GU_DESIGN_SYSTEM_VERSION', '1.3.0' );
+define( 'GU_DESIGN_SYSTEM_VERSION', '1.3.1' );
 define( 'GU_DESIGN_SYSTEM_URL', plugin_dir_url( __FILE__ ) );
+define( 'GU_ACF_JSON_DIR', plugin_dir_path( __FILE__ ) . 'acf-json' );
+
+
+// ─────────────────────────────────────────────────────────────
+// 0. ACF JSON LOAD / SAVE
+// ─────────────────────────────────────────────────────────────
+
+// Append plugin acf-json to ACF's load paths (preserves default theme path).
+add_filter( 'acf/settings/load_json', function ( $paths ) {
+	$paths[] = GU_ACF_JSON_DIR;
+	return $paths;
+} );
+
+// Direct all ACF saves to the plugin acf-json directory; create it if absent.
+add_filter( 'acf/settings/save_json', function ( $path ) {
+	if ( ! is_dir( GU_ACF_JSON_DIR ) ) {
+		wp_mkdir_p( GU_ACF_JSON_DIR );
+	}
+	return GU_ACF_JSON_DIR;
+} );
 
 
 // ─────────────────────────────────────────────────────────────
