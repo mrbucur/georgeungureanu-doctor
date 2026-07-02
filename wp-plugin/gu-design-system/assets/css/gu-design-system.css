@@ -5156,3 +5156,77 @@ h3.elementor-heading-title { font-weight: var(--weight-semibold) !important; let
     gap: 16px;
   }
 }
+
+/* ── 31m. PHASE B — MICRO INTERACTIONS ── */
+
+/* Hover lift + spring easing on PHP-rendered cards not yet covered */
+.gu-clinic-card {
+  transition: transform 280ms var(--ease-spring),
+              box-shadow 280ms ease !important;
+}
+.gu-clinic-card:hover {
+  transform: translateY(-4px) !important;
+  box-shadow: var(--shadow-lg) !important;
+}
+
+.gu-guide-block,
+.gu-recovery-card {
+  transition: transform 280ms var(--ease-spring),
+              box-shadow 280ms ease !important;
+}
+.gu-guide-block:hover,
+.gu-recovery-card:hover {
+  transform: translateY(-3px) !important;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08) !important;
+}
+
+/* Final CTA section — subtle fade-in via gu-reveal */
+#gu-cta-rebuilt.gu-final-cta {
+  transition: opacity 600ms var(--ease-out);
+}
+
+/* FAQ items — smooth expand indicator */
+.gu-faq__item summary {
+  transition: color 160ms ease;
+}
+.gu-faq__item[open] summary {
+  color: var(--color-accent);
+}
+
+/* Checklist items — stagger via gu-reveal-group */
+.gu-checklist {
+  /* marked as gu-reveal-group by JS */
+}
+
+/* PHP shortcode section headings — fade up */
+.gu-programari-section-heading,
+.gu-sfatul-heading {
+  /* marked as gu-reveal by JS */
+}
+
+/* Related/author cards on single pages */
+.gu-related-card,
+.gu-clinic-card {
+  transition: transform 280ms var(--ease-spring),
+              box-shadow 280ms ease !important;
+}
+.gu-related-card:hover {
+  transform: translateY(-4px) !important;
+  box-shadow: var(--shadow-lg) !important;
+}
+
+/* Credentials strip values — subtle scale on first view */
+.gu-credentials-strip {
+  /* marked as gu-reveal by JS */
+}
+
+/* Reduced motion — honour system preference */
+@media (prefers-reduced-motion: reduce) {
+  .gu-clinic-card,
+  .gu-guide-block,
+  .gu-recovery-card,
+  .gu-related-card {
+    transition: none !important;
+    transform: none !important;
+  }
+}

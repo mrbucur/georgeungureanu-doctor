@@ -1086,7 +1086,7 @@ add_shortcode( 'gu_about_philosophy', function () {
 	$phil = gu_get_about_field( 'about_philosophy' );
 	if ( empty( trim( strip_tags( $phil ) ) ) ) { return ''; }
 	return '<div class="gu-about-philosophy">'
-		. '<h2 class="gu-about-section-heading gu-about-section-heading--light">Filosofia mea de practică</h2>'
+		. '<h2 class="gu-about-section-heading">Filosofia mea de practică</h2>'
 		. '<div class="gu-about-philosophy__content">' . wp_kses_post( $phil ) . '</div>'
 		. '</div>';
 } );
