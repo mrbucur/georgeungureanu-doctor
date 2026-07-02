@@ -296,7 +296,7 @@ add_shortcode( 'gu_field', function ( $atts ) {
 // Shared helper: empty-state block shown on archive pages with < 3 items.
 function gu_archive_empty_state(): string {
 	$icon = '<svg width="40" height="40" viewBox="0 0 24 24" fill="none"'
-		. ' stroke="#4D7A70" stroke-width="1.5" stroke-linecap="round"'
+		. ' stroke="#0E7FC0" stroke-width="1.5" stroke-linecap="round"'
 		. ' stroke-linejoin="round" aria-hidden="true">'
 		. '<circle cx="12" cy="12" r="10"/>'
 		. '<polyline points="12 6 12 12 16 14"/>'
@@ -330,10 +330,10 @@ add_shortcode( 'gu_afectiuni_archive', function () {
 	while ( $query->have_posts() ) {
 		$query->the_post();
 		$summary = function_exists( 'get_field' ) ? wp_strip_all_tags( (string) get_field( 'short_summary' ) ) : get_the_excerpt();
-		$out    .= '<article style="background:#FDFBF7;border:1px solid #D6CFC4;border-radius:8px;padding:28px;">';
-		$out    .= '<h3 style="font-family:Lora,serif;font-size:20px;font-weight:700;margin:0 0 10px;"><a href="' . esc_url( get_permalink() ) . '" style="color:#231E1A;text-decoration:none;">' . esc_html( get_the_title() ) . '</a></h3>';
-		$out    .= '<p style="font-family:Inter,system-ui,sans-serif;font-size:15px;color:#5A5550;margin:0 0 14px;">' . esc_html( wp_trim_words( $summary, 20 ) ) . '</p>';
-		$out    .= '<a href="' . esc_url( get_permalink() ) . '" style="font-size:14px;font-weight:600;color:#4D7A70;text-decoration:none;">Citește mai mult →</a>';
+		$out    .= '<article class="gu-afectiuni-card" style="background:#FFFFFF;border:1px solid rgba(0,0,0,.06);border-radius:16px;padding:28px;">';
+		$out    .= '<h3 style="font-family:Lora,serif;font-size:20px;font-weight:700;margin:0 0 10px;"><a href="' . esc_url( get_permalink() ) . '" style="color:#1D1D1F;text-decoration:none;">' . esc_html( get_the_title() ) . '</a></h3>';
+		$out    .= '<p style="font-family:Inter,system-ui,sans-serif;font-size:15px;color:#6E6E73;margin:0 0 14px;">' . esc_html( wp_trim_words( $summary, 20 ) ) . '</p>';
+		$out    .= '<a href="' . esc_url( get_permalink() ) . '" style="font-size:14px;font-weight:600;color:#0E7FC0;text-decoration:none;">Citește mai mult →</a>';
 		$out    .= '</article>';
 	}
 	wp_reset_postdata();
@@ -364,10 +364,10 @@ add_shortcode( 'gu_interventii_archive', function () {
 	while ( $query->have_posts() ) {
 		$query->the_post();
 		$summary = function_exists( 'get_field' ) ? wp_strip_all_tags( (string) get_field( 'short_summary' ) ) : get_the_excerpt();
-		$out    .= '<article style="background:#FDFBF7;border:1px solid #D6CFC4;border-radius:8px;padding:28px;">';
-		$out    .= '<h3 style="font-family:Lora,serif;font-size:20px;font-weight:700;margin:0 0 10px;"><a href="' . esc_url( get_permalink() ) . '" style="color:#231E1A;text-decoration:none;">' . esc_html( get_the_title() ) . '</a></h3>';
-		$out    .= '<p style="font-family:Inter,system-ui,sans-serif;font-size:15px;color:#5A5550;margin:0 0 14px;">' . esc_html( wp_trim_words( $summary, 20 ) ) . '</p>';
-		$out    .= '<a href="' . esc_url( get_permalink() ) . '" style="font-size:14px;font-weight:600;color:#4D7A70;text-decoration:none;">Detalii intervenție →</a>';
+		$out    .= '<article class="gu-interventii-card" style="background:#FFFFFF;border:1px solid rgba(0,0,0,.06);border-radius:16px;padding:28px;">';
+		$out    .= '<h3 style="font-family:Lora,serif;font-size:20px;font-weight:700;margin:0 0 10px;"><a href="' . esc_url( get_permalink() ) . '" style="color:#1D1D1F;text-decoration:none;">' . esc_html( get_the_title() ) . '</a></h3>';
+		$out    .= '<p style="font-family:Inter,system-ui,sans-serif;font-size:15px;color:#6E6E73;margin:0 0 14px;">' . esc_html( wp_trim_words( $summary, 20 ) ) . '</p>';
+		$out    .= '<a href="' . esc_url( get_permalink() ) . '" style="font-size:14px;font-weight:600;color:#0E7FC0;text-decoration:none;">Detalii intervenție →</a>';
 		$out    .= '</article>';
 	}
 	wp_reset_postdata();
@@ -488,7 +488,7 @@ add_shortcode( 'gu_articole_archive', function ( $atts ) {
 	}
 	$query = new WP_Query( $args );
 	if ( ! $query->have_posts() ) {
-		return '<p style="font-family:Inter,sans-serif;color:#5A4E47;">Nu există articole publicate.</p>';
+		return '<p style="font-family:Inter,sans-serif;color:#6E6E73;">Nu există articole publicate.</p>';
 	}
 	$out = '<div class="gu-articole-grid">';
 	while ( $query->have_posts() ) {
@@ -818,7 +818,7 @@ add_shortcode( 'gu_article_author', function () {
 	$out  = '<div class="gu-author-block">';
 	$out .= '<div class="gu-author-block__avatar" aria-hidden="true">';
 	// SVG silhouette placeholder — replaced when photography is available
-	$out .= '<svg viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg" width="80" height="80"><circle cx="40" cy="40" r="40" fill="#C8C0B8"/><circle cx="40" cy="30" r="14" fill="#FDFBF7"/><ellipse cx="40" cy="72" rx="24" ry="18" fill="#FDFBF7"/></svg>';
+	$out .= '<svg viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg" width="80" height="80"><circle cx="40" cy="40" r="40" fill="#C8C0B8"/><circle cx="40" cy="30" r="14" fill="#FFFFFF"/><ellipse cx="40" cy="72" rx="24" ry="18" fill="#FFFFFF"/></svg>';
 	$out .= '</div>';
 	$out .= '<div class="gu-author-block__content">';
 	$out .= '<span class="gu-author-block__label">Autor &amp; Revizie medicală</span>';
@@ -1020,8 +1020,8 @@ add_shortcode( 'gu_about_hero', function () {
 			. ' aria-label="[CLIENT: PORTRET PROFESIONAL NECESAR]">';
 		$photo_html .= '<svg viewBox="0 0 440 540" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">'
 			. '<rect width="440" height="540" fill="#C8C0B8"/>'
-			. '<circle cx="220" cy="185" r="82" fill="#FDFBF7"/>'
-			. '<ellipse cx="220" cy="490" rx="148" ry="120" fill="#FDFBF7"/>'
+			. '<circle cx="220" cy="185" r="82" fill="#FFFFFF"/>'
+			. '<ellipse cx="220" cy="490" rx="148" ry="120" fill="#FFFFFF"/>'
 			. '<text x="220" y="345" font-family="Georgia,serif" font-size="11" fill="#6B5E57"'
 			. ' text-anchor="middle">[CLIENT: PORTRET</text>'
 			. '<text x="220" y="362" font-family="Georgia,serif" font-size="11" fill="#6B5E57"'
@@ -1327,17 +1327,17 @@ add_shortcode( 'gu_programari_page', function (): string {
 	$s_inner_wide     = 'max-width:900px;margin:0 auto;padding:96px 32px;';
 	$s_inner_narrow   = 'max-width:720px;margin:0 auto;padding:96px 32px;';
 	$s_inner_narrow_c = 'max-width:720px;margin:0 auto;padding:96px 32px;text-align:center;';
-	$s_overline       = 'font:600 11px/1 Inter,system-ui,sans-serif;letter-spacing:.1em;text-transform:uppercase;color:#3D6B5E;margin:0 0 14px;';
+	$s_overline       = 'font:600 11px/1 Inter,system-ui,sans-serif;letter-spacing:.1em;text-transform:uppercase;color:#0E7FC0;margin:0 0 14px;';
 	$s_h1             = 'font:700 clamp(42px,4.8vw,64px)/1.1 Lora,Georgia,serif;color:#1D1D1F;letter-spacing:-.025em;margin:0 0 20px;';
 	$s_h2             = 'font:700 clamp(28px,3vw,42px)/1.15 Lora,Georgia,serif;color:#1D1D1F;letter-spacing:-.02em;margin:0 0 16px;';
 	$s_lead           = 'font:400 20px/1.7 Inter,system-ui,sans-serif;color:#6E6E73;max-width:600px;margin:0 0 32px;';
 	$s_body           = 'font:400 17px/1.75 Inter,system-ui,sans-serif;color:#424245;margin:0 0 20px;';
-	$s_note           = 'font:400 14px/1.6 Inter,system-ui,sans-serif;color:#6E6E73;border-left:3px solid #3D6B5E;padding-left:14px;margin:32px 0 0;';
-	$s_client_box     = 'background:#FBFBFD;border:1px dashed rgba(61,107,94,.35);border-radius:10px;padding:28px 32px;margin:32px 0 0;font:400 15px/1.65 Inter,system-ui,sans-serif;color:#6E6E73;';
-	$s_city_badge     = 'display:inline-block;background:rgba(61,107,94,.1);color:#3D6B5E;font:600 12px/1 Inter,system-ui,sans-serif;padding:6px 14px;border-radius:100px;letter-spacing:.04em;';
-	$s_btn_sage       = 'display:inline-block;background:#3D6B5E;color:#FFFFFF;font:600 16px/1 Inter,system-ui,sans-serif;padding:16px 36px;border-radius:8px;text-decoration:none;';
-	$s_btn_sage_sm    = 'display:inline-block;background:#3D6B5E;color:#FFFFFF;font:600 14px/1 Inter,system-ui,sans-serif;padding:12px 22px;border-radius:8px;text-decoration:none;';
-	$s_btn_outline_sm = 'display:inline-block;background:transparent;color:#3D6B5E;border:1.5px solid #3D6B5E;font:600 14px/1 Inter,system-ui,sans-serif;padding:11px 22px;border-radius:8px;text-decoration:none;';
+	$s_note           = 'font:400 14px/1.6 Inter,system-ui,sans-serif;color:#6E6E73;border-left:3px solid #0E7FC0;padding-left:14px;margin:32px 0 0;';
+	$s_client_box     = 'background:#FBFBFD;border:1px dashed rgba(14,127,192,.35);border-radius:10px;padding:28px 32px;margin:32px 0 0;font:400 15px/1.65 Inter,system-ui,sans-serif;color:#6E6E73;';
+	$s_city_badge     = 'display:inline-block;background:rgba(14,127,192,.1);color:#0E7FC0;font:600 12px/1 Inter,system-ui,sans-serif;padding:6px 14px;border-radius:100px;letter-spacing:.04em;';
+	$s_btn_sage       = 'display:inline-block;background:#0E7FC0;color:#FFFFFF;font:600 16px/1 Inter,system-ui,sans-serif;padding:16px 36px;border-radius:8px;text-decoration:none;';
+	$s_btn_sage_sm    = 'display:inline-block;background:#0E7FC0;color:#FFFFFF;font:600 14px/1 Inter,system-ui,sans-serif;padding:12px 22px;border-radius:8px;text-decoration:none;';
+	$s_btn_outline_sm = 'display:inline-block;background:transparent;color:#0E7FC0;border:1.5px solid #0E7FC0;font:600 14px/1 Inter,system-ui,sans-serif;padding:11px 22px;border-radius:8px;text-decoration:none;';
 
 	$out = '';
 
@@ -1420,7 +1420,7 @@ add_shortcode( 'gu_programari_page', function (): string {
 	$out .= '<p style="' . $s_body . '">Consultația online nu înlocuiește examinarea clinică directă atunci când aceasta este necesară.</p>';
 
 	$out .= '<div style="' . $s_client_box . '">';
-	$out .= '<strong style="color:#3D6B5E;">[CLIENT: DETALII CONSULTAȚIE ONLINE NECESARE]</strong><br><br>';
+	$out .= '<strong style="color:#0E7FC0;">[CLIENT: DETALII CONSULTAȚIE ONLINE NECESARE]</strong><br><br>';
 	$out .= 'Vă rugăm să confirmați:<br>';
 	$out .= '<ul style="margin:10px 0 0 20px;line-height:2;">';
 	$out .= '<li>Dacă oferiți consultații online și prin ce platformă (Zoom, Teams, alt sistem)</li>';
@@ -1506,7 +1506,7 @@ add_shortcode( 'gu_programari_page', function (): string {
 	}
 	$out .= '</div>';
 
-	$out .= '<p style="' . $s_note . '">Aveți o altă întrebare? Scrieți-ne la <a href="mailto:[CLIENT: email]" style="color:#3D6B5E;">[CLIENT: email contact]</a></p>';
+	$out .= '<p style="' . $s_note . '">Aveți o altă întrebare? Scrieți-ne la <a href="mailto:[CLIENT: email]" style="color:#0E7FC0;">[CLIENT: email contact]</a></p>';
 
 	$out .= '</div>';
 	$out .= '</section>';
@@ -1522,7 +1522,7 @@ add_shortcode( 'gu_programari_page', function (): string {
 	$out .= '<a href="#clinici" style="' . $s_btn_sage . '">Alegeți o locație ↑</a>';
 	$out .= '<a href="#" style="' . $s_btn_outline_sm . '">[CLIENT: +40 7XX XXX XXX]</a>';
 	$out .= '</div>';
-	$out .= '<p style="margin-top:20px;font:400 14px/1.6 Inter,system-ui,sans-serif;color:#86868B;">Sau scrieți la <a href="mailto:[CLIENT: email]" style="color:#3D6B5E;">[CLIENT: email contact]</a></p>';
+	$out .= '<p style="margin-top:20px;font:400 14px/1.6 Inter,system-ui,sans-serif;color:#86868B;">Sau scrieți la <a href="mailto:[CLIENT: email]" style="color:#0E7FC0;">[CLIENT: email contact]</a></p>';
 	$out .= '</div>';
 	$out .= '</section>';
 
@@ -1553,22 +1553,22 @@ add_shortcode( 'gu_recomandari_page', function (): string {
 	$s_section_canvas = 'background:#F5F5F7;border-bottom:1px solid rgba(0,0,0,.06);';
 	$s_inner_wide     = 'max-width:900px;margin:0 auto;padding:96px 32px;';
 	$s_inner_narrow   = 'max-width:720px;margin:0 auto;padding:96px 32px;text-align:center;';
-	$s_overline       = 'font:600 11px/1 Inter,system-ui,sans-serif;letter-spacing:.1em;text-transform:uppercase;color:#3D6B5E;margin:0 0 14px;';
+	$s_overline       = 'font:600 11px/1 Inter,system-ui,sans-serif;letter-spacing:.1em;text-transform:uppercase;color:#0E7FC0;margin:0 0 14px;';
 	$s_h1             = 'font:700 clamp(42px,4.8vw,64px)/1.1 Lora,Georgia,serif;color:#1D1D1F;letter-spacing:-.025em;margin:0 0 20px;';
 	$s_h2             = 'font:700 clamp(28px,3vw,42px)/1.15 Lora,Georgia,serif;color:#1D1D1F;letter-spacing:-.02em;margin:0 0 16px;';
 	$s_lead           = 'font:400 20px/1.7 Inter,system-ui,sans-serif;color:#6E6E73;max-width:600px;margin:0 0 32px;';
 	$s_lead_center    = $s_lead . 'margin-left:auto;margin-right:auto;';
 	$s_body           = 'font:400 17px/1.75 Inter,system-ui,sans-serif;color:#424245;margin:0 0 20px;';
-	$s_note           = 'font:400 14px/1.6 Inter,system-ui,sans-serif;color:#6E6E73;border-left:3px solid #3D6B5E;padding-left:14px;margin:32px 0 0;';
-	$s_client_box     = 'background:#FBFBFD;border:1px dashed rgba(61,107,94,.35);border-radius:10px;padding:28px 32px;margin:32px 0 0;font:400 15px/1.65 Inter,system-ui,sans-serif;color:#6E6E73;';
+	$s_note           = 'font:400 14px/1.6 Inter,system-ui,sans-serif;color:#6E6E73;border-left:3px solid #0E7FC0;padding-left:14px;margin:32px 0 0;';
+	$s_client_box     = 'background:#FBFBFD;border:1px dashed rgba(14,127,192,.35);border-radius:10px;padding:28px 32px;margin:32px 0 0;font:400 15px/1.65 Inter,system-ui,sans-serif;color:#6E6E73;';
 	$s_card_grid      = 'display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:20px;margin-top:36px;';
 	$s_card           = 'background:#FFFFFF;border-radius:12px;padding:28px 28px 24px;box-shadow:0 1px 4px rgba(0,0,0,.06),0 0 0 1px rgba(0,0,0,.04);';
-	$s_card_role      = 'font:500 13px/1.4 Inter,system-ui,sans-serif;color:#3D6B5E;letter-spacing:.04em;margin:0 0 6px;text-transform:uppercase;font-size:12px;';
+	$s_card_role      = 'font:500 13px/1.4 Inter,system-ui,sans-serif;color:#0E7FC0;letter-spacing:.04em;margin:0 0 6px;text-transform:uppercase;font-size:12px;';
 	$s_card_name      = 'font:700 18px/1.3 Lora,Georgia,serif;color:#1D1D1F;margin:0 0 4px;';
 	$s_card_inst      = 'font:400 14px/1.5 Inter,system-ui,sans-serif;color:#6E6E73;margin:0 0 14px;';
 	$s_card_body      = 'font:400 15px/1.7 Inter,system-ui,sans-serif;color:#424245;margin:0;';
 	$s_btn_ink        = 'display:inline-block;background:#1D1D1F;color:#FFFFFF;font:600 16px/1 Inter,system-ui,sans-serif;padding:16px 36px;border-radius:8px;text-decoration:none;transition:background 200ms;';
-	$s_btn_sage       = 'display:inline-block;background:#3D6B5E;color:#FFFFFF;font:600 16px/1 Inter,system-ui,sans-serif;padding:16px 36px;border-radius:8px;text-decoration:none;margin-top:8px;';
+	$s_btn_sage       = 'display:inline-block;background:#0E7FC0;color:#FFFFFF;font:600 16px/1 Inter,system-ui,sans-serif;padding:16px 36px;border-radius:8px;text-decoration:none;margin-top:8px;';
 
 	$out = '';
 
@@ -1620,7 +1620,7 @@ add_shortcode( 'gu_recomandari_page', function (): string {
 
 	// Client action required
 	$out .= '<div style="' . $s_client_box . '">';
-	$out .= '<strong style="color:#3D6B5E;">[CLIENT: RECOMMENDATION CONTENT REQUIRED]</strong><br>';
+	$out .= '<strong style="color:#0E7FC0;">[CLIENT: RECOMMENDATION CONTENT REQUIRED]</strong><br>';
 	$out .= '<br>Pentru fiecare recomandare publicată este necesară:<br>';
 	$out .= '<ul style="margin:10px 0 0 20px;line-height:2;">';
 	$out .= '<li>Acordul scris al colegului medic</li>';
@@ -1651,7 +1651,7 @@ add_shortcode( 'gu_recomandari_page', function (): string {
 
 	// Client placeholder
 	$out .= '<div style="' . $s_client_box . '">';
-	$out .= '<strong style="color:#3D6B5E;">[CLIENT: PATIENT TESTIMONIAL WORKFLOW REQUIRED]</strong><br>';
+	$out .= '<strong style="color:#0E7FC0;">[CLIENT: PATIENT TESTIMONIAL WORKFLOW REQUIRED]</strong><br>';
 	$out .= '<br>Format recomandat pentru fiecare testimonial:<br>';
 	$out .= '<ul style="margin:10px 0 0 20px;line-height:2;">';
 	$out .= '<li>Prenume (sau inițiale) + procedura efectuată + anul</li>';
@@ -1675,7 +1675,7 @@ add_shortcode( 'gu_recomandari_page', function (): string {
 	$out .= '<p style="' . $s_lead_center . '">Dacă ați primit îngrijiri de la Dr. George Ungureanu și doriți să vă împărtășiți experiența, vă invităm să ne contactați direct.</p>';
 
 	$out .= '<div style="' . $s_client_box . 'text-align:left;">';
-	$out .= '<strong style="color:#3D6B5E;">[CLIENT: PATIENT TESTIMONIAL WORKFLOW REQUIRED]</strong><br>';
+	$out .= '<strong style="color:#0E7FC0;">[CLIENT: PATIENT TESTIMONIAL WORKFLOW REQUIRED]</strong><br>';
 	$out .= '<br>Opțiuni de implementare:<br>';
 	$out .= '<ul style="margin:10px 0 0 20px;line-height:2;">';
 	$out .= '<li>Formular de contact intern cu câmpuri specifice (recomandată)</li>';
@@ -1795,12 +1795,12 @@ add_shortcode( 'gu_sfatul_hub', function (): string {
 	$s_wide     = 'max-width:960px;margin:0 auto;padding:80px 32px;';
 	$s_narrow   = 'max-width:720px;margin:0 auto;padding:80px 32px;';
 	$s_narrow_c = 'max-width:720px;margin:0 auto;padding:80px 32px;text-align:center;';
-	$s_over     = 'font:600 11px/1 Inter,system-ui,sans-serif;letter-spacing:.1em;text-transform:uppercase;color:#3D6B5E;margin:0 0 14px;';
+	$s_over     = 'font:600 11px/1 Inter,system-ui,sans-serif;letter-spacing:.1em;text-transform:uppercase;color:#0E7FC0;margin:0 0 14px;';
 	$s_h1       = 'font:700 clamp(40px,4.5vw,60px)/1.1 Lora,Georgia,serif;color:#1D1D1F;letter-spacing:-.025em;margin:0 0 20px;';
 	$s_h2       = 'font:700 clamp(26px,3vw,38px)/1.15 Lora,Georgia,serif;color:#1D1D1F;letter-spacing:-.02em;margin:0 0 12px;';
 	$s_body     = 'font:400 16px/1.75 Inter,system-ui,sans-serif;color:#424245;margin:0 0 16px;';
-	$s_btn_sage = 'display:inline-flex;align-items:center;gap:8px;background:#3D6B5E;color:#FFFFFF;font:600 15px/1 Inter,system-ui,sans-serif;padding:13px 26px;border-radius:8px;text-decoration:none;';
-	$s_btn_out  = 'display:inline-flex;align-items:center;background:transparent;color:#3D6B5E;font:600 15px/1 Inter,system-ui,sans-serif;padding:0;border:none;text-decoration:none;gap:6px;';
+	$s_btn_sage = 'display:inline-flex;align-items:center;gap:8px;background:#0E7FC0;color:#FFFFFF;font:600 15px/1 Inter,system-ui,sans-serif;padding:13px 26px;border-radius:8px;text-decoration:none;';
+	$s_btn_out  = 'display:inline-flex;align-items:center;background:transparent;color:#0E7FC0;font:600 15px/1 Inter,system-ui,sans-serif;padding:0;border:none;text-decoration:none;gap:6px;';
 	$programari_url = esc_url( home_url( '/programari/' ) );
 
 	$out = '';
@@ -2115,7 +2115,7 @@ add_shortcode( 'gu_sfatul_hub', function (): string {
 	$out .= '<p style="font:600 11px/1 Inter,system-ui,sans-serif;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.5);margin:0 0 14px;">Pasul urmator</p>';
 	$out .= '<h2 style="font:700 clamp(26px,3vw,38px)/1.15 Lora,Georgia,serif;color:#FFFFFF;letter-spacing:-.02em;margin:0 0 16px;">Pregatit pentru o evaluare?</h2>';
 	$out .= '<p style="font:400 18px/1.75 Inter,system-ui,sans-serif;color:rgba(255,255,255,.65);margin:0 auto 36px;max-width:500px;">O prima consultatie va ofera claritate &mdash; indiferent de diagnostic.</p>';
-	$out .= '<a href="' . $programari_url . '" style="display:inline-block;background:#3D6B5E;color:#FFFFFF;font:600 16px/1 Inter,system-ui,sans-serif;padding:16px 36px;border-radius:8px;text-decoration:none;">Programeaza o consultatie</a>';
+	$out .= '<a href="' . $programari_url . '" style="display:inline-block;background:#0E7FC0;color:#FFFFFF;font:600 16px/1 Inter,system-ui,sans-serif;padding:16px 36px;border-radius:8px;text-decoration:none;">Programeaza o consultatie</a>';
 	$out .= '</div>';
 	$out .= '</section>';
 
