@@ -331,7 +331,7 @@ add_shortcode( 'gu_afectiuni_archive', function () {
 		$query->the_post();
 		$summary = function_exists( 'get_field' ) ? wp_strip_all_tags( (string) get_field( 'short_summary' ) ) : get_the_excerpt();
 		$out    .= '<article class="gu-afectiuni-card" style="background:#FFFFFF;border:1px solid rgba(0,0,0,.06);border-radius:16px;padding:28px;">';
-		$out    .= '<h3 style="font-family:Lora,serif;font-size:20px;font-weight:700;margin:0 0 10px;"><a href="' . esc_url( get_permalink() ) . '" style="color:#1D1D1F;text-decoration:none;">' . esc_html( get_the_title() ) . '</a></h3>';
+		$out    .= '<h3 style="font-family:Inter,system-ui,sans-serif;font-size:20px;font-weight:700;margin:0 0 10px;letter-spacing:-0.01em;"><a href="' . esc_url( get_permalink() ) . '" style="color:#1D1D1F;text-decoration:none;">' . esc_html( get_the_title() ) . '</a></h3>';
 		$out    .= '<p style="font-family:Inter,system-ui,sans-serif;font-size:15px;color:#6E6E73;margin:0 0 14px;">' . esc_html( wp_trim_words( $summary, 20 ) ) . '</p>';
 		$out    .= '<a href="' . esc_url( get_permalink() ) . '" style="font-size:14px;font-weight:600;color:#0E7FC0;text-decoration:none;">Citește mai mult →</a>';
 		$out    .= '</article>';
@@ -365,7 +365,7 @@ add_shortcode( 'gu_interventii_archive', function () {
 		$query->the_post();
 		$summary = function_exists( 'get_field' ) ? wp_strip_all_tags( (string) get_field( 'short_summary' ) ) : get_the_excerpt();
 		$out    .= '<article class="gu-interventii-card" style="background:#FFFFFF;border:1px solid rgba(0,0,0,.06);border-radius:16px;padding:28px;">';
-		$out    .= '<h3 style="font-family:Lora,serif;font-size:20px;font-weight:700;margin:0 0 10px;"><a href="' . esc_url( get_permalink() ) . '" style="color:#1D1D1F;text-decoration:none;">' . esc_html( get_the_title() ) . '</a></h3>';
+		$out    .= '<h3 style="font-family:Inter,system-ui,sans-serif;font-size:20px;font-weight:700;margin:0 0 10px;letter-spacing:-0.01em;"><a href="' . esc_url( get_permalink() ) . '" style="color:#1D1D1F;text-decoration:none;">' . esc_html( get_the_title() ) . '</a></h3>';
 		$out    .= '<p style="font-family:Inter,system-ui,sans-serif;font-size:15px;color:#6E6E73;margin:0 0 14px;">' . esc_html( wp_trim_words( $summary, 20 ) ) . '</p>';
 		$out    .= '<a href="' . esc_url( get_permalink() ) . '" style="font-size:14px;font-weight:600;color:#0E7FC0;text-decoration:none;">Detalii intervenție →</a>';
 		$out    .= '</article>';
@@ -1174,7 +1174,7 @@ add_shortcode( 'gu_about_cta', function () {
 	return '<div class="gu-about-cta">'
 		. '<h2 class="gu-about-cta__heading">Vorbiți cu Dr. George Ungureanu</h2>'
 		. '<p class="gu-about-cta__text">O consultație vă oferă o evaluare individualizată a simptomelor dumneavoastră și o discuție deschisă despre toate opțiunile de tratament disponibile.</p>'
-		. '<a class="gu-btn gu-btn--light" href="' . esc_url( home_url( '/programari/' ) ) . '">Programează o consultație</a>'
+		. '<a class="gu-btn gu-btn--accent" href="' . esc_url( home_url( '/programari/' ) ) . '">Programează o consultație</a>'
 		. '</div>';
 } );
 
@@ -1328,8 +1328,8 @@ add_shortcode( 'gu_programari_page', function (): string {
 	$s_inner_narrow   = 'max-width:720px;margin:0 auto;padding:96px 32px;';
 	$s_inner_narrow_c = 'max-width:720px;margin:0 auto;padding:96px 32px;text-align:center;';
 	$s_overline       = 'font:600 11px/1 Inter,system-ui,sans-serif;letter-spacing:.1em;text-transform:uppercase;color:#0E7FC0;margin:0 0 14px;';
-	$s_h1             = 'font:700 clamp(42px,4.8vw,64px)/1.1 Lora,Georgia,serif;color:#1D1D1F;letter-spacing:-.025em;margin:0 0 20px;';
-	$s_h2             = 'font:700 clamp(28px,3vw,42px)/1.15 Lora,Georgia,serif;color:#1D1D1F;letter-spacing:-.02em;margin:0 0 16px;';
+	$s_h1             = 'font:700 clamp(42px,4.8vw,64px)/1.1 Inter,system-ui,sans-serif;color:#1D1D1F;letter-spacing:-.03em;margin:0 0 20px;';
+	$s_h2             = 'font:700 clamp(28px,3vw,42px)/1.15 Inter,system-ui,sans-serif;color:#1D1D1F;letter-spacing:-.025em;margin:0 0 16px;';
 	$s_lead           = 'font:400 20px/1.7 Inter,system-ui,sans-serif;color:#6E6E73;max-width:600px;margin:0 0 32px;';
 	$s_body           = 'font:400 17px/1.75 Inter,system-ui,sans-serif;color:#424245;margin:0 0 20px;';
 	$s_note           = 'font:400 14px/1.6 Inter,system-ui,sans-serif;color:#6E6E73;border-left:3px solid #0E7FC0;padding-left:14px;margin:32px 0 0;';
@@ -1554,8 +1554,8 @@ add_shortcode( 'gu_recomandari_page', function (): string {
 	$s_inner_wide     = 'max-width:900px;margin:0 auto;padding:96px 32px;';
 	$s_inner_narrow   = 'max-width:720px;margin:0 auto;padding:96px 32px;text-align:center;';
 	$s_overline       = 'font:600 11px/1 Inter,system-ui,sans-serif;letter-spacing:.1em;text-transform:uppercase;color:#0E7FC0;margin:0 0 14px;';
-	$s_h1             = 'font:700 clamp(42px,4.8vw,64px)/1.1 Lora,Georgia,serif;color:#1D1D1F;letter-spacing:-.025em;margin:0 0 20px;';
-	$s_h2             = 'font:700 clamp(28px,3vw,42px)/1.15 Lora,Georgia,serif;color:#1D1D1F;letter-spacing:-.02em;margin:0 0 16px;';
+	$s_h1             = 'font:700 clamp(42px,4.8vw,64px)/1.1 Inter,system-ui,sans-serif;color:#1D1D1F;letter-spacing:-.03em;margin:0 0 20px;';
+	$s_h2             = 'font:700 clamp(28px,3vw,42px)/1.15 Inter,system-ui,sans-serif;color:#1D1D1F;letter-spacing:-.025em;margin:0 0 16px;';
 	$s_lead           = 'font:400 20px/1.7 Inter,system-ui,sans-serif;color:#6E6E73;max-width:600px;margin:0 0 32px;';
 	$s_lead_center    = $s_lead . 'margin-left:auto;margin-right:auto;';
 	$s_body           = 'font:400 17px/1.75 Inter,system-ui,sans-serif;color:#424245;margin:0 0 20px;';
@@ -1564,10 +1564,10 @@ add_shortcode( 'gu_recomandari_page', function (): string {
 	$s_card_grid      = 'display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:20px;margin-top:36px;';
 	$s_card           = 'background:#FFFFFF;border-radius:12px;padding:28px 28px 24px;box-shadow:0 1px 4px rgba(0,0,0,.06),0 0 0 1px rgba(0,0,0,.04);';
 	$s_card_role      = 'font:500 13px/1.4 Inter,system-ui,sans-serif;color:#0E7FC0;letter-spacing:.04em;margin:0 0 6px;text-transform:uppercase;font-size:12px;';
-	$s_card_name      = 'font:700 18px/1.3 Lora,Georgia,serif;color:#1D1D1F;margin:0 0 4px;';
+	$s_card_name      = 'font:700 18px/1.3 Inter,system-ui,sans-serif;color:#1D1D1F;margin:0 0 4px;letter-spacing:-0.01em;';
 	$s_card_inst      = 'font:400 14px/1.5 Inter,system-ui,sans-serif;color:#6E6E73;margin:0 0 14px;';
 	$s_card_body      = 'font:400 15px/1.7 Inter,system-ui,sans-serif;color:#424245;margin:0;';
-	$s_btn_ink        = 'display:inline-block;background:#1D1D1F;color:#FFFFFF;font:600 16px/1 Inter,system-ui,sans-serif;padding:16px 36px;border-radius:8px;text-decoration:none;transition:background 200ms;';
+	$s_btn_blue       = 'display:inline-block;background:#0E7FC0;color:#FFFFFF;font:600 16px/1 Inter,system-ui,sans-serif;padding:16px 36px;border-radius:8px;text-decoration:none;transition:background 200ms;';
 	$s_btn_sage       = 'display:inline-block;background:#0E7FC0;color:#FFFFFF;font:600 16px/1 Inter,system-ui,sans-serif;padding:16px 36px;border-radius:8px;text-decoration:none;margin-top:8px;';
 
 	$out = '';
@@ -1580,7 +1580,7 @@ add_shortcode( 'gu_recomandari_page', function (): string {
 	$out .= '<p style="' . $s_overline . '">Trust &amp; Validare Profesională</p>';
 	$out .= '<h1 style="' . $s_h1 . '">Recomandări</h1>';
 	$out .= '<p style="' . $s_lead_center . '">Parteneri medicali și pacienți despre experiența cu Dr. George Ungureanu — fără stele artificiale, fără scoruri.</p>';
-	$out .= '<a href="' . $programari_url . '" style="' . $s_btn_ink . '">Programează o consultație</a>';
+	$out .= '<a href="' . $programari_url . '" style="' . $s_btn_blue . '">Programează o consultație</a>';
 	$out .= '</div>';
 	$out .= '</section>';
 
@@ -1796,8 +1796,8 @@ add_shortcode( 'gu_sfatul_hub', function (): string {
 	$s_narrow   = 'max-width:720px;margin:0 auto;padding:80px 32px;';
 	$s_narrow_c = 'max-width:720px;margin:0 auto;padding:80px 32px;text-align:center;';
 	$s_over     = 'font:600 11px/1 Inter,system-ui,sans-serif;letter-spacing:.1em;text-transform:uppercase;color:#0E7FC0;margin:0 0 14px;';
-	$s_h1       = 'font:700 clamp(40px,4.5vw,60px)/1.1 Lora,Georgia,serif;color:#1D1D1F;letter-spacing:-.025em;margin:0 0 20px;';
-	$s_h2       = 'font:700 clamp(26px,3vw,38px)/1.15 Lora,Georgia,serif;color:#1D1D1F;letter-spacing:-.02em;margin:0 0 12px;';
+	$s_h1       = 'font:700 clamp(40px,4.5vw,60px)/1.1 Inter,system-ui,sans-serif;color:#1D1D1F;letter-spacing:-.03em;margin:0 0 20px;';
+	$s_h2       = 'font:700 clamp(26px,3vw,38px)/1.15 Inter,system-ui,sans-serif;color:#1D1D1F;letter-spacing:-.025em;margin:0 0 12px;';
 	$s_body     = 'font:400 16px/1.75 Inter,system-ui,sans-serif;color:#424245;margin:0 0 16px;';
 	$s_btn_sage = 'display:inline-flex;align-items:center;gap:8px;background:#0E7FC0;color:#FFFFFF;font:600 15px/1 Inter,system-ui,sans-serif;padding:13px 26px;border-radius:8px;text-decoration:none;';
 	$s_btn_out  = 'display:inline-flex;align-items:center;background:transparent;color:#0E7FC0;font:600 15px/1 Inter,system-ui,sans-serif;padding:0;border:none;text-decoration:none;gap:6px;';
@@ -2110,14 +2110,52 @@ add_shortcode( 'gu_sfatul_hub', function (): string {
 	// ════════════════════════════════════════════════════
 	// FINAL CTA
 	// ════════════════════════════════════════════════════
-	$out .= '<section style="background:#1D1D1F;">';
+	$out .= '<section style="background:#F2F2F7;border-top:1px solid rgba(0,0,0,.06);">';
 	$out .= '<div style="' . $s_narrow_c . '">';
-	$out .= '<p style="font:600 11px/1 Inter,system-ui,sans-serif;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.5);margin:0 0 14px;">Pasul urmator</p>';
-	$out .= '<h2 style="font:700 clamp(26px,3vw,38px)/1.15 Lora,Georgia,serif;color:#FFFFFF;letter-spacing:-.02em;margin:0 0 16px;">Pregatit pentru o evaluare?</h2>';
-	$out .= '<p style="font:400 18px/1.75 Inter,system-ui,sans-serif;color:rgba(255,255,255,.65);margin:0 auto 36px;max-width:500px;">O prima consultatie va ofera claritate &mdash; indiferent de diagnostic.</p>';
-	$out .= '<a href="' . $programari_url . '" style="display:inline-block;background:#0E7FC0;color:#FFFFFF;font:600 16px/1 Inter,system-ui,sans-serif;padding:16px 36px;border-radius:8px;text-decoration:none;">Programeaza o consultatie</a>';
+	$out .= '<p style="font:600 11px/1 Inter,system-ui,sans-serif;letter-spacing:.1em;text-transform:uppercase;color:#6E6E73;margin:0 0 14px;">Pasul urmator</p>';
+	$out .= '<h2 style="font:700 clamp(26px,3vw,38px)/1.15 Inter,system-ui,sans-serif;color:#1D1D1F;letter-spacing:-.025em;margin:0 0 16px;">Pregătit pentru o evaluare?</h2>';
+	$out .= '<p style="font:400 18px/1.75 Inter,system-ui,sans-serif;color:#424245;margin:0 auto 36px;max-width:500px;">O primă consultație vă oferă claritate &mdash; indiferent de diagnostic.</p>';
+	$out .= '<a href="' . $programari_url . '" style="display:inline-block;background:#0E7FC0;color:#FFFFFF;font:600 16px/1 Inter,system-ui,sans-serif;padding:16px 36px;border-radius:8px;text-decoration:none;">Programează o consultație</a>';
 	$out .= '</div>';
 	$out .= '</section>';
 
 	return $out;
 } );
+
+/* ── HOMEPAGE FINAL CTA — PHP-INJECTED REBUILD ────────────────────────────
+   The Elementor CTA section (#organism-cta-appointment) stores per-element
+   colors in the DB and generates post-38.css with specificity (0,4,0) that
+   cannot be overridden without ID selectors. Rather than fighting Elementor's
+   cascade, we hide that section via CSS (Section 31c) and inject a fully
+   controlled replacement here. JS positions it before .elementor-location-footer.
+   ────────────────────────────────────────────────────────────────────────── */
+add_action( 'wp_footer', function () {
+	if ( ! is_front_page() ) {
+		return;
+	}
+	$url_programari = esc_url( home_url( '/programari/' ) );
+	$url_despre     = esc_url( home_url( '/despre/' ) );
+	?>
+	<section id="gu-cta-rebuilt" class="gu-final-cta" aria-label="Programează o consultație">
+		<div class="gu-final-cta__inner">
+			<p class="gu-final-cta__overline">Pasul următor</p>
+			<h2 class="gu-final-cta__heading">Programează o consultație neurochirurgicală</h2>
+			<p class="gu-final-cta__body">O primă consultație oferă un diagnostic precis și un plan terapeutic individualizat — conservator sau chirurgical, în funcție de situația dumneavoastră.</p>
+			<p class="gu-final-cta__trust">Consultații disponibile în Cluj-Napoca, Baia Mare și online.</p>
+			<div class="gu-final-cta__actions">
+				<a href="<?php echo $url_programari; ?>" class="gu-final-cta__btn-primary">Programează o consultație</a>
+				<a href="<?php echo $url_despre; ?>" class="gu-final-cta__btn-secondary">Vezi clinicile <span aria-hidden="true">→</span></a>
+			</div>
+		</div>
+	</section>
+	<script>
+	(function () {
+		var footer = document.querySelector('.elementor-location-footer');
+		var section = document.getElementById('gu-cta-rebuilt');
+		if (footer && section) {
+			footer.parentNode.insertBefore(section, footer);
+		}
+	}());
+	</script>
+	<?php
+}, 20 );

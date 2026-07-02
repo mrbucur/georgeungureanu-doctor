@@ -256,3 +256,136 @@ Checks per page: overflow, header present, computed background colors (no legacy
 CSS token audit (from 9.10): 10/10 PASS — all deprecated hex values absent from `gu-design-system.css`.
 
 Screenshots taken: all 10 pages at 1440px, full-page.
+
+---
+
+## 9.10D — Final Polish & Interaction Pass
+
+**Date:** 2026-07-02  
+**QA result:** 28 PASS / 0 FAIL  
+**Status:** COMPLETE — awaiting human browser review before commit
+
+### Changes Made
+
+#### Token Updates (`gu-design-system.css` Section 31a)
+
+| Token | Old | New |
+|-------|-----|-----|
+| `--radius-lg` | 16px (Section 1), 12px (Section 26a override) | **20px** (Section 31a final override) |
+| `--color-surface-gray` | — | `#F2F2F7` (iOS System Gray 6) |
+| `--ease-spring` | — | `cubic-bezier(0.34, 1.56, 0.64, 1)` |
+
+Note: Section 26a (Sprint 9.5) contains a second `:root` block that was overriding `--radius-lg` to 12px. Section 31a is positioned last in the file and provides the canonical final value of 20px.
+
+#### Footer Overhaul (Section 31b)
+
+- Unified `background: #F5F5F7 !important` across all pages (was inconsistent: white on some pages, transparent on others)
+- Brand name element (511e1807): Lora serif, 20px, 700 weight, `#1D1D1F`, `text-transform: none` — was rendering as "DR. GEORGE UNGUREANU" (all-caps from the general heading uppercase rule)
+- Subtitle element (4af808b3): 13px, 400 weight, `#6E6E73`, `text-transform: none`
+- Column headings (c3b9da9c, 27495d8d): 11px, 600 weight, 0.08em letter-spacing, `#6E6E73`, uppercase — correct section label treatment
+- Nav links: 14px, 400 weight, `#424245`, with blue hover
+- Description text: 14px, `#424245`, 1.65 line-height
+
+#### Homepage CTA Section Redesign (Section 31c)
+
+Target: `#organism-cta-appointment` (Elementor element `a5c00001`)
+
+Before: Elementor-generated CSS set `background-color: #1D1D1F` (dark). Button `a5c00006` had `background: #F5F5F7; color: #1D1D1F` (gray button on dark bg, invisible due to ghost rule override).
+
+After:
+- Background overridden to `linear-gradient(180deg, #FFFFFF 0%, #F2F2F7 100%)` — clean Apple Health onboarding card feel
+- Overline: accent blue, 11px, 0.10em spacing, uppercase
+- Heading: Lora serif, `clamp(30px, 3.5vw, 44px)`, `#1D1D1F`, -0.025em tracking
+- Body copy: 17px, `#424245`, centered, max-width 560px
+- Button: `#0E7FC0` accent, white text, `padding: 16px 40px`, with hover lift
+
+#### Ghost Button Fix (Section 26e edit)
+
+**Problem:** `.elementor-button.elementor-button-link { background-color: transparent !important; color: var(--color-ink) !important; }` was overriding ALL Elementor link-type buttons in the body, including the hero buttons (making them transparent with dark text — invisible on the dark hero).
+
+**Fix:** Removed `.elementor-button.elementor-button-link` from the ghost rule. The rule now only applies to `.gu-btn--ghost`. Elementor's per-element generated CSS (in `post-{id}.css`) now correctly controls each button's color. Added explicit overrides in Section 31e for the hero primary/ghost buttons for reliability.
+
+#### Header Tablet Fix (Section 31d)
+
+At 768–1023px, the desktop nav was overflowing because "Sfatul Neurochirurgului" (~22 chars) consumed too much horizontal space alongside 5 other nav items, the logo, and the CTA button.
+
+Fix: `@media (min-width: 768px) and (max-width: 1023px)` rule forces hamburger/drawer mode. The mobile drawer (already functional below 1024px) handles navigation at this range. Desktop nav resumes at 1024px+.
+
+#### Mobile Header CTA Fix (Section 31i)
+
+**Problem:** `.gu-btn { display: inline-flex; }` at line 2394 (Section 26e) comes AFTER `@media (max-width: 767px) { .gu-header__cta { display: none; } }` in cascade order. Both have specificity [0,1,0]; the later rule wins — so the `.gu-btn` display rule was showing the header CTA at mobile.
+
+**Fix:** Added `@media (max-width: 767px) { .gu-header__cta { display: none !important; } }` in Section 31i.
+
+#### Card Interactions (Sections 26e edits + 31g)
+
+- Card hover: `transform: translateY(-4px) scale(1.01)` with `280ms cubic-bezier(0.34, 1.56, 0.64, 1)` spring easing (was `translateY(-3px)` at 240ms linear ease)
+- `.gu-clinic-card`, `.gu-hub-featured`: hardcoded `16px` → `20px` radius
+- Icon-box cards: hover lift `translateY(-4px)` added
+
+#### Micro-Interactions
+
+- `html { scroll-behavior: smooth }` (Section 31h)
+- JS anchor scroll with header offset (`gu-animations.js`) — polyfills for any browser with `behavior: 'smooth'` support, accounts for fixed header height
+- Intersection Observer for `.gu-reveal` / `.gu-reveal-group` classes already wired since Sprint 9.9 — confirmed working
+
+#### Header Compact State (Section 31j)
+
+Explicit `rgba(255, 255, 255, 0.95)` + backdrop-filter blur for scrolled header state.
+
+### Files Changed
+
+| File | Changes |
+|------|---------|
+| `gu-design-system.css` | Section 31 added (200 lines); Ghost button rule narrowed; Card hover updated to spring; Footer bg fixed in Section 28q; `--radius-lg` updated in Section 1 |
+| `gu-design-system.js/gu-animations.js` | Smooth anchor scroll handler added |
+
+### QA Results — 9.10D
+
+**28 PASS / 0 FAIL**
+
+| Check | Result |
+|-------|--------|
+| Footer bg `#F5F5F7` — homepage | ✓ |
+| Footer brand name `text-transform: none` | ✓ |
+| Hero button blue `#0E7FC0` | ✓ |
+| CTA section button blue `#0E7FC0` | ✓ |
+| `--radius-lg = 20px` (computed) | ✓ |
+| `--color-surface-gray` defined | ✓ |
+| No overflow — 1440px | ✓ |
+| Hamburger visible at 768px | ✓ |
+| Desktop nav hidden at 768px | ✓ |
+| No overflow — 768px | ✓ |
+| Header CTA hidden at 390px | ✓ |
+| Hamburger visible at 390px | ✓ |
+| No overflow — 390px | ✓ |
+| Footer bg — all 6 pages | ✓ ×6 |
+| CSS source: `--radius-lg: 20px` | ✓ |
+| CSS source: `--color-surface-gray` | ✓ |
+| CSS source: CTA section targeted | ✓ |
+| CSS source: `--ease-spring` | ✓ |
+| CSS source: spring hover animation | ✓ |
+| CSS source: ghost rule narrowed | ✓ |
+| CSS source: smooth scroll | ✓ |
+| JS: anchor scroll with header offset | ✓ |
+| JS: IntersectionObserver wired | ✓ |
+
+### Browser Review Checklist
+
+Before committing, verify in `http://georgeungureanu-doctor-dev.local/` at 1440/768/390px:
+
+- [ ] Homepage hero: dark bg, white serif headline, blue "Programează o consultație" primary button
+- [ ] Homepage hero: "Află mai multe" ghost button (transparent, white border on dark hero)
+- [ ] Homepage CTA section: light white-to-gray gradient, dark editorial heading, blue "Programează acum" button
+- [ ] Homepage specialty cards: rounded corners (~20px), hover lift with spring
+- [ ] Footer: `#F5F5F7` background, "Dr. George Ungureanu" in mixed case (not ALL CAPS)
+- [ ] Footer nav links: readable, hover turns blue
+- [ ] 768px: hamburger shows, no nav overflow, drawer functional
+- [ ] 390px: hamburger shows, header CTA hidden
+- [ ] Sfatul hub page: dark final CTA section intact, hub nav pills blue
+- [ ] Programări final CTA: "Primul pas este cel mai ușor." with blue button
+- [ ] Recomandări final CTA: "Programați o consultație" with blue button
+- [ ] Smooth scroll on in-page anchor links
+- [ ] Cards: hover lift animation (translateY -4px + scale 1.01) with spring feel
+
+> **DO NOT COMMIT. STOP FOR HUMAN REVIEW.**

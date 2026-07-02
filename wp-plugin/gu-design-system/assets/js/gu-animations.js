@@ -65,6 +65,23 @@
     });
   }
 
+  // ── Smooth anchor scroll ─────────────────────────────────────
+  // Polyfill for browsers that don't support scroll-behavior: smooth
+  // (also covers hub nav pills and any in-page anchor links)
+  document.addEventListener('click', function (e) {
+    var link = e.target.closest('a[href^="#"]');
+    if (!link) return;
+    var id = link.getAttribute('href').slice(1);
+    if (!id) return;
+    var target = document.getElementById(id);
+    if (!target) return;
+    e.preventDefault();
+    var headerH = document.getElementById('gu-header');
+    var offset = headerH ? headerH.offsetHeight + 12 : 72;
+    var top = target.getBoundingClientRect().top + window.scrollY - offset;
+    window.scrollTo({ top: top, behavior: 'smooth' });
+  });
+
   // ── Init ──────────────────────────────────────────────────────
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', function () {
