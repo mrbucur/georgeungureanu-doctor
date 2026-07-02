@@ -17,12 +17,12 @@
 deployment:
   tasks:
     # ── GU Design System plugin ──────────────────────────────────
-    - export PLUGIN_DEST=[WP_ROOT]/wp-content/plugins/gu-design-system
+    - export PLUGIN_DEST=/home/rsnro/staging.georgeungureanu.doctor/wp-content/plugins/gu-design-system
     - mkdir -p "$PLUGIN_DEST"
     - cp -R wp-plugin/gu-design-system/. "$PLUGIN_DEST/"
 
     # ── Ungureanu MD Child theme ─────────────────────────────────
-    - export THEME_DEST=[WP_ROOT]/wp-content/themes/ungureanu-md-child
+    - export THEME_DEST=/home/rsnro/staging.georgeungureanu.doctor/wp-content/themes/ungureanu-md-child
     - mkdir -p "$THEME_DEST"
     - cp -R wp-content/themes/ungureanu-md-child/. "$THEME_DEST/"
 
