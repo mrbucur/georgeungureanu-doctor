@@ -3,7 +3,7 @@
  * Plugin Name:  GU Design System
  * Plugin URI:   https://georgeungureanu.doctor
  * Description:  Apple Health-inspired design system for georgeungureanu.doctor. Enqueues Inter via Google Fonts, CSS custom properties (color, typography, spacing, layout, motion tokens), scroll-reveal animations, and PHP-rendered page sections. Safe to activate/deactivate — removes everything on deactivation. Does not modify Elementor database settings and does not depend on Elementor Pro APIs.
- * Version:      1.3.2
+ * Version:      1.3.3
  * Author:       Mr. Bucur
  * Author URI:   https://puiu.bucur.info
  * License:      Private — All rights reserved
@@ -14,7 +14,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Prevent direct file access.
 }
 
-define( 'GU_DESIGN_SYSTEM_VERSION', '1.3.2' );
+define( 'GU_DESIGN_SYSTEM_VERSION', '1.3.3' );
 define( 'GU_DESIGN_SYSTEM_URL', plugin_dir_url( __FILE__ ) );
 define( 'GU_ACF_JSON_DIR', plugin_dir_path( __FILE__ ) . 'acf-json' );
 
@@ -2367,6 +2367,155 @@ add_action( 'admin_post_gu_flush_permalinks', function () {
 	exit;
 } );
 
+// ── Elementor kit status helper ───────────────────────────────
+
+/**
+ * Returns the current state of the Elementor Default Kit.
+ *
+ * Possible kit_status values:
+ *   'not_elementor' — Elementor plugin is not loaded
+ *   'ok'            — active kit exists and is published
+ *   'trashed'       — active kit option points to a trashed post
+ *   'broken'        — active kit option points to a non-published, non-trash post
+ *   'restorable'    — option missing/stale but another kit was found (publish/trash/draft)
+ *   'missing'       — no kit exists at all; must create new
+ *
+ * @return array{elementor_active:bool, option_set:bool, kit_id:int, kit_post:WP_Post|null, kit_status:string, restorable:WP_Post|null}
+ */
+function gu_elementor_kit_status(): array {
+	$result = [
+		'elementor_active' => class_exists( 'Elementor\Plugin' ),
+		'option_set'       => false,
+		'kit_id'           => 0,
+		'kit_post'         => null,
+		'kit_status'       => 'not_elementor',
+		'restorable'       => null,
+	];
+
+	if ( ! $result['elementor_active'] ) {
+		return $result;
+	}
+
+	$kit_id               = (int) get_option( 'elementor_active_kit', 0 );
+	$result['option_set'] = $kit_id > 0;
+	$result['kit_id']     = $kit_id;
+
+	if ( $kit_id > 0 ) {
+		$post = get_post( $kit_id );
+		if ( $post instanceof WP_Post ) {
+			$result['kit_post'] = $post;
+			if ( 'publish' === $post->post_status ) {
+				$result['kit_status'] = 'ok';
+				return $result;
+			}
+			if ( 'trash' === $post->post_status ) {
+				$result['kit_status'] = 'trashed';
+				return $result;
+			}
+			$result['kit_status'] = 'broken';
+			return $result;
+		}
+	}
+
+	// Option missing or post gone — look for any surviving kit.
+	$kits = get_posts( [
+		'post_type'      => 'elementor_library',
+		'post_status'    => [ 'publish', 'trash', 'draft' ],
+		'meta_key'       => '_elementor_template_type',
+		'meta_value'     => 'kit',
+		'numberposts'    => 1,
+		'orderby'        => 'date',
+		'order'          => 'DESC',
+		'no_found_rows'  => true,
+	] );
+
+	if ( ! empty( $kits ) ) {
+		$result['restorable'] = $kits[0];
+		$result['kit_status'] = 'restorable';
+	} else {
+		$result['kit_status'] = 'missing';
+	}
+
+	return $result;
+}
+
+// ── POST handler — Repair Elementor Default Kit ───────────────
+
+add_action( 'admin_post_gu_repair_kit', function () {
+	if ( ! current_user_can( 'manage_options' ) ) {
+		wp_die( 'Unauthorized.', 403 );
+	}
+	check_admin_referer( 'gu_repair_kit' );
+
+	if ( ! class_exists( 'Elementor\Plugin' ) ) {
+		wp_safe_redirect( add_query_arg(
+			[ 'page' => 'gu-design-system', 'action' => 'kit_error', 'reason' => 'no_elementor' ],
+			admin_url( 'admin.php' )
+		) );
+		exit;
+	}
+
+	$status     = gu_elementor_kit_status();
+	$kit_action = 'error';
+
+	switch ( $status['kit_status'] ) {
+
+		case 'ok':
+			$kit_action = 'already_ok';
+			break;
+
+		case 'trashed':
+			// The active kit is in trash — restore it.
+			wp_untrash_post( $status['kit_id'] );
+			wp_publish_post( $status['kit_id'] );
+			$kit_action = 'restored';
+			break;
+
+		case 'broken':
+			// Post exists but is not published — publish it.
+			wp_publish_post( $status['kit_id'] );
+			$kit_action = 'restored';
+			break;
+
+		case 'restorable':
+			// Found an orphaned kit — adopt it and restore if needed.
+			$kit = $status['restorable'];
+			if ( 'trash' === $kit->post_status ) {
+				wp_untrash_post( $kit->ID );
+				wp_publish_post( $kit->ID );
+			} elseif ( 'publish' !== $kit->post_status ) {
+				wp_publish_post( $kit->ID );
+			}
+			update_option( 'elementor_active_kit', $kit->ID );
+			$kit_action = 'restored';
+			break;
+
+		case 'missing':
+		default:
+			// No kit anywhere — create a minimal one.
+			$new_id = wp_insert_post( [
+				'post_title'  => 'Default Kit',
+				'post_type'   => 'elementor_library',
+				'post_status' => 'publish',
+				'meta_input'  => [
+					'_elementor_edit_mode'     => 'builder',
+					'_elementor_template_type' => 'kit',
+				],
+			] );
+			if ( ! is_wp_error( $new_id ) && $new_id > 0 ) {
+				update_option( 'elementor_active_kit', $new_id );
+				$kit_action = 'created';
+			}
+			break;
+	}
+
+	wp_safe_redirect( add_query_arg(
+		[ 'page' => 'gu-design-system', 'action' => 'kit_repaired', 'kit_action' => $kit_action ],
+		admin_url( 'admin.php' )
+	) );
+	exit;
+} );
+
 // ── Page render ───────────────────────────────────────────────
 
 function gu_admin_setup_page(): void {
@@ -2409,6 +2558,9 @@ function gu_admin_setup_page(): void {
 
 	$all_pages_exist = ! in_array( false, array_column( $pages_status, 'exists' ), true );
 
+	$kit        = gu_elementor_kit_status();
+	$kit_action = isset( $_GET['kit_action'] ) ? sanitize_key( $_GET['kit_action'] ) : '';
+
 	?>
 	<div class="wrap">
 	<h1>GU Design System — Setup</h1>
@@ -2442,6 +2594,26 @@ function gu_admin_setup_page(): void {
 	<?php if ( $action === 'flushed' ) : ?>
 	<div class="notice notice-success is-dismissible"><p>
 		<strong>Permalink-urile au fost reîncărcate.</strong> Arhivele CPT sunt acum accesibile.
+	</p></div>
+	<?php endif; ?>
+
+	<?php if ( $action === 'kit_repaired' ) : ?>
+	<div class="notice notice-<?php echo $kit_action === 'error' ? 'error' : 'success'; ?> is-dismissible"><p>
+		<?php if ( $kit_action === 'created' ) : ?>
+			<strong>Default Kit creat.</strong> Elementor poate fi acum utilizat.
+		<?php elseif ( $kit_action === 'restored' ) : ?>
+			<strong>Default Kit restaurat.</strong> Elementor poate fi acum utilizat.
+		<?php elseif ( $kit_action === 'already_ok' ) : ?>
+			Default Kit este deja activ — nicio modificare.
+		<?php else : ?>
+			<strong>Eroare:</strong> Kit-ul nu a putut fi creat. Verifică erorile PHP sau reinstalează Elementor.
+		<?php endif; ?>
+	</p></div>
+	<?php endif; ?>
+
+	<?php if ( $action === 'kit_error' ) : ?>
+	<div class="notice notice-error is-dismissible"><p>
+		<strong>Elementor nu este activ.</strong> Activează pluginul Elementor înainte de a repara kit-ul.
 	</p></div>
 	<?php endif; ?>
 
@@ -2560,6 +2732,67 @@ function gu_admin_setup_page(): void {
 	</div>
 
 
+	<!-- ── Elementor Default Kit ─────────────────────────── -->
+	<div class="gu-setup-card">
+		<h2>Elementor Default Kit</h2>
+
+		<?php if ( ! $kit['elementor_active'] ) : ?>
+			<p style="color:#d63638;font-weight:600;margin:0">
+				✗ Elementor nu este activ — kit-ul nu poate fi verificat.
+			</p>
+
+		<?php elseif ( $kit['kit_status'] === 'ok' ) : ?>
+			<p style="color:#00a32a;font-weight:600;margin:0 0 6px">
+				✓ Default Kit activ (ID <?php echo esc_html( $kit['kit_id'] ); ?>)
+			</p>
+			<p style="margin:0;font-size:12px;color:#646970">
+				Elementor poate deschide editorul fără erori.
+			</p>
+
+		<?php else : ?>
+			<?php
+			$kit_problem = '';
+			if ( $kit['kit_status'] === 'trashed' ) {
+				$kit_problem = 'Kit-ul implicit (ID ' . $kit['kit_id'] . ') a fost mutat în Coș. Elementor arată eroarea "Your site doesn\'t have a default kit."';
+			} elseif ( $kit['kit_status'] === 'broken' ) {
+				$kit_problem = 'Kit-ul (ID ' . $kit['kit_id'] . ') există dar are statusul <code>' . esc_html( $kit['kit_post']->post_status ) . '</code> în loc de <code>publish</code>.';
+			} elseif ( $kit['kit_status'] === 'restorable' ) {
+				$kit_problem = 'Opțiunea <code>elementor_active_kit</code> lipsește sau este invalidă, dar a fost găsit un kit existent (ID ' . $kit['restorable']->ID . ', status: ' . esc_html( $kit['restorable']->post_status ) . ').';
+			} else {
+				$kit_problem = 'Niciun kit nu există în baza de date. Elementor va arăta eroarea "Your site doesn\'t have a default kit."';
+			}
+			?>
+			<p style="color:#d63638;font-weight:600;margin:0 0 8px">
+				✗ Default Kit lipsește sau este invalid
+			</p>
+			<p style="margin:0 0 16px;font-size:13px;color:#1d1d1f">
+				<?php echo wp_kses( $kit_problem, [ 'code' => [] ] ); ?>
+			</p>
+
+			<form method="post" action="<?php echo esc_url( admin_url( 'admin-post.php' ) ); ?>">
+				<?php wp_nonce_field( 'gu_repair_kit' ); ?>
+				<input type="hidden" name="action" value="gu_repair_kit">
+				<button type="submit" class="button button-primary">Repair Elementor Default Kit</button>
+			</form>
+
+			<p style="margin:12px 0 0;font-size:12px;color:#646970">
+				<?php if ( $kit['kit_status'] === 'trashed' ) : ?>
+					Acțiunea va restaura kit-ul din Coș și îl va republica.
+				<?php elseif ( $kit['kit_status'] === 'restorable' ) : ?>
+					Acțiunea va seta kit-ul existent ca activ și îl va publica dacă este necesar.
+				<?php else : ?>
+					Acțiunea va crea un Default Kit nou și îl va seta ca activ.
+				<?php endif; ?>
+				Nu se șterg sau modifică setările existente ale kit-ului.
+			</p>
+		<?php endif; ?>
+
+		<p style="margin:16px 0 0;font-size:12px;color:#646970;border-top:1px solid #f0f0f1;padding-top:12px">
+			<strong>Opțiune WordPress:</strong> <code>elementor_active_kit</code> = <code><?php echo esc_html( $kit['kit_id'] ?: '(nesetat)' ); ?></code>
+		</p>
+	</div>
+
+
 	<!-- ── Flush Permalinks ───────────────────────────────── -->
 	<div class="gu-setup-card">
 		<h2>Flush Permalinks</h2>
@@ -2583,7 +2816,8 @@ function gu_admin_setup_page(): void {
 		<table class="gu-setup-table">
 			<thead><tr><th>Situație</th><th>Acțiune necesară</th></tr></thead>
 			<tbody>
-				<tr><td>WordPress nou instalat</td><td>Create / Repair Core Pages → Flush Permalinks → importă template-urile Elementor</td></tr>
+				<tr><td>WordPress nou instalat</td><td>Create / Repair Core Pages → Flush Permalinks → Repair Elementor Default Kit → importă template-urile Elementor</td></tr>
+				<tr><td>Elementor arată "doesn't have a default kit"</td><td>Repair Elementor Default Kit</td></tr>
 				<tr><td>Plugin actualizat (CPT sau slug nou)</td><td>Flush Permalinks</td></tr>
 				<tr><td>Activare temă</td><td>Flush Permalinks</td></tr>
 				<tr><td>Deploy cPanel Git</td><td>Elementor → Tools → Regenerate CSS (dacă s-a modificat CSS-ul plugin-ului)</td></tr>
