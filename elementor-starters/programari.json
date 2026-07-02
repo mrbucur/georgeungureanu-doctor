@@ -1,0 +1,279 @@
+{
+  "version": "0.4",
+  "title": "Programări — Starter Template",
+  "type": "page",
+  "content": [
+
+    {
+      "id": "prs001",
+      "elType": "section",
+      "isInner": false,
+      "settings": {
+        "background_background": "classic",
+        "background_color": "#FFFFFF",
+        "padding": { "top": "72", "right": "32", "bottom": "72", "left": "32", "unit": "px", "isLinked": false },
+        "layout": "boxed",
+        "content_width": { "size": 720, "unit": "px" }
+      },
+      "elements": [
+        {
+          "id": "prc001",
+          "elType": "column",
+          "settings": { "_column_size": 100, "_inline_size": null },
+          "elements": [
+            {
+              "id": "prw001",
+              "elType": "widget",
+              "widgetType": "text-editor",
+              "settings": { "editor": "<p style=\"font-size:11px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:#0E7FC0;margin:0 0 14px;text-align:center\">Consultații neurochirurgicale</p>" },
+              "elements": []
+            },
+            {
+              "id": "prw002",
+              "elType": "widget",
+              "widgetType": "heading",
+              "settings": { "title": "Programați o consultație", "header_size": "h1", "align": "center", "title_color": "#1D1D1F" },
+              "elements": []
+            },
+            {
+              "id": "prw003",
+              "elType": "widget",
+              "widgetType": "text-editor",
+              "settings": { "editor": "<p style=\"text-align:center;color:#424245;font-size:19px;line-height:1.65\">Disponibil în Cluj-Napoca, Baia Mare și online. Diagnostic precis, plan terapeutic individualizat.</p>" },
+              "elements": []
+            }
+          ]
+        }
+      ]
+    },
+
+    {
+      "id": "prs002",
+      "elType": "section",
+      "isInner": false,
+      "settings": {
+        "background_background": "classic",
+        "background_color": "#F2F2F7",
+        "padding": { "top": "64", "right": "32", "bottom": "16", "left": "32", "unit": "px", "isLinked": false },
+        "layout": "boxed",
+        "content_width": { "size": 1240, "unit": "px" }
+      },
+      "elements": [
+        {
+          "id": "prc002",
+          "elType": "column",
+          "settings": { "_column_size": 100, "_inline_size": null },
+          "elements": [
+            {
+              "id": "prw004",
+              "elType": "widget",
+              "widgetType": "heading",
+              "settings": { "title": "Locații fizice", "header_size": "h2", "align": "left", "title_color": "#1D1D1F" },
+              "elements": []
+            },
+            {
+              "id": "prw005",
+              "elType": "widget",
+              "widgetType": "text-editor",
+              "settings": { "editor": "<p style=\"color:#424245;font-size:16px;margin:0\">Consultații față-în-față în două orașe.</p>" },
+              "elements": []
+            }
+          ]
+        }
+      ]
+    },
+
+    {
+      "id": "prs003",
+      "elType": "section",
+      "isInner": false,
+      "settings": {
+        "background_background": "classic",
+        "background_color": "#F2F2F7",
+        "padding": { "top": "24", "right": "32", "bottom": "64", "left": "32", "unit": "px", "isLinked": false },
+        "layout": "boxed",
+        "content_width": { "size": 1240, "unit": "px" },
+        "gap": "extended"
+      },
+      "elements": [
+        {
+          "id": "prc003",
+          "elType": "column",
+          "settings": { "_column_size": 50, "_inline_size": null },
+          "elements": [
+            {
+              "id": "prw006",
+              "elType": "widget",
+              "widgetType": "text-editor",
+              "settings": { "editor": "<p style=\"font-size:11px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:#0E7FC0;margin:0 0 6px\">Cluj-Napoca</p><p style=\"font-size:22px;font-weight:700;color:#1D1D1F;margin:0 0 20px\">[CLIENT_CONTENT: denumire clinică]</p><p style=\"font-size:11px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;color:#6E6E73;margin:0 0 4px\">Adresă</p><p style=\"font-size:15px;color:#424245;margin:0 0 12px\">[CLIENT_CONTENT: stradă, număr, Cluj-Napoca]</p><p style=\"font-size:11px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;color:#6E6E73;margin:0 0 4px\">Program</p><p style=\"font-size:15px;color:#424245;margin:0 0 12px\">[CLIENT_CONTENT: zile și ore]</p><p style=\"font-size:11px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;color:#6E6E73;margin:0 0 4px\">Telefon</p><p style=\"font-size:15px;color:#424245;margin:0\">[CLIENT_CONTENT: număr telefon]</p>" },
+              "elements": []
+            },
+            {
+              "id": "prw007",
+              "elType": "widget",
+              "widgetType": "button",
+              "settings": {
+                "text": "Sună pentru programare",
+                "link": { "url": "tel:[CLIENT_CONTENT]", "is_external": "", "nofollow": "" },
+                "align": "left",
+                "background_color": "#0E7FC0",
+                "button_text_color": "#FFFFFF"
+              },
+              "elements": []
+            }
+          ]
+        },
+        {
+          "id": "prc004",
+          "elType": "column",
+          "settings": { "_column_size": 50, "_inline_size": null },
+          "elements": [
+            {
+              "id": "prw008",
+              "elType": "widget",
+              "widgetType": "text-editor",
+              "settings": { "editor": "<p style=\"font-size:11px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:#0E7FC0;margin:0 0 6px\">Baia Mare</p><p style=\"font-size:22px;font-weight:700;color:#1D1D1F;margin:0 0 20px\">[CLIENT_CONTENT: denumire clinică]</p><p style=\"font-size:11px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;color:#6E6E73;margin:0 0 4px\">Adresă</p><p style=\"font-size:15px;color:#424245;margin:0 0 12px\">[CLIENT_CONTENT: stradă, număr, Baia Mare]</p><p style=\"font-size:11px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;color:#6E6E73;margin:0 0 4px\">Program</p><p style=\"font-size:15px;color:#424245;margin:0 0 12px\">[CLIENT_CONTENT: zile și ore]</p><p style=\"font-size:11px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;color:#6E6E73;margin:0 0 4px\">Telefon</p><p style=\"font-size:15px;color:#424245;margin:0\">[CLIENT_CONTENT: număr telefon]</p>" },
+              "elements": []
+            },
+            {
+              "id": "prw009",
+              "elType": "widget",
+              "widgetType": "button",
+              "settings": {
+                "text": "Sună pentru programare",
+                "link": { "url": "tel:[CLIENT_CONTENT]", "is_external": "", "nofollow": "" },
+                "align": "left",
+                "background_color": "#0E7FC0",
+                "button_text_color": "#FFFFFF"
+              },
+              "elements": []
+            }
+          ]
+        }
+      ]
+    },
+
+    {
+      "id": "prs004",
+      "elType": "section",
+      "isInner": false,
+      "settings": {
+        "background_background": "classic",
+        "background_color": "#FFFFFF",
+        "padding": { "top": "64", "right": "32", "bottom": "64", "left": "32", "unit": "px", "isLinked": false },
+        "layout": "boxed",
+        "content_width": { "size": 720, "unit": "px" }
+      },
+      "elements": [
+        {
+          "id": "prc005",
+          "elType": "column",
+          "settings": { "_column_size": 100, "_inline_size": null },
+          "elements": [
+            {
+              "id": "prw010",
+              "elType": "widget",
+              "widgetType": "heading",
+              "settings": { "title": "Consultație online", "header_size": "h2", "align": "center", "title_color": "#1D1D1F" },
+              "elements": []
+            },
+            {
+              "id": "prw011",
+              "elType": "widget",
+              "widgetType": "text-editor",
+              "settings": { "editor": "<p style=\"text-align:center;color:#424245;font-size:16px;line-height:1.65;margin:0 0 24px\">Consultații video disponibile pentru pacienți din orice localitate. Programați direct prin calendarul online.</p><div style=\"background:#F2F2F7;border:2px dashed rgba(0,0,0,0.10);border-radius:12px;padding:48px 32px;text-align:center;color:#6E6E73;font-size:14px\">Calendar online Cal.com — în pregătire<br><span style=\"font-size:12px\">[CLIENT_CONTENT: configurați Cal.com și înlocuiți acest bloc cu embed-ul]</span></div>" },
+              "elements": []
+            }
+          ]
+        }
+      ]
+    },
+
+    {
+      "id": "prs005",
+      "elType": "section",
+      "isInner": false,
+      "settings": {
+        "background_background": "classic",
+        "background_color": "#F2F2F7",
+        "padding": { "top": "64", "right": "32", "bottom": "64", "left": "32", "unit": "px", "isLinked": false },
+        "layout": "boxed",
+        "content_width": { "size": 800, "unit": "px" }
+      },
+      "elements": [
+        {
+          "id": "prc006",
+          "elType": "column",
+          "settings": { "_column_size": 100, "_inline_size": null },
+          "elements": [
+            {
+              "id": "prw012",
+              "elType": "widget",
+              "widgetType": "heading",
+              "settings": { "title": "Întrebări frecvente", "header_size": "h2", "align": "left", "title_color": "#1D1D1F" },
+              "elements": []
+            },
+            {
+              "id": "prw013",
+              "elType": "widget",
+              "widgetType": "text-editor",
+              "settings": { "editor": "<details style=\"background:#FFFFFF;border-radius:14px;overflow:hidden;margin-bottom:12px;border:1px solid rgba(0,0,0,0.06)\"><summary style=\"font-size:16px;font-weight:600;color:#1D1D1F;padding:20px 24px;cursor:pointer\">Ce să aduc la prima consultație?</summary><div style=\"padding:0 24px 20px;font-size:15px;line-height:1.7;color:#424245\">Aduceți investigațiile imagistice (RMN, CT), biletele de externare, lista medicamentelor curente și un act de identitate.</div></details><details style=\"background:#FFFFFF;border-radius:14px;overflow:hidden;margin-bottom:12px;border:1px solid rgba(0,0,0,0.06)\"><summary style=\"font-size:16px;font-weight:600;color:#1D1D1F;padding:20px 24px;cursor:pointer\">Cât durează o consultație?</summary><div style=\"padding:0 24px 20px;font-size:15px;line-height:1.7;color:#424245\">Prima consultație durează 30–45 de minute. Consultațiile de urmărire, 20–30 de minute.</div></details><details style=\"background:#FFFFFF;border-radius:14px;overflow:hidden;margin-bottom:12px;border:1px solid rgba(0,0,0,0.06)\"><summary style=\"font-size:16px;font-weight:600;color:#1D1D1F;padding:20px 24px;cursor:pointer\">Este necesar un bilet de trimitere?</summary><div style=\"padding:0 24px 20px;font-size:15px;line-height:1.7;color:#424245\">Nu este obligatoriu în regim privat. [CLIENT_CONTENT: confirmați cu clinica]</div></details><details style=\"background:#FFFFFF;border-radius:14px;overflow:hidden;border:1px solid rgba(0,0,0,0.06)\"><summary style=\"font-size:16px;font-weight:600;color:#1D1D1F;padding:20px 24px;cursor:pointer\">Cum funcționează consultația online?</summary><div style=\"padding:0 24px 20px;font-size:15px;line-height:1.7;color:#424245\">Prin videoconferință securizată. Programați prin calendarul de mai sus și veți primi un link de acces.</div></details>" },
+              "elements": []
+            }
+          ]
+        }
+      ]
+    },
+
+    {
+      "id": "prs006",
+      "elType": "section",
+      "isInner": false,
+      "settings": {
+        "background_background": "classic",
+        "background_color": "#0E7FC0",
+        "padding": { "top": "72", "right": "32", "bottom": "72", "left": "32", "unit": "px", "isLinked": false },
+        "layout": "boxed",
+        "content_width": { "size": 640, "unit": "px" }
+      },
+      "elements": [
+        {
+          "id": "prc007",
+          "elType": "column",
+          "settings": { "_column_size": 100, "_inline_size": null },
+          "elements": [
+            {
+              "id": "prw014",
+              "elType": "widget",
+              "widgetType": "heading",
+              "settings": { "title": "Solicitați o consultație astăzi", "header_size": "h2", "align": "center", "title_color": "#FFFFFF" },
+              "elements": []
+            },
+            {
+              "id": "prw015",
+              "elType": "widget",
+              "widgetType": "text-editor",
+              "settings": { "editor": "<p style=\"text-align:center;color:rgba(255,255,255,0.85);font-size:17px;line-height:1.7;margin:0 0 32px\">Diagnostic precis și plan de tratament individualizat — conservator sau chirurgical.</p>" },
+              "elements": []
+            },
+            {
+              "id": "prw016",
+              "elType": "widget",
+              "widgetType": "button",
+              "settings": {
+                "text": "Sună acum",
+                "link": { "url": "tel:[CLIENT_CONTENT]", "is_external": "", "nofollow": "" },
+                "align": "center",
+                "background_color": "#FFFFFF",
+                "button_text_color": "#0E7FC0"
+              },
+              "elements": []
+            }
+          ]
+        }
+      ]
+    }
+
+  ],
+  "page_settings": {}
+}

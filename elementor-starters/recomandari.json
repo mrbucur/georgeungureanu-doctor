@@ -1,0 +1,268 @@
+{
+  "version": "0.4",
+  "title": "Recomandări — Starter Template",
+  "type": "page",
+  "content": [
+
+    {
+      "id": "rcs001",
+      "elType": "section",
+      "isInner": false,
+      "settings": {
+        "background_background": "classic",
+        "background_color": "#FFFFFF",
+        "padding": { "top": "72", "right": "32", "bottom": "64", "left": "32", "unit": "px", "isLinked": false },
+        "layout": "boxed",
+        "content_width": { "size": 720, "unit": "px" }
+      },
+      "elements": [
+        {
+          "id": "rcc001",
+          "elType": "column",
+          "settings": { "_column_size": 100, "_inline_size": null },
+          "elements": [
+            {
+              "id": "rcw001",
+              "elType": "widget",
+              "widgetType": "text-editor",
+              "settings": { "editor": "<p style=\"font-size:11px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:#0E7FC0;margin:0 0 14px;text-align:center\">Experiența pacienților</p>" },
+              "elements": []
+            },
+            {
+              "id": "rcw002",
+              "elType": "widget",
+              "widgetType": "heading",
+              "settings": { "title": "Ce spun colegii și pacienții", "header_size": "h1", "align": "center", "title_color": "#1D1D1F" },
+              "elements": []
+            },
+            {
+              "id": "rcw003",
+              "elType": "widget",
+              "widgetType": "text-editor",
+              "settings": { "editor": "<p style=\"text-align:center;color:#424245;font-size:19px;line-height:1.65\">Recomandări din partea colegilor medici și experiențele pacienților care au beneficiat de consultații sau intervenții neurochirurgicale.</p>" },
+              "elements": []
+            },
+            {
+              "id": "rcw004",
+              "elType": "widget",
+              "widgetType": "text-editor",
+              "settings": { "editor": "<div style=\"display:flex;align-items:center;justify-content:center;gap:24px;flex-wrap:wrap;margin-top:24px;font-size:13px;color:#6E6E73\"><span>✓ Medic specialist atestat</span><span>✓ Experiență dovedită</span><span>✓ Abordare individualizată</span></div>" },
+              "elements": []
+            }
+          ]
+        }
+      ]
+    },
+
+    {
+      "id": "rcs002",
+      "elType": "section",
+      "isInner": false,
+      "settings": {
+        "background_background": "classic",
+        "background_color": "#F2F2F7",
+        "padding": { "top": "64", "right": "32", "bottom": "16", "left": "32", "unit": "px", "isLinked": false },
+        "layout": "boxed",
+        "content_width": { "size": 1240, "unit": "px" }
+      },
+      "elements": [
+        {
+          "id": "rcc002",
+          "elType": "column",
+          "settings": { "_column_size": 100, "_inline_size": null },
+          "elements": [
+            {
+              "id": "rcw005",
+              "elType": "widget",
+              "widgetType": "heading",
+              "settings": { "title": "Recomandări de la colegi medici", "header_size": "h2", "align": "left", "title_color": "#1D1D1F" },
+              "elements": []
+            },
+            {
+              "id": "rcw006",
+              "elType": "widget",
+              "widgetType": "text-editor",
+              "settings": { "editor": "<p style=\"color:#424245;font-size:16px;margin:0\">[CLIENT_CONTENT: introduceți recomandările de la colegi medici în cardurile de mai jos]</p>" },
+              "elements": []
+            }
+          ]
+        }
+      ]
+    },
+
+    {
+      "id": "rcs003",
+      "elType": "section",
+      "isInner": false,
+      "settings": {
+        "background_background": "classic",
+        "background_color": "#F2F2F7",
+        "padding": { "top": "24", "right": "32", "bottom": "64", "left": "32", "unit": "px", "isLinked": false },
+        "layout": "boxed",
+        "content_width": { "size": 1240, "unit": "px" },
+        "gap": "extended"
+      },
+      "elements": [
+        {
+          "id": "rcc003",
+          "elType": "column",
+          "settings": { "_column_size": 50, "_inline_size": null },
+          "elements": [
+            {
+              "id": "rcw007",
+              "elType": "widget",
+              "widgetType": "text-editor",
+              "settings": { "editor": "<div style=\"background:#FFFFFF;border-radius:20px;padding:36px 32px;border:1px solid rgba(0,0,0,0.06);margin-bottom:24px\"><p style=\"font-size:16px;line-height:1.75;color:#424245;font-style:italic;margin:0 0 20px\">„[CLIENT_CONTENT: citat de recomandare de la un coleg medic]”</p><p style=\"font-size:14px;font-weight:600;color:#1D1D1F;margin:0 0 2px\">[CLIENT_CONTENT: Dr. Prenume Nume]</p><p style=\"font-size:13px;color:#6E6E73;margin:0\">[CLIENT_CONTENT: specialitate, instituție]</p></div><div style=\"background:#FFFFFF;border-radius:20px;padding:36px 32px;border:1px solid rgba(0,0,0,0.06)\"><p style=\"font-size:16px;line-height:1.75;color:#424245;font-style:italic;margin:0 0 20px\">„[CLIENT_CONTENT: citat de recomandare de la un coleg medic]”</p><p style=\"font-size:14px;font-weight:600;color:#1D1D1F;margin:0 0 2px\">[CLIENT_CONTENT: Dr. Prenume Nume]</p><p style=\"font-size:13px;color:#6E6E73;margin:0\">[CLIENT_CONTENT: specialitate, instituție]</p></div>" },
+              "elements": []
+            }
+          ]
+        },
+        {
+          "id": "rcc004",
+          "elType": "column",
+          "settings": { "_column_size": 50, "_inline_size": null },
+          "elements": [
+            {
+              "id": "rcw008",
+              "elType": "widget",
+              "widgetType": "text-editor",
+              "settings": { "editor": "<div style=\"background:#FFFFFF;border-radius:20px;padding:36px 32px;border:1px solid rgba(0,0,0,0.06);margin-bottom:24px\"><p style=\"font-size:16px;line-height:1.75;color:#424245;font-style:italic;margin:0 0 20px\">„[CLIENT_CONTENT: citat de recomandare de la un coleg medic]”</p><p style=\"font-size:14px;font-weight:600;color:#1D1D1F;margin:0 0 2px\">[CLIENT_CONTENT: Dr. Prenume Nume]</p><p style=\"font-size:13px;color:#6E6E73;margin:0\">[CLIENT_CONTENT: specialitate, instituție]</p></div><div style=\"background:#FFFFFF;border-radius:20px;padding:36px 32px;border:1px solid rgba(0,0,0,0.06)\"><p style=\"font-size:16px;line-height:1.75;color:#424245;font-style:italic;margin:0 0 20px\">„[CLIENT_CONTENT: citat de recomandare de la un coleg medic]”</p><p style=\"font-size:14px;font-weight:600;color:#1D1D1F;margin:0 0 2px\">[CLIENT_CONTENT: Dr. Prenume Nume]</p><p style=\"font-size:13px;color:#6E6E73;margin:0\">[CLIENT_CONTENT: specialitate, instituție]</p></div>" },
+              "elements": []
+            }
+          ]
+        }
+      ]
+    },
+
+    {
+      "id": "rcs004",
+      "elType": "section",
+      "isInner": false,
+      "settings": {
+        "background_background": "classic",
+        "background_color": "#FFFFFF",
+        "padding": { "top": "64", "right": "32", "bottom": "16", "left": "32", "unit": "px", "isLinked": false },
+        "layout": "boxed",
+        "content_width": { "size": 1240, "unit": "px" }
+      },
+      "elements": [
+        {
+          "id": "rcc005",
+          "elType": "column",
+          "settings": { "_column_size": 100, "_inline_size": null },
+          "elements": [
+            {
+              "id": "rcw009",
+              "elType": "widget",
+              "widgetType": "heading",
+              "settings": { "title": "Experiențele pacienților", "header_size": "h2", "align": "left", "title_color": "#1D1D1F" },
+              "elements": []
+            },
+            {
+              "id": "rcw010",
+              "elType": "widget",
+              "widgetType": "text-editor",
+              "settings": { "editor": "<p style=\"color:#424245;font-size:16px;margin:0\">[CLIENT_CONTENT: mărturiile pacienților cu acordul acestora — folosiți inițiale sau prenume]</p>" },
+              "elements": []
+            }
+          ]
+        }
+      ]
+    },
+
+    {
+      "id": "rcs005",
+      "elType": "section",
+      "isInner": false,
+      "settings": {
+        "background_background": "classic",
+        "background_color": "#FFFFFF",
+        "padding": { "top": "24", "right": "32", "bottom": "64", "left": "32", "unit": "px", "isLinked": false },
+        "layout": "boxed",
+        "content_width": { "size": 1240, "unit": "px" },
+        "gap": "extended"
+      },
+      "elements": [
+        {
+          "id": "rcc006",
+          "elType": "column",
+          "settings": { "_column_size": 50, "_inline_size": null },
+          "elements": [
+            {
+              "id": "rcw011",
+              "elType": "widget",
+              "widgetType": "text-editor",
+              "settings": { "editor": "<div style=\"background:#F2F2F7;border-radius:20px;padding:36px 32px;margin-bottom:24px\"><p style=\"font-size:16px;line-height:1.75;color:#424245;font-style:italic;margin:0 0 20px\">„[CLIENT_CONTENT: mărturie pacient]”</p><p style=\"font-size:14px;font-weight:600;color:#1D1D1F;margin:0 0 2px\">[CLIENT_CONTENT: inițiale]</p><p style=\"font-size:13px;color:#6E6E73;margin:0\">Pacient — [CLIENT_CONTENT: tip intervenție]</p></div><div style=\"background:#F2F2F7;border-radius:20px;padding:36px 32px\"><p style=\"font-size:16px;line-height:1.75;color:#424245;font-style:italic;margin:0 0 20px\">„[CLIENT_CONTENT: mărturie pacient]”</p><p style=\"font-size:14px;font-weight:600;color:#1D1D1F;margin:0 0 2px\">[CLIENT_CONTENT: inițiale]</p><p style=\"font-size:13px;color:#6E6E73;margin:0\">Pacient — [CLIENT_CONTENT: tip intervenție]</p></div>" },
+              "elements": []
+            }
+          ]
+        },
+        {
+          "id": "rcc007",
+          "elType": "column",
+          "settings": { "_column_size": 50, "_inline_size": null },
+          "elements": [
+            {
+              "id": "rcw012",
+              "elType": "widget",
+              "widgetType": "text-editor",
+              "settings": { "editor": "<div style=\"background:#F2F2F7;border-radius:20px;padding:36px 32px;margin-bottom:24px\"><p style=\"font-size:16px;line-height:1.75;color:#424245;font-style:italic;margin:0 0 20px\">„[CLIENT_CONTENT: mărturie pacient]”</p><p style=\"font-size:14px;font-weight:600;color:#1D1D1F;margin:0 0 2px\">[CLIENT_CONTENT: inițiale]</p><p style=\"font-size:13px;color:#6E6E73;margin:0\">Pacient — [CLIENT_CONTENT: tip intervenție]</p></div><div style=\"background:#F2F2F7;border-radius:20px;padding:36px 32px\"><p style=\"font-size:16px;line-height:1.75;color:#424245;font-style:italic;margin:0 0 20px\">„[CLIENT_CONTENT: mărturie pacient]”</p><p style=\"font-size:14px;font-weight:600;color:#1D1D1F;margin:0 0 2px\">[CLIENT_CONTENT: inițiale]</p><p style=\"font-size:13px;color:#6E6E73;margin:0\">Pacient — [CLIENT_CONTENT: tip intervenție]</p></div>" },
+              "elements": []
+            }
+          ]
+        }
+      ]
+    },
+
+    {
+      "id": "rcs006",
+      "elType": "section",
+      "isInner": false,
+      "settings": {
+        "background_background": "classic",
+        "background_color": "#0E7FC0",
+        "padding": { "top": "72", "right": "32", "bottom": "72", "left": "32", "unit": "px", "isLinked": false },
+        "layout": "boxed",
+        "content_width": { "size": 640, "unit": "px" }
+      },
+      "elements": [
+        {
+          "id": "rcc008",
+          "elType": "column",
+          "settings": { "_column_size": 100, "_inline_size": null },
+          "elements": [
+            {
+              "id": "rcw013",
+              "elType": "widget",
+              "widgetType": "heading",
+              "settings": { "title": "Programați-vă acum", "header_size": "h2", "align": "center", "title_color": "#FFFFFF" },
+              "elements": []
+            },
+            {
+              "id": "rcw014",
+              "elType": "widget",
+              "widgetType": "text-editor",
+              "settings": { "editor": "<p style=\"text-align:center;color:rgba(255,255,255,0.85);font-size:17px;line-height:1.7;margin:0 0 32px\">Cluj-Napoca, Baia Mare sau online. Primul pas spre un diagnostic corect și un tratament potrivit.</p>" },
+              "elements": []
+            },
+            {
+              "id": "rcw015",
+              "elType": "widget",
+              "widgetType": "button",
+              "settings": {
+                "text": "Programează o consultație",
+                "link": { "url": "/programari/", "is_external": "", "nofollow": "" },
+                "align": "center",
+                "background_color": "#FFFFFF",
+                "button_text_color": "#0E7FC0"
+              },
+              "elements": []
+            }
+          ]
+        }
+      ]
+    }
+
+  ],
+  "page_settings": {}
+}

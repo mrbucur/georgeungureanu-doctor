@@ -1,0 +1,302 @@
+{
+  "version": "0.4",
+  "title": "Despre — Starter Template",
+  "type": "page",
+  "content": [
+
+    {
+      "id": "des001",
+      "elType": "section",
+      "isInner": false,
+      "settings": {
+        "background_background": "classic",
+        "background_color": "#FFFFFF",
+        "padding": { "top": "80", "right": "32", "bottom": "80", "left": "32", "unit": "px", "isLinked": false },
+        "layout": "boxed",
+        "content_width": { "size": 720, "unit": "px" }
+      },
+      "elements": [
+        {
+          "id": "dec001",
+          "elType": "column",
+          "settings": { "_column_size": 100, "_inline_size": null },
+          "elements": [
+            {
+              "id": "dew001",
+              "elType": "widget",
+              "widgetType": "text-editor",
+              "settings": { "editor": "<p style=\"font-size:11px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:#0E7FC0;margin:0 0 14px;text-align:center\">Neurochirurg specialist</p>" },
+              "elements": []
+            },
+            {
+              "id": "dew002",
+              "elType": "widget",
+              "widgetType": "heading",
+              "settings": { "title": "Dr. George Ungureanu", "header_size": "h1", "align": "center", "title_color": "#1D1D1F" },
+              "elements": []
+            },
+            {
+              "id": "dew003",
+              "elType": "widget",
+              "widgetType": "heading",
+              "settings": { "title": "Medic Specialist Neurochirurgie", "header_size": "h2", "align": "center", "title_color": "#424245" },
+              "elements": []
+            },
+            {
+              "id": "dew004",
+              "elType": "widget",
+              "widgetType": "text-editor",
+              "settings": { "editor": "<p style=\"text-align:center;color:#424245;font-size:17px;line-height:1.7\">Dr. George Ungureanu este medic specialist neurochirurg cu experiență în diagnosticul și tratamentul afecțiunilor sistemului nervos central și periferic. Activează în Cluj-Napoca, Baia Mare și online.</p><p style=\"text-align:center;font-size:13px;color:#6E6E73\">[CLIENT_CONTENT: biografie extinsă — înlocuiți acest paragraf]</p>" },
+              "elements": []
+            },
+            {
+              "id": "dew005",
+              "elType": "widget",
+              "widgetType": "button",
+              "settings": {
+                "text": "Programează o consultație",
+                "link": { "url": "/programari/", "is_external": "", "nofollow": "" },
+                "align": "center",
+                "background_color": "#0E7FC0",
+                "button_text_color": "#FFFFFF"
+              },
+              "elements": []
+            }
+          ]
+        }
+      ]
+    },
+
+    {
+      "id": "des002",
+      "elType": "section",
+      "isInner": false,
+      "settings": {
+        "background_background": "classic",
+        "background_color": "#F2F2F7",
+        "padding": { "top": "64", "right": "32", "bottom": "16", "left": "32", "unit": "px", "isLinked": false },
+        "layout": "boxed",
+        "content_width": { "size": 1240, "unit": "px" }
+      },
+      "elements": [
+        {
+          "id": "dec002",
+          "elType": "column",
+          "settings": { "_column_size": 100, "_inline_size": null },
+          "elements": [
+            {
+              "id": "dew006",
+              "elType": "widget",
+              "widgetType": "heading",
+              "settings": { "title": "Formare și credențiale", "header_size": "h2", "align": "left", "title_color": "#1D1D1F" },
+              "elements": []
+            }
+          ]
+        }
+      ]
+    },
+
+    {
+      "id": "des003",
+      "elType": "section",
+      "isInner": false,
+      "settings": {
+        "background_background": "classic",
+        "background_color": "#F2F2F7",
+        "padding": { "top": "24", "right": "32", "bottom": "64", "left": "32", "unit": "px", "isLinked": false },
+        "layout": "boxed",
+        "content_width": { "size": 1240, "unit": "px" },
+        "gap": "extended"
+      },
+      "elements": [
+        {
+          "id": "dec003",
+          "elType": "column",
+          "settings": { "_column_size": 33, "_inline_size": null },
+          "elements": [
+            {
+              "id": "dew007",
+              "elType": "widget",
+              "widgetType": "text-editor",
+              "settings": { "editor": "<p style=\"font-size:11px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:#0E7FC0;margin:0 0 6px\">Specializare</p><p style=\"font-size:17px;font-weight:600;color:#1D1D1F;margin:0 0 4px\">Medic Specialist Neurochirurgie</p><p style=\"font-size:13px;color:#6E6E73\">[CLIENT_CONTENT: instituție, an]</p>" },
+              "elements": []
+            }
+          ]
+        },
+        {
+          "id": "dec004",
+          "elType": "column",
+          "settings": { "_column_size": 33, "_inline_size": null },
+          "elements": [
+            {
+              "id": "dew008",
+              "elType": "widget",
+              "widgetType": "text-editor",
+              "settings": { "editor": "<p style=\"font-size:11px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:#0E7FC0;margin:0 0 6px\">Facultate</p><p style=\"font-size:17px;font-weight:600;color:#1D1D1F;margin:0 0 4px\">[CLIENT_CONTENT: universitate]</p><p style=\"font-size:13px;color:#6E6E73\">Medicină Generală</p>" },
+              "elements": []
+            }
+          ]
+        },
+        {
+          "id": "dec005",
+          "elType": "column",
+          "settings": { "_column_size": 34, "_inline_size": null },
+          "elements": [
+            {
+              "id": "dew009",
+              "elType": "widget",
+              "widgetType": "text-editor",
+              "settings": { "editor": "<p style=\"font-size:11px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:#0E7FC0;margin:0 0 6px\">Locații</p><p style=\"font-size:17px;font-weight:600;color:#1D1D1F;margin:0 0 4px\">Cluj-Napoca · Baia Mare</p><p style=\"font-size:13px;color:#6E6E73\">și consultații online</p>" },
+              "elements": []
+            }
+          ]
+        }
+      ]
+    },
+
+    {
+      "id": "des004",
+      "elType": "section",
+      "isInner": false,
+      "settings": {
+        "background_background": "classic",
+        "background_color": "#FFFFFF",
+        "padding": { "top": "64", "right": "32", "bottom": "16", "left": "32", "unit": "px", "isLinked": false },
+        "layout": "boxed",
+        "content_width": { "size": 720, "unit": "px" }
+      },
+      "elements": [
+        {
+          "id": "dec006",
+          "elType": "column",
+          "settings": { "_column_size": 100, "_inline_size": null },
+          "elements": [
+            {
+              "id": "dew010",
+              "elType": "widget",
+              "widgetType": "heading",
+              "settings": { "title": "Abordarea mea", "header_size": "h2", "align": "center", "title_color": "#1D1D1F" },
+              "elements": []
+            },
+            {
+              "id": "dew011",
+              "elType": "widget",
+              "widgetType": "text-editor",
+              "settings": { "editor": "<p style=\"text-align:center;color:#424245;font-size:17px;line-height:1.7\">Fiecare pacient este unic — planul terapeutic este stabilit după un diagnostic complet, cu explicații clare despre opțiunile disponibile.</p>" },
+              "elements": []
+            }
+          ]
+        }
+      ]
+    },
+
+    {
+      "id": "des005",
+      "elType": "section",
+      "isInner": false,
+      "settings": {
+        "background_background": "classic",
+        "background_color": "#FFFFFF",
+        "padding": { "top": "24", "right": "32", "bottom": "64", "left": "32", "unit": "px", "isLinked": false },
+        "layout": "boxed",
+        "content_width": { "size": 1240, "unit": "px" },
+        "gap": "extended"
+      },
+      "elements": [
+        {
+          "id": "dec007",
+          "elType": "column",
+          "settings": { "_column_size": 33, "_inline_size": null },
+          "elements": [
+            {
+              "id": "dew012",
+              "elType": "widget",
+              "widgetType": "text-editor",
+              "settings": { "editor": "<p style=\"font-size:28px;font-weight:700;color:#E5E5EA;margin:0 0 12px;line-height:1\">01</p><p style=\"font-size:17px;font-weight:600;color:#1D1D1F;margin:0 0 10px\">Diagnostic precis</p><p style=\"font-size:14px;line-height:1.65;color:#424245;margin:0\">Evaluare completă: anamneză, examen clinic și interpretare imagistică (RMN, CT). Nicio recomandare chirurgicală fără certitudinea diagnosticului.</p>" },
+              "elements": []
+            }
+          ]
+        },
+        {
+          "id": "dec008",
+          "elType": "column",
+          "settings": { "_column_size": 33, "_inline_size": null },
+          "elements": [
+            {
+              "id": "dew013",
+              "elType": "widget",
+              "widgetType": "text-editor",
+              "settings": { "editor": "<p style=\"font-size:28px;font-weight:700;color:#E5E5EA;margin:0 0 12px;line-height:1\">02</p><p style=\"font-size:17px;font-weight:600;color:#1D1D1F;margin:0 0 10px\">Plan individualizat</p><p style=\"font-size:14px;line-height:1.65;color:#424245;margin:0\">Opțiunile conservatoare sunt explorate înainte de chirurgie. Decizia se ia împreună cu pacientul, cu timp pentru întrebări.</p>" },
+              "elements": []
+            }
+          ]
+        },
+        {
+          "id": "dec009",
+          "elType": "column",
+          "settings": { "_column_size": 34, "_inline_size": null },
+          "elements": [
+            {
+              "id": "dew014",
+              "elType": "widget",
+              "widgetType": "text-editor",
+              "settings": { "editor": "<p style=\"font-size:28px;font-weight:700;color:#E5E5EA;margin:0 0 12px;line-height:1\">03</p><p style=\"font-size:17px;font-weight:600;color:#1D1D1F;margin:0 0 10px\">Suport continuu</p><p style=\"font-size:14px;line-height:1.65;color:#424245;margin:0\">Consultații de urmărire, ghid de recuperare și disponibilitate pentru întrebări după intervenție.</p>" },
+              "elements": []
+            }
+          ]
+        }
+      ]
+    },
+
+    {
+      "id": "des006",
+      "elType": "section",
+      "isInner": false,
+      "settings": {
+        "background_background": "classic",
+        "background_color": "#0E7FC0",
+        "padding": { "top": "72", "right": "32", "bottom": "72", "left": "32", "unit": "px", "isLinked": false },
+        "layout": "boxed",
+        "content_width": { "size": 640, "unit": "px" }
+      },
+      "elements": [
+        {
+          "id": "dec010",
+          "elType": "column",
+          "settings": { "_column_size": 100, "_inline_size": null },
+          "elements": [
+            {
+              "id": "dew015",
+              "elType": "widget",
+              "widgetType": "heading",
+              "settings": { "title": "Programați o consultație", "header_size": "h2", "align": "center", "title_color": "#FFFFFF" },
+              "elements": []
+            },
+            {
+              "id": "dew016",
+              "elType": "widget",
+              "widgetType": "text-editor",
+              "settings": { "editor": "<p style=\"text-align:center;color:rgba(255,255,255,0.85);font-size:17px;line-height:1.7;margin:0 0 32px\">Cluj-Napoca, Baia Mare sau online — alegeți locația care vă convine.</p>" },
+              "elements": []
+            },
+            {
+              "id": "dew017",
+              "elType": "widget",
+              "widgetType": "button",
+              "settings": {
+                "text": "Programează acum",
+                "link": { "url": "/programari/", "is_external": "", "nofollow": "" },
+                "align": "center",
+                "background_color": "#FFFFFF",
+                "button_text_color": "#0E7FC0"
+              },
+              "elements": []
+            }
+          ]
+        }
+      ]
+    }
+
+  ],
+  "page_settings": {}
+}
