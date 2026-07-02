@@ -1352,6 +1352,7 @@ add_shortcode( 'gu_programari_page', function (): string {
 	$out .= '<div style="display:flex;gap:10px;flex-wrap:wrap;">';
 	$out .= '<span style="' . $s_city_badge . '">Cluj-Napoca</span>';
 	$out .= '<span style="' . $s_city_badge . '">Baia Mare</span>';
+	$out .= '<span style="' . $s_city_badge . '">Online</span>';
 	$out .= '</div>';
 	$out .= '</div>';
 	$out .= '</section>';
@@ -1363,7 +1364,7 @@ add_shortcode( 'gu_programari_page', function (): string {
 	$out .= '<div style="' . $s_inner_wide . '">';
 	$out .= '<p style="' . $s_overline . '">Locații</p>';
 	$out .= '<h2 style="' . $s_h2 . '">Unde consultă Dr. George Ungureanu</h2>';
-	$out .= '<p style="' . $s_lead . '">Consultații disponibile în două locații, cu programare directă la fiecare clinică.</p>';
+	$out .= '<p style="' . $s_lead . '">Consultații disponibile în două locații fizice sau online prin video, cu programare directă.</p>';
 
 	$clinics = [
 		[
@@ -1412,23 +1413,54 @@ add_shortcode( 'gu_programari_page', function (): string {
 	// ──────────────────────────────────────────────────────
 	// SECTION 3 — ONLINE CONSULTATION
 	// ──────────────────────────────────────────────────────
-	$out .= '<section style="' . $s_section_white . '">';
+	$online_cal_url = '#'; // [CLIENT: CAL.COM ONLINE CONSULTATION LINK — replace with actual URL]
+
+	$out .= '<section id="online" style="' . $s_section_white . '">';
 	$out .= '<div style="' . $s_inner_wide . '">';
 	$out .= '<p style="' . $s_overline . '">La Distanță</p>';
 	$out .= '<h2 style="' . $s_h2 . '">Consultație Online</h2>';
-	$out .= '<p style="' . $s_body . '">O consultație online permite evaluarea simptomelor, revizuirea investigațiilor imagistice existente și orientarea pacientului — fără deplasare. Este indicată mai ales pentru a doua opinie sau pentru evaluarea preliminară.</p>';
-	$out .= '<p style="' . $s_body . '">Consultația online nu înlocuiește examinarea clinică directă atunci când aceasta este necesară.</p>';
+	$out .= '<p style="' . $s_lead . '">Evaluare neurochirurgicală prin video — fără deplasare. Indicată pentru a doua opinie, interpretarea investigațiilor imagistice sau evaluarea preliminară.</p>';
 
-	$out .= '<div style="' . $s_client_box . '">';
-	$out .= '<strong style="color:#0E7FC0;">[CLIENT: DETALII CONSULTAȚIE ONLINE NECESARE]</strong><br><br>';
-	$out .= 'Vă rugăm să confirmați:<br>';
-	$out .= '<ul style="margin:10px 0 0 20px;line-height:2;">';
-	$out .= '<li>Dacă oferiți consultații online și prin ce platformă (Zoom, Teams, alt sistem)</li>';
-	$out .= '<li>Tariful pentru consultația online</li>';
-	$out .= '<li>Modalitatea de programare online (link direct, email, telefon)</li>';
-	$out .= '<li>Ce materiale trebuie trimise înainte de consultație</li>';
-	$out .= '</ul>';
+	// Online consultation card
+	$out .= '<div style="background:#FFFFFF;border:1px solid rgba(0,0,0,.08);border-radius:16px;padding:36px 36px 32px;max-width:560px;box-shadow:0 2px 12px rgba(0,0,0,.06);margin-bottom:32px;">';
+
+	// Icon + platform header
+	$out .= '<div style="display:flex;align-items:center;gap:14px;margin-bottom:22px;">';
+	$out .= '<div style="width:48px;height:48px;background:#E8F4FB;border-radius:12px;display:flex;align-items:center;justify-content:center;flex-shrink:0;">';
+	$out .= '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><rect x="2" y="6" width="14" height="12" rx="2" stroke="#0E7FC0" stroke-width="1.5"/><path d="M16 10l6-4v12l-6-4v-4z" stroke="#0E7FC0" stroke-width="1.5" stroke-linejoin="round"/></svg>';
 	$out .= '</div>';
+	$out .= '<div>';
+	$out .= '<p style="font:600 11px/1 Inter,system-ui,sans-serif;letter-spacing:.06em;text-transform:uppercase;color:#0E7FC0;margin:0 0 5px;">Platformă video</p>';
+	$out .= '<p style="font:700 18px/1.2 Inter,system-ui,sans-serif;color:#1D1D1F;margin:0;letter-spacing:-.01em;">Google Meet</p>';
+	$out .= '</div>';
+	$out .= '</div>'; // icon row
+
+	$out .= '<p style="font:400 15px/1.75 Inter,system-ui,sans-serif;color:#424245;margin:0 0 22px;">Consultația se desfășoară video și audio în timp real. Linkul de acces Google Meet vă este trimis automat prin email după confirmare — nu necesită instalarea niciunei aplicații.</p>';
+
+	$online_features = [
+		'Video + audio de înaltă calitate, direct în browser',
+		'Durată: 30 / 45 / 60 minute în funcție de complexitate',
+		'Puteți partaja imagini RMN/CT pe ecran în timp real',
+		'Consultație disponibilă din orice locație cu acces internet',
+	];
+	$out .= '<ul style="margin:0 0 28px 0;padding:0;list-style:none;">';
+	foreach ( $online_features as $f ) {
+		$out .= '<li style="font:400 14px/1.6 Inter,system-ui,sans-serif;color:#424245;padding:8px 0;border-bottom:1px solid rgba(0,0,0,.05);display:flex;align-items:flex-start;gap:10px;">';
+		$out .= '<span style="color:#0E7FC0;font-weight:700;flex-shrink:0;line-height:1.6;" aria-hidden="true">✓</span>' . esc_html( $f );
+		$out .= '</li>';
+	}
+	$out .= '</ul>';
+
+	$out .= '<a href="' . esc_url( $online_cal_url ) . '" style="' . $s_btn_sage . '">Programează o consultație online</a>';
+
+	$out .= '<div style="' . $s_client_box . 'margin:20px 0 0;">';
+	$out .= '<strong style="color:#0E7FC0;font-size:13px;">[CLIENT: CAL.COM ONLINE CONSULTATION LINK]</strong><br>';
+	$out .= '<span style="font-size:13px;">Înlocuiți <code>#</code> de mai sus cu linkul Cal.com pentru programare online. Ex: <code>https://cal.com/george-ungureanu/consultatie-online</code></span>';
+	$out .= '</div>';
+
+	$out .= '</div>'; // card
+
+	$out .= '<p style="' . $s_note . '">Consultația online nu înlocuiește examinarea clinică directă. La prima consultație online, Dr. Ungureanu va stabili dacă este necesară și o evaluare fizică.</p>';
 
 	$out .= '</div>';
 	$out .= '</section>';
@@ -1494,6 +1526,22 @@ add_shortcode( 'gu_programari_page', function (): string {
 		[
 			'q' => 'Consultați și pacienți din alte țări?',
 			'a' => '[CLIENT: Confirmare dacă se acceptă pacienți internaționali și detalii specifice — ex: Consultez și pacienți din Republica Moldova, diaspora românească și pacienți internaționali. Consultația se poate organiza online sau la una dintre clinicile partenere.]',
+		],
+		[
+			'q' => 'Cum se desfășoară consultația online?',
+			'a' => 'Consultația online are loc prin Google Meet — video și audio în timp real, direct în browser, fără instalarea niciunei aplicații. După confirmare, primiți un email cu linkul de acces și instrucțiuni de pregătire. Consultația urmează același format ca cea față în față: Dr. Ungureanu ascultă istoricul simptomelor, revizuiește investigațiile trimise în prealabil și formulează un plan de evaluare sau tratament.',
+		],
+		[
+			'q' => 'Ce documente trebuie să pregătesc pentru consultația online?',
+			'a' => 'Pregătiți: (1) imagini RMN sau CT în format digital — fișiere DICOM, JPG sau PDF pe care le puteți partaja pe ecran sau trimite în avans; (2) lista medicamentelor curente cu doze; (3) orice scrisori medicale sau rezultate de analize recente. Nu este obligatoriu să le aveți pe toate — consultația se poate desfășura și pe baza simptomelor descrise.',
+		],
+		[
+			'q' => 'Pot trimite RMN/CT înainte de consultație?',
+			'a' => 'Da, și este recomandat. Puteți trimite imaginile prin email înainte de consultație — Dr. Ungureanu le va analiza în avans, ceea ce face sesiunea mai eficientă. Formatele acceptate: DICOM (CD), JPG, PNG sau PDF. Dacă aveți imaginile doar pe CD, le puteți fotografia sau scana. [CLIENT: adăugați adresa de email pentru trimiterea documentelor]',
+		],
+		[
+			'q' => 'Primesc link video după programare?',
+			'a' => 'Da. Imediat după confirmarea programării, primiți automat un email cu linkul Google Meet, data și ora consultației, precum și instrucțiunile de pregătire. Cu 24 de ore înainte, primiți un reminder. Linkul este valabil o singură dată și este personal.',
 		],
 	];
 
