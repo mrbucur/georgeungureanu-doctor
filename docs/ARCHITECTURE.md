@@ -1,113 +1,100 @@
 # Site Architecture — georgeungureanu.doctor
 
-## Hybrid Template Model
+## Template Model
 
-This site uses two distinct rendering strategies depending on content type.
+This site uses **Elementor Pro** throughout. There are two categories:
+
+| Category | Templates | Managed via |
+|---|---|---|
+| **Static pages** | Acasă, Despre, Programări, Recomandări | Elementor Page Editor |
+| **CPT archives + singles** | afectiuni, interventii, articole | Elementor Pro Theme Builder |
+
+PHP templates in the child theme serve as **fallbacks** — they are active only when no Elementor Pro template with matching conditions is published.
 
 ---
 
-### Native PHP Templates (CPT Archives & Singles)
+## Static Pages (Elementor Page Editor)
 
-These templates live in `wp-content/themes/ungureanu-md-child/` and render
-entirely in PHP. They are not editable in the Elementor visual editor.
-
-| Template | URL | Purpose |
+| PHP Wrapper | URL | Starter JSON |
 |---|---|---|
-| `archive-afectiuni.php` | `/afectiuni/` | Grid of all medical conditions |
-| `archive-interventii.php` | `/interventii/` | Grid of all surgical procedures |
-| `archive-articole.php` | `/articole/` | Grid of all articles |
-| `single-afectiuni.php` | `/afectiuni/{slug}/` | Single medical condition |
-| `single-interventii.php` | `/interventii/{slug}/` | Single surgical procedure |
-| `single-articole.php` | `/articole/{slug}/` | Single article |
-
-**Why native PHP here:** These templates are query-driven — they loop over
-custom post type entries, read ACF fields, and render structured medical content
-(symptoms, diagnosis, treatment sections, FAQ, CTA). The layout is fixed by
-design and must be consistent across all entries. There is no editorial need to
-rearrange sections per-post.
-
-**ACF field access note:**
-- `afectiuni` / `articole`: fields accessed by name (e.g. `get_field('subtitle')`)
-- `interventii`: fields accessed by key (e.g. `get_field('field_sp_subtitle')`)
-  because the ACF group `group_sp.json` has empty `name` values
-
----
-
-### Elementor-Editable Templates (Static Pages)
-
-These templates are thin PHP wrappers that call `the_content()`. All visible
-content is managed inside the Elementor visual editor.
-
-| Template | URL | Starter JSON |
-|---|---|---|
+| `front-page.php` | `/` | `elementor-starters/acasa.json` |
 | `page-despre.php` | `/despre/` | `elementor-starters/despre.json` |
 | `page-programari.php` | `/programari/` | `elementor-starters/programari.json` |
 | `page-recomandari.php` | `/recomandari/` | `elementor-starters/recomandari.json` |
 
-**Why Elementor here:** These pages contain content that will change over time
-(biography, clinic addresses, phone numbers, testimonials, colleague
-recommendations). The client needs to update this content without a developer.
-The Elementor editor provides a safe, visual interface for those edits.
+Each wrapper calls `get_header()` + `the_content()` + `get_footer()`. An admin-only hint appears when no Elementor content exists yet.
 
-**PHP wrapper contract:**
-- Calls `get_header()` and `get_footer()` — header/footer always come from the
-  child theme, never from Elementor's site-wide settings
-- Wraps output in `<main id="content" class="gu-elementor-page">` for
-  consistent landmark and CSS targeting
-- Shows an admin-only hint (visible only to logged-in editors) when no
-  Elementor content has been added yet, with a direct link to the editor and
-  the path to the relevant starter JSON
+**Homepage Posts widget:** `acasa.json` uses the Elementor Pro `posts` widget querying `post_type: afectiuni`, `posts_per_page: 6`, ordered by `menu_order`. Replace with the Pro Posts widget configured as needed.
+
+**How to import and build a static page:**
+1. WP Admin → Pages → open page → Edit with Elementor
+2. Click folder icon (Add Template) → My Templates → Import Templates
+3. Upload the starter JSON → Insert → publish
 
 ---
 
-### How to import a starter template
+## CPT Archives & Singles (Elementor Pro Theme Builder)
 
-1. In WP Admin, go to **Pages** and open the target page (Despre, Programări,
-   or Recomandări)
-2. Click **Edit with Elementor**
-3. In the Elementor panel, click the folder icon (Import Template) or use
-   **My Templates → Import**
-4. Upload the corresponding `.json` file from `elementor-starters/`
-5. Insert the template into the page — all sections are immediately editable
-6. Replace all `[CLIENT_CONTENT: ...]` placeholders with real content
-7. Click **Publish**
+| Starter JSON | Type | Condition to set |
+|---|---|---|
+| `elementor-starters/theme-builder/archive-afectiuni.json` | Archive | Post Type Archive › Afecțiuni |
+| `elementor-starters/theme-builder/archive-interventii.json` | Archive | Post Type Archive › Intervenții |
+| `elementor-starters/theme-builder/archive-articole.json` | Archive | Post Type Archive › Articole |
+| `elementor-starters/theme-builder/single-afectiuni.json` | Single | Single › Afecțiune |
+| `elementor-starters/theme-builder/single-interventii.json` | Single | Single › Intervenție |
+| `elementor-starters/theme-builder/single-articole.json` | Single | Single › Articol |
+
+**How to import and activate a Theme Builder template:**
+1. WP Admin → Elementor → My Templates → Import Templates
+2. Upload the JSON → it appears in the library
+3. WP Admin → Elementor → Theme Builder → Add New (Archive or Single)
+4. Click the imported template → Set Conditions → Post Type Archive › [CPT] (or Single › [CPT]) → Save & Close
+
+**ACF Dynamic Tags in single templates:**
+- `single-afectiuni.json` — fields accessed by name: `subtitle`, `short_summary`, `symptoms`, `causes`, `diagnosis`, `treatment`, `recovery`, `faq`, `cta_title`, `cta_text`
+- `single-interventii.json` — fields accessed by key: `field_sp_subtitle`, `field_sp_short_summary`, `field_sp_indications`, `field_sp_when_surgery`, `field_sp_surgical_technique`, `field_sp_benefits`, `field_sp_risks`, `field_sp_recovery_timeline`, `field_sp_faq`, `field_sp_cta_title`
+- `single-articole.json` — fields by name: `subtitle`, `short_summary`, `key_takeaways` + `post-content` widget for `the_content()`
+
+The `__dynamic__` key in widget settings carries the ACF tag binding. After import, verify fields are connected in the Elementor editor (Dynamic Tags icon on each widget).
+
+**Archive-posts widget:** Archive templates use `archive-posts` widget (not `posts`) — it inherits the current archive query automatically. No custom query needed.
 
 ---
 
-### What NOT to do
+## Fallback PHP Templates
 
-- Do not assign Elementor templates to `archive-*` or `single-*` URLs — those
-  use WordPress template hierarchy, not page templates
-- Do not set the Elementor "Page Layout" to "Elementor Full Width" on the three
-  editable pages — the PHP wrapper already provides the `<main>` landmark and
-  the child theme provides header/footer
-- Do not add ACF fields to the Despre / Programări / Recomandări pages — those
-  pages are content-edited directly in Elementor
+If a Theme Builder template is not published for a given condition, WordPress falls back to these child theme files:
+
+| File | Fallback for |
+|---|---|
+| `archive-afectiuni.php` | `/afectiuni/` |
+| `archive-interventii.php` | `/interventii/` |
+| `archive-articole.php` | `/articole/` |
+| `single-afectiuni.php` | `/afectiuni/{slug}/` |
+| `single-interventii.php` | `/interventii/{slug}/` |
+| `single-articole.php` | `/articole/{slug}/` |
+
+These are fully functional native PHP templates and can remain in production as a safety net.
 
 ---
 
-### Plugin: gu-design-system
+## Plugin: gu-design-system
 
 `wp-plugin/gu-design-system/gu-design-system.php` registers:
 
 - Custom post types: `afectiuni`, `interventii`, `articole`
-- ACF field groups (via JSON sync): `acf-json/group_mc.json`, `group_sp.json`,
-  `group_ar.json`
-- Admin setup page at **GU Design System → Setup** with tools to create core
-  pages, flush permalinks, and repair an Elementor default kit
+- ACF field groups (JSON sync): `acf-json/group_mc.json`, `group_sp.json`, `group_ar.json`
+- Admin setup page: **GU Design System → Setup** — create core pages, flush permalinks, repair Elementor default kit
 
-### Child theme: ungureanu-md-child
+## Child Theme: ungureanu-md-child
 
-`wp-content/themes/ungureanu-md-child/` contains:
-
-- All PHP templates listed above
-- `assets/css/theme.css` — design tokens, archive/single/page layout CSS,
-  light footer, responsive breakpoints (Apple Health palette)
-- `functions.php` — enqueues theme.css, registers menus, loads plugin
+- PHP page/archive/single templates (wrappers + fallbacks)
+- `assets/css/theme.css` — design tokens, archive/single layout CSS, light footer, responsive breakpoints
+- `functions.php` — enqueues theme.css, registers menus
 
 ---
 
-### Design Tokens (Apple Health palette)
+## Design Tokens (Apple Health palette)
 
 ```css
 --color-ink:            #1D1D1F

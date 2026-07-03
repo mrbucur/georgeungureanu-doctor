@@ -1,0 +1,158 @@
+{
+  "version": "0.4",
+  "title": "Archive — Intervenții",
+  "type": "archive",
+  "content": [
+
+    {
+      "id": "ari_hdr",
+      "elType": "section",
+      "isInner": false,
+      "settings": {
+        "background_background": "classic",
+        "background_color": "#FFFFFF",
+        "padding": { "top": "64", "right": "24", "bottom": "48", "left": "24", "unit": "px", "isLinked": false },
+        "layout": "boxed",
+        "content_width": { "size": 1200, "unit": "px" }
+      },
+      "elements": [
+        {
+          "id": "ari_hdr_col",
+          "elType": "column",
+          "settings": { "_column_size": 100 },
+          "elements": [
+            {
+              "id": "ari_label",
+              "elType": "widget",
+              "widgetType": "text-editor",
+              "settings": { "editor": "<p style=\"font-size:11px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:#0E7FC0;margin:0 0 14px\">Proceduri neurochirurgicale</p>" },
+              "elements": []
+            },
+            {
+              "id": "ari_title",
+              "elType": "widget",
+              "widgetType": "archive-title",
+              "settings": {
+                "title_color": "#1D1D1F",
+                "header_size": "h1",
+                "align": "left",
+                "show_label": "no",
+                "typography_typography": "custom",
+                "typography_font_size": { "unit": "px", "size": 42 },
+                "typography_font_weight": "700",
+                "typography_line_height": { "unit": "em", "size": 1.1 }
+              },
+              "elements": []
+            },
+            {
+              "id": "ari_desc",
+              "elType": "widget",
+              "widgetType": "text-editor",
+              "settings": { "editor": "<p style=\"color:#424245;font-size:19px;line-height:1.65;margin:16px 0 0;max-width:640px\">Intervenții neurochirurgicale efectuate cu tehnologie modernă, cu accent pe siguranța pacientului și recuperare rapidă.</p>" },
+              "elements": []
+            }
+          ]
+        }
+      ]
+    },
+
+    {
+      "id": "ari_grid",
+      "elType": "section",
+      "isInner": false,
+      "settings": {
+        "background_background": "classic",
+        "background_color": "#F2F2F7",
+        "padding": { "top": "48", "right": "24", "bottom": "80", "left": "24", "unit": "px", "isLinked": false },
+        "layout": "boxed",
+        "content_width": { "size": 1200, "unit": "px" }
+      },
+      "elements": [
+        {
+          "id": "ari_grid_col",
+          "elType": "column",
+          "settings": { "_column_size": 100 },
+          "elements": [
+            {
+              "id": "ari_posts",
+              "elType": "widget",
+              "widgetType": "archive-posts",
+              "settings": {
+                "_skin": "cards",
+                "show_image": "",
+                "show_badge": "",
+                "show_title": "yes",
+                "title_tag": "h3",
+                "show_separator": "",
+                "show_excerpt": "yes",
+                "excerpt_length": 22,
+                "show_read_more": "yes",
+                "read_more_text": "Citește mai mult →",
+                "show_meta_data": [],
+                "columns": "3",
+                "columns_tablet": "2",
+                "columns_mobile": "1",
+                "pagination_type": "numbers",
+                "pagination_page_limit": "5",
+                "row_gap": { "size": 24, "unit": "px" }
+              },
+              "elements": []
+            }
+          ]
+        }
+      ]
+    },
+
+    {
+      "id": "ari_cta",
+      "elType": "section",
+      "isInner": false,
+      "settings": {
+        "background_background": "classic",
+        "background_color": "#0E7FC0",
+        "padding": { "top": "72", "right": "24", "bottom": "72", "left": "24", "unit": "px", "isLinked": false },
+        "layout": "boxed",
+        "content_width": { "size": 640, "unit": "px" }
+      },
+      "elements": [
+        {
+          "id": "ari_cta_col",
+          "elType": "column",
+          "settings": { "_column_size": 100 },
+          "elements": [
+            {
+              "id": "ari_cta_h",
+              "elType": "widget",
+              "widgetType": "heading",
+              "settings": { "title": "Programați o consultație", "header_size": "h2", "align": "center", "title_color": "#FFFFFF" },
+              "elements": []
+            },
+            {
+              "id": "ari_cta_sub",
+              "elType": "widget",
+              "widgetType": "text-editor",
+              "settings": { "editor": "<p style=\"text-align:center;color:rgba(255,255,255,0.85);font-size:17px;line-height:1.7;margin:0 0 32px\">Cluj&#8209;Napoca, Baia Mare sau online.</p>" },
+              "elements": []
+            },
+            {
+              "id": "ari_cta_btn",
+              "elType": "widget",
+              "widgetType": "button",
+              "settings": {
+                "text": "Programează acum",
+                "link": { "url": "/programari/", "is_external": "", "nofollow": "" },
+                "align": "center",
+                "background_color": "#FFFFFF",
+                "button_text_color": "#0E7FC0",
+                "border_radius": { "top": "980", "right": "980", "bottom": "980", "left": "980", "unit": "px", "isLinked": true }
+              },
+              "elements": []
+            }
+          ]
+        }
+      ]
+    }
+
+  ],
+  "page_settings": {}
+}
