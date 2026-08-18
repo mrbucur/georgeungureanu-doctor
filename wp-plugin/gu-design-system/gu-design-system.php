@@ -2827,7 +2827,7 @@ add_action( 'wp_footer', function () {
 	}
 	$cta             = gu_shared_primary_cta();
 	$url_programari = esc_url( $cta['url'] );
-	$url_despre     = esc_url( home_url( '/despre/' ) );
+	$url_clinici    = esc_url( home_url( '/programari/#clinici' ) );
 	$cities          = gu_shared_site_setting( 'consultation_cities', 'Cluj-Napoca, Baia Mare' );
 	?>
 	<section id="gu-cta-rebuilt" class="gu-final-cta" aria-label="Programează o consultație">
@@ -2838,7 +2838,7 @@ add_action( 'wp_footer', function () {
 			<p class="gu-final-cta__trust">Consultații disponibile în <?php echo esc_html( $cities ); ?> și online.</p>
 			<div class="gu-final-cta__actions">
 				<a href="<?php echo $url_programari; ?>" class="gu-final-cta__btn-primary"><?php echo esc_html( $cta['label'] ); ?></a>
-				<a href="<?php echo $url_despre; ?>" class="gu-final-cta__btn-secondary">Vezi clinicile <span aria-hidden="true">→</span></a>
+				<a href="<?php echo $url_clinici; ?>" class="gu-final-cta__btn-secondary">Vezi clinicile <span aria-hidden="true">→</span></a>
 			</div>
 		</div>
 	</section>
