@@ -2175,10 +2175,12 @@ add_shortcode( 'gu_recomandari_page', function (): string {
 		while ( $patient_experiences->have_posts() ) {
 			$patient_experiences->the_post();
 			$city     = sanitize_text_field( (string) get_post_meta( get_the_ID(), '_gu_city', true ) );
+			$context  = sanitize_text_field( (string) get_post_meta( get_the_ID(), '_gu_context', true ) );
 			$relation = 'apartinator' === get_post_meta( get_the_ID(), '_gu_relation', true ) ? 'Aparținător' : 'Pacient';
+			$details  = $context ?: $relation . ( $city ? ' · ' . $city : '' );
 			$out .= '<article class="gu-experience-card">';
 			$out .= '<blockquote>„' . esc_html( get_the_content() ) . '”</blockquote>';
-			$out .= '<p><strong>' . esc_html( get_the_title() ) . '</strong><span>' . esc_html( $relation . ( $city ? ' · ' . $city : '' ) ) . '</span></p>';
+			$out .= '<p><strong>' . esc_html( get_the_title() ) . '</strong><span>' . esc_html( $details ) . '</span></p>';
 			$out .= '</article>';
 		}
 		wp_reset_postdata();
