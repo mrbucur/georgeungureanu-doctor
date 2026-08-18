@@ -3,7 +3,7 @@
  * Plugin Name:  GU Design System
  * Plugin URI:   https://georgeungureanu.doctor
  * Description:  Apple Health-inspired design system for georgeungureanu.doctor. Enqueues Inter via Google Fonts, CSS custom properties (color, typography, spacing, layout, motion tokens), scroll-reveal animations, and PHP-rendered page sections. Safe to activate/deactivate — removes everything on deactivation. Does not modify Elementor database settings and does not depend on Elementor Pro APIs.
- * Version:      1.5.4
+ * Version:      1.5.5
  * Author:       Mr. Bucur
  * Author URI:   https://puiu.bucur.info
  * License:      Private — All rights reserved
@@ -14,7 +14,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Prevent direct file access.
 }
 
-define( 'GU_DESIGN_SYSTEM_VERSION', '1.5.4' );
+define( 'GU_DESIGN_SYSTEM_VERSION', '1.5.5' );
 define( 'GU_DESIGN_SYSTEM_URL', plugin_dir_url( __FILE__ ) );
 define( 'GU_ACF_JSON_DIR', plugin_dir_path( __FILE__ ) . 'acf-json' );
 
@@ -1182,7 +1182,7 @@ add_shortcode( 'gu_about_hero', function () {
 	$out .= '<div class="gu-about-hero__photo-wrap">' . $photo_html . '</div>';
 	$out .= '<div class="gu-about-hero__content">';
 	$out .= '<h1 class="gu-about-hero__name">' . esc_html( $brand ) . '</h1>';
-	$out .= '<p class="gu-about-hero__title">Medic primar neurochirurg</p>';
+	$out .= '<p class="gu-about-hero__title">' . esc_html( gu_shared_site_setting( 'brand_specialty', 'Medic Primar Neurochirurg, Doctor în Medicină' ) ) . '</p>';
 	if ( $has_tagline ) {
 		$out .= '<p class="gu-about-hero__tagline">' . esc_html( $tagline ) . '</p>';
 	}
@@ -1309,6 +1309,57 @@ add_shortcode( 'gu_about_interests', function () {
 	return $out;
 } );
 
+function gu_professional_validation_markup(): string {
+	$sources = [
+		[
+			'label' => 'Activitate în echipă',
+			'title' => 'Echipa Neurochirurgie Spinală',
+			'text'  => 'Prezentat în echipa de chirurgie spinală alături de neurochirurgi cu experiență în patologia complexă a coloanei vertebrale.',
+			'url'   => 'https://ncs.doctor/despre-noi/',
+			'source'=> 'Neurochirurgie Spinală',
+		],
+		[
+			'label' => 'Educație medicală',
+			'title' => 'Lector invitat la Cursul Româno-German de Neurochirurgie',
+			'text'  => 'Invitat în programul ediției din 2019, alături de experți români și internaționali în neurochirurgie pediatrică.',
+			'url'   => 'https://medevents.ro/ro/neurochirurgia-pediatrica-este-tema-noii-editii-a-cursului-romano-german-de-neurochirurgie-din-acest-an/',
+			'source'=> 'MedEvents',
+		],
+		[
+			'label' => 'Activitate academică',
+			'title' => 'Contribuții profesionale în neurochirurgie',
+			'text'  => 'Coautor în lucrări de specialitate despre tratamentul chirurgical al anevrismelor și meningioamelor.',
+			'url'   => 'https://www.umfst.ro/fileadmin/doctorate/sustineri_pub/2025/Tamas_Flaviu/Tamas_CV%20prof.dr.%20Florian.pdf',
+			'source'=> 'CV academic Prof. Dr. Ioan Ștefan Florian',
+		],
+		[
+			'label' => 'Formare medicală',
+			'title' => 'Apreciere din partea studenților și rezidenților',
+			'text'  => 'Menționat între medicii apreciați pentru sprijinul oferit în activitatea clinică și îndrumarea lucrărilor de licență.',
+			'url'   => 'https://www.stiridecluj.ro/social/studentii-si-rezidentii-de-la-clinica-de-neurochirurgie-ii-iau-apararea-chirurgului-stefan-florian-noi-il-numim-tata',
+			'source'=> 'Știri de Cluj',
+		],
+	];
+
+	$out  = '<section class="gu-validation-section gu-about-validation">';
+	$out .= '<div class="gu-about-validation__inner">';
+	$out .= '<p class="gu-about-validation__eyebrow">Surse publice verificabile</p>';
+	$out .= '<h2 class="gu-about-section-heading">Validare profesională</h2>';
+	$out .= '<p class="gu-about-validation__lead">Colaborări clinice, activitate academică și participări profesionale documentate public. Aceste referințe nu sunt prezentate ca testimoniale ale colegilor.</p>';
+	$out .= '<div class="gu-source-grid">';
+	foreach ( $sources as $source ) {
+		$out .= '<article class="gu-source-card">';
+		$out .= '<p class="gu-source-card__label">' . esc_html( $source['label'] ) . '</p>';
+		$out .= '<h3>' . esc_html( $source['title'] ) . '</h3>';
+		$out .= '<p>' . esc_html( $source['text'] ) . '</p>';
+		$out .= '<a href="' . esc_url( $source['url'] ) . '" target="_blank" rel="noopener noreferrer">Verifică sursa: ' . esc_html( $source['source'] ) . ' <span aria-hidden="true">↗</span></a>';
+		$out .= '</article>';
+	}
+	$out .= '</div></div></section>';
+
+	return $out;
+}
+
 // Research & Publications — CONDITIONAL: self-contained block or empty string.
 add_shortcode( 'gu_about_research', function () {
 	$content = gu_get_about_field( 'about_research' );
@@ -1322,7 +1373,8 @@ add_shortcode( 'gu_about_research', function () {
 		. '<div class="gu-about-conditional__inner">'
 		. '<h2 class="gu-about-section-heading">Cercetare &amp; Publicații</h2>'
 		. '<div class="gu-about-research">' . wp_kses_post( $content ) . '</div>'
-		. '</div></div>';
+		. '</div></div>'
+		. gu_professional_validation_markup();
 } );
 
 // Teaching & Academic.
@@ -1335,16 +1387,41 @@ add_shortcode( 'gu_about_teaching', function () {
 
 // Professional Memberships.
 add_shortcode( 'gu_about_memberships', function () {
-	$content = gu_get_about_field( 'about_memberships' );
-	if ( gu_about_content_is_missing( $content ) ) {
-		$content = '<ul>'
-			. '<li>European Association of Neurosurgical Societies (EANS)</li>'
-			. '<li>Southeast Europe Neurosurgical Society (SeENS)</li>'
-			. '<li>Societatea Română de Neurochirurgie (SRN)</li>'
-			. '</ul>';
+	$memberships = [
+		[
+			'acronym' => 'EANS',
+			'name'    => 'European Association of Neurosurgical Societies',
+			'url'     => 'https://www.eans.org/',
+			'logo'    => 'https://2022.eanscongress.org/assets/images/EANS.svg',
+		],
+		[
+			'acronym' => 'SeENS',
+			'name'    => 'Southeast Europe Neurosurgical Society',
+			'url'     => 'https://seens.eu/',
+			'logo'    => 'https://seens.eu/wp-content/uploads/2026/04/SEENS-LOGO.png',
+		],
+		[
+			'acronym' => 'SRN',
+			'name'    => 'Societatea Română de Neurochirurgie',
+			'url'     => 'https://rsn.ro/',
+			'logo'    => 'https://rsn.ro/wp-content/uploads/2024/10/logo-rsn-e1761635171752.png',
+		],
+	];
+
+	$out  = '<div class="gu-memberships-section">';
+	$out .= '<h2 class="gu-about-section-heading">Afilieri Profesionale</h2>';
+	$out .= '<p class="gu-memberships-section__lead">Apartenența la organizații profesionale susține schimbul de experiență, educația medicală continuă și colaborarea în comunitatea neurochirurgicală.</p>';
+	$out .= '<div class="gu-membership-grid">';
+	foreach ( $memberships as $membership ) {
+		$out .= '<a class="gu-membership-card" href="' . esc_url( $membership['url'] ) . '" target="_blank" rel="noopener noreferrer" aria-label="Vizitați site-ul ' . esc_attr( $membership['name'] ) . '">';
+		$out .= '<span class="gu-membership-card__logo"><img src="' . esc_url( $membership['logo'] ) . '" alt="Logo ' . esc_attr( $membership['acronym'] ) . '" loading="lazy" decoding="async"></span>';
+		$out .= '<span class="gu-membership-card__content"><strong>' . esc_html( $membership['acronym'] ) . '</strong><small>' . esc_html( $membership['name'] ) . '</small></span>';
+		$out .= '<span class="gu-membership-card__arrow" aria-hidden="true">↗</span>';
+		$out .= '</a>';
 	}
-	return '<h2 class="gu-about-section-heading">Afilieri Profesionale</h2>'
-		. '<div class="gu-about-memberships">' . wp_kses_post( $content ) . '</div>';
+	$out .= '</div></div>';
+
+	return $out;
 } );
 
 // Media Appearances — CONDITIONAL: self-contained block or empty string.
@@ -1891,6 +1968,85 @@ add_shortcode( 'gu_location_card', function () {
 // testimonials second, no star ratings, no carousels.
 // ─────────────────────────────────────────────────────────────
 
+add_action( 'init', function (): void {
+	register_post_type( 'gu_experience', [
+		'labels' => [
+			'name'          => 'Experiențe pacienți',
+			'singular_name' => 'Experiență pacient',
+			'menu_name'     => 'Experiențe pacienți',
+			'edit_item'     => 'Revizuiește experiența',
+		],
+		'public'              => false,
+		'show_ui'             => true,
+		'show_in_menu'        => true,
+		'menu_icon'           => 'dashicons-format-quote',
+		'supports'            => [ 'title', 'editor' ],
+		'exclude_from_search' => true,
+		'map_meta_cap'        => true,
+	] );
+} );
+
+function gu_handle_experience_submission(): void {
+	$redirect_url = home_url( '/recomandari/' );
+
+	if ( ! isset( $_POST['gu_experience_nonce'] )
+		|| ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['gu_experience_nonce'] ) ), 'gu_submit_experience' ) ) {
+		wp_safe_redirect( add_query_arg( 'experienta', 'eroare', $redirect_url ) . '#impartasiti-experienta' );
+		exit;
+	}
+
+	// Quietly accept bot submissions without storing them.
+	if ( ! empty( $_POST['website'] ) ) {
+		wp_safe_redirect( add_query_arg( 'experienta', 'trimisa', $redirect_url ) . '#impartasiti-experienta' );
+		exit;
+	}
+
+	$name       = isset( $_POST['public_name'] ) ? sanitize_text_field( wp_unslash( $_POST['public_name'] ) ) : '';
+	$email      = isset( $_POST['email'] ) ? sanitize_email( wp_unslash( $_POST['email'] ) ) : '';
+	$city       = isset( $_POST['city'] ) ? sanitize_text_field( wp_unslash( $_POST['city'] ) ) : '';
+	$relation   = isset( $_POST['relation'] ) ? sanitize_key( wp_unslash( $_POST['relation'] ) ) : 'pacient';
+	$experience = isset( $_POST['experience'] ) ? sanitize_textarea_field( wp_unslash( $_POST['experience'] ) ) : '';
+	$consent    = ! empty( $_POST['publication_consent'] );
+
+	if ( ! in_array( $relation, [ 'pacient', 'apartinator' ], true ) ) {
+		$relation = 'pacient';
+	}
+
+	if ( '' === $name || ! is_email( $email ) || mb_strlen( $experience ) < 40 || ! $consent ) {
+		wp_safe_redirect( add_query_arg( 'experienta', 'incompleta', $redirect_url ) . '#impartasiti-experienta' );
+		exit;
+	}
+
+	$rate_key = 'gu_experience_' . md5( (string) ( $_SERVER['REMOTE_ADDR'] ?? '' ) );
+	if ( get_transient( $rate_key ) ) {
+		wp_safe_redirect( add_query_arg( 'experienta', 'asteptati', $redirect_url ) . '#impartasiti-experienta' );
+		exit;
+	}
+
+	$post_id = wp_insert_post( [
+		'post_type'    => 'gu_experience',
+		'post_status'  => 'pending',
+		'post_title'   => $name,
+		'post_content' => $experience,
+	], true );
+
+	if ( is_wp_error( $post_id ) ) {
+		wp_safe_redirect( add_query_arg( 'experienta', 'eroare', $redirect_url ) . '#impartasiti-experienta' );
+		exit;
+	}
+
+	update_post_meta( $post_id, '_gu_email', $email );
+	update_post_meta( $post_id, '_gu_city', $city );
+	update_post_meta( $post_id, '_gu_relation', $relation );
+	update_post_meta( $post_id, '_gu_consent_at', current_time( 'mysql' ) );
+	set_transient( $rate_key, 1, 2 * MINUTE_IN_SECONDS );
+
+	wp_safe_redirect( add_query_arg( 'experienta', 'trimisa', $redirect_url ) . '#impartasiti-experienta' );
+	exit;
+}
+add_action( 'admin_post_nopriv_gu_submit_experience', 'gu_handle_experience_submission' );
+add_action( 'admin_post_gu_submit_experience', 'gu_handle_experience_submission' );
+
 add_filter( 'body_class', function ( array $classes ): array {
 	if ( is_page( 'recomandari' ) ) {
 		$classes[] = 'page-recomandari';
@@ -1909,7 +2065,15 @@ add_shortcode( 'gu_recomandari_page', function (): string {
 	// placeholder or internal note is shown to visitors. See
 	// docs/CLIENT_CONTENT_REQUIRED.md for exactly what's needed.
 	$has_colleague_recommendations = false;
-	$has_patient_testimonials      = false;
+	$patient_experiences           = new WP_Query( [
+		'post_type'      => 'gu_experience',
+		'post_status'    => 'publish',
+		'posts_per_page' => 12,
+		'orderby'        => 'date',
+		'order'          => 'DESC',
+		'no_found_rows'  => true,
+	] );
+	$has_patient_testimonials = $patient_experiences->have_posts();
 
 	// ── Shared inline style strings ───────────────────────────
 	$s_section_white  = 'background:#FFFFFF;border-bottom:1px solid rgba(0,0,0,.06);';
@@ -2007,19 +2171,76 @@ add_shortcode( 'gu_recomandari_page', function (): string {
 			. 'și nu poate fi redusă la o cifră. Relatările de mai jos sunt partajate cu acordul explicit al pacienților.';
 		$out .= '</p>';
 
+		$out .= '<div class="gu-experience-grid">';
+		while ( $patient_experiences->have_posts() ) {
+			$patient_experiences->the_post();
+			$city     = sanitize_text_field( (string) get_post_meta( get_the_ID(), '_gu_city', true ) );
+			$relation = 'apartinator' === get_post_meta( get_the_ID(), '_gu_relation', true ) ? 'Aparținător' : 'Pacient';
+			$out .= '<article class="gu-experience-card">';
+			$out .= '<blockquote>„' . esc_html( get_the_content() ) . '”</blockquote>';
+			$out .= '<p><strong>' . esc_html( get_the_title() ) . '</strong><span>' . esc_html( $relation . ( $city ? ' · ' . $city : '' ) ) . '</span></p>';
+			$out .= '</article>';
+		}
+		wp_reset_postdata();
+		$out .= '</div>';
+
 		$out .= '</div>';
 		$out .= '</section>';
 	}
 
 	// ────────────────────────────────────────────────────────
+	// SECTION 2B — INDEPENDENT REVIEW PLATFORMS
+	// Link to the original platforms; do not copy patient content or
+	// imply that third-party reviews were commissioned by this site.
+	// ────────────────────────────────────────────────────────
+	$out .= '<section class="gu-independent-reviews">';
+	$out .= '<div style="' . $s_inner_wide . '">';
+	$out .= '<p style="' . $s_overline . '">Opinii publicate independent</p>';
+	$out .= '<h2 style="' . $s_h2 . '">Experiențe pe platforme externe</h2>';
+	$out .= '<p style="' . $s_body . '">Puteți consulta opinii publicate direct de utilizatori pe platforme independente. Conținutul acestora nu este administrat, verificat sau modificat de acest site.</p>';
+	$out .= '<div class="gu-review-source-list">';
+	$out .= '<a href="https://www.doctorbun.ro/doctor-gheorghe-ungureanu_15993.html" target="_blank" rel="noopener noreferrer"><span><strong>DoctorBun</strong><small>Profil și recenzii publice ale pacienților</small></span><span aria-hidden="true">↗</span></a>';
+	$out .= '<a href="https://www.clickmed.ro/doctori/ungureanu-gheorghe" target="_blank" rel="noopener noreferrer"><span><strong>Clickmed</strong><small>Profil medical și recomandări publicate pe platformă</small></span><span aria-hidden="true">↗</span></a>';
+	$out .= '</div>';
+	$out .= '<p class="gu-source-disclaimer">Legăturile sunt oferite pentru transparență. Nu afișăm scoruri, stele și nu republicăm relatări fără acordul autorilor.</p>';
+	$out .= '</div>';
+	$out .= '</section>';
+
+	// ────────────────────────────────────────────────────────
 	// SECTION 3 — SHARE YOUR EXPERIENCE
 	// ────────────────────────────────────────────────────────
-	$out .= '<section style="' . $s_section_canvas . '">';
-	$out .= '<div style="' . $s_inner_narrow . '">';
+	$out .= '<section id="impartasiti-experienta" style="' . $s_section_canvas . '">';
+	$out .= '<div class="gu-experience-submit" style="' . $s_inner_narrow . '">';
 	$out .= '<p style="' . $s_overline . '">Contribuiți</p>';
 	$out .= '<h2 style="' . $s_h2 . '">Împărtășiți experiența dumneavoastră</h2>';
-	$out .= '<p style="' . $s_lead_center . '">Dacă ați primit îngrijiri de la Dr. George Ungureanu și doriți să vă împărtășiți experiența, vă invităm să ne contactați direct.</p>';
-	$out .= '<a href="' . $programari_url . '" style="' . $s_btn_blue . '">Contactați-ne</a>';
+	$out .= '<p style="' . $s_lead_center . '">Dacă ați fost pacient sau aparținător, ne puteți trimite o relatare. Toate mesajele sunt revizuite înainte de publicare.</p>';
+
+	$status = isset( $_GET['experienta'] ) ? sanitize_key( wp_unslash( $_GET['experienta'] ) ) : '';
+	if ( 'trimisa' === $status ) {
+		$out .= '<div class="gu-form-notice gu-form-notice--success" role="status"><strong>Vă mulțumim.</strong> Experiența a fost trimisă și va fi verificată înainte de publicare.</div>';
+	} elseif ( $status ) {
+		$message = 'Nu am putut trimite formularul. Verificați câmpurile obligatorii și încercați din nou.';
+		if ( 'asteptati' === $status ) {
+			$message = 'A fost înregistrată deja o trimitere recentă. Vă rugăm să așteptați două minute.';
+		}
+		$out .= '<div class="gu-form-notice gu-form-notice--error" role="alert">' . esc_html( $message ) . '</div>';
+	}
+
+	$out .= '<form class="gu-experience-form" method="post" action="' . esc_url( admin_url( 'admin-post.php' ) ) . '">';
+	$out .= '<input type="hidden" name="action" value="gu_submit_experience">';
+	$out .= wp_nonce_field( 'gu_submit_experience', 'gu_experience_nonce', true, false );
+	$out .= '<div class="gu-form-honeypot" aria-hidden="true"><label for="gu-website">Website</label><input id="gu-website" name="website" type="text" tabindex="-1" autocomplete="off"></div>';
+	$out .= '<div class="gu-form-grid">';
+	$out .= '<div><label for="gu-public-name">Numele afișat public <span aria-hidden="true">*</span></label><input id="gu-public-name" name="public_name" type="text" maxlength="80" autocomplete="name" required placeholder="Ex.: Maria P. sau Andrei Popescu"><small>Puteți folosi prenumele și inițiala numelui.</small></div>';
+	$out .= '<div><label for="gu-email">Email <span aria-hidden="true">*</span></label><input id="gu-email" name="email" type="email" maxlength="190" autocomplete="email" required placeholder="Folosit doar pentru verificare"><small>Emailul nu va fi publicat.</small></div>';
+	$out .= '<div><label for="gu-relation">Ați fost</label><select id="gu-relation" name="relation"><option value="pacient">Pacient</option><option value="apartinator">Aparținător</option></select></div>';
+	$out .= '<div><label for="gu-city">Localitate <span>(opțional)</span></label><input id="gu-city" name="city" type="text" maxlength="80" autocomplete="address-level2"></div>';
+	$out .= '</div>';
+	$out .= '<div><label for="gu-experience">Experiența dumneavoastră <span aria-hidden="true">*</span></label><textarea id="gu-experience" name="experience" rows="7" minlength="40" maxlength="1800" required placeholder="Povestiți, în propriile cuvinte, despre comunicare, claritatea explicațiilor și experiența îngrijirii."></textarea><small>Nu includeți diagnostice, rezultate de investigații, CNP, numere de telefon sau alte date medicale ori de identificare.</small></div>';
+	$out .= '<label class="gu-form-consent"><input type="checkbox" name="publication_consent" value="1" required><span>Sunt de acord ca relatarea și numele ales mai sus să poată fi publicate pe site, după revizuire. Înțeleg că pot solicita ulterior retragerea acesteia. <span aria-hidden="true">*</span></span></label>';
+	$out .= '<p class="gu-form-privacy">Datele sunt folosite exclusiv pentru verificarea și moderarea relatării. Consultați <a href="' . esc_url( home_url( '/politica-de-confidentialitate/' ) ) . '">Politica de confidențialitate</a>.</p>';
+	$out .= '<button class="gu-btn gu-btn--accent" type="submit">Trimite experiența</button>';
+	$out .= '</form>';
 
 	$out .= '</div>';
 	$out .= '</section>';
