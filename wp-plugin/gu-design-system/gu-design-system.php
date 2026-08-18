@@ -1848,11 +1848,11 @@ add_shortcode( 'gu_sfatul_hub', function (): string {
 
 	// ── Nav section list (ordered, conditional) ───────────────
 	$nav_sections = [
-		[ 'id' => 'prima-consultatie', 'label' => 'Prima consultatie', 'icon' => $ico_consult, 'active' => true ],
+		[ 'id' => 'prima-consultatie', 'label' => 'Prima consultație', 'icon' => $ico_consult, 'active' => true ],
 		[ 'id' => 'recuperare',        'label' => 'Recuperare',        'icon' => $ico_recover, 'active' => $has_recuperare ],
 		[ 'id' => 'mituri',            'label' => 'Mituri',            'icon' => $ico_myth,    'active' => $has_mituri ],
 		[ 'id' => 'video',             'label' => 'Video',             'icon' => $ico_video,   'active' => $has_video ],
-		[ 'id' => 'intrebari',         'label' => 'Intrebari',         'icon' => $ico_faq,     'active' => true ],
+		[ 'id' => 'intrebari',         'label' => 'Întrebări',         'icon' => $ico_faq,     'active' => true ],
 	];
 
 	// ── Shared style strings ──────────────────────────────────
@@ -1876,9 +1876,9 @@ add_shortcode( 'gu_sfatul_hub', function (): string {
 	// ════════════════════════════════════════════════════
 	$out .= '<section style="' . $s_white . '">';
 	$out .= '<div style="' . $s_narrow . 'padding-bottom:64px;">';
-	$out .= '<p style="' . $s_over . '">Educatie medicala pentru pacienti</p>';
+	$out .= '<p style="' . $s_over . '">Educație medicală pentru pacienți</p>';
 	$out .= '<h1 style="' . $s_h1 . '">Sfatul Neurochirurgului</h1>';
-	$out .= '<p style="font:400 19px/1.75 Inter,system-ui,sans-serif;color:#6E6E73;margin:0 0 32px;max-width:600px;">Ghiduri, raspunsuri si resurse medicale redactate de Dr. George Ungureanu &mdash; pentru ca un pacient informat are o recuperare mai buna.</p>';
+	$out .= '<p style="font:400 19px/1.75 Inter,system-ui,sans-serif;color:#6E6E73;margin:0 0 32px;max-width:600px;">Ghiduri, răspunsuri și resurse medicale redactate de Dr. George Ungureanu &mdash; pentru că un pacient informat are o recuperare mai bună.</p>';
 	$out .= '<a href="' . $programari_url . '" style="' . $s_btn_sage . '">Programeaza o consultatie</a>';
 	$out .= '</div>';
 	$out .= '</section>';
@@ -1888,7 +1888,7 @@ add_shortcode( 'gu_sfatul_hub', function (): string {
 	// ════════════════════════════════════════════════════
 	$active_pills = array_values( array_filter( $nav_sections, fn( $s ) => $s['active'] ) );
 	if ( count( $active_pills ) > 1 ) {
-		$out .= '<nav class="gu-hub-nav" aria-label="Sectiuni hub">';
+		$out .= '<nav class="gu-hub-nav" aria-label="Secțiuni hub">';
 		$out .= '<div class="gu-hub-nav__inner">';
 		foreach ( $active_pills as $pill ) {
 			$out .= '<a href="#' . esc_attr( $pill['id'] ) . '" class="gu-hub-nav__pill">';
@@ -1922,7 +1922,7 @@ add_shortcode( 'gu_sfatul_hub', function (): string {
 		}
 		$out .= '<h2 class="gu-hub-featured__title">' . esc_html( $f_title ) . '</h2>';
 		$out .= '<p class="gu-hub-featured__excerpt">' . esc_html( $f_excerpt ) . '</p>';
-		$out .= '<a href="' . esc_url( $f_url ) . '" class="gu-hub-featured__link">Citeste articolul <svg width="16" height="16" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 10h12M12 5l5 5-5 5"/></svg></a>';
+		$out .= '<a href="' . esc_url( $f_url ) . '" class="gu-hub-featured__link">Citește articolul <svg width="16" height="16" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 10h12M12 5l5 5-5 5"/></svg></a>';
 		$out .= '</div>';
 		$out .= '</div>';
 		$out .= '</div>';
@@ -1934,40 +1934,40 @@ add_shortcode( 'gu_sfatul_hub', function (): string {
 	// ════════════════════════════════════════════════════
 	$out .= '<section id="prima-consultatie" style="' . $s_white . '">';
 	$out .= '<div style="' . $s_wide . '">';
-	$out .= '<p style="' . $s_over . '">Ghid pentru pacienti</p>';
-	$out .= '<h2 style="' . $s_h2 . '">Prima Consultatie</h2>';
-	$out .= '<p style="' . $s_body . 'margin-bottom:40px;">Tot ce trebuie sa stiti inainte de prima intalnire cu Dr. George Ungureanu &mdash; fara surprize, fara anxietate inutila.</p>';
+	$out .= '<p style="' . $s_over . '">Ghid pentru pacienți</p>';
+	$out .= '<h2 style="' . $s_h2 . '">Prima Consultație</h2>';
+	$out .= '<p style="' . $s_body . 'margin-bottom:40px;">Tot ce trebuie să știți înainte de prima întâlnire cu Dr. George Ungureanu &mdash; fără surprize, fără anxietate inutilă.</p>';
 
 	$out .= '<div class="gu-guide-grid">';
 
 	// Block 1 — Ce sa aduceti
 	$out .= '<div class="gu-guide-block">';
 	$out .= '<p class="gu-guide-block__over">Pas 1</p>';
-	$out .= '<h3 class="gu-guide-block__title">Ce sa aduceti</h3>';
+	$out .= '<h3 class="gu-guide-block__title">Ce să aduceți</h3>';
 	$bring = [
-		'RMN sau CT recente, cu CD/DVD sau link digital (daca exista)',
-		'Trimitere de la medicul de familie sau specialist (daca aveti)',
-		'Lista medicamentelor pe care le luati in prezent',
-		'Buletin de identitate si cardul de sanatate CNAS',
-		'Analize de sange recente (daca ati efectuat)',
+		'RMN sau CT recente, cu CD/DVD sau link digital (dacă există)',
+		'Trimitere de la medicul de familie sau specialist (dacă aveți)',
+		'Lista medicamentelor pe care le luați în prezent',
+		'Buletin de identitate și cardul de sănătate CNAS',
+		'Analize de sânge recente (dacă ați efectuat)',
 	];
 	$out .= '<ul class="gu-guide-block__list">';
 	foreach ( $bring as $item ) {
 		$out .= '<li>' . esc_html( $item ) . '</li>';
 	}
 	$out .= '</ul>';
-	$out .= '<p class="gu-guide-block__note">Nu aveti toate documentele? Veniti oricum. O consultatie partial documentata este mai valoroasa decat o intarziere.</p>';
+	$out .= '<p class="gu-guide-block__note">Nu aveți toate documentele? Veniți oricum. O consultație parțial documentată este mai valoroasă decât o întârziere.</p>';
 	$out .= '</div>';
 
-	// Block 2 — Cum sa va pregatiti
+	// Block 2 — Cum să vă pregătiți
 	$out .= '<div class="gu-guide-block">';
 	$out .= '<p class="gu-guide-block__over">Pas 2</p>';
-	$out .= '<h3 class="gu-guide-block__title">Cum sa va pregatiti</h3>';
+	$out .= '<h3 class="gu-guide-block__title">Cum să vă pregătiți</h3>';
 	$prep = [
-		'Notati simptomele: de cand au aparut, cum s-au modificat in timp',
-		'Scrieti intrebarile la care doriti raspuns — nu va bazati pe memorie',
-		'Aduceti un apartinator daca doriti un al doilea set de ochi si urechi',
-		'Nu este necesara pregatire speciala: diete, post sau modificari de medicatie',
+		'Notați simptomele: de când au apărut, cum s-au modificat în timp',
+		'Scrieți întrebările la care doriți răspuns — nu vă bazați pe memorie',
+		'Aduceți un aparținător dacă doriți un al doilea set de ochi și urechi',
+		'Nu este necesară pregătire specială: diete, post sau modificări de medicație',
 	];
 	$out .= '<ul class="gu-guide-block__list">';
 	foreach ( $prep as $item ) {
@@ -1979,14 +1979,14 @@ add_shortcode( 'gu_sfatul_hub', function (): string {
 	// Block 3 — Ce intrebari sa puneti
 	$out .= '<div class="gu-guide-block">';
 	$out .= '<p class="gu-guide-block__over">Pas 3</p>';
-	$out .= '<h3 class="gu-guide-block__title">Ce intrebari sa puneti</h3>';
+	$out .= '<h3 class="gu-guide-block__title">Ce întrebări să puneți</h3>';
 	$qs = [
-		'"Ce arata exact investigatiile mele?"',
-		'"Cat de urgent este cazul meu?"',
-		'"Care sunt optiunile de tratament si ce implica fiecare?"',
-		'"Ce se intampla daca nu tratez acum?"',
-		'"Cat de des voi avea nevoie de urmarire?"',
-		'"Ce sa evit si ce pot face in continuare?"',
+		'"Ce arată exact investigațiile mele?"',
+		'"Cât de urgent este cazul meu?"',
+		'"Care sunt opțiunile de tratament și ce implică fiecare?"',
+		'"Ce se întâmplă dacă nu tratez acum?"',
+		'"Cât de des voi avea nevoie de urmărire?"',
+		'"Ce să evit și ce pot face în continuare?"',
 	];
 	$out .= '<ul class="gu-guide-block__list gu-guide-block__list--questions">';
 	foreach ( $qs as $q ) {
@@ -1998,7 +1998,7 @@ add_shortcode( 'gu_sfatul_hub', function (): string {
 	$out .= '</div>'; // .gu-guide-grid
 
 	$out .= '<div style="margin-top:40px;padding-top:32px;border-top:1px solid rgba(0,0,0,.06);">';
-	$out .= '<a href="' . $programari_url . '" style="' . $s_btn_sage . '">Programeaza prima consultatie</a>';
+	$out .= '<a href="' . $programari_url . '" style="' . $s_btn_sage . '">Programează prima consultație</a>';
 	$out .= '</div>';
 	$out .= '</div>';
 	$out .= '</section>';
@@ -2010,8 +2010,8 @@ add_shortcode( 'gu_sfatul_hub', function (): string {
 		$out .= '<section id="recuperare" style="' . $s_canvas . '">';
 		$out .= '<div style="' . $s_wide . '">';
 		$out .= '<p style="' . $s_over . '">Ghiduri de recuperare</p>';
-		$out .= '<h2 style="' . $s_h2 . '">Recuperare si ingrijire</h2>';
-		$out .= '<p style="' . $s_body . 'margin-bottom:36px;">Ghiduri specifice pe tip de interventie &mdash; ce sa asteptati, cand sa va ingrijorati, cum sa reveniti la viata de zi cu zi.</p>';
+		$out .= '<h2 style="' . $s_h2 . '">Recuperare și îngrijire</h2>';
+		$out .= '<p style="' . $s_body . 'margin-bottom:36px;">Ghiduri specifice pe tip de intervenție &mdash; ce să așteptați, când să vă îngrijorați, cum să reveniți la viața de zi cu zi.</p>';
 		$out .= '<div class="gu-recovery-grid">';
 		foreach ( $recovery_topics as $topic ) {
 			$out .= '<div class="gu-recovery-card">';
@@ -2038,14 +2038,14 @@ add_shortcode( 'gu_sfatul_hub', function (): string {
 		$myth_bg = ( $sections_before_mituri % 2 === 0 ) ? $s_canvas : $s_white;
 		$out .= '<section id="mituri" style="' . $myth_bg . '">';
 		$out .= '<div style="' . $s_wide . '">';
-		$out .= '<p style="' . $s_over . '">Claritate medicala</p>';
-		$out .= '<h2 style="' . $s_h2 . '">Mituri si adevaruri</h2>';
-		$out .= '<p style="' . $s_body . 'margin-bottom:36px;">Credinte frecvente despre neurochirurgie &mdash; si ce spune medicina reala.</p>';
+		$out .= '<p style="' . $s_over . '">Claritate medicală</p>';
+		$out .= '<h2 style="' . $s_h2 . '">Mituri și adevăruri</h2>';
+		$out .= '<p style="' . $s_body . 'margin-bottom:36px;">Credințe frecvente despre neurochirurgie &mdash; și ce spune medicina reală.</p>';
 		$out .= '<div class="gu-myth-grid">';
 		foreach ( $myths as $pair ) {
 			$out .= '<div class="gu-myth-pair">';
 			$out .= '<div class="gu-myth-card"><p class="gu-myth-card__label">Mit</p><p class="gu-myth-card__text">' . esc_html( $pair['myth'] ) . '</p></div>';
-			$out .= '<div class="gu-truth-card"><p class="gu-truth-card__label">Adevarul</p><p class="gu-truth-card__text">' . esc_html( $pair['truth'] ) . '</p></div>';
+			$out .= '<div class="gu-truth-card"><p class="gu-truth-card__label">Adevărul</p><p class="gu-truth-card__text">' . esc_html( $pair['truth'] ) . '</p></div>';
 			$out .= '</div>';
 		}
 		$out .= '</div>';
@@ -2061,9 +2061,9 @@ add_shortcode( 'gu_sfatul_hub', function (): string {
 		$video_bg = ( $sections_before_video % 2 === 0 ) ? $s_canvas : $s_white;
 		$out .= '<section id="video" style="' . $video_bg . '">';
 		$out .= '<div style="' . $s_wide . '">';
-		$out .= '<p style="' . $s_over . '">Dr. George explica</p>';
+		$out .= '<p style="' . $s_over . '">Dr. George explică</p>';
 		$out .= '<h2 style="' . $s_h2 . '">Video</h2>';
-		$out .= '<p style="' . $s_body . 'margin-bottom:36px;">Explicatii vizuale despre afectiuni, proceduri si recuperare.</p>';
+		$out .= '<p style="' . $s_body . 'margin-bottom:36px;">Explicații vizuale despre afecțiuni, proceduri și recuperare.</p>';
 		$out .= '<div class="gu-video-grid">';
 		foreach ( $videos as $video ) {
 			$out .= '<a href="' . esc_url( $video['url'] ) . '" class="gu-video-card" target="_blank" rel="noopener noreferrer">';
@@ -2080,7 +2080,7 @@ add_shortcode( 'gu_sfatul_hub', function (): string {
 			if ( ! empty( $video['description'] ) ) {
 				$out .= '<p class="gu-video-card__desc">' . esc_html( $video['description'] ) . '</p>';
 			}
-			$out .= '<span class="gu-video-card__link">Vizualizeaza pe YouTube &nearr;</span>';
+			$out .= '<span class="gu-video-card__link">Vizualizează pe YouTube &nearr;</span>';
 			$out .= '</div></a>';
 		}
 		$out .= '</div>';
@@ -2145,9 +2145,9 @@ add_shortcode( 'gu_sfatul_hub', function (): string {
 
 	$out .= '<section id="intrebari" style="' . $faq_bg . '">';
 	$out .= '<div style="' . $s_wide . '">';
-	$out .= '<p style="' . $s_over . '">Raspunsuri clare</p>';
-	$out .= '<h2 style="' . $s_h2 . '">Intrebari Frecvente</h2>';
-	$out .= '<p style="' . $s_body . 'margin-bottom:40px;">Raspunsuri la cele mai comune intrebari despre neurochirurgie, consultatii si recuperare.</p>';
+	$out .= '<p style="' . $s_over . '">Răspunsuri clare</p>';
+	$out .= '<h2 style="' . $s_h2 . '">Întrebări Frecvente</h2>';
+	$out .= '<p style="' . $s_body . 'margin-bottom:40px;">Răspunsuri la cele mai comune întrebări despre neurochirurgie, consultații și recuperare.</p>';
 	foreach ( $faq_data as $faq_sec ) {
 		$out .= '<h3 style="font:600 13px/1 Inter,system-ui,sans-serif;letter-spacing:.08em;text-transform:uppercase;color:#6E6E73;margin:36px 0 16px;">' . esc_html( $faq_sec['category'] ) . '</h3>';
 		$out .= '<div class="gu-faq" style="margin-bottom:8px;">';
@@ -2166,9 +2166,9 @@ add_shortcode( 'gu_sfatul_hub', function (): string {
 	$grid_bg = ( ( $sections_above_faq + 1 ) % 2 === 0 ) ? $s_white : $s_canvas;
 	$out .= '<section style="' . $grid_bg . '">';
 	$out .= '<div style="' . $s_wide . '">';
-	$out .= '<p style="' . $s_over . '">Lectura aprofundata</p>';
+	$out .= '<p style="' . $s_over . '">Lectură aprofundată</p>';
 	$out .= '<h2 style="' . $s_h2 . '">Articole</h2>';
-	$out .= '<p style="' . $s_body . 'margin-bottom:8px;">Articole detaliate despre afectiuni, proceduri si viata cu o conditie neurologica.</p>';
+	$out .= '<p style="' . $s_body . 'margin-bottom:8px;">Articole detaliate despre afecțiuni, proceduri și viață cu o condiție neurologică.</p>';
 	$out .= do_shortcode( '[gu_articole_archive]' );
 	$out .= '</div>';
 	$out .= '</section>';
