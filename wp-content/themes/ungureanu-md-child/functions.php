@@ -26,6 +26,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
+require_once get_stylesheet_directory() . '/inc/theme-settings.php';
+
 // ─────────────────────────────────────────────────────────────
 // 1. REMOVE PLUGIN HEADER — native header.php takes over
 // ─────────────────────────────────────────────────────────────
@@ -95,7 +97,21 @@ function ungureanu_child_theme_support() {
 		'style',
 		'script',
 	] );
+	register_nav_menus( [
+		'primary' => 'Navigare principală',
+	] );
 }
+
+// Repository-owned fallback favicon. WordPress Site Icon, when configured,
+// can replace this later without changing templates.
+add_action( 'wp_head', function () {
+	if ( has_site_icon() ) {
+		return;
+	}
+	?>
+	<link rel="icon" href="<?php echo esc_url( get_stylesheet_directory_uri() . '/assets/img/favicon.svg' ); ?>" type="image/svg+xml">
+	<?php
+}, 2 );
 
 
 // ─────────────────────────────────────────────────────────────

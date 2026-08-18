@@ -1,5 +1,10 @@
 # Conținut necesar de la Dr. George Ungureanu
 
+> **Inventar istoric.** Pentru statusul curent, răspunsurile primite și toate
+> actualizările viitoare folosiți exclusiv
+> [`CLIENT_DECISIONS_REQUIRED.md`](CLIENT_DECISIONS_REQUIRED.md). Nu mențineți
+> două liste în paralel.
+
 Acest document listează tot conținutul pe care site-ul îl așteaptă de la client, grupat după prioritate. Elementele marcate **CRITIC** blochează lansarea. Celelalte pot fi adăugate ulterior.
 
 ---
@@ -117,6 +122,9 @@ Acest document listează tot conținutul pe care site-ul îl așteaptă de la cl
 ### O6 · CV medical complet (PDF descărcabil)
 - **Unde apare:** Pagina Despre — link discret în secțiunea credențiale
 - **Format:** PDF, actualizat
+- **Status:** PRIMIT un CV Europass datat 22.01.2025; conținutul factual a fost
+  centralizat. Înainte de publicarea PDF-ului este necesară o versiune actualizată
+  după finalizarea doctoratului și fără date personale care nu trebuie expuse.
 
 ### O7 · Meta-descrieri și titluri SEO per pagină
 - **Unde apare:** `<head>` — invizibil pentru vizitatori, critic pentru Google

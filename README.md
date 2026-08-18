@@ -2,6 +2,10 @@
 
 **Website for Dr. George Ungureanu — Neurosurgeon**
 
+> Current source of truth: native WordPress child theme + GU Design System
+> plugin. The older Elementor-first notes below describe the project's origin,
+> not its current frontend architecture.
+
 A WordPress + Hello Elementor + Elementor Pro website designed to serve patients and their families navigating neurosurgical conditions.
 
 ---
@@ -62,10 +66,10 @@ georgeungureanu.doctor/
 | Layer | Technology |
 |-------|-----------|
 | CMS | WordPress |
-| Theme | Hello Elementor |
-| Page Builder | Elementor Pro |
-| Layout Model | Flexbox Containers only |
-| Colors | Global Colors only |
+| Theme | Ungureanu MD Child (Hello Elementor parent) |
+| Page layouts | Native PHP templates; Elementor is transitional/legacy |
+| Functionality/content model | GU Design System plugin + CPT + ACF |
+| Configuration | Theme settings + WordPress menus (migration in progress) |
 | Typography | Global Fonts only |
 | Design Pattern | Atomic Design |
 | Mobile | Mobile-first |
@@ -100,9 +104,13 @@ georgeungureanu.doctor/
 
 | Phase | Status |
 |-------|--------|
-| Documentation | In Progress |
-| Design System | Not Started |
-| Component Library | Not Started |
-| Page Templates | Not Started |
-| Content Entry | Not Started |
-| Launch | Not Started |
+| Documentation | Extensive; consolidation needed |
+| Design System | Implemented; token/CSS consolidation needed |
+| Component Library | Implemented in plugin; inline-style cleanup needed |
+| Page Templates | Native child-theme templates implemented |
+| Theme configuration | Foundation implemented; migration in progress |
+| Content Entry | In progress; some client placeholders remain |
+| Launch | Staging workflow prepared; final QA pending |
+
+See [`docs/planning/THEME_FIRST_PARADIGM.md`](docs/planning/THEME_FIRST_PARADIGM.md)
+for the active architecture and migration rules.

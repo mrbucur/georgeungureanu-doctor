@@ -1,8 +1,40 @@
 # Online Consultations Setup — Cal.com + Google Meet
 
-**Status:** Infrastructure decision confirmed. Cal.com account and event types pending client setup.
+**Status (2026-08-18):** Contul Cal.com și evenimentul public sunt create.
+Google Calendar, Google Meet și Stripe rămân de conectat împreună cu Dr. George.
+
+## Eligibilitate confirmată de Dr. George
+
+Consultația online este destinată evaluării unui dosar medical complet în
+situațiile în care a fost recomandată evaluarea neurochirurgicală, a fost
+recomandată o operație sau se solicită o a doua opinie neurochirurgicală.
+
+Pentru ca evaluarea să fie utilă, trebuie să existe un RMN sau CT recent, iar
+pacientul sau un aparținător care cunoaște foarte bine simptomele și istoricul
+medical trebuie să fie disponibil pentru întrebări.
+
+Consultația online nu este potrivită dacă nu a fost recomandată o evaluare
+neurochirurgicală sau dacă persoana dorește doar informații generale.
+
+**Durată configurată:** un singur interval de 45 de minute.
+
+### Documente înainte de consultație
+
+Niciun document nu trebuie încărcat obligatoriu înainte de consultație. Dacă
+pacientul le are disponibile, sunt recomandate: RMN, CT, scrisori medicale și
+biletul de externare. Pentru eligibilitatea consultației trebuie totuși să existe
+un RMN sau CT recent, disponibil pentru evaluare. Canalul securizat prin care
+documentele vor fi trimise nu este încă stabilit.
+
+### Avertisment medical aprobat
+
+Consultația online nu poate constitui o recomandare medicală fermă, deoarece
+pacientul nu poate fi examinat clinic, iar anumite aspecte nu pot fi evaluate la
+distanță.
+
 **Platform:** Cal.com (scheduling) + Google Meet (video)
-**Payment:** Deferred — Stripe integration optional, not in scope for Sprint 9.11.
+**Payment:** obligatorie la programare; implementarea va folosi integrarea
+nativă Stripe din Cal.com după confirmarea prețului și a entității care încasează.
 
 ---
 
@@ -24,9 +56,10 @@
 
 ## Account Setup
 
-1. Create account at **cal.com** using the practice email.
-2. Account owner: **[CLIENT DECISION — see CLIENT_DECISIONS_REQUIRED.md]**
-3. Connect Google Calendar:
+1. Cont creat la **cal.com/georgeungureanu** cu adresa dedicată
+   `consultatii@georgeungureanu.doctor`.
+2. Eveniment public: `https://cal.com/georgeungureanu/consultatie-online`.
+3. De realizat împreună cu Dr. George — conectarea Google Calendar:
    - Settings → Calendars → Add Google Calendar
    - Grant access to the calendar used for clinical appointments
    - Set "Check for conflicts" on the clinical calendar to prevent double-booking
@@ -44,34 +77,28 @@
 
 ## Recommended Event Type Settings
 
-Create one event type: **"Consultație Neurochirurgicală Online"**
+Eveniment creat: **„Consultație online de neurochirurgie”**
 
 ```
 Title:        Consultație Neurochirurgicală Online
 URL slug:     consultatie-online
-Description:  Consultație neurochirurgicală prin video cu Dr. George Ungureanu.
-              Vă rugăm să trimiteți imagini RMN/CT (dacă există) la [EMAIL] înainte de consultație.
-Location:     Google Meet (auto-generated)
-Duration:     [CLIENT DECISION — 30 / 45 / 60 min; see below]
-Buffer:       10 min after (recommended for note-taking)
-Minimum notice: 24 hours (prevents same-day bookings without preparation)
+Description:  Consultație medicală online pentru evaluarea simptomelor,
+              discutarea investigațiilor și stabilirea pașilor următori.
+Location:     Cal Video temporar; Google Meet după conectare
+Duration:     45 min
+Buffer:       10 min după consultație
+Minimum notice: 24 ore
 ```
 
-### Duration Options
+### Configurarea duratei în Cal.com
 
-| Duration | Recommended use case |
-|---|---|
-| 30 min | Follow-up, second opinion on existing imaging |
-| 45 min | Standard first consultation |
-| 60 min | Complex case, multiple conditions, international patient |
-
-**Recommendation:** Offer 45 min as the default. Add 30 and 60 min as additional event types or as a selectable option within the same event type.
+Decizia tehnică este închisă: se folosește un singur interval de 45 de minute.
 
 ---
 
 ## Availability Configuration
 
-- Set available hours to match actual clinical schedule
+- Program provizoriu: marți și joi, 18:00–20:00, Europe/Bucharest
 - Block days with in-person clinic obligations
 - Add buffer between slots to avoid back-to-back fatigue
 - Consider a dedicated "online day" per week (e.g., Thursday afternoon)
@@ -82,10 +109,11 @@ Minimum notice: 24 hours (prevents same-day bookings without preparation)
 
 **[CLIENT DECISION — see CLIENT_DECISIONS_REQUIRED.md]**
 
-Suggested default:
-- Free cancellation up to **24 hours** before appointment
-- Late cancellation or no-show: [CLIENT: fee or no fee]
-- Rescheduling: allowed at any time at no cost
+Recomandare de lucru, încă neaprobată:
+- reprogramare până la **48 de ore** înainte;
+- o singură reprogramare gratuită;
+- sub 48 de ore și în caz de neprezentare, plata nu se rambursează;
+- dacă medicul anulează, pacientul alege rambursare integrală sau reprogramare.
 
 Cal.com setting: Events → Edit → Cancellation policy (plain text field shown to patient at booking).
 
@@ -109,7 +137,7 @@ Consultația dumneavoastră online a fost confirmată.
 🎥 Link Google Meet: [LINK]
 
 Pregătire recomandată:
-- Trimiteți imaginile RMN/CT (dacă există) la [EMAIL] cu cel puțin 12 ore înainte
+- Nu trimiteți RMN/CT prin email obișnuit; urmați instrucțiunile canalului securizat
 - Pregătiți lista medicamentelor curente
 - Verificați că microfonul și camera funcționează înainte de consultație
 - Asigurați un spațiu privat și liniștit
@@ -126,7 +154,7 @@ Dr. George Ungureanu
 
 To be included in the confirmation email and displayed on the website:
 
-- [ ] Imagini RMN/CT în format digital (DICOM, JPG, PDF) — trimise în avans
+- [ ] Imagini RMN/CT disponibile în format digital; transmiterea se face numai prin canalul securizat comunicat
 - [ ] Lista medicamentelor curente (denumire + doze)
 - [ ] Scrisori medicale sau rezultate de analize relevante
 - [ ] Dispozitiv cu cameră și microfon funcționale (laptop, tabletă sau telefon)
@@ -136,16 +164,14 @@ To be included in the confirmation email and displayed on the website:
 
 ---
 
-## Payment — Later via Stripe (Optional)
+## Payment — Stripe (Required Before Public Launch)
 
 Cal.com supports Stripe payment at booking. When ready:
 
 1. Settings → Payment → Connect Stripe
 2. Set price per event type (e.g., 45 min = [CLIENT: X RON / EUR])
-3. Patient pays at the time of booking — card details held, charged on confirmation
-4. Optional: require payment only for new patients, not follow-ups
-
-**Not in scope for Sprint 9.11.** Revisit after Cal.com account is live and pricing is confirmed.
+3. Plata integrală este cerută în fluxul de programare.
+4. Test obligatoriu: plată reușită, plată abandonată, rambursare și reprogramare.
 
 ---
 
@@ -154,9 +180,9 @@ Cal.com supports Stripe payment at booking. When ready:
 The Programări page (`/programari/`) already contains:
 - An "Online" card in the clinic grid section
 - CTA button: "Programează o consultație online"
-- Button URL placeholder: `#` — replace with actual Cal.com link
-
-To update: in `gu-design-system.php`, find `$online_cal_url = '#';` and replace `'#'` with the Cal.com booking URL.
+- CTA activ către `https://cal.com/georgeungureanu/consultatie-online`
+- Email dedicat exclusiv consultațiilor online:
+  `consultatii@georgeungureanu.doctor`
 
 ---
 

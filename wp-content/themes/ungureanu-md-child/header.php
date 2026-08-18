@@ -2,23 +2,20 @@
 /**
  * Site Header — Ungureanu MD Child
  *
- * HTML structure mirrors the plugin's gu_render_header() exactly so that
- * gu-header.js (compact scroll, mobile drawer) and all plugin CSS classes
- * continue to work without modification.
+ * Renders the Elementor Theme Builder "header" location (currently Header
+ * 135) when a document is assigned to it for the current request. Falls
+ * back to the native markup below only if elementor_theme_do_location()
+ * did not print anything — the native markup mirrors gu_render_header()
+ * exactly so gu-header.js and plugin CSS classes still apply during
+ * fallback.
  *
  * The plugin's gu_render_header hook on wp_body_open is removed in
- * functions.php so only this template renders the header.
+ * functions.php so it never fires as a third source of header markup.
  */
 
-$nav_items = [
-	'Acasă'                   => home_url( '/' ),
-	'Afecțiuni'               => home_url( '/afectiuni/' ),
-	'Intervenții'             => home_url( '/interventii/' ),
-	'Sfatul Neurochirurgului' => home_url( '/articole/' ),
-	'Recomandări'             => home_url( '/recomandari/' ),
-	'Despre'                  => home_url( '/despre/' ),
-];
-$cta_url = home_url( '/programari/' );
+$nav_items = gu_get_navigation_items();
+$cta       = gu_get_primary_cta();
+$brand     = gu_get_theme_setting( 'brand_name' );
 ?><!DOCTYPE html>
 <html <?php language_attributes(); ?>>
 <head>
@@ -30,23 +27,30 @@ $cta_url = home_url( '/programari/' );
 <body <?php body_class(); ?>>
 <?php wp_body_open(); ?>
 
+<?php
+$gu_header_rendered =
+	function_exists( 'elementor_theme_do_location' )
+	&& elementor_theme_do_location( 'header' );
+
+if ( ! $gu_header_rendered ) :
+?>
 <header class="gu-header" id="gu-header" role="banner">
 	<div class="gu-header__inner">
 
 		<a class="gu-header__logo"
 		   href="<?php echo esc_url( home_url( '/' ) ); ?>"
-		   aria-label="Dr. George Ungureanu — Pagina principală">
-			<span class="gu-header__logo-name">Dr. George Ungureanu</span>
-			<span class="gu-header__logo-title">Neurochirurg</span>
+		   aria-label="<?php echo esc_attr( $brand . ' — Pagina principală' ); ?>">
+			<span class="gu-header__logo-name"><?php echo esc_html( $brand ); ?></span>
+			<span class="gu-header__logo-title"><?php echo esc_html( gu_get_theme_setting( 'brand_short_role' ) ); ?></span>
 		</a>
 
 		<nav class="gu-header__nav" aria-label="Navigare principală">
 			<ul class="gu-header__nav-list" role="list">
-				<?php foreach ( $nav_items as $label => $url ) : ?>
+				<?php foreach ( $nav_items as $item ) : ?>
 				<li class="gu-header__nav-item">
-					<a class="gu-header__nav-link<?php echo gu_nav_is_active( $url ) ? ' is-active' : ''; ?>"
-					   href="<?php echo esc_url( $url ); ?>">
-						<?php echo esc_html( $label ); ?>
+					<a class="gu-header__nav-link<?php echo gu_nav_is_active( $item['url'] ) ? ' is-active' : ''; ?>"
+					   href="<?php echo esc_url( $item['url'] ); ?>">
+						<?php echo esc_html( $item['title'] ); ?>
 					</a>
 				</li>
 				<?php endforeach; ?>
@@ -55,8 +59,8 @@ $cta_url = home_url( '/programari/' );
 
 		<div class="gu-header__actions">
 			<a class="gu-btn gu-btn--accent gu-header__cta"
-			   href="<?php echo esc_url( $cta_url ); ?>">
-				Programează o consultație
+			   href="<?php echo esc_url( $cta['url'] ); ?>">
+				<?php echo esc_html( $cta['label'] ); ?>
 			</a>
 			<button class="gu-header__hamburger"
 			        type="button"
@@ -96,11 +100,11 @@ $cta_url = home_url( '/programari/' );
 
 		<nav aria-label="Navigare mobilă">
 			<ul class="gu-mobile-drawer__nav" role="list">
-				<?php foreach ( $nav_items as $label => $url ) : ?>
+				<?php foreach ( $nav_items as $item ) : ?>
 				<li>
 					<a class="gu-mobile-drawer__link"
-					   href="<?php echo esc_url( $url ); ?>">
-						<?php echo esc_html( $label ); ?>
+					   href="<?php echo esc_url( $item['url'] ); ?>">
+						<?php echo esc_html( $item['title'] ); ?>
 					</a>
 				</li>
 				<?php endforeach; ?>
@@ -108,9 +112,10 @@ $cta_url = home_url( '/programari/' );
 		</nav>
 
 		<a class="gu-btn gu-btn--accent gu-mobile-drawer__cta"
-		   href="<?php echo esc_url( $cta_url ); ?>">
-			Programează o consultație
+		   href="<?php echo esc_url( $cta['url'] ); ?>">
+			<?php echo esc_html( $cta['label'] ); ?>
 		</a>
 	</div>
 
 </div>
+<?php endif; ?>
